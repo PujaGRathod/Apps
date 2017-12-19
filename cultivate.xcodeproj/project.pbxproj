@@ -10,6 +10,19 @@
 		2E7C02DD820F9692877E75BA /* Pods_cultivateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */; };
 		387DF48219EACDBF74AED4C6 /* Pods_cultivateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6FDA977FE33C981E8A508FA /* Pods_cultivateTests.framework */; };
 		5682DF834AFDF8A88F0227CE /* Pods_cultivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF26A737BBDC0A8280FF62C6 /* Pods_cultivate.framework */; };
+		BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */; };
+		BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D390B1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift */; };
+		BF2D390E1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D390D1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift */; };
+		BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D39101FE8E65700AF63EC /* CULContact.swift */; };
+		BF7F48C71FE8E9B800737FE5 /* ContactsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */; };
+		BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48C81FE8EE1C00737FE5 /* String.swift */; };
+		BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */; };
+		BF7F48CD1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CC1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift */; };
+		BF7F48CF1FE8FE3300737FE5 /* AddTagsInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CE1FE8FE3300737FE5 /* AddTagsInformationVC.swift */; };
+		BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48D01FE8FE4300737FE5 /* AddTagsVC.swift */; };
+		BF7F48D31FE9015600737FE5 /* CULButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48D21FE9015600737FE5 /* CULButton.swift */; };
+		BF7F48D71FE9089A00737FE5 /* ContactTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48D51FE9089A00737FE5 /* ContactTblCell.swift */; };
+		BF7F48D81FE9089A00737FE5 /* ContactTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7F48D61FE9089A00737FE5 /* ContactTblCell.xib */; };
 		BFC985611FE79AAF0041E32D /* cultivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC985601FE79AAF0041E32D /* cultivateTests.swift */; };
 		BFC9856C1FE79AAF0041E32D /* cultivateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */; };
 		BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D7881FE79F300091F4A8 /* GoogleService-Info.plist */; };
@@ -49,6 +62,19 @@
 		A527A60A714358D782BE7612 /* Pods-cultivateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AFEAE65D87570891E2BFFE1B /* Pods-cultivateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9240D895B6E5D12F9FC0DB0 /* Pods-cultivate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivate/Pods-cultivate.debug.xcconfig"; sourceTree = "<group>"; };
+		BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListVC.swift; sourceTree = "<group>"; };
+		BF2D390B1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactInstructionsVC.swift; sourceTree = "<group>"; };
+		BF2D390D1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTableViewAdapter.swift; sourceTree = "<group>"; };
+		BF2D39101FE8E65700AF63EC /* CULContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULContact.swift; sourceTree = "<group>"; };
+		BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsWorker.swift; sourceTree = "<group>"; };
+		BF7F48C81FE8EE1C00737FE5 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFollowupFrequenciesInformationVC.swift; sourceTree = "<group>"; };
+		BF7F48CC1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFollowupFrequenciesVC.swift; sourceTree = "<group>"; };
+		BF7F48CE1FE8FE3300737FE5 /* AddTagsInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsInformationVC.swift; sourceTree = "<group>"; };
+		BF7F48D01FE8FE4300737FE5 /* AddTagsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsVC.swift; sourceTree = "<group>"; };
+		BF7F48D21FE9015600737FE5 /* CULButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULButton.swift; sourceTree = "<group>"; };
+		BF7F48D51FE9089A00737FE5 /* ContactTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTblCell.swift; sourceTree = "<group>"; };
+		BF7F48D61FE9089A00737FE5 /* ContactTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTblCell.xib; sourceTree = "<group>"; };
 		BFC985481FE79AAE0041E32D /* cultivate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cultivate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9855C1FE79AAF0041E32D /* cultivateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cultivateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC985601FE79AAF0041E32D /* cultivateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cultivateTests.swift; sourceTree = "<group>"; };
@@ -124,6 +150,26 @@
 				35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF2D390F1FE8E63E00AF63EC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F48D41FE9088C00737FE5 /* ContactTblCell */,
+				BF2D39101FE8E65700AF63EC /* CULContact.swift */,
+				BF7F48C81FE8EE1C00737FE5 /* String.swift */,
+				BF7F48D21FE9015600737FE5 /* CULButton.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BF7F48D41FE9088C00737FE5 /* ContactTblCell */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F48D51FE9089A00737FE5 /* ContactTblCell.swift */,
+				BF7F48D61FE9089A00737FE5 /* ContactTblCell.xib */,
+			);
+			path = ContactTblCell;
 			sourceTree = "<group>";
 		};
 		BFC9853F1FE79AAE0041E32D = {
@@ -210,6 +256,7 @@
 				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
 				BFE9D79D1FE79FFF0091F4A8 /* Login */,
 				BFE9D79B1FE79FFF0091F4A8 /* Onboarding */,
+				BF2D390F1FE8E63E00AF63EC /* Shared */,
 				BFE9D79C1FE79FFF0091F4A8 /* Signup */,
 				BFE9D7A31FE7A12A0091F4A8 /* Welcome */,
 			);
@@ -219,7 +266,15 @@
 		BFE9D79B1FE79FFF0091F4A8 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				BF7F48CE1FE8FE3300737FE5 /* AddTagsInformationVC.swift */,
+				BF7F48D01FE8FE4300737FE5 /* AddTagsVC.swift */,
+				BF2D390D1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift */,
+				BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */,
+				BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */,
 				BFE9D7A61FE7AB850091F4A8 /* FooterView */,
+				BF2D390B1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift */,
+				BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */,
+				BF7F48CC1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -380,6 +435,7 @@
 				BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */,
 				BFE9D7971FE79F300091F4A8 /* Main.storyboard in Resources */,
 				BFE9D7981FE79F300091F4A8 /* Assets.xcassets in Resources */,
+				BF7F48D81FE9089A00737FE5 /* ContactTblCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,10 +631,22 @@
 			files = (
 				BFE9D7A51FE7A1330091F4A8 /* WelcomeVC.swift in Sources */,
 				BFE9D7A81FE7AB920091F4A8 /* FooterView.swift in Sources */,
+				BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */,
 				BFEF92321FE7D586000ED577 /* ForgotPasswordVC.swift in Sources */,
+				BF7F48C71FE8E9B800737FE5 /* ContactsWorker.swift in Sources */,
+				BF2D390E1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift in Sources */,
+				BF7F48CD1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift in Sources */,
+				BF7F48D71FE9089A00737FE5 /* ContactTblCell.swift in Sources */,
+				BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */,
+				BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */,
 				BFE9D79F1FE7A0210091F4A8 /* SignupVC.swift in Sources */,
+				BF7F48D31FE9015600737FE5 /* CULButton.swift in Sources */,
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
+				BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */,
+				BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */,
 				BFEF92301FE7D2C3000ED577 /* LoginVC.swift in Sources */,
+				BF7F48CF1FE8FE3300737FE5 /* AddTagsInformationVC.swift in Sources */,
+				BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
