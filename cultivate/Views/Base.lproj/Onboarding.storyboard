@@ -139,7 +139,7 @@ You’ll have the opportunity to change your selected contacts later on.</string
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="cAU-qO-jkZ" kind="show" id="hpE-hk-GAj"/>
+                                    <segue destination="cAU-qO-jkZ" kind="show" identifier="segueShowFollowupFrequenciesInformationVC" id="hpE-hk-GAj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -203,8 +203,8 @@ You’ll have the opportunity to change your selected contacts later on.</string
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuN-KB-SM0">
-                                <rect key="frame" x="16" y="156" width="343" height="203"/>
-                                <string key="text">You've selected 42 contacts. You'll be able to edit your selected contacts later on.
+                                <rect key="frame" x="16" y="156" width="343" height="223.5"/>
+                                <string key="text">You've selected &lt;COUNT&gt; contacts. You'll be able to edit your selected contacts later on.
  
 Next you will choose how often you would like to follow-up with each of your selected contacts.
 
@@ -221,10 +221,10 @@ Cultivate will automatically schedule recommended follow-up dates based on the p
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7h-wF-b2h">
-                                <rect key="frame" x="0.0" y="359" width="375" height="208"/>
+                                <rect key="frame" x="0.0" y="379.5" width="375" height="187.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UoL-O3-tGs" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="79.5" width="327" height="50"/>
+                                        <rect key="frame" x="24" y="69.5" width="327" height="50"/>
                                         <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Can-wG-2Mu"/>
@@ -266,6 +266,7 @@ Cultivate will automatically schedule recommended follow-up dates based on the p
                     </navigationItem>
                     <connections>
                         <outlet property="footerView" destination="QvC-tW-0Ip" id="BuE-IA-4vZ"/>
+                        <outlet property="lblInformation" destination="fuN-KB-SM0" id="ciS-NC-NUW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JWS-4U-EQ0" userLabel="First Responder" sceneMemberID="firstResponder"/>

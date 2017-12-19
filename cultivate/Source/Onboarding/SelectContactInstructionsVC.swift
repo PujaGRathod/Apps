@@ -14,8 +14,7 @@ class SelectContactInstructionsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.footerView.setCurrentStep(to: OnboardingStep.chooseContacts)
     }
 
     override func didReceiveMemoryWarning() {

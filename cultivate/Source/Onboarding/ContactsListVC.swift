@@ -50,19 +50,18 @@ class ContactsListVC: UIViewController {
         self.lblSelectedContactsCount.layer.cornerRadius = 28/2
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     func adjustContinueButtonVisibility() {
         self.bottomMarginConstraintForContinueButton.constant = (selectedContacts.count > 0) ? 12 : -64
         self.view.layoutIfNeeded()
+    }
+    
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueShowFollowupFrequenciesInformationVC",
+            let viewcontroller: SetFollowupFrequenciesInformationVC = segue.destination as! SetFollowupFrequenciesInformationVC {
+            viewcontroller.selectedContacts = self.selectedContacts
+        }
     }
 }
 

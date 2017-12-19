@@ -10,12 +10,15 @@ import UIKit
 
 class SetFollowupFrequenciesInformationVC: UIViewController {
 
+    var selectedContacts: [CULContact] = []
+    
     @IBOutlet weak var footerView: FooterView!
+    @IBOutlet weak var lblInformation: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.footerView.setCurrentStep(to: OnboardingStep.setPriorityLevels)
+        self.lblInformation.text = self.lblInformation.text?.replacingOccurrences(of: "<COUNT>", with: "\(self.selectedContacts.count)")
     }
 
     override func didReceiveMemoryWarning() {
