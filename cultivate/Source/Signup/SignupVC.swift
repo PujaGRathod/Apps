@@ -10,6 +10,7 @@ import UIKit
 
 class SignupVC: UIViewController {
 
+    @IBOutlet weak var btnSignUp: UIButton!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtRetypePassword: UITextField!
@@ -40,4 +41,6 @@ class SignupVC: UIViewController {
     }
     */
 
+    @IBAction func onSignupTap(_ sender: UIButton) {
+    }
 }

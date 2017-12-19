@@ -12,11 +12,17 @@ class LoginVC: UIViewController {
 
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
-    
+    @IBOutlet weak var btnLogin: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let textfields: [UITextField] = [ self.txtEmail, self.txtPassword]
+        for textfield in textfields {
+            textfield.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+            textfield.layer.borderWidth = 1
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,4 +41,7 @@ class LoginVC: UIViewController {
     }
     */
 
+    @IBAction func onLoginTap(_ sender: UIButton) {
+
+    }
 }

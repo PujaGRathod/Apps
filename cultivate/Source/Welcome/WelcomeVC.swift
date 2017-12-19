@@ -11,7 +11,7 @@ import GoogleSignIn
 import FirebaseAuth
 import FBSDKLoginKit
 
-class WelcomeVC: UIViewController, GIDSignInUIDelegate {
+class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 
     @IBOutlet weak var btnContinueWithEmail: UIButton!
     @IBOutlet weak var btnContinueWithFacebook: FBSDKLoginButton!
@@ -20,6 +20,7 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         self.removeConstraints()
         
@@ -27,14 +28,14 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate {
         self.btnContinueWithEmail.layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
         self.btnContinueWithEmail.layer.cornerRadius = 5
         
-        self.btnContinueWithFacebook.layer.borderWidth = 1
-        self.btnContinueWithFacebook.layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
+//        self.btnContinueWithFacebook.layer.borderWidth = 1
+//        self.btnContinueWithFacebook.layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
         self.btnContinueWithFacebook.layer.cornerRadius = 5
-        
-        self.viewContinueWithGoogle.layer.borderWidth = 1
-        self.viewContinueWithGoogle.layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
+
+//        self.viewContinueWithGoogle.layer.borderWidth = 1
+//        self.viewContinueWithGoogle.layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
         self.viewContinueWithGoogle.layer.cornerRadius = 5
-        
+
         self.viewFooter.setCurrentStep(to: OnboardingStep.createAccount)
     }
     
