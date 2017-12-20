@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yMs-5i-lSX">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -35,13 +39,13 @@
         <!--Select contacts-->
         <scene sceneID="g9D-F4-av5">
             <objects>
-                <viewController id="7i3-5b-Jp1" customClass="SelectContactInstructionsVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectContactInstructionsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7i3-5b-Jp1" customClass="SelectContactInstructionsVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fXQ-UP-ih7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WgC-01-kD9">
-                                <rect key="frame" x="16" y="156" width="568" height="142.5"/>
+                                <rect key="frame" x="16" y="156" width="343" height="203"/>
                                 <string key="text">Select the people from your iOS Contacts app that you would like to cultivate relationships with.
  
 Choose contacts who you value but communicate with infrequently (i.e. less than a weekly basis). 
@@ -52,17 +56,17 @@ You’ll have the opportunity to change your selected contacts later on.</string
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZJ-wT-cqO" customClass="FooterView" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="500" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="qL6-Pq-6TY"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b91-Jk-834">
-                                <rect key="frame" x="0.0" y="298.5" width="600" height="201.5"/>
+                                <rect key="frame" x="0.0" y="359" width="375" height="208"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEb-mz-MSE" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="76" width="552" height="50"/>
+                                        <rect key="frame" x="24" y="79.5" width="327" height="50"/>
                                         <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="mL1-AK-1il"/>
@@ -115,17 +119,17 @@ You’ll have the opportunity to change your selected contacts later on.</string
             <objects>
                 <viewController title="Select contacts" id="Nml-Y5-ZEC" customClass="ContactsListVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kq6-6a-sPG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ice-WQ-5km">
-                                <rect key="frame" x="0.0" y="116" width="600" height="410"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="477"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexColor" red="0.25882352939999997" green="0.4039215686" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qsF-I2-3No" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="24" y="538" width="552" height="50"/>
+                                <rect key="frame" x="24" y="605" width="327" height="50"/>
                                 <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="wNg-t1-MT8"/>
@@ -195,11 +199,11 @@ You’ll have the opportunity to change your selected contacts later on.</string
             <objects>
                 <viewController id="cAU-qO-jkZ" customClass="SetFollowupFrequenciesInformationVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aOr-fL-C55">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuN-KB-SM0">
-                                <rect key="frame" x="16" y="156" width="568" height="162.5"/>
+                                <rect key="frame" x="16" y="156" width="343" height="223.5"/>
                                 <string key="text">You've selected &lt;COUNT&gt; contacts. You'll be able to edit your selected contacts later on.
  
 Next you will choose how often you would like to follow-up with each of your selected contacts.
@@ -210,17 +214,17 @@ Cultivate will automatically schedule recommended follow-up dates based on the p
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QvC-tW-0Ip" customClass="FooterView" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="500" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="DOr-kw-Hcj"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7h-wF-b2h">
-                                <rect key="frame" x="0.0" y="318.5" width="600" height="181.5"/>
+                                <rect key="frame" x="0.0" y="379.5" width="375" height="187.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UoL-O3-tGs" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="66.5" width="552" height="50"/>
+                                        <rect key="frame" x="24" y="69.5" width="327" height="50"/>
                                         <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Can-wG-2Mu"/>
@@ -274,21 +278,21 @@ Cultivate will automatically schedule recommended follow-up dates based on the p
             <objects>
                 <viewController id="FPF-jS-j8i" customClass="SetFollowupFrequenciesVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mXO-9d-FeS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TBw-4r-Hzg">
-                                <rect key="frame" x="0.0" y="232.5" width="600" height="367.5"/>
+                                <rect key="frame" x="0.0" y="232.5" width="375" height="434.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/42" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nE-OW-OX0">
-                                <rect key="frame" x="283.5" y="140" width="33" height="20.5"/>
+                                <rect key="frame" x="171" y="140" width="33" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kanye Zoltan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTY-Bz-Udf">
-                                <rect key="frame" x="16" y="184.5" width="568" height="24"/>
+                                <rect key="frame" x="16" y="184.5" width="343" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -327,11 +331,11 @@ Cultivate will automatically schedule recommended follow-up dates based on the p
             <objects>
                 <viewController id="wX7-HE-xwT" customClass="AddTagsInformationVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6l0-yc-qUA">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2E-y9-goT">
-                                <rect key="frame" x="16" y="156" width="568" height="162.5"/>
+                                <rect key="frame" x="16" y="156" width="343" height="243.5"/>
                                 <string key="text">You've finished setting follow-up frequencies. We will automatically set follow-up reminders for your selected contacts.
  
 You now have the option of tagging each of your selected contacts into useful categories (e.g. Family, professional mentors, surfing buddies, etc.). 
@@ -342,17 +346,17 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMV-Y5-Jew" customClass="FooterView" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="500" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Bvp-Iu-Ne5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2z-ds-xLu">
-                                <rect key="frame" x="0.0" y="318.5" width="600" height="181.5"/>
+                                <rect key="frame" x="0.0" y="399.5" width="375" height="167.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsP-TQ-W0m" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="46" width="552" height="50"/>
+                                        <rect key="frame" x="24" y="39" width="327" height="50"/>
                                         <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="FLB-uc-To7"/>
@@ -366,7 +370,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zP9-8g-XsN">
-                                        <rect key="frame" x="225" y="105.5" width="150" height="50"/>
+                                        <rect key="frame" x="112.5" y="98.5" width="150" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="OZM-VG-1c5"/>
@@ -429,14 +433,14 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
             <objects>
                 <viewController id="wMO-YL-KQ0" customClass="AddTagsVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SAM-Kj-BPL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="hWY-Tv-QuJ">
-                                <rect key="frame" x="0.0" y="232.5" width="600" height="367.5"/>
+                                <rect key="frame" x="0.0" y="232.5" width="375" height="434.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="4F2-cy-cDM">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add tags" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fg8-er-wou">
@@ -463,13 +467,13 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 </view>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/42" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nl1-mj-x4U">
-                                <rect key="frame" x="283.5" y="140" width="33" height="20.5"/>
+                                <rect key="frame" x="171" y="140" width="33" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kanye Zoltan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6y-46-aJP">
-                                <rect key="frame" x="16" y="184.5" width="568" height="24"/>
+                                <rect key="frame" x="16" y="184.5" width="343" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -507,24 +511,24 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
             <objects>
                 <viewController id="cPq-97-pvr" customClass="OnboardingCompletedVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ehe-Uk-GJz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You've completed set-up" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dv8-CG-DAp">
-                                <rect key="frame" x="16" y="216" width="568" height="20.5"/>
+                                <rect key="frame" x="16" y="216" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEN-lf-a7m" customClass="FooterView" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="500" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="tt6-Uj-RED"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abg-ZI-hXR" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="24" y="268.5" width="552" height="50"/>
+                                <rect key="frame" x="24" y="268.5" width="327" height="50"/>
                                 <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="b6l-64-ZeN"/>

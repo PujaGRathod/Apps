@@ -165,11 +165,20 @@
                         <outlet property="viewContinueWithGoogle" destination="G2Y-Z7-j5i" id="h9o-Yv-0wS"/>
                         <outlet property="viewFooter" destination="HrP-Ow-GRC" id="mgD-lN-uoO"/>
                         <segue destination="PNw-x8-SWy" kind="presentation" identifier="segueShowWebLinkVC" id="fI1-PX-s0W"/>
+                        <segue destination="gqU-sV-nqp" kind="show" identifier="segueShowOnboarding" id="g5l-eS-uBl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M3K-WR-TgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="620" y="-192"/>
+        </scene>
+        <!--SelectContactInstructionsVC-->
+        <scene sceneID="Vdu-y0-SdD">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboarding" referencedIdentifier="SelectContactInstructionsVC" id="gqU-sV-nqp" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6B3-L0-1rk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1947" y="-68"/>
         </scene>
         <!--navWebLink-->
         <scene sceneID="s9t-Vc-b3P">
@@ -179,7 +188,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ujb-yY-tcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="620" y="283"/>
+            <point key="canvasLocation" x="619" y="336"/>
         </scene>
         <!--Create an account-->
         <scene sceneID="zeB-x5-wQV">
@@ -196,7 +205,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PJz-Q9-xoF">
                                 <rect key="frame" x="36" y="204" width="303" height="40"/>
@@ -229,6 +238,9 @@
                                 <state key="normal" title="Sign up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onSignupTap:" destination="IHn-jF-1Ua" eventType="touchUpInside" id="C7d-4L-12G"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -259,6 +271,7 @@
                         <outlet property="txtEmail" destination="xcl-J0-023" id="yfV-ab-gVM"/>
                         <outlet property="txtPassword" destination="PJz-Q9-xoF" id="tix-Cc-xkU"/>
                         <outlet property="txtRetypePassword" destination="LCy-n3-aPG" id="PHz-KY-C5I"/>
+                        <segue destination="gqU-sV-nqp" kind="show" identifier="segueShowOnboarding" id="SKL-Xq-T7l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wsc-iD-lX8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -280,7 +293,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qOA-hY-9Xs">
                                 <rect key="frame" x="36" y="204" width="303" height="40"/>
@@ -307,6 +320,9 @@
                                 <state key="normal" title="Log in">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onLoginTap:" destination="eXN-KP-mT5" eventType="touchUpInside" id="tpV-4M-46H"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -330,8 +346,10 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="Coi-60-Er7"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnLogin" destination="X1G-Fk-cX2" id="aqe-qC-5h9"/>
                         <outlet property="txtEmail" destination="mb2-Eb-QHd" id="Ep1-nN-QBj"/>
                         <outlet property="txtPassword" destination="qOA-hY-9Xs" id="QrH-Qu-Eda"/>
+                        <segue destination="gqU-sV-nqp" kind="show" identifier="segueShowOnboarding" id="8t4-1C-VHd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jh-2q-zJ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -353,7 +371,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GQ-NN-1BK" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
                                 <rect key="frame" x="36" y="325" width="303" height="50"/>
@@ -428,4 +446,7 @@
     <resources>
         <image name="WelcomeScreenLogo" width="2454" height="343"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="g5l-eS-uBl"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>665470860141-j1a2bldrid6sohvnaql99q5fkfbt1ddv.apps.googleusercontent.com</string>
+	<string>665470860141-c1e6nqnsphjsv8ruup3vt4mr2m9coatu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.665470860141-j1a2bldrid6sohvnaql99q5fkfbt1ddv</string>
+	<string>com.googleusercontent.apps.665470860141-c1e6nqnsphjsv8ruup3vt4mr2m9coatu</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBl9CFjt65wV3qNCQvmfEsuQ_LOO0APt68</string>
 	<key>GCM_SENDER_ID</key>
@@ -23,17 +23,17 @@
 	<key>STORAGE_BUCKET</key>
 	<string>cultivate-a8ff7.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:665470860141:ios:795f464e659ccaf7</string>
+	<string>1:665470860141:ios:662190f338199616</string>
 	<key>DATABASE_URL</key>
 	<string>https://cultivate-a8ff7.firebaseio.com</string>
 </dict>
