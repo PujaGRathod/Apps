@@ -16,6 +16,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "FIRAuthSwiftNameSupport.h"
+
 @class FIRVerifyAssertionResponse;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,12 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** @class FIRAdditionalUserInfo
     @brief Represents additional user data returned from an identity provider.
  */
-NS_SWIFT_NAME(AdditionalUserInfo)
+FIR_SWIFT_NAME(AdditionalUserInfo)
 @interface FIRAdditionalUserInfo : NSObject
 
 /** @fn init
-    @brief This class should not be initialized manually. `FIRAdditionalUserInfo` can be retrieved
-        from from an instance of `FIRAuthDataResult`.
+    @brief This class should not be initialized manually. @c FIRAdditionalUserInfo can be retrieved
+        from from an instance of @c FIRAuthDataResult.
  */
 - (instancetype)init NS_UNAVAILABLE;
 

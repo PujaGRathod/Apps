@@ -24,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         IQKeyboardManager.sharedManager().enable = true
         
+        let authStoryboard: UIStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
+        let welcomeNavigationController: UINavigationController = authStoryboard.instantiateViewController(withIdentifier: "navWelcomeVC") as! UINavigationController
+        self.window?.rootViewController = welcomeNavigationController
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
     

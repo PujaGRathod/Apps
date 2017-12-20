@@ -16,12 +16,14 @@
 
  #import <Foundation/Foundation.h>
 
+ #import "FIRAuthSwiftNameSupport.h"
+
  NS_ASSUME_NONNULL_BEGIN
 
  /** @class FIRActionCodeSettings
      @brief Used to set and retrieve settings related to handling action codes.
   */
- NS_SWIFT_NAME(ActionCodeSettings)
+ FIR_SWIFT_NAME(ActionCodeSettings)
  @interface FIRActionCodeSettings : NSObject
 
  /** @property URL

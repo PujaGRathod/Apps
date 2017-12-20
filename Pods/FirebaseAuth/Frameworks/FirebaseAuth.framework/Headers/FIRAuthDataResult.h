@@ -16,6 +16,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "FIRAuthSwiftNameSupport.h"
+
 @class FIRAdditionalUserInfo;
 @class FIRUser;
 
@@ -25,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Helper object that contains the result of a successful sign-in, link and reauthenticate
         action. It contains references to a FIRUser instance and a FIRAdditionalUserInfo instance.
  */
-NS_SWIFT_NAME(AuthDataResult)
+FIR_SWIFT_NAME(AuthDataResult)
 @interface FIRAuthDataResult : NSObject
 
 /** @fn init
-    @brief This class should not be initialized manually. `FIRAuthDataResult` instance is
-        returned as part of `FIRAuthDataResultCallback`.
+    @brief This class should not be initialized manually. @c FIRAuthDataResult instance is
+        returned as part of @c FIRAuthDataResultCallback .
  */
 - (instancetype)init NS_UNAVAILABLE;
 
