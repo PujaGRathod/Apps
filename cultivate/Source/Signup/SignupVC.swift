@@ -16,7 +16,7 @@ class SignupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         let textfields: [UITextField] = [ self.txtEmail, self.txtPassword, self.txtRetypePassword ]
         for textfield in textfields {
             textfield.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
