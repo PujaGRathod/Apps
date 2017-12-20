@@ -10,6 +10,9 @@
 		2E7C02DD820F9692877E75BA /* Pods_cultivateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */; };
 		387DF48219EACDBF74AED4C6 /* Pods_cultivateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6FDA977FE33C981E8A508FA /* Pods_cultivateTests.framework */; };
 		5682DF834AFDF8A88F0227CE /* Pods_cultivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF26A737BBDC0A8280FF62C6 /* Pods_cultivate.framework */; };
+		591EA6371FEA77730001B494 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6351FEA77730001B494 /* UIViewControllerExtension.swift */; };
+		591EA6381FEA77730001B494 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6361FEA77730001B494 /* StringExtension.swift */; };
+		591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6391FEA777A0001B494 /* CULUser.swift */; };
 		BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */; };
 		BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */; };
 		BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D390B1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift */; };
@@ -62,6 +65,9 @@
 
 /* Begin PBXFileReference section */
 		35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cultivateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		591EA6351FEA77730001B494 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		591EA6361FEA77730001B494 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		591EA6391FEA777A0001B494 /* CULUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CULUser.swift; sourceTree = "<group>"; };
 		A2FD7CDFD2528A07F8BD2C67 /* Pods-cultivateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateTests/Pods-cultivateTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A527A60A714358D782BE7612 /* Pods-cultivateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AFEAE65D87570891E2BFFE1B /* Pods-cultivateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +143,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		591EA6341FEA77730001B494 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				591EA6351FEA77730001B494 /* UIViewControllerExtension.swift */,
+				591EA6361FEA77730001B494 /* StringExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A403616D97A8AF715CC5288F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,8 +178,10 @@
 		BF2D390F1FE8E63E00AF63EC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				591EA6341FEA77730001B494 /* Extensions */,
 				BF7F48D41FE9088C00737FE5 /* ContactTblCell */,
 				BF2D39101FE8E65700AF63EC /* CULContact.swift */,
+				591EA6391FEA777A0001B494 /* CULUser.swift */,
 				BF7F48C81FE8EE1C00737FE5 /* String.swift */,
 				BF7F48D21FE9015600737FE5 /* CULButton.swift */,
 			);
@@ -648,6 +665,7 @@
 				BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */,
 				BFEF92321FE7D586000ED577 /* ForgotPasswordVC.swift in Sources */,
 				BF7F48C71FE8E9B800737FE5 /* ContactsWorker.swift in Sources */,
+				591EA6371FEA77730001B494 /* UIViewControllerExtension.swift in Sources */,
 				BF2D390E1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift in Sources */,
 				BFA437111FEA2FDD00E2E886 /* OnboardingNavigationController.swift in Sources */,
 				BF7F48CD1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift in Sources */,
@@ -655,11 +673,13 @@
 				BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */,
 				BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */,
 				BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */,
+				591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */,
 				BFE9D79F1FE7A0210091F4A8 /* SignupVC.swift in Sources */,
 				BF7F48D31FE9015600737FE5 /* CULButton.swift in Sources */,
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
 				BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */,
 				BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */,
+				591EA6381FEA77730001B494 /* StringExtension.swift in Sources */,
 				BFEF92301FE7D2C3000ED577 /* LoginVC.swift in Sources */,
 				BF7F48CF1FE8FE3300737FE5 /* AddTagsInformationVC.swift in Sources */,
 				BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */,

@@ -5,28 +5,44 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - FBSDKCoreKit (4.28.0):
+  - BoringSSL (9.1):
+    - BoringSSL/Implementation (= 9.1)
+    - BoringSSL/Interface (= 9.1)
+  - BoringSSL/Implementation (9.1):
+    - BoringSSL/Interface (= 9.1)
+  - BoringSSL/Interface (9.1)
+  - FBSDKCoreKit (4.29.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.28.0):
+  - FBSDKLoginKit (4.29.0):
     - FBSDKCoreKit
-  - Firebase/Auth (4.6.0):
+  - Firebase/Auth (4.8.0):
     - Firebase/Core
-    - FirebaseAuth (= 4.3.2)
-  - Firebase/Core (4.6.0):
+    - FirebaseAuth (= 4.4.1)
+  - Firebase/Core (4.8.0):
     - FirebaseAnalytics (= 4.0.5)
-    - FirebaseCore (= 4.0.11)
+    - FirebaseCore (= 4.0.13)
+  - Firebase/Firestore (4.8.0):
+    - Firebase/Core
+    - FirebaseFirestore (= 0.9.4)
   - FirebaseAnalytics (4.0.5):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseAuth (4.3.2):
+  - FirebaseAuth (4.4.1):
     - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.11):
+  - FirebaseCore (4.0.13):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseInstanceID (2.0.6)
+  - FirebaseFirestore (0.9.4):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - gRPC-ProtoRPC (~> 1.0)
+    - leveldb-library (~> 1.18)
+    - Protobuf (~> 3.1)
+  - FirebaseInstanceID (2.0.8):
+    - FirebaseCore (~> 4.0)
   - GoogleSignIn (4.1.1):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
@@ -42,19 +58,40 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.3)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
-  - GTMOAuth2 (1.1.5):
+  - gRPC (1.8.0):
+    - gRPC-RxLibrary (= 1.8.0)
+    - gRPC/Main (= 1.8.0)
+  - gRPC-Core (1.8.0):
+    - gRPC-Core/Implementation (= 1.8.0)
+    - gRPC-Core/Interface (= 1.8.0)
+  - gRPC-Core/Implementation (1.8.0):
+    - BoringSSL (~> 9.0)
+    - gRPC-Core/Interface (= 1.8.0)
+    - nanopb (~> 0.3)
+  - gRPC-Core/Interface (1.8.0)
+  - gRPC-ProtoRPC (1.8.0):
+    - gRPC (= 1.8.0)
+    - gRPC-RxLibrary (= 1.8.0)
+    - Protobuf (~> 3.0)
+  - gRPC-RxLibrary (1.8.0)
+  - gRPC/Main (1.8.0):
+    - gRPC-Core (= 1.8.0)
+    - gRPC-RxLibrary (= 1.8.0)
+  - GTMOAuth2 (1.1.6):
     - GTMSessionFetcher (~> 1.1)
   - GTMSessionFetcher (1.1.12):
     - GTMSessionFetcher/Full (= 1.1.12)
   - GTMSessionFetcher/Core (1.1.12)
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
-  - IQKeyboardManagerSwift (5.0.6)
+  - IQKeyboardManagerSwift (5.0.7)
+  - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - Protobuf (3.5.0)
   - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
@@ -63,27 +100,36 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/Firestore
   - GoogleSignIn
   - IQKeyboardManagerSwift
   - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  FBSDKCoreKit: ca961e279113f691fd83dc634c0bbad9d4e3f370
-  FBSDKLoginKit: b077381c27d800f21661757e8140cf2c80a91e4a
-  Firebase: 27321a925aa85520618255a7c630859e0502ccbd
+  BoringSSL: 84318770d120503ab1a6aaf1df777c5ca053697e
+  FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
+  FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
+  Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
-  FirebaseAuth: e58563adb207a43910a2ed87fecb9fa7d556df5a
-  FirebaseCore: 2a946ece8fbe3ce1fdeeb55324f273caade22df9
-  FirebaseInstanceID: 24958382a1011bba5aaff37e334e7a650b9118f5
+  FirebaseAuth: dc0dd403beca5b2b016aac89c2d0b8dad1c81926
+  FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
+  FirebaseFirestore: 0fb0301657759bdd7a4bc37a436e543a86b189ad
+  FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
   GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
+  gRPC: cc3f797b97bf221a9e535e8e012a6f99b1d7f797
+  gRPC-Core: 250fd60016c4e4c413279f4002679b0e14e7df26
+  gRPC-ProtoRPC: 5b934b29a95b94b0f871d4fc361ff52269476765
+  gRPC-RxLibrary: 7c57a1b2ff2f9cafb0face35bbfa0a326281295d
+  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
-  IQKeyboardManagerSwift: 02bfbb0dff71c66d0ab77d80d25dfce0c3717735
+  IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 90f480586d8b17dbe7f61973643676bac9932370
+PODFILE CHECKSUM: 95b59d105ce378c7f81ed4e9ee0937af8bf5e0d8
 
 COCOAPODS: 1.3.1

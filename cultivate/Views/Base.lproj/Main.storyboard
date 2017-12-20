@@ -234,6 +234,9 @@
                                 <state key="normal" title="Sign up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onSignupTap:" destination="LKw-Uj-IdX" eventType="touchUpInside" id="GeI-lM-m3B"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -261,6 +264,7 @@
                         <viewLayoutGuide key="safeArea" id="pUf-cq-MJV"/>
                     </view>
                     <connections>
+                        <outlet property="btnSignUp" destination="gea-tx-Zge" id="QrW-bn-J5a"/>
                         <outlet property="txtEmail" destination="eAY-Ap-CUM" id="Vco-ME-GgF"/>
                         <outlet property="txtPassword" destination="HW0-gf-3jr" id="84d-GT-Kxu"/>
                         <outlet property="txtRetypePassword" destination="ocu-iQ-8cN" id="gFc-2f-xC4"/>
@@ -316,6 +320,9 @@
                                 <state key="normal" title="Log in">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onLoginTap:" destination="yjj-Rw-ZLz" eventType="touchUpInside" id="ezb-7C-cA4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -339,6 +346,7 @@
                         <viewLayoutGuide key="safeArea" id="Yuh-h7-7YF"/>
                     </view>
                     <connections>
+                        <outlet property="btnLogin" destination="TCk-H1-cPu" id="I3x-ds-LnH"/>
                         <outlet property="txtEmail" destination="3lQ-qB-6Mq" id="0hi-sR-TIS"/>
                         <outlet property="txtPassword" destination="HhE-rn-lw9" id="uun-hi-DMr"/>
                     </connections>
