@@ -10,6 +10,9 @@
 		2E7C02DD820F9692877E75BA /* Pods_cultivateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */; };
 		387DF48219EACDBF74AED4C6 /* Pods_cultivateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6FDA977FE33C981E8A508FA /* Pods_cultivateTests.framework */; };
 		5682DF834AFDF8A88F0227CE /* Pods_cultivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF26A737BBDC0A8280FF62C6 /* Pods_cultivate.framework */; };
+		591EA62C1FEA40DA0001B494 /* CULUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA62B1FEA40DA0001B494 /* CULUser.swift */; };
+		591EA6311FEA68B00001B494 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6301FEA68AF0001B494 /* StringExtension.swift */; };
+		591EA6331FEA69100001B494 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6321FEA69100001B494 /* UIViewControllerExtension.swift */; };
 		BFC985611FE79AAF0041E32D /* cultivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC985601FE79AAF0041E32D /* cultivateTests.swift */; };
 		BFC9856C1FE79AAF0041E32D /* cultivateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */; };
 		BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D7881FE79F300091F4A8 /* GoogleService-Info.plist */; };
@@ -45,6 +48,9 @@
 
 /* Begin PBXFileReference section */
 		35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cultivateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		591EA62B1FEA40DA0001B494 /* CULUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULUser.swift; sourceTree = "<group>"; };
+		591EA6301FEA68AF0001B494 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		591EA6321FEA69100001B494 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		A2FD7CDFD2528A07F8BD2C67 /* Pods-cultivateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateTests/Pods-cultivateTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A527A60A714358D782BE7612 /* Pods-cultivateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AFEAE65D87570891E2BFFE1B /* Pods-cultivateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +109,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		591EA62F1FEA68AF0001B494 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				591EA6301FEA68AF0001B494 /* StringExtension.swift */,
+				591EA6321FEA69100001B494 /* UIViewControllerExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A403616D97A8AF715CC5288F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
+				591EA62F1FEA68AF0001B494 /* Extensions */,
+				591EA62B1FEA40DA0001B494 /* CULUser.swift */,
 				BFE9D79D1FE79FFF0091F4A8 /* Login */,
 				BFE9D79B1FE79FFF0091F4A8 /* Onboarding */,
 				BFE9D79C1FE79FFF0091F4A8 /* Signup */,
@@ -462,25 +479,39 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-cultivate/Pods-cultivate-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,7 +606,10 @@
 			files = (
 				BFE9D7A51FE7A1330091F4A8 /* WelcomeVC.swift in Sources */,
 				BFE9D7A81FE7AB920091F4A8 /* FooterView.swift in Sources */,
+				591EA6331FEA69100001B494 /* UIViewControllerExtension.swift in Sources */,
+				591EA62C1FEA40DA0001B494 /* CULUser.swift in Sources */,
 				BFEF92321FE7D586000ED577 /* ForgotPasswordVC.swift in Sources */,
+				591EA6311FEA68B00001B494 /* StringExtension.swift in Sources */,
 				BFE9D79F1FE7A0210091F4A8 /* SignupVC.swift in Sources */,
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
 				BFEF92301FE7D2C3000ED577 /* LoginVC.swift in Sources */,
@@ -754,7 +788,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/cultivate/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -771,7 +805,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/cultivate/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
