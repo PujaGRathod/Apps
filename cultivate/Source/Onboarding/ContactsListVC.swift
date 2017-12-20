@@ -9,13 +9,12 @@
 import UIKit
 
 class ContactsListVC: UIViewController {
-
+    
     @IBOutlet weak var tblContactsList: UITableView!
     @IBOutlet weak var btnContinue: UIButton!
     @IBOutlet weak var viewSelectedContactsCount: UIView!
     @IBOutlet weak var lblSelectedContactsCount: UILabel!
     @IBOutlet weak var bottomMarginConstraintForContinueButton: NSLayoutConstraint!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
     lazy var filteredContacts: [CULContact] = []
@@ -43,25 +42,42 @@ class ContactsListVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.viewSelectedContactsCount.layer.cornerRadius = 36/2
         self.lblSelectedContactsCount.layer.cornerRadius = 28/2
     }
-
+    
     func adjustContinueButtonVisibility() {
         self.bottomMarginConstraintForContinueButton.constant = (selectedContacts.count > 0) ? 12 : -64
         self.view.layoutIfNeeded()
     }
     
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueShowFollowupFrequenciesInformationVC",
-            let viewcontroller: SetFollowupFrequenciesInformationVC = segue.destination as! SetFollowupFrequenciesInformationVC {
+            let viewcontroller: SetFollowupFrequenciesInformationVC = segue.destination as? SetFollowupFrequenciesInformationVC {
+            self.selectedContacts.sort(by: { (contact1, contact2) -> Bool in
+                return contact1.name > contact2.name
+            })
             viewcontroller.selectedContacts = self.selectedContacts
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "segueShowFollowupFrequenciesInformationVC" && self.selectedContacts.count == 0 {
+            self.showErrorMessageForContactSelection()
+            return false
+        }
+        return true
+    }
+    
+    private func showErrorMessageForContactSelection() {
+        let alert: UIAlertController = UIAlertController(title: "Error", message: "Please select atleast one contact.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
