@@ -75,6 +75,8 @@ class SignupVC: UIViewController {
             }
             if let user = user {
                 print("User account created with: \(email)")
+                // TODO: Open onboarding
+                self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
                 let userlocal = CULUser(withName: name, email: user.email ?? email, id: user.uid)
                 userlocal.save()
             } else {

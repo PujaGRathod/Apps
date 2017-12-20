@@ -84,8 +84,11 @@ class LoginVC: UIViewController {
         CULUser.checkIfUserExist(with: id, completion: { (fetchedUser, exist)  in
             if exist && fetchedUser != nil {
                 print("user is old")
+                self.showAlert("Success", message: "Login success")
             } else {
                 print("user is new")
+                // TODO: Open onboarding
+                self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
                 let user = CULUser(withName: name, email: email, id: id)
                 user.save()
             }

@@ -439,7 +439,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BFC985431FE79AAE0041E32D /* Build configuration list for PBXProject "cultivate" */;
+			buildConfigurationList = BFC985431FE79AAE0041E32D /* Build configuration list for PBXProject "Cultivate" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -934,7 +934,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cultivate.app/cultivate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cultivate.temp_caseinsensitive_rename.app/Cultivate.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -952,7 +952,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cultivate.app/cultivate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cultivate.temp_caseinsensitive_rename.app/Cultivate.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
@@ -993,7 +993,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BFC985431FE79AAE0041E32D /* Build configuration list for PBXProject "cultivate" */ = {
+		BFC985431FE79AAE0041E32D /* Build configuration list for PBXProject "Cultivate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BFC9856E1FE79AAF0041E32D /* Debug */,

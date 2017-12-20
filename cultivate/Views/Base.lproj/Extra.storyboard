@@ -33,7 +33,7 @@
                         <viewLayoutGuide key="safeArea" id="H4k-v4-TKS"/>
                     </view>
                     <navigationItem key="navigationItem" id="294-uC-bXA">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="FY5-wZ-rTJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="FY5-wZ-rTJ">
                             <connections>
                                 <action selector="doneButtonTapped:" destination="7AJ-Y9-yK1" id="bfW-w9-ETr"/>
                             </connections>

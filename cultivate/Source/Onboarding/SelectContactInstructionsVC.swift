@@ -16,6 +16,11 @@ class SelectContactInstructionsVC: UIViewController {
         super.viewDidLoad()
         self.footerView.setCurrentStep(to: OnboardingStep.chooseContacts)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
