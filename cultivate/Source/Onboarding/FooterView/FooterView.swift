@@ -65,10 +65,7 @@ class FooterView: UIView {
     }
     
     func setCurrentStep(to step: OnboardingStep) {
-        self.innerViewCreateAccount.isHidden = true
-        self.innerViewChooseContacts.isHidden = true
-        self.innerViewPriorityLevels.isHidden = true
-        self.innerViewAddTags.isHidden = true
+        self.hideAllInnerViews()
         var innerCircleViewToShow: UIView!
         switch step {
         case .createAccount:
@@ -81,5 +78,19 @@ class FooterView: UIView {
             innerCircleViewToShow = self.innerViewAddTags
         }
         innerCircleViewToShow.isHidden = false
+    }
+    
+    private func hideAllInnerViews() {
+        self.innerViewCreateAccount.isHidden = true
+        self.innerViewChooseContacts.isHidden = true
+        self.innerViewPriorityLevels.isHidden = true
+        self.innerViewAddTags.isHidden = true
+    }
+    
+    func setProgressCompletion() {
+        self.hideAllInnerViews()
+        for stepView in self.stepViewsCollection {
+            stepView.backgroundColor = self.innerViewChooseContacts.backgroundColor
+        }
     }
 }

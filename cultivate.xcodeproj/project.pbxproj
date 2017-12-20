@@ -10,9 +10,26 @@
 		2E7C02DD820F9692877E75BA /* Pods_cultivateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */; };
 		387DF48219EACDBF74AED4C6 /* Pods_cultivateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6FDA977FE33C981E8A508FA /* Pods_cultivateTests.framework */; };
 		5682DF834AFDF8A88F0227CE /* Pods_cultivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF26A737BBDC0A8280FF62C6 /* Pods_cultivate.framework */; };
-		591EA62C1FEA40DA0001B494 /* CULUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA62B1FEA40DA0001B494 /* CULUser.swift */; };
-		591EA6311FEA68B00001B494 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6301FEA68AF0001B494 /* StringExtension.swift */; };
-		591EA6331FEA69100001B494 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6321FEA69100001B494 /* UIViewControllerExtension.swift */; };
+		591EA6371FEA77730001B494 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6351FEA77730001B494 /* UIViewControllerExtension.swift */; };
+		591EA6381FEA77730001B494 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6361FEA77730001B494 /* StringExtension.swift */; };
+		591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6391FEA777A0001B494 /* CULUser.swift */; };
+		BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */; };
+		BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */; };
+		BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D390B1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift */; };
+		BF2D390E1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D390D1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift */; };
+		BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D39101FE8E65700AF63EC /* CULContact.swift */; };
+		BF7F48C71FE8E9B800737FE5 /* ContactsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */; };
+		BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48C81FE8EE1C00737FE5 /* String.swift */; };
+		BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */; };
+		BF7F48CD1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CC1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift */; };
+		BF7F48CF1FE8FE3300737FE5 /* AddTagsInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CE1FE8FE3300737FE5 /* AddTagsInformationVC.swift */; };
+		BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48D01FE8FE4300737FE5 /* AddTagsVC.swift */; };
+		BF7F48D31FE9015600737FE5 /* CULButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48D21FE9015600737FE5 /* CULButton.swift */; };
+		BF7F48D71FE9089A00737FE5 /* ContactTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48D51FE9089A00737FE5 /* ContactTblCell.swift */; };
+		BF7F48D81FE9089A00737FE5 /* ContactTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7F48D61FE9089A00737FE5 /* ContactTblCell.xib */; };
+		BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4370C1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift */; };
+		BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */; };
+		BFA437111FEA2FDD00E2E886 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA437101FEA2FDD00E2E886 /* OnboardingNavigationController.swift */; };
 		BFC985611FE79AAF0041E32D /* cultivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC985601FE79AAF0041E32D /* cultivateTests.swift */; };
 		BFC9856C1FE79AAF0041E32D /* cultivateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */; };
 		BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D7881FE79F300091F4A8 /* GoogleService-Info.plist */; };
@@ -48,13 +65,30 @@
 
 /* Begin PBXFileReference section */
 		35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cultivateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		591EA62B1FEA40DA0001B494 /* CULUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULUser.swift; sourceTree = "<group>"; };
-		591EA6301FEA68AF0001B494 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		591EA6321FEA69100001B494 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		591EA6351FEA77730001B494 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		591EA6361FEA77730001B494 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		591EA6391FEA777A0001B494 /* CULUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CULUser.swift; sourceTree = "<group>"; };
 		A2FD7CDFD2528A07F8BD2C67 /* Pods-cultivateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateTests/Pods-cultivateTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A527A60A714358D782BE7612 /* Pods-cultivateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AFEAE65D87570891E2BFFE1B /* Pods-cultivateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9240D895B6E5D12F9FC0DB0 /* Pods-cultivate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivate/Pods-cultivate.debug.xcconfig"; sourceTree = "<group>"; };
+		BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsListTableViewAdapter.swift; sourceTree = "<group>"; };
+		BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListVC.swift; sourceTree = "<group>"; };
+		BF2D390B1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactInstructionsVC.swift; sourceTree = "<group>"; };
+		BF2D390D1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTableViewAdapter.swift; sourceTree = "<group>"; };
+		BF2D39101FE8E65700AF63EC /* CULContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULContact.swift; sourceTree = "<group>"; };
+		BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsWorker.swift; sourceTree = "<group>"; };
+		BF7F48C81FE8EE1C00737FE5 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFollowupFrequenciesInformationVC.swift; sourceTree = "<group>"; };
+		BF7F48CC1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFollowupFrequenciesVC.swift; sourceTree = "<group>"; };
+		BF7F48CE1FE8FE3300737FE5 /* AddTagsInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsInformationVC.swift; sourceTree = "<group>"; };
+		BF7F48D01FE8FE4300737FE5 /* AddTagsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsVC.swift; sourceTree = "<group>"; };
+		BF7F48D21FE9015600737FE5 /* CULButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULButton.swift; sourceTree = "<group>"; };
+		BF7F48D51FE9089A00737FE5 /* ContactTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTblCell.swift; sourceTree = "<group>"; };
+		BF7F48D61FE9089A00737FE5 /* ContactTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTblCell.xib; sourceTree = "<group>"; };
+		BFA4370C1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowupFrequencyListTableViewAdapter.swift; sourceTree = "<group>"; };
+		BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedVC.swift; sourceTree = "<group>"; };
+		BFA437101FEA2FDD00E2E886 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
 		BFC985481FE79AAE0041E32D /* cultivate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cultivate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9855C1FE79AAF0041E32D /* cultivateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cultivateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC985601FE79AAF0041E32D /* cultivateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cultivateTests.swift; sourceTree = "<group>"; };
@@ -109,11 +143,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		591EA62F1FEA68AF0001B494 /* Extensions */ = {
+		591EA6341FEA77730001B494 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				591EA6301FEA68AF0001B494 /* StringExtension.swift */,
-				591EA6321FEA69100001B494 /* UIViewControllerExtension.swift */,
+				591EA6351FEA77730001B494 /* UIViewControllerExtension.swift */,
+				591EA6361FEA77730001B494 /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -139,6 +173,28 @@
 				35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF2D390F1FE8E63E00AF63EC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				591EA6341FEA77730001B494 /* Extensions */,
+				BF7F48D41FE9088C00737FE5 /* ContactTblCell */,
+				BF2D39101FE8E65700AF63EC /* CULContact.swift */,
+				591EA6391FEA777A0001B494 /* CULUser.swift */,
+				BF7F48C81FE8EE1C00737FE5 /* String.swift */,
+				BF7F48D21FE9015600737FE5 /* CULButton.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BF7F48D41FE9088C00737FE5 /* ContactTblCell */ = {
+			isa = PBXGroup;
+			children = (
+				BF7F48D51FE9089A00737FE5 /* ContactTblCell.swift */,
+				BF7F48D61FE9089A00737FE5 /* ContactTblCell.xib */,
+			);
+			path = ContactTblCell;
 			sourceTree = "<group>";
 		};
 		BFC9853F1FE79AAE0041E32D = {
@@ -223,10 +279,9 @@
 			isa = PBXGroup;
 			children = (
 				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
-				591EA62F1FEA68AF0001B494 /* Extensions */,
-				591EA62B1FEA40DA0001B494 /* CULUser.swift */,
 				BFE9D79D1FE79FFF0091F4A8 /* Login */,
 				BFE9D79B1FE79FFF0091F4A8 /* Onboarding */,
+				BF2D390F1FE8E63E00AF63EC /* Shared */,
 				BFE9D79C1FE79FFF0091F4A8 /* Signup */,
 				BFE9D7A31FE7A12A0091F4A8 /* Welcome */,
 			);
@@ -236,7 +291,19 @@
 		BFE9D79B1FE79FFF0091F4A8 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				BF7F48CE1FE8FE3300737FE5 /* AddTagsInformationVC.swift */,
+				BF7F48D01FE8FE4300737FE5 /* AddTagsVC.swift */,
+				BF2D390D1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift */,
+				BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */,
+				BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */,
+				BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */,
+				BFA4370C1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift */,
 				BFE9D7A61FE7AB850091F4A8 /* FooterView */,
+				BF2D390B1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift */,
+				BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */,
+				BF7F48CC1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift */,
+				BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */,
+				BFA437101FEA2FDD00E2E886 /* OnboardingNavigationController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -397,6 +464,7 @@
 				BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */,
 				BFE9D7971FE79F300091F4A8 /* Main.storyboard in Resources */,
 				BFE9D7981FE79F300091F4A8 /* Assets.xcassets in Resources */,
+				BF7F48D81FE9089A00737FE5 /* ContactTblCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,39 +547,25 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-cultivate/Pods-cultivate-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,13 +660,29 @@
 			files = (
 				BFE9D7A51FE7A1330091F4A8 /* WelcomeVC.swift in Sources */,
 				BFE9D7A81FE7AB920091F4A8 /* FooterView.swift in Sources */,
-				591EA6331FEA69100001B494 /* UIViewControllerExtension.swift in Sources */,
-				591EA62C1FEA40DA0001B494 /* CULUser.swift in Sources */,
+				BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */,
+				BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */,
+				BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */,
 				BFEF92321FE7D586000ED577 /* ForgotPasswordVC.swift in Sources */,
-				591EA6311FEA68B00001B494 /* StringExtension.swift in Sources */,
+				BF7F48C71FE8E9B800737FE5 /* ContactsWorker.swift in Sources */,
+				591EA6371FEA77730001B494 /* UIViewControllerExtension.swift in Sources */,
+				BF2D390E1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift in Sources */,
+				BFA437111FEA2FDD00E2E886 /* OnboardingNavigationController.swift in Sources */,
+				BF7F48CD1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift in Sources */,
+				BF7F48D71FE9089A00737FE5 /* ContactTblCell.swift in Sources */,
+				BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */,
+				BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */,
+				BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */,
+				591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */,
 				BFE9D79F1FE7A0210091F4A8 /* SignupVC.swift in Sources */,
+				BF7F48D31FE9015600737FE5 /* CULButton.swift in Sources */,
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
+				BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */,
+				BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */,
+				591EA6381FEA77730001B494 /* StringExtension.swift in Sources */,
 				BFEF92301FE7D2C3000ED577 /* LoginVC.swift in Sources */,
+				BF7F48CF1FE8FE3300737FE5 /* AddTagsInformationVC.swift in Sources */,
+				BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,13 +857,15 @@
 			baseConfigurationReference = B9240D895B6E5D12F9FC0DB0 /* Pods-cultivate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = W6K2394RR4;
 				INFOPLIST_FILE = "$(SRCROOT)/cultivate/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cultivate.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cultivate.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -804,13 +876,15 @@
 			baseConfigurationReference = C32A8D628919FCC1FCBCD811 /* Pods-cultivate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = W6K2394RR4;
 				INFOPLIST_FILE = "$(SRCROOT)/cultivate/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cultivate.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cultivate.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
