@@ -47,7 +47,9 @@ class ContactListTableViewAdapter: NSObject {
             }
             self.delegate?.contactsLoaded(self.allContacts)
             
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     

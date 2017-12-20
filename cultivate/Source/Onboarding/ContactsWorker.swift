@@ -136,7 +136,7 @@ class ContactsWorker {
     }
     
     class func createCULContact(from cnContact: CNContact) -> CULContact {
-        var contact: CULContact = CULContact()
+        let contact: CULContact = CULContact()
         contact.identifier = cnContact.identifier
         contact.name = cnContact.givenName
         return contact

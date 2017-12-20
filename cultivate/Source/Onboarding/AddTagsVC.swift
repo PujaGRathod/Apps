@@ -26,10 +26,29 @@ class AddTagsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tagListTableViewAdapter.set(tableView: self.tblTagsList)
+        self.tagListTableViewAdapter.delegate = self
+        
+        self.txtAddNewTag.delegate = self
+        
+        if let contact: CULContact = self.contacts.first {
+            self.currentContact = contact
+        } else {
+            // FATAL ERROR
+            // There's no contact to followup
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @IBAction func textFieldEditingChanged(_ sender: Any) {
+        print(self.txtAddNewTag.text ?? "N.A")
+        if let text: String = self.txtAddNewTag.text {
+            self.tagListTableViewAdapter.search(tag: text)
+        }
     }
     
     func shouldPopViewController() -> Bool {
@@ -57,7 +76,7 @@ class AddTagsVC: UIViewController {
             let nextIndex: Int = index + 1
             if nextIndex == self.contacts.count {
                 // The contact is the last one on the list. We should move to the next screen now.
-                self.performSegue(withIdentifier: "segueShowAddTagsInformationVC", sender: self.contacts)
+                self.performSegue(withIdentifier: "segueShowOnboardingCompletedVC", sender: self.contacts)
             } else {
                 self.currentContact = self.contacts[nextIndex]
             }
@@ -75,6 +94,18 @@ class AddTagsVC: UIViewController {
             } else {
                 self.currentContact = self.contacts[previousIndex]
             }
+        } else {
+            self.printErrorMessageWhenContctIfNotFoundInTheList()
+        }
+    }
+    
+    func set(tag: CULTag, for contact: CULContact) {
+        if let index: Int = self.index(for: contact) {
+            contact.tag = tag
+            self.contacts[index] = contact
+            
+            self.txtAddNewTag.text = nil
+            self.tagListTableViewAdapter.search(tag: "")
         } else {
             self.printErrorMessageWhenContctIfNotFoundInTheList()
         }
@@ -98,4 +129,31 @@ class AddTagsVC: UIViewController {
     }
     */
 
+    func add(tag name: String) -> CULTag {
+        return self.tagListTableViewAdapter.add(tag: name)
+    }
+}
+
+extension AddTagsVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // TODO: Trim characters
+        if let text: String = textField.text {
+            if self.tagListTableViewAdapter.filteredTagsCount() == 0 {
+                let tag: CULTag = self.add(tag: text)
+                self.set(tag: tag, for: self.currentContact)
+                self.setContact(after: self.currentContact)
+            }
+        } else {
+            // TODO: Show empty textfield error
+        }
+        return true
+    }
+}
+
+extension AddTagsVC: TagsListTableViewAdapterDelegate {
+    func selected(tag: CULTag, for contact: CULContact) {
+        self.set(tag: tag, for: contact)
+        self.setContact(after: contact)
+    }
 }
