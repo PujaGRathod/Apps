@@ -18,6 +18,7 @@ class TagsListTableViewAdapter: NSObject {
     private var filteredTags: [CULTag] = []
     private var contact: CULContact!
     private var selectedTag: CULTag?
+    private var searchText: String = ""
     private var tableView: UITableView!
     
     var delegate: TagsListTableViewAdapterDelegate?
@@ -48,6 +49,7 @@ class TagsListTableViewAdapter: NSObject {
     func set(contact: CULContact) {
         self.contact = contact
         self.selectedTag = nil
+        self.tableView.reloadData()
     }
     
     // TODO: change this function to add tag to Firebase
@@ -62,11 +64,12 @@ class TagsListTableViewAdapter: NSObject {
     }
     
     func search(tag name: String) {
+        self.searchText = name
         if name.count == 0 {
             self.filteredTags = self.tags
         } else {
             self.filteredTags = self.tags.filter { (tag) -> Bool in
-                return tag.name.contains(name)
+                return tag.name.lowercased().contains(name.lowercased())
             }
         }
         self.tableView.reloadData()
@@ -84,22 +87,46 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.filteredTags.count == 0 {
+            return 1
+        }
         return self.filteredTags.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = UIColor.clear
-        cell.textLabel?.text = self.tag(for: indexPath)?.name ?? "N.A"
+        cell.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+        
+        if self.filteredTags.count == 0 {
+            cell.textLabel?.text = "Tap to create a new tag"
+            cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 17)
+        } else {
+            let tag: CULTag? = self.tag(for: indexPath)
+            cell.textLabel?.text = tag?.name ?? "N.A"
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
+            
+            if self.contact.tag?.identifier == tag?.identifier {
+                cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryType.none
+            }
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Call delegate method
-        if let tag:CULTag = self.tag(for: indexPath) {
+        if self.filteredTags.count == 0 {
+            let tag: CULTag = self.add(tag: self.searchText)
             self.delegate?.selected(tag: tag, for: self.contact)
         } else {
-            // How could this happen?
+            // Call delegate method
+            if let tag:CULTag = self.tag(for: indexPath) {
+                self.delegate?.selected(tag: tag, for: self.contact)
+            } else {
+                // How could this happen?
+            }
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

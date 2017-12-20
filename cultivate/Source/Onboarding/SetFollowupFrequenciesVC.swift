@@ -35,6 +35,11 @@ class SetFollowupFrequenciesVC: UIViewController {
             // There's no contact to followup
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tblFrequencyList.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

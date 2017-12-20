@@ -39,6 +39,11 @@ class AddTagsVC: UIViewController {
             // There's no contact to followup
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tblTagsList.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

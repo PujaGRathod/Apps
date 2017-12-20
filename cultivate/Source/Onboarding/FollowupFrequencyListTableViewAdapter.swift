@@ -44,6 +44,7 @@ class FollowupFrequencyListTableViewAdapter: NSObject {
     func set(contact: CULContact) {
         self.contact = contact
         self.selectedFrequency = nil
+        self.tableView.reloadData()
     }
 }
 
@@ -61,7 +62,16 @@ extension FollowupFrequencyListTableViewAdapter:UITableViewDelegate, UITableView
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = UIColor.clear
         cell.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
-        cell.textLabel?.text = self.frequency(for: indexPath).values.description
+        
+        let frequency: CULFollowupFrequency = self.frequency(for: indexPath)
+        cell.textLabel?.text = frequency.values.description
+        
+        if self.contact.followupFrequency == frequency {
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.none
+        }
+        
         return cell
     }
     
