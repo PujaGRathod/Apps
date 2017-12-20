@@ -174,7 +174,7 @@
         <!--navWebLink-->
         <scene sceneID="s9t-Vc-b3P">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="navWebLink" id="PNw-x8-SWy" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Extra" referencedIdentifier="navWebLink" id="PNw-x8-SWy" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="PZB-un-M4U"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ujb-yY-tcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -252,7 +252,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6c9-JO-l6E"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create an account" id="Mii-JW-f0w"/>
+                    <navigationItem key="navigationItem" title="Create an account" id="Mii-JW-f0w">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="D9N-eQ-nEA"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="txtEmail" destination="xcl-J0-023" id="yfV-ab-gVM"/>
                         <outlet property="txtPassword" destination="PJz-Q9-xoF" id="tix-Cc-xkU"/>
@@ -396,10 +398,10 @@
             </objects>
             <point key="canvasLocation" x="3151" y="-625"/>
         </scene>
-        <!--Onboarding Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="JYF-8J-E1h">
             <objects>
-                <navigationController storyboardIdentifier="navWebLink" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9Pg-qh-GfU" customClass="OnboardingNavigationController" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navWelcomeVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9Pg-qh-GfU" customClass="CULNavigationController" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Aum-b3-5N5">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>

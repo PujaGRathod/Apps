@@ -6,6 +6,7 @@ target 'cultivate' do
   # Pods for cultivate
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
   pod 'GoogleSignIn'
   pod 'Bolts'
   pod 'FBSDKLoginKit'

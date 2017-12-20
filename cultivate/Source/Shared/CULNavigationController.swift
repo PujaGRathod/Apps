@@ -1,5 +1,5 @@
 //
-//  OnboardingNavigationController.swift
+//  CULNavigationController.swift
 //  cultivate
 //
 //  Created by Akshit Zaveri on 20/12/17.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class OnboardingNavigationController: UINavigationController {
+class CULNavigationController: UINavigationController {
     override func popViewController(animated: Bool) -> UIViewController? {
         return super.popViewController(animated: animated)
     }
 }
 
-extension OnboardingNavigationController: UINavigationBarDelegate {
+extension CULNavigationController: UINavigationBarDelegate {
 
 //    func navigationBar(_ navigationBar: UINavigationBar, shouldPush item: UINavigationItem) -> Bool {
 //        return true
