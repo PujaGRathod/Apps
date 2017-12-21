@@ -11,14 +11,14 @@ import FirebaseAuth
 
 class LoginVC: UIViewController {
 
-    @IBOutlet weak var txtEmail: UITextField!
-    @IBOutlet weak var txtPassword: UITextField!
+    @IBOutlet weak var txtEmail: CULTextField!
+    @IBOutlet weak var txtPassword: CULTextField!
     @IBOutlet weak var btnLogin: UIButton!
+    @IBOutlet weak var errorLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.errorLabel.text = ""
         let textfields: [UITextField] = [ self.txtEmail, self.txtPassword]
         for textfield in textfields {
             textfield.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
@@ -43,16 +43,41 @@ class LoginVC: UIViewController {
     */
 
     @IBAction func onLoginTap(_ sender: UIButton) {
-        if let emailText = self.txtEmail.text,
-            emailText.isValidEmail() {
-            if let passText = self.txtPassword.text {
-                let credntial = EmailAuthProvider.credential(withEmail: emailText, password: passText)
-                self.authenticateUser(with: credntial, name: "", email: emailText)
-            } else {
-                self.showAlert("Required!", message: "Password is required!")
-            }
+        let email: String? = self.txtEmail.text
+        let password: String? = self.txtPassword.text
+        
+        var errorMessages: [String] = []
+        
+        var validationSuccess: Bool = true
+        
+        if email?.isEmpty == true {
+            self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
+            errorMessages.append("E-mail address can not be empty")
+            validationSuccess = false
         } else {
-            self.showAlert("Required!", message: "Valid Email is required!")
+            if email?.isValidEmail() == false {
+                self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
+                errorMessages.append("E-mail address is not valid.")
+                validationSuccess = false
+            } else {
+                self.txtEmail.setTextfieldMode(to: CULTextFieldMode.success)
+            }
+        }
+        
+        if password?.isEmpty == true {
+            errorMessages.append("Password can not be empty")
+            self.txtPassword.setTextfieldMode(to: CULTextFieldMode.error)
+            validationSuccess = false
+        } else {
+            self.txtPassword.setTextfieldMode(to: CULTextFieldMode.success)
+        }
+        
+        if validationSuccess {
+            self.errorLabel.text = ""
+            let credntial = EmailAuthProvider.credential(withEmail: email!, password: password!)
+            self.authenticateUser(with: credntial, name: "", email: email!)
+        } else {
+            self.errorLabel.text = errorMessages.joined(separator: "\n")
         }
     }
 
@@ -61,7 +86,9 @@ class LoginVC: UIViewController {
         Auth.auth().signIn(with: credential) { (user, error) in
             if let error = error {
                 print("Error FIR AUTH: \(error.localizedDescription)")
-                self.showAlert("Error", message: error.localizedDescription)
+                self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
+                self.txtPassword.setTextfieldMode(to: CULTextFieldMode.error)
+                self.errorLabel.text = "Invalid password or e-mail address"
                 return
             }
             if let user = user {
@@ -84,7 +111,7 @@ class LoginVC: UIViewController {
         CULUser.checkIfUserExist(with: id, completion: { (fetchedUser, exist)  in
             if exist && fetchedUser != nil {
                 print("user is old")
-                self.showAlert("Success", message: "Login success")
+                //TODO: Show dashboard to the user
             } else {
                 print("user is new")
                 // TODO: Open onboarding

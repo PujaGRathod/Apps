@@ -10,14 +10,6 @@ import UIKit
 
 class CULButton: UIButton {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.adjustUI()
@@ -38,7 +30,7 @@ class CULButton: UIButton {
     private func addDropShadow() {
         self.layer.shadowColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
         self.layer.shadowOpacity = 0.9
-        self.layer.shadowOffset = CGSize(width: 1, height: 1)
+        self.layer.shadowOffset = CGSize(width: 1, height: 2)
     }
     
     private func addBorder() {

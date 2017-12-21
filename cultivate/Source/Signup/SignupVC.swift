@@ -12,18 +12,15 @@ import FirebaseAuth
 class SignupVC: UIViewController {
 
     @IBOutlet weak var btnSignUp: UIButton!
-    @IBOutlet weak var txtEmail: UITextField!
-    @IBOutlet weak var txtPassword: UITextField!
-    @IBOutlet weak var txtRetypePassword: UITextField!
+    @IBOutlet weak var txtEmail: CULTextField!
+    @IBOutlet weak var txtPassword: CULTextField!
+    @IBOutlet weak var txtRetypePassword: CULTextField!
+    @IBOutlet weak var errorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        let textfields: [UITextField] = [ self.txtEmail, self.txtPassword, self.txtRetypePassword ]
-        for textfield in textfields {
-            textfield.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
-            textfield.layer.borderWidth = 1
-        }
+        self.errorLabel.text = ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,20 +40,50 @@ class SignupVC: UIViewController {
     */
 
     @IBAction func onSignupTap(_ sender: UIButton) {
-        if let emailText = self.txtEmail.text,
-            emailText.isValidEmail() {
-            if let passText = self.txtPassword.text,
-                let repassText = self.txtRetypePassword.text {
-                if passText == repassText {
-                    self.signupUser(with: emailText, password: passText, name: "")
-                } else {
-                    self.showAlert("Error!", message: "Password do not match!")
-                }
-            } else {
-                self.showAlert("Required!", message: "Password is required!")
-            }
+        let email: String? = self.txtEmail.text
+        let password: String? = self.txtPassword.text
+        let retypePassword: String? = self.txtRetypePassword.text
+        
+        var errorMessages: [String] = []
+        
+        var validationSuccess: Bool = true
+        
+        if email?.isEmpty == true {
+            self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
+            errorMessages.append("E-mail address can not be empty")
+            validationSuccess = false
         } else {
-            self.showAlert("Required!", message: "Valid Email is required!")
+            if email?.isValidEmail() == false {
+                self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
+                errorMessages.append("E-mail address is not valid")
+                validationSuccess = false
+            } else {
+                self.txtEmail.setTextfieldMode(to: CULTextFieldMode.success)
+            }
+        }
+        
+        if password?.isEmpty == true || retypePassword?.isEmpty == true || password != retypePassword {
+            errorMessages.append("Password and Re-type password does not match")
+            self.txtPassword.setTextfieldMode(to: CULTextFieldMode.error)
+            self.txtRetypePassword.setTextfieldMode(to: CULTextFieldMode.error)
+            validationSuccess = false
+        } else {
+            if self.txtPassword.isPasswordStrong() {
+                self.txtPassword.setTextfieldMode(to: CULTextFieldMode.success)
+                self.txtRetypePassword.setTextfieldMode(to: CULTextFieldMode.success)
+            } else {
+                errorMessages.append("Your password must be at least 8 characters")
+                self.txtPassword.setTextfieldMode(to: CULTextFieldMode.error)
+                self.txtRetypePassword.setTextfieldMode(to: CULTextFieldMode.error)
+                validationSuccess = false
+            }
+        }
+        
+        if validationSuccess {
+            self.errorLabel.text = ""
+            self.signupUser(with: email!, password: password!, name: "")
+        } else {
+            self.errorLabel.text = errorMessages.joined(separator: "\n")
         }
     }
 
@@ -66,7 +93,8 @@ class SignupVC: UIViewController {
                 if let error = error as? NSError,
                     let name = error.userInfo["error_name"] as? String {
                     if name == "ERROR_EMAIL_ALREADY_IN_USE" || name == "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" {
-                        self.showAlert("Error", message: "The email address is already in use by another account.")
+                        self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
+                        self.errorLabel.text = "The email address is already in use by another account."
                     }
                 }
                 print("Error FIR AUTH: \(error.localizedDescription)")

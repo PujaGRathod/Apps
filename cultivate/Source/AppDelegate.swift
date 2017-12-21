@@ -62,5 +62,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    
+//    private func testFirestore() {
+//        let store: Firestore = Firestore.firestore()
+//        let data: [String:Any] = [
+//            "first": "Akshit2",
+//            "last": "Zaveri3",
+//            "born": 1990
+//        ]
+//        _ = store.collection("users").addDocument(data: data) { (error) in
+//            if let error = error {
+//                print(error)
+//            } else {
+//                print("Success")
+//            }
+//        }
+//    }
+//
+//    private func getDataFromFirestore() {
+//        let store = Firestore.firestore()
+//        store.collection("usersTestAkshit1").getDocuments { (snapshot, error) in
+//            for document in snapshot?.documents ?? [] {
+//                print(document)
+//            }
+//        }
+//    }
 }
 

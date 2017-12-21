@@ -15,6 +15,7 @@ class CULUser {
     var email: String
     let id: String
     var isOnBoardingComplete: Bool = false
+    
     var rawData: [String: Any] {
         return [
             "id": self.id,

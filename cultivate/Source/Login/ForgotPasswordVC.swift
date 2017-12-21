@@ -7,31 +7,38 @@
 //
 
 import UIKit
+import Firebase
 
 class ForgotPasswordVC: UIViewController {
 
-    @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var txtEmail: CULTextField!
+    @IBOutlet weak var forgotPasswordSuccessLabel: UILabel!
+    @IBOutlet weak var forgotPasswordErrorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.forgotPasswordErrorLabel.text = ""
+        self.forgotPasswordSuccessLabel.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func forgotPasswordButtonTapped(_ sender: CULButton) {
+        if let email: String = self.txtEmail.text {
+            Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
+                if error != nil {
+                    self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
+                    self.forgotPasswordErrorLabel.text = "Invalid email address"
+                    self.forgotPasswordSuccessLabel.isHidden = true
+                } else {
+                    // Success
+                    self.txtEmail.setTextfieldMode(to: CULTextFieldMode.success)
+                    self.forgotPasswordErrorLabel.text = ""
+                    self.forgotPasswordSuccessLabel.isHidden = false
+                }
+            })
+        }
     }
-    */
-
 }
