@@ -25,14 +25,16 @@
                                     <constraint firstAttribute="height" constant="117" id="40Q-dj-ZEU"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The simplest way to nurture the relationships you care about most" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-O6-YIg">
-                                <rect key="frame" x="16" y="241" width="343" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-O6-YIg">
+                                <rect key="frame" x="16" y="252.5" width="343" height="48"/>
+                                <string key="text">The simplest way to build and maintain
+ your most important relationships</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fee-kW-6gM">
-                                <rect key="frame" x="24" y="300.5" width="327" height="182"/>
+                                <rect key="frame" x="24" y="340.5" width="327" height="182"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYY-Uu-SBO">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="50"/>
@@ -121,39 +123,31 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By continuing you indicate that you have read and agree to the Terms of Service and Privacy Policy." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9x-D2-hAA" customClass="TTTAttributedLabel">
-                                <rect key="frame" x="24" y="482.5" width="327" height="84.5"/>
+                                <rect key="frame" x="24" y="522.5" width="327" height="84.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84.5" id="g8I-5S-B9l"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HrP-Ow-GRC" customClass="FooterView" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="q8p-AJ-kb8"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="A9x-D2-hAA" firstAttribute="leading" secondItem="Mto-sb-YhQ" secondAttribute="leading" constant="24" id="43a-HW-tBr"/>
                             <constraint firstItem="Fee-kW-6gM" firstAttribute="leading" secondItem="Mto-sb-YhQ" secondAttribute="leading" constant="24" id="80u-iJ-IG2"/>
-                            <constraint firstItem="HrP-Ow-GRC" firstAttribute="leading" secondItem="Mto-sb-YhQ" secondAttribute="leading" id="CYw-XE-cx6"/>
                             <constraint firstItem="3FB-O6-YIg" firstAttribute="leading" secondItem="Mto-sb-YhQ" secondAttribute="leading" constant="16" id="DTD-m7-Hwy"/>
-                            <constraint firstItem="Mto-sb-YhQ" firstAttribute="bottom" secondItem="HrP-Ow-GRC" secondAttribute="bottom" id="Hag-4x-sfA"/>
                             <constraint firstItem="Mto-sb-YhQ" firstAttribute="trailing" secondItem="Fee-kW-6gM" secondAttribute="trailing" constant="24" id="IHG-wr-2VG"/>
                             <constraint firstItem="Mto-sb-YhQ" firstAttribute="trailing" secondItem="mNc-Hr-RjB" secondAttribute="trailing" constant="16" id="OoL-ag-WIO"/>
-                            <constraint firstItem="Fee-kW-6gM" firstAttribute="centerY" secondItem="Mto-sb-YhQ" secondAttribute="centerY" id="VAC-oB-6sa"/>
+                            <constraint firstItem="Fee-kW-6gM" firstAttribute="centerY" secondItem="Mto-sb-YhQ" secondAttribute="centerY" constant="40" id="VAC-oB-6sa"/>
                             <constraint firstItem="mNc-Hr-RjB" firstAttribute="top" secondItem="Mto-sb-YhQ" secondAttribute="top" id="Wn5-wk-HaM"/>
-                            <constraint firstItem="3FB-O6-YIg" firstAttribute="top" secondItem="mNc-Hr-RjB" secondAttribute="bottom" constant="8" id="bYm-80-gqS"/>
+                            <constraint firstItem="3FB-O6-YIg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mNc-Hr-RjB" secondAttribute="bottom" constant="16" id="bYm-80-gqS"/>
                             <constraint firstItem="mNc-Hr-RjB" firstAttribute="leading" secondItem="Mto-sb-YhQ" secondAttribute="leading" constant="16" id="ct3-mS-LCU"/>
-                            <constraint firstItem="Mto-sb-YhQ" firstAttribute="trailing" secondItem="HrP-Ow-GRC" secondAttribute="trailing" id="dWr-aH-WT3"/>
                             <constraint firstItem="Fee-kW-6gM" firstAttribute="centerX" secondItem="Mto-sb-YhQ" secondAttribute="centerX" id="eMe-fs-b11"/>
                             <constraint firstItem="Mto-sb-YhQ" firstAttribute="trailing" secondItem="3FB-O6-YIg" secondAttribute="trailing" constant="16" id="kW9-qp-dxl"/>
                             <constraint firstItem="Mto-sb-YhQ" firstAttribute="trailing" secondItem="A9x-D2-hAA" secondAttribute="trailing" constant="24" id="lAh-Tk-KnK"/>
                             <constraint firstItem="A9x-D2-hAA" firstAttribute="top" secondItem="Fee-kW-6gM" secondAttribute="bottom" id="leJ-pc-egY"/>
-                            <constraint firstItem="HrP-Ow-GRC" firstAttribute="top" secondItem="A9x-D2-hAA" secondAttribute="bottom" id="m5H-xm-x8i"/>
-                            <constraint firstItem="Fee-kW-6gM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3FB-O6-YIg" secondAttribute="bottom" constant="4" id="x8V-Af-8il"/>
+                            <constraint firstItem="Fee-kW-6gM" firstAttribute="top" secondItem="3FB-O6-YIg" secondAttribute="bottom" constant="40" id="x8V-Af-8il"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mto-sb-YhQ"/>
                     </view>
@@ -163,7 +157,6 @@
                         <outlet property="btnContinueWithFacebook" destination="d6K-s4-om9" id="Ac5-S9-xJq"/>
                         <outlet property="lblTermsPrivacyPolicyAgreement" destination="A9x-D2-hAA" id="H84-AC-8cd"/>
                         <outlet property="viewContinueWithGoogle" destination="G2Y-Z7-j5i" id="h9o-Yv-0wS"/>
-                        <outlet property="viewFooter" destination="HrP-Ow-GRC" id="mgD-lN-uoO"/>
                         <segue destination="PNw-x8-SWy" kind="presentation" identifier="segueShowWebLinkVC" id="fI1-PX-s0W"/>
                         <segue destination="gqU-sV-nqp" kind="show" identifier="segueShowOnboarding" id="g5l-eS-uBl"/>
                     </connections>
@@ -490,6 +483,6 @@
         <image name="WelcomeScreenLogo" width="2454" height="343"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8t4-1C-VHd"/>
+        <segue reference="g5l-eS-uBl"/>
     </inferredMetricsTieBreakers>
 </document>
