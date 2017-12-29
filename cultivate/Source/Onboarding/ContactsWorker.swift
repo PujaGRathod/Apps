@@ -138,7 +138,8 @@ class ContactsWorker {
     class func createCULContact(from cnContact: CNContact) -> CULContact {
         let contact: CULContact = CULContact()
         contact.identifier = cnContact.identifier
-        contact.name = cnContact.givenName
+        contact.first_name = cnContact.givenName
+        contact.last_name = cnContact.familyName
         return contact
     }
 }

@@ -42,7 +42,20 @@ enum CULFollowupFrequency {
 
 class CULContact {
     var identifier: String!
-    var name: String!
+    var first_name: String?
+    var last_name: String?
+    var name: String {
+        var list: [String] = []
+        if let fName: String = self.first_name,
+            self.first_name?.isEmpty == false {
+            list.append(fName)
+        }
+        if let lName: String = self.last_name,
+            self.last_name?.isEmpty == false {
+            list.append(lName)
+        }
+        return list.joined(separator: " ")
+    }
     var followupFrequency: CULFollowupFrequency = CULFollowupFrequency.none
     var tag: CULTag?
 }
