@@ -91,6 +91,43 @@ class CULTextField: UITextField {
     
     func isPasswordStrong() -> Bool {
         if let text: String = self.text, text.count >= 8 {
+            if self.hasLowercaseCharacters(),
+                self.hasUppercaseCharacters(),
+                self.hasSymbols(),
+                self.hasNumbers() {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func hasLowercaseCharacters() -> Bool {
+        let set = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz")
+        if self.text?.rangeOfCharacter(from: set) != nil {
+            return true
+        }
+        return false
+    }
+    
+    private func hasUppercaseCharacters() -> Bool {
+        let set = CharacterSet(charactersIn: "ABCDEFGHIJKLKMNOPQRSTUVWXYZ")
+        if self.text?.rangeOfCharacter(from: set) != nil {
+            return true
+        }
+        return false
+    }
+    
+    private func hasSymbols() -> Bool {
+        let set = CharacterSet(charactersIn: "!@#$%^&*()~{}[]:\";',./<>?")
+        if self.text?.rangeOfCharacter(from: set) != nil {
+            return true
+        }
+        return false
+    }
+    
+    private func hasNumbers() -> Bool {
+        let set = CharacterSet(charactersIn: "0123456789")
+        if self.text?.rangeOfCharacter(from: set) != nil {
             return true
         }
         return false

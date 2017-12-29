@@ -72,7 +72,7 @@ class SignupVC: UIViewController {
                 self.txtPassword.setTextfieldMode(to: CULTextFieldMode.success)
                 self.txtRetypePassword.setTextfieldMode(to: CULTextFieldMode.success)
             } else {
-                errorMessages.append("Your password must be at least 8 characters")
+                errorMessages.append("Your password must be at least 8 characters and consist of at least one lowercase, one uppercase, one number and one symbol.")
                 self.txtPassword.setTextfieldMode(to: CULTextFieldMode.error)
                 self.txtRetypePassword.setTextfieldMode(to: CULTextFieldMode.error)
                 validationSuccess = false
