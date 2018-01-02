@@ -88,7 +88,7 @@ class LoginVC: UIViewController {
                 print("Error FIR AUTH: \(error.localizedDescription)")
                 self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
                 self.txtPassword.setTextfieldMode(to: CULTextFieldMode.error)
-                self.errorLabel.text = "Invalid password or e-mail address"
+                self.errorLabel.text = "Invalid password or e-mail address."
                 return
             }
             if let user = user {
@@ -99,7 +99,7 @@ class LoginVC: UIViewController {
                 } else {
                     print("Email on FIR User: \(user.email ?? "nil")")
                 }
-                print("User account created with: \(credential.provider)")
+                print("User account logged in with: \(credential.provider)")
                 self.checkandCreateUser(id: user.uid, email: user.email ?? email, name: user.displayName ?? name)
             } else {
                 print("Error: user is nil FIR AUTH")
@@ -111,7 +111,12 @@ class LoginVC: UIViewController {
         CULUser.checkIfUserExist(with: id, completion: { (fetchedUser, exist)  in
             if exist && fetchedUser != nil {
                 print("user is old")
-                //TODO: Show dashboard to the user
+                if fetchedUser?.isOnBoardingComplete == true {
+                    // TODO: Show dashboard
+                } else {
+                    // Show onboarding
+                    self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
+                }
             } else {
                 print("user is new")
                 // TODO: Open onboarding

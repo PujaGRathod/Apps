@@ -47,6 +47,7 @@
 		BFE9D7AA1FE7AB9A0091F4A8 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D7A91FE7AB9A0091F4A8 /* FooterView.xib */; };
 		BFEF92301FE7D2C3000ED577 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEF922F1FE7D2C3000ED577 /* LoginVC.swift */; };
 		BFEF92321FE7D586000ED577 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEF92311FE7D586000ED577 /* ForgotPasswordVC.swift */; };
+		BFF28FEB1FFB634B00036150 /* ExtendedSplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF28FEA1FFB634B00036150 /* ExtendedSplashVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		BFE9D7A91FE7AB9A0091F4A8 /* FooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
 		BFEF922F1FE7D2C3000ED577 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		BFEF92311FE7D586000ED577 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		BFF28FEA1FFB634B00036150 /* ExtendedSplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedSplashVC.swift; sourceTree = "<group>"; };
 		C32A8D628919FCC1FCBCD811 /* Pods-cultivate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivate.release.xcconfig"; path = "Pods/Target Support Files/Pods-cultivate/Pods-cultivate.release.xcconfig"; sourceTree = "<group>"; };
 		CB93933DF4F0FC143E5C5EB6 /* Pods-cultivateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateTests/Pods-cultivateTests.release.xcconfig"; sourceTree = "<group>"; };
 		D6FDA977FE33C981E8A508FA /* Pods_cultivateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cultivateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
+				BFF28FEA1FFB634B00036150 /* ExtendedSplashVC.swift */,
 				BFE9D79D1FE79FFF0091F4A8 /* Login */,
 				BFE9D79B1FE79FFF0091F4A8 /* Onboarding */,
 				BF2D390F1FE8E63E00AF63EC /* Shared */,
@@ -696,6 +699,7 @@
 				BF1298A71FEA8E710058C8EC /* CULNavigationController.swift in Sources */,
 				BF7F48D71FE9089A00737FE5 /* ContactTblCell.swift in Sources */,
 				BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */,
+				BFF28FEB1FFB634B00036150 /* ExtendedSplashVC.swift in Sources */,
 				BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */,
 				BF4A5AAC1FEA746900012B40 /* WebLinkVC.swift in Sources */,
 				BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */,

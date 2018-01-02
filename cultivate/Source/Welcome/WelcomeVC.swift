@@ -139,8 +139,8 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     func authenticateUser(with credential: AuthCredential, name: String, email: String) {
         Auth.auth().signIn(with: credential) { (user, error) in
             if let error = error {
-                if let error = error as? NSError,
-                    let name = error.userInfo["error_name"] as? String {
+                let error = error as NSError
+                if let name = error.userInfo["error_name"] as? String {
                     if name == "ERROR_EMAIL_ALREADY_IN_USE" || name == "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" {
                         self.showAlert("Error", message: error.localizedDescription)
                     }
@@ -169,7 +169,12 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         CULUser.checkIfUserExist(with: id, completion: { (fetchedUser, exist)  in
             if exist && fetchedUser != nil {
                 print("user is old")
-                // TODO: Open dashboard
+                if fetchedUser?.isOnBoardingComplete == true {
+                    // TODO: Show dashboard
+                } else {
+                    // Show onboarding
+                    self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
+                }
             } else {
                 print("user is new")
                 // TODO: Open onboarding

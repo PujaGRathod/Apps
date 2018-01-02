@@ -90,9 +90,10 @@ class SignupVC: UIViewController {
     func signupUser(with email: String, password: String, name: String) {
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if let error = error {
-                if let error = error as? NSError,
-                    let name = error.userInfo["error_name"] as? String {
+                let error = error as NSError
+                if let name = error.userInfo["error_name"] as? String {
                     if name == "ERROR_EMAIL_ALREADY_IN_USE" || name == "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" {
+                        
                         self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
                         self.errorLabel.text = "The email address is already in use by another account."
                     }

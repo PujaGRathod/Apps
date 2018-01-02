@@ -506,7 +506,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
             </objects>
             <point key="canvasLocation" x="3857" y="-215"/>
         </scene>
-        <!--Congratulations-->
+        <!--Onboarding CompletedVC-->
         <scene sceneID="SpY-EE-Xxb">
             <objects>
                 <viewController id="cPq-97-pvr" customClass="OnboardingCompletedVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
@@ -514,8 +514,8 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You've completed set-up" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dv8-CG-DAp">
-                                <rect key="frame" x="16" y="216" width="343" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations! You’ve successfully completed setting up your Cultivate account" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dv8-CG-DAp">
+                                <rect key="frame" x="16" y="216" width="343" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -528,7 +528,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abg-ZI-hXR" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="24" y="268.5" width="327" height="50"/>
+                                <rect key="frame" x="24" y="289" width="327" height="50"/>
                                 <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="b6l-64-ZeN"/>
@@ -553,7 +553,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NZP-Fc-AcK"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Congratulations" id="d0s-L9-dvh">
+                    <navigationItem key="navigationItem" id="d0s-L9-dvh">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Dqe-I5-NPw"/>
                     </navigationItem>
                     <connections>
@@ -562,7 +562,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoR-ZV-Dax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3857" y="525"/>
+            <point key="canvasLocation" x="3856.8000000000002" y="524.8875562218891"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
