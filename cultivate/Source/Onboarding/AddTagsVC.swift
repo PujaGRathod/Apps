@@ -23,12 +23,16 @@ class AddTagsVC: UIViewController {
     @IBOutlet weak var lblContactName: UILabel!
     @IBOutlet weak var txtAddNewTag: UITextField!
     @IBOutlet weak var tblTagsList: UITableView!
+    @IBOutlet weak var headerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tagListTableViewAdapter.set(tableView: self.tblTagsList)
         self.tagListTableViewAdapter.delegate = self
+        self.tagListTableViewAdapter.textField = self.txtAddNewTag
+        
+        self.tblTagsList.tableHeaderView = self.headerView
         
         self.txtAddNewTag.delegate = self
         
@@ -124,18 +128,8 @@ class AddTagsVC: UIViewController {
         print("// Contact is not present in list. How could this happen?")
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    func add(tag name: String) -> CULTag {
-        return self.tagListTableViewAdapter.add(tag: name)
+    func add(tag name: String, completion: @escaping ((CULTag?)->Void))  {
+        self.tagListTableViewAdapter.add(tag: name, completion: completion)
     }
 }
 
@@ -145,9 +139,12 @@ extension AddTagsVC: UITextFieldDelegate {
         // TODO: Trim characters
         if let text: String = textField.text {
             if self.tagListTableViewAdapter.filteredTagsCount() == 0 {
-                let tag: CULTag = self.add(tag: text)
-                self.set(tag: tag, for: self.currentContact)
-                self.setContact(after: self.currentContact)
+                self.add(tag: text, completion: { (tag) in
+                    if let tag = tag {
+                        self.set(tag: tag, for: self.currentContact)
+                        self.setContact(after: self.currentContact)
+                    }
+                })
             }
         } else {
             // TODO: Show empty textfield error

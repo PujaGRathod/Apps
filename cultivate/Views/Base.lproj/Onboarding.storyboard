@@ -439,30 +439,30 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="hWY-Tv-QuJ">
                                 <rect key="frame" x="0.0" y="232.5" width="375" height="434.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="4F2-cy-cDM">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="iXR-kt-0zb">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add tags" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fg8-er-wou">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add tags" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cto-Wd-WYj">
                                             <rect key="frame" x="16" y="0.0" width="359" height="44"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="44" id="hSN-hm-YNQ"/>
+                                                <constraint firstAttribute="height" constant="44" id="XZ5-Uk-ZcZ"/>
                                             </constraints>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                             <connections>
-                                                <action selector="textFieldEditingChanged:" destination="wMO-YL-KQ0" eventType="editingChanged" id="Wom-LE-uP4"/>
+                                                <action selector="textFieldEditingChanged:" destination="wMO-YL-KQ0" eventType="editingChanged" id="rkY-yb-0Vw"/>
                                             </connections>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="Fg8-er-wou" firstAttribute="leading" secondItem="4F2-cy-cDM" secondAttribute="leading" constant="16" id="16m-91-Mii"/>
-                                        <constraint firstItem="Fg8-er-wou" firstAttribute="top" secondItem="4F2-cy-cDM" secondAttribute="top" id="NJj-22-dsC"/>
-                                        <constraint firstAttribute="trailing" secondItem="Fg8-er-wou" secondAttribute="trailing" id="jl3-j4-RIE"/>
-                                        <constraint firstAttribute="bottom" secondItem="Fg8-er-wou" secondAttribute="bottom" id="uf8-Db-1vK"/>
+                                        <constraint firstItem="Cto-Wd-WYj" firstAttribute="leading" secondItem="iXR-kt-0zb" secondAttribute="leading" constant="16" id="56M-lm-lip"/>
+                                        <constraint firstAttribute="bottom" secondItem="Cto-Wd-WYj" secondAttribute="bottom" id="85K-0A-jgE"/>
+                                        <constraint firstAttribute="trailing" secondItem="Cto-Wd-WYj" secondAttribute="trailing" id="jfX-eX-fXT"/>
+                                        <constraint firstItem="Cto-Wd-WYj" firstAttribute="top" secondItem="iXR-kt-0zb" secondAttribute="top" id="z6d-ch-WuG"/>
                                     </constraints>
                                 </view>
                             </tableView>
@@ -495,10 +495,11 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                     </view>
                     <navigationItem key="navigationItem" title="Add tags" id="opU-Df-w7c"/>
                     <connections>
+                        <outlet property="headerView" destination="iXR-kt-0zb" id="ApJ-z3-Ok9"/>
                         <outlet property="lblContactCount" destination="nl1-mj-x4U" id="3zo-DC-ij9"/>
                         <outlet property="lblContactName" destination="c6y-46-aJP" id="gDr-LZ-p62"/>
                         <outlet property="tblTagsList" destination="hWY-Tv-QuJ" id="13B-t7-DrK"/>
-                        <outlet property="txtAddNewTag" destination="Fg8-er-wou" id="Zrk-Fo-c1s"/>
+                        <outlet property="txtAddNewTag" destination="Cto-Wd-WYj" id="ouD-Jt-wcS"/>
                         <segue destination="cPq-97-pvr" kind="show" identifier="segueShowOnboardingCompletedVC" id="8T6-s2-ML5"/>
                     </connections>
                 </viewController>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol TagsListTableViewAdapterDelegate {
     func selected(tag: CULTag, for contact: CULContact)
@@ -20,6 +21,7 @@ class TagsListTableViewAdapter: NSObject {
     private var selectedTag: CULTag?
     private var searchText: String = ""
     private var tableView: UITableView!
+    var textField: UITextField?
     
     var delegate: TagsListTableViewAdapterDelegate?
     
@@ -29,21 +31,58 @@ class TagsListTableViewAdapter: NSObject {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        self.tags = self.getTags()
-        self.filteredTags = self.tags
-        
-        self.tableView.reloadData()
+        self.loadTags()
+    }
+    
+    func loadTags() {
+        self.getTags { (tags) in
+            self.tags = tags
+            self.filteredTags = self.tags
+            self.tableView.reloadData()
+            
+            if self.tags.count == 0 {
+                let attributes: [NSAttributedStringKey:Any] = [
+                    NSAttributedStringKey.foregroundColor: UIColor.black
+                ]
+                self.textField?.attributedPlaceholder = NSMutableAttributedString(string: "Add tags", attributes: attributes)
+            } else {
+                let attributes: [NSAttributedStringKey:Any] = [
+                    NSAttributedStringKey.foregroundColor: UIColor.gray
+                ]
+                self.textField?.attributedPlaceholder = NSMutableAttributedString(string: "Add tags", attributes: attributes)
+            }
+        }
     }
     
     // TODO: get the data from Firebase
-    private func getTags() -> [CULTag] {
-        return [
-            CULTag(identifier: "1", name: "Family"),
-            CULTag(identifier: "2", name: "Office"),
-            CULTag(identifier: "3", name: "Football team"),
-            CULTag(identifier: "4", name: "Surfing buddies"),
-            CULTag(identifier: "5", name: "Mentors")
-        ]
+    private func getTags(_ completion: @escaping (([CULTag])->Void)) {
+        guard let currentUser = Auth.auth().currentUser else {
+            completion([])
+            return
+        }
+        
+        let store = Firestore.firestore()
+        store.collection("users/\(currentUser.uid)/tags").getDocuments { (snapshot, error) in
+            var tags: [CULTag] = []
+            if let error = error {
+                print(error)
+            } else if let snapshot = snapshot {
+                for document in snapshot.documents {
+                    let tag = self.tag(from: document.data(), id: document.documentID)
+                    tags.append(tag)
+                }
+            }
+            completion(tags)
+        }
+    }
+    
+    private func tag(from rawTag: [String:Any], id: String) -> CULTag {
+        var tag = CULTag()
+        if let name: String = rawTag["name"] as? String {
+            tag.name = name
+        }
+        tag.identifier = id
+        return tag
     }
     
     func set(contact: CULContact) {
@@ -53,14 +92,35 @@ class TagsListTableViewAdapter: NSObject {
     }
     
     // TODO: change this function to add tag to Firebase
-    func add(tag name: String) -> CULTag {
-        let indentifier: String = "\(Date.timeIntervalSinceReferenceDate)"
-        let tag: CULTag = CULTag(identifier: indentifier, name: name)
-        self.tags.append(tag)
+    func add(tag name: String, completion: @escaping ((CULTag?)->Void)) {
         
-        self.tableView.reloadData()
+        var identifier: String? = "\(Date.timeIntervalSinceReferenceDate)"
+        identifier = identifier?.components(separatedBy: ".").first ?? "someUniqueId"
         
-        return tag
+        let tag: CULTag = CULTag(identifier: identifier, name: name)
+        
+        guard let currentUser = Auth.auth().currentUser else {
+            completion(nil)
+            return
+        }
+        
+        let store: Firestore = Firestore.firestore()
+        let data: [String:Any] = [
+            "name": tag.name
+        ]
+        
+        if let identifier = identifier {
+            store.collection("users").document(currentUser.uid).collection("tags").document(identifier).setData(data) { (error) in
+                
+                if let error = error {
+                    print(error)
+                } else {
+                    print("Success")
+                    completion(tag)
+                    self.loadTags()
+                }
+            }
+        }
     }
     
     func search(tag name: String) {
@@ -82,12 +142,10 @@ class TagsListTableViewAdapter: NSObject {
 
 extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
     
-    func tag(for indexPath: IndexPath) -> CULTag? {
-        return self.filteredTags[indexPath.item]
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.filteredTags.count == 0 {
+        if self.filteredTags.count == 0,
+            self.searchText.isEmpty == false {
+            
             return 1
         }
         return self.filteredTags.count
@@ -97,12 +155,15 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = UIColor.clear
         cell.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+        cell.textLabel?.textColor = #colorLiteral(red: 0.3803921569, green: 0.368627451, blue: 0.3843137255, alpha: 1)
         
-        if self.filteredTags.count == 0 {
+        if self.filteredTags.count == 0,
+            self.searchText.isEmpty == false {
+            
             cell.textLabel?.text = "Tap to create a new tag"
             cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 17)
         } else {
-            let tag: CULTag? = self.tag(for: indexPath)
+            let tag: CULTag? = self.filteredTags[indexPath.item]
             cell.textLabel?.text = tag?.name ?? "N.A"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
             
@@ -117,16 +178,18 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.filteredTags.count == 0 {
-            let tag: CULTag = self.add(tag: self.searchText)
-            self.delegate?.selected(tag: tag, for: self.contact)
+        if self.filteredTags.count == 0,
+            self.searchText.isEmpty == false {
+            
+            self.add(tag: self.searchText, completion: { (tag) in
+                if let tag = tag {
+                    self.delegate?.selected(tag: tag, for: self.contact)
+                }
+            })
         } else {
             // Call delegate method
-            if let tag:CULTag = self.tag(for: indexPath) {
-                self.delegate?.selected(tag: tag, for: self.contact)
-            } else {
-                // How could this happen?
-            }
+            let tag:CULTag = self.filteredTags[indexPath.item]
+            self.delegate?.selected(tag: tag, for: self.contact)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

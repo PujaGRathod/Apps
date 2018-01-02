@@ -24,16 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         IQKeyboardManager.sharedManager().enable = true
         
-        try? Auth.auth().signOut()
         
-        if let currentuser = Auth.auth().currentUser {
+        
+//        try? Auth.auth().signOut()
+        
+        if let currentUser = Auth.auth().currentUser {
             
             let authStoryboard: UIStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
             let extendedSplashVC: ExtendedSplashVC = authStoryboard.instantiateViewController(withIdentifier: "ExtendedSplashVC") as!ExtendedSplashVC
             self.window?.rootViewController = extendedSplashVC
             self.window?.makeKeyAndVisible()
             
-            CULUser.checkIfUserExist(with: currentuser.uid, completion: { (loggedInUser, success) in
+            CULUser.checkIfUserExist(with: currentUser.uid, completion: { (loggedInUser, success) in
                 DispatchQueue.main.async {
                     
                     guard let user = loggedInUser else {
