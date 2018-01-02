@@ -80,7 +80,7 @@ You’ll have the opportunity to change your selected contacts later on.</string
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87450980392156863" green="0.89411764705882346" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="wEb-mz-MSE" secondAttribute="trailing" constant="24" id="dwM-u6-JYq"/>
                                     <constraint firstItem="wEb-mz-MSE" firstAttribute="leading" secondItem="b91-Jk-834" secondAttribute="leading" constant="24" id="kDp-tZ-aUj"/>
@@ -88,7 +88,7 @@ You’ll have the opportunity to change your selected contacts later on.</string
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Cws-Oc-uxa" firstAttribute="trailing" secondItem="WgC-01-kD9" secondAttribute="trailing" constant="16" id="0E7-g1-SqE"/>
                             <constraint firstItem="OZJ-wT-cqO" firstAttribute="top" secondItem="b91-Jk-834" secondAttribute="bottom" id="19b-0D-Ogm"/>
@@ -124,9 +124,9 @@ You’ll have the opportunity to change your selected contacts later on.</string
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ice-WQ-5km">
                                 <rect key="frame" x="0.0" y="116" width="375" height="477"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexColor" red="0.25882352939999997" green="0.4039215686" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qsF-I2-3No" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
                                 <rect key="frame" x="24" y="605" width="327" height="50"/>
@@ -143,7 +143,7 @@ You’ll have the opportunity to change your selected contacts later on.</string
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="kKg-6f-NUn" firstAttribute="trailing" secondItem="qsF-I2-3No" secondAttribute="trailing" constant="24" id="DRD-og-mb2"/>
                             <constraint firstItem="Ice-WQ-5km" firstAttribute="leading" secondItem="kKg-6f-NUn" secondAttribute="leading" id="GqL-EH-F6h"/>
@@ -238,7 +238,7 @@ Cultivate will automatically schedule recommended follow-up dates based on the p
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="UoL-O3-tGs" firstAttribute="centerY" secondItem="F7h-wF-b2h" secondAttribute="centerY" id="EW8-TL-fXn"/>
                                     <constraint firstAttribute="trailing" secondItem="UoL-O3-tGs" secondAttribute="trailing" constant="24" id="lQt-BC-7EC"/>
@@ -246,7 +246,7 @@ Cultivate will automatically schedule recommended follow-up dates based on the p
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fuN-KB-SM0" firstAttribute="top" secondItem="EaR-HA-s3a" secondAttribute="top" constant="40" id="BoD-BU-Dpz"/>
                             <constraint firstItem="EaR-HA-s3a" firstAttribute="trailing" secondItem="F7h-wF-b2h" secondAttribute="trailing" id="LfU-kR-9Pu"/>
@@ -281,9 +281,9 @@ Cultivate will automatically schedule recommended follow-up dates based on the p
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TBw-4r-Hzg">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="TBw-4r-Hzg">
                                 <rect key="frame" x="0.0" y="232.5" width="375" height="434.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/42" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nE-OW-OX0">
                                 <rect key="frame" x="171" y="140" width="33" height="20.5"/>
@@ -298,7 +298,7 @@ Cultivate will automatically schedule recommended follow-up dates based on the p
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Gaf-Zd-M4E" firstAttribute="trailing" secondItem="TBw-4r-Hzg" secondAttribute="trailing" id="AAe-Pb-4xw"/>
                             <constraint firstItem="0nE-OW-OX0" firstAttribute="top" secondItem="Gaf-Zd-M4E" secondAttribute="top" constant="24" id="BaZ-5F-Oqf"/>
@@ -392,7 +392,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="tsP-TQ-W0m" firstAttribute="centerY" secondItem="Y2z-ds-xLu" secondAttribute="centerY" constant="-20" id="B4c-49-S9n"/>
                                     <constraint firstItem="zP9-8g-XsN" firstAttribute="top" secondItem="tsP-TQ-W0m" secondAttribute="bottom" constant="9.5" id="WC9-5G-rOl"/>
@@ -402,7 +402,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zt2-bl-cph" firstAttribute="trailing" secondItem="U2E-y9-goT" secondAttribute="trailing" constant="16" id="3Na-tR-0c0"/>
                             <constraint firstItem="Y2z-ds-xLu" firstAttribute="top" secondItem="U2E-y9-goT" secondAttribute="bottom" id="4vo-Zx-ZZV"/>
@@ -438,7 +438,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="hWY-Tv-QuJ">
                                 <rect key="frame" x="0.0" y="232.5" width="375" height="434.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="4F2-cy-cDM">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -479,7 +479,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="c6y-46-aJP" firstAttribute="leading" secondItem="iQs-aX-beC" secondAttribute="leading" constant="16" id="2Zu-XZ-ykG"/>
                             <constraint firstItem="nl1-mj-x4U" firstAttribute="top" secondItem="iQs-aX-beC" secondAttribute="top" constant="24" id="6YU-dN-eYh"/>
@@ -539,7 +539,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Dv8-CG-DAp" firstAttribute="leading" secondItem="NZP-Fc-AcK" secondAttribute="leading" constant="16" id="3IH-wJ-xWy"/>
                             <constraint firstItem="Dv8-CG-DAp" firstAttribute="top" secondItem="NZP-Fc-AcK" secondAttribute="top" constant="100" id="4bu-4H-I9A"/>

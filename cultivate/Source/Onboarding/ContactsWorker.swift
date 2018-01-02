@@ -21,7 +21,7 @@ class ContactsWorker {
     // MARK: - Contact Operations
     
     open func reloadContacts() {
-        getContacts( {(contacts, sortedKeys, error) in
+        self.getContacts( {(contacts, sortedKeys, error) in
             if (error == nil) {
                 DispatchQueue.main.async(execute: {
 //                    self.tableView.reloadData()
@@ -71,21 +71,29 @@ class ContactsWorker {
             //Authorization granted by user for this app.
             var contactsArray = [CNContact]()
             
-            let contactFetchRequest = CNContactFetchRequest(keysToFetch: allowedContactKeys())
-            
+            let contactFetchRequest = CNContactFetchRequest(keysToFetch: self.allowedContactKeys())
+            contactFetchRequest.sortOrder = CNContactSortOrder.userDefault
             do {
                 try contactsStore?.enumerateContacts(with: contactFetchRequest, usingBlock: { (contact, stop) -> Void in
                     //Ordering contacts based on alphabets in firstname
                     contactsArray.append(contact)
                     var key: String = "#"
-                    
+
                     //If ordering has to be happening via family name change it here.
-                    let firstLetter = contact.givenName[0..<1]
+                    var firstLetter = contact.givenName[0..<1]
+                    switch contactFetchRequest.sortOrder {
+                    case .givenName:
+                        firstLetter = contact.givenName[0..<1]
+                    case .familyName, .none:
+                        fallthrough
+                    default:
+                        firstLetter = contact.familyName[0..<1]
+                    }
                     if firstLetter?.containsAlphabets() == true {
                         key = firstLetter!.uppercased()
                     }
                     var contacts = [CNContact]()
-                    
+
                     if let segregatedContact = self.orderedContacts[key] {
                         contacts = segregatedContact
                     }
@@ -138,7 +146,8 @@ class ContactsWorker {
     class func createCULContact(from cnContact: CNContact) -> CULContact {
         let contact: CULContact = CULContact()
         contact.identifier = cnContact.identifier
-        contact.name = cnContact.givenName
+        contact.first_name = cnContact.givenName
+        contact.last_name = cnContact.familyName
         return contact
     }
 }

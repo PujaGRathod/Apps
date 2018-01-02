@@ -17,7 +17,6 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     @IBOutlet weak var btnContinueWithEmail: CULButton!
     @IBOutlet weak var btnContinueWithFacebook: FBSDKLoginButton!
     @IBOutlet weak var viewContinueWithGoogle: GIDSignInButton!
-    @IBOutlet weak var viewFooter: FooterView!
     @IBOutlet weak var lblTermsPrivacyPolicyAgreement: TTTAttributedLabel!
     
     override func viewDidLoad() {
@@ -28,8 +27,6 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 
         self.btnContinueWithFacebook.readPermissions = ["public_profile", "email"]
         self.btnContinueWithFacebook.delegate = self
-
-        self.viewFooter.setCurrentStep(to: OnboardingStep.createAccount)
         
         self.setupPrivacyAndTermsLabelWithLinks()
     }
