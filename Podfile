@@ -2,6 +2,7 @@ platform :ios, '10.0'
 
 target 'cultivate' do
   use_frameworks!
+  inhibit_all_warnings!
   
   # Pods for cultivate
   pod 'Firebase/Core'
