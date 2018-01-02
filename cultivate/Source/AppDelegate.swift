@@ -24,15 +24,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         IQKeyboardManager.sharedManager().enable = true
         
-//        let authStoryboard: UIStoryboard = UIStoryboard(name: "Onboarding", bundle: nil)
-//        let welcomeNavigationController: UINavigationController = authStoryboard.instantiateInitialViewController() as! UINavigationController
-//        self.window?.rootViewController = welcomeNavigationController
-//        self.window?.makeKeyAndVisible()
+        try? Auth.auth().signOut()
         
-        let authStoryboard: UIStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
-        let welcomeNavigationController: UINavigationController = authStoryboard.instantiateViewController(withIdentifier: "navWelcomeVC") as! UINavigationController
-        self.window?.rootViewController = welcomeNavigationController
-        self.window?.makeKeyAndVisible()
+        if let currentuser = Auth.auth().currentUser {
+            
+            let authStoryboard: UIStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
+            let extendedSplashVC: ExtendedSplashVC = authStoryboard.instantiateViewController(withIdentifier: "ExtendedSplashVC") as!ExtendedSplashVC
+            self.window?.rootViewController = extendedSplashVC
+            self.window?.makeKeyAndVisible()
+            
+            CULUser.checkIfUserExist(with: currentuser.uid, completion: { (loggedInUser, success) in
+                DispatchQueue.main.async {
+                    
+                    guard let user = loggedInUser else {
+                        
+                        let welcomeNavigationController: UINavigationController = authStoryboard.instantiateViewController(withIdentifier: "navWelcomeVC") as! UINavigationController
+                        self.window?.rootViewController = welcomeNavigationController
+                        
+                        return
+                    }
+                    
+                    if user.isOnBoardingComplete == true {
+                        // Show dashboard
+                    } else {
+                        let onboardingStoryboard: UIStoryboard = UIStoryboard(name: "Onboarding", bundle: nil)
+                        let welcomeNavigationController: UINavigationController = onboardingStoryboard.instantiateInitialViewController() as! UINavigationController
+                        self.window?.rootViewController = welcomeNavigationController
+                    }
+                    
+                    self.window?.makeKeyAndVisible()
+                }
+            })
+        } else {
+            let authStoryboard: UIStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
+            let welcomeNavigationController: UINavigationController = authStoryboard.instantiateViewController(withIdentifier: "navWelcomeVC") as! UINavigationController
+            self.window?.rootViewController = welcomeNavigationController
+            self.window?.makeKeyAndVisible()
+        }
         
         return true
     }

@@ -48,9 +48,9 @@ class CULUser {
         userRef.getDocument { (user, error) in
             if user?.exists == true,
                 let data = user?.data() {
-                completion(CULUser.init(with: data), (user != nil))
+                completion(CULUser.init(with: data), true)
             } else {
-                completion(nil, (user != nil))
+                completion(nil, false)
             }
         }
     }
