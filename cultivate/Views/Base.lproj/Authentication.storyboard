@@ -159,6 +159,7 @@
                         <outlet property="viewContinueWithGoogle" destination="G2Y-Z7-j5i" id="h9o-Yv-0wS"/>
                         <segue destination="PNw-x8-SWy" kind="presentation" identifier="segueShowWebLinkVC" id="fI1-PX-s0W"/>
                         <segue destination="gqU-sV-nqp" kind="show" identifier="segueShowOnboarding" id="g5l-eS-uBl"/>
+                        <segue destination="KL3-OX-qtO" kind="presentation" identifier="segueDashboard" id="fqR-VV-pmF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M3K-WR-TgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -391,6 +392,7 @@
                         <outlet property="txtEmail" destination="mb2-Eb-QHd" id="Ep1-nN-QBj"/>
                         <outlet property="txtPassword" destination="qOA-hY-9Xs" id="QrH-Qu-Eda"/>
                         <segue destination="gqU-sV-nqp" kind="show" identifier="segueShowOnboarding" id="8t4-1C-VHd"/>
+                        <segue destination="KL3-OX-qtO" kind="presentation" identifier="segueDashboard" id="xd4-5g-JC7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jh-2q-zJ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -506,11 +508,20 @@
             </objects>
             <point key="canvasLocation" x="-106" y="-192"/>
         </scene>
+        <!--Dashboard-->
+        <scene sceneID="V19-Cu-7u0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Dashboard" id="KL3-OX-qtO" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jj5-5n-b3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1901" y="274"/>
+        </scene>
     </scenes>
     <resources>
         <image name="WelcomeScreenLogo" width="2454" height="343"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="fqR-VV-pmF"/>
         <segue reference="g5l-eS-uBl"/>
     </inferredMetricsTieBreakers>
 </document>

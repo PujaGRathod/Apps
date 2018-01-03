@@ -170,14 +170,14 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
             if exist && fetchedUser != nil {
                 print("user is old")
                 if fetchedUser?.isOnBoardingComplete == true {
-                    // TODO: Show dashboard
+                    // Show dashboard
+                    self.performSegue(withIdentifier: "segueDashboard", sender: nil)
                 } else {
                     // Show onboarding
                     self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
                 }
             } else {
                 print("user is new")
-                // TODO: Open onboarding
                 self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
                 let user = CULUser(withName: name, email: email, id: id)
                 user.save()

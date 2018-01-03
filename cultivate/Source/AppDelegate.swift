@@ -24,10 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         IQKeyboardManager.sharedManager().enable = true
         
-        
-        
-//        try? Auth.auth().signOut()
-        
         if let currentUser = Auth.auth().currentUser {
             
             let authStoryboard: UIStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
@@ -48,10 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if user.isOnBoardingComplete == true {
                         // Show dashboard
+                        let dashboardStoryboard: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+                        let dashboardNavController: UINavigationController = dashboardStoryboard.instantiateInitialViewController() as! UINavigationController
+                        self.window?.rootViewController = dashboardNavController
                     } else {
+                        // Show onboarding
                         let onboardingStoryboard: UIStoryboard = UIStoryboard(name: "Onboarding", bundle: nil)
-                        let welcomeNavigationController: UINavigationController = onboardingStoryboard.instantiateInitialViewController() as! UINavigationController
-                        self.window?.rootViewController = welcomeNavigationController
+                        let welcomeNavController: UINavigationController = onboardingStoryboard.instantiateInitialViewController() as! UINavigationController
+                        self.window?.rootViewController = welcomeNavController
                     }
                     
                     self.window?.makeKeyAndVisible()

@@ -54,7 +54,6 @@ class TagsListTableViewAdapter: NSObject {
         }
     }
     
-    // TODO: get the data from Firebase
     private func getTags(_ completion: @escaping (([CULTag])->Void)) {
         guard let currentUser = Auth.auth().currentUser else {
             completion([])
@@ -91,7 +90,6 @@ class TagsListTableViewAdapter: NSObject {
         self.tableView.reloadData()
     }
     
-    // TODO: change this function to add tag to Firebase
     func add(tag name: String, completion: @escaping ((CULTag?)->Void)) {
         
         var identifier: String? = "\(Date.timeIntervalSinceReferenceDate)"

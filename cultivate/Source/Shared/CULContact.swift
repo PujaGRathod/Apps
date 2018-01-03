@@ -8,15 +8,15 @@
 
 import Foundation
 
-enum CULFollowupFrequency {
-    case two_weeks
-    case one_month
-    case two_months
-    case three_months
-    case four_months
-    case six_months
-    case one_year
-    case none
+enum CULFollowupFrequency: String {
+    case two_weeks = "two_weeks"
+    case one_month = "one_month"
+    case two_months = "two_months"
+    case three_months = "three_months"
+    case four_months = "four_months"
+    case six_months = "six_months"
+    case one_year = "one_year"
+    case none = "none"
     
     var values: (days: Int, weeks: Int, months: Int, years: Int, description: String) {
         switch self {

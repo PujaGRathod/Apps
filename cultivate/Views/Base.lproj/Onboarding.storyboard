@@ -538,6 +538,9 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 <state key="normal" title="Get started">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="dmD-YG-3e7" kind="presentation" identifier="segueDashboard" id="7iU-sj-mgP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -564,6 +567,14 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoR-ZV-Dax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3856.8000000000002" y="524.8875562218891"/>
+        </scene>
+        <!--Dashboard-->
+        <scene sceneID="oXp-mL-5aT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Dashboard" id="dmD-YG-3e7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eSV-G7-vrT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4561" y="524"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

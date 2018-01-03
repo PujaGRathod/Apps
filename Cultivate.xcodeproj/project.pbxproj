@@ -21,6 +21,8 @@
 		BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D39101FE8E65700AF63EC /* CULContact.swift */; };
 		BF4A5AAA1FEA742900012B40 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF4A5AA81FEA742800012B40 /* Authentication.storyboard */; };
 		BF4A5AAC1FEA746900012B40 /* WebLinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */; };
+		BF6379B61FFCA54F009C30E8 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */; };
+		BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6379B81FFCA587009C30E8 /* DashboardVC.swift */; };
 		BF7F48C71FE8E9B800737FE5 /* ContactsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */; };
 		BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48C81FE8EE1C00737FE5 /* String.swift */; };
 		BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */; };
@@ -84,6 +86,8 @@
 		BF2D39101FE8E65700AF63EC /* CULContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULContact.swift; sourceTree = "<group>"; };
 		BF4A5AA91FEA742900012B40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkVC.swift; sourceTree = "<group>"; };
+		BF6379B51FFCA54F009C30E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Dashboard.storyboard; sourceTree = "<group>"; };
+		BF6379B81FFCA587009C30E8 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsWorker.swift; sourceTree = "<group>"; };
 		BF7F48C81FE8EE1C00737FE5 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFollowupFrequenciesInformationVC.swift; sourceTree = "<group>"; };
@@ -198,6 +202,14 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		BF6379B71FFCA57C009C30E8 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				BF6379B81FFCA587009C30E8 /* DashboardVC.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
 		BF7F48D41FE9088C00737FE5 /* ContactTblCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +286,7 @@
 				BFE9D78D1FE79F300091F4A8 /* Extra.storyboard */,
 				BFE9D7A01FE7A0440091F4A8 /* Onboarding.storyboard */,
 				BF4A5AA81FEA742800012B40 /* Authentication.storyboard */,
+				BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +302,7 @@
 		BFE9D7911FE79F300091F4A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BF6379B71FFCA57C009C30E8 /* Dashboard */,
 				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
 				BFF28FEA1FFB634B00036150 /* ExtendedSplashVC.swift */,
 				BFE9D79D1FE79FFF0091F4A8 /* Login */,
@@ -477,6 +491,7 @@
 				BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */,
 				BFE9D7971FE79F300091F4A8 /* Extra.storyboard in Resources */,
 				BFE9D7981FE79F300091F4A8 /* Assets.xcassets in Resources */,
+				BF6379B61FFCA54F009C30E8 /* Dashboard.storyboard in Resources */,
 				BF7F48D81FE9089A00737FE5 /* ContactTblCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -690,6 +705,7 @@
 				BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */,
 				BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */,
 				BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */,
+				BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */,
 				BFEF92321FE7D586000ED577 /* ForgotPasswordVC.swift in Sources */,
 				BF7F48C71FE8E9B800737FE5 /* ContactsWorker.swift in Sources */,
 				BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */,
@@ -754,6 +770,14 @@
 				BF4A5AA91FEA742900012B40 /* Base */,
 			);
 			name = Authentication.storyboard;
+			sourceTree = "<group>";
+		};
+		BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF6379B51FFCA54F009C30E8 /* Base */,
+			);
+			name = Dashboard.storyboard;
 			sourceTree = "<group>";
 		};
 		BFE9D78B1FE79F300091F4A8 /* LaunchScreen.storyboard */ = {

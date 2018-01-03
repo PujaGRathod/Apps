@@ -53,6 +53,14 @@ class AddTagsVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueShowOnboardingCompletedVC",
+            let vc: OnboardingCompletedVC = segue.destination as? OnboardingCompletedVC {
+            
+            vc.contacts = sender as! [CULContact]
+        }
+    }
+    
     @IBAction func textFieldEditingChanged(_ sender: Any) {
         print(self.txtAddNewTag.text ?? "N.A")
         if let text: String = self.txtAddNewTag.text {
