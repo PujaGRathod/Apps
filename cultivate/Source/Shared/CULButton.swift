@@ -44,6 +44,6 @@ class CULButton: UIButton {
     }
     
     private func setFont() {
-        self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)
     }
 }

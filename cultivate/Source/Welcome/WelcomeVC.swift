@@ -14,9 +14,13 @@ import TTTAttributedLabel
 
 class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 
+    @IBOutlet weak var continueWithEmailContainerView: UIView!
+    @IBOutlet weak var continueWithFacebookContainerView: UIView!
+    @IBOutlet weak var continueWithGoogleContainerView: UIView!
     @IBOutlet weak var btnContinueWithEmail: CULButton!
-    @IBOutlet weak var btnContinueWithFacebook: FBSDKLoginButton!
-    @IBOutlet weak var viewContinueWithGoogle: GIDSignInButton!
+    @IBOutlet weak var btnContinueWithFacebook: CULButton!
+//    @IBOutlet weak var viewContinueWithGoogle: GIDSignInButton!
+    @IBOutlet weak var continueWithGoogleButton: CULButton!
     @IBOutlet weak var lblTermsPrivacyPolicyAgreement: TTTAttributedLabel!
     
     override func viewDidLoad() {
@@ -25,10 +29,24 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().uiDelegate = self
         self.removeConstraints()
 
-        self.btnContinueWithFacebook.readPermissions = ["public_profile", "email"]
-        self.btnContinueWithFacebook.delegate = self
+//        self.btnContinueWithFacebook.readPermissions = ["public_profile", "email"]
+//        self.btnContinueWithFacebook.delegate = self
         
         self.setupPrivacyAndTermsLabelWithLinks()
+        
+//        self.btnContinueWithFacebook.titleLabel?.font = self.btnContinueWithEmail.titleLabel?.font
+        
+        self.continueWithEmailContainerView.layer.cornerRadius = self.btnContinueWithEmail.layer.cornerRadius
+        self.continueWithEmailContainerView.layer.borderColor = self.btnContinueWithEmail.layer.borderColor
+        self.continueWithEmailContainerView.layer.borderWidth = self.btnContinueWithEmail.layer.borderWidth
+        
+        self.continueWithFacebookContainerView.layer.cornerRadius = self.btnContinueWithEmail.layer.cornerRadius
+        self.continueWithFacebookContainerView.layer.borderColor = self.btnContinueWithEmail.layer.borderColor
+        self.continueWithFacebookContainerView.layer.borderWidth = self.btnContinueWithEmail.layer.borderWidth
+        
+        self.continueWithGoogleContainerView.layer.cornerRadius = self.btnContinueWithEmail.layer.cornerRadius
+        self.continueWithGoogleContainerView.layer.borderColor = self.btnContinueWithEmail.layer.borderColor
+        self.continueWithGoogleContainerView.layer.borderWidth = self.btnContinueWithEmail.layer.borderWidth
     }
     
     private func setupPrivacyAndTermsLabelWithLinks() {
@@ -72,18 +90,18 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     }
     
     func removeConstraints() {
-        for constraint in self.btnContinueWithFacebook.constraints {
-            if constraint.constant == 28 && constraint.firstAttribute == NSLayoutAttribute.height {
-                self.btnContinueWithFacebook.removeConstraint(constraint)
-            }
-        }
+//        for constraint in self.btnContinueWithFacebook.constraints {
+//            if constraint.constant == 28 && constraint.firstAttribute == NSLayoutAttribute.height {
+//                self.btnContinueWithFacebook.removeConstraint(constraint)
+//            }
+//        }
         
-        for constraint in self.viewContinueWithGoogle.constraints {
-            print(constraint.constant)
-            if constraint.constant == 48 && constraint.firstAttribute == NSLayoutAttribute.height {
-                self.viewContinueWithGoogle.removeConstraint(constraint)
-            }
-        }
+//        for constraint in self.viewContinueWithGoogle.constraints {
+//            print(constraint.constant)
+//            if constraint.constant == 48 && constraint.firstAttribute == NSLayoutAttribute.height {
+//                self.viewContinueWithGoogle.removeConstraint(constraint)
+//            }
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -194,6 +212,10 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
             print(error.localizedDescription)
         }
     }
+
+    @IBAction func continueWithGoogleTapped(_ sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
 }
 
 extension WelcomeVC:TTTAttributedLabelDelegate {
@@ -209,6 +231,42 @@ extension WelcomeVC:TTTAttributedLabelDelegate {
 }
 
 extension WelcomeVC: FBSDKLoginButtonDelegate {
+    
+    @IBAction func loginWithFacebookButtonTapped(_ sender: UIButton) {
+        let login = FBSDKLoginManager()
+        login.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
+            
+            guard let result = result else {
+                return
+            }
+            
+            if result.isCancelled {
+                print("Cancelled by user!")
+            } else {
+                print("Permissions: \(result.grantedPermissions)")
+                print("UserID: \(result.token.userID)")
+                if let profileRequest = FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields": "email, id, name"]) {
+                    profileRequest.start(completionHandler: { (connection, result, error) in
+                        if let error = error {
+                            print("Error Profile fetching: \(error.localizedDescription)")
+                        } else {
+                            if let result = result as? [String: Any?] {
+                                print("email from FB: \(String(describing: result["email"]))")
+                                let email = result["email"] as? String
+                                let name = result["name"] as? String
+                                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                                self.authenticateUser(with: credential, name: name ?? "", email: email ?? "")
+                            } else {
+                                print("Wrong response: \(String(describing: result))")
+                            }
+                        }
+                    })
+                }
+            }
+            
+        }
+    }
+    
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if result.isCancelled {
             print("Cancelled by user!")

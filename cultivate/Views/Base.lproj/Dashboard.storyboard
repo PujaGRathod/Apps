@@ -49,10 +49,12 @@
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="m9s-gg-eZZ">
                             <connections>
                                 <action selector="logoutTapped:" destination="PHu-bs-Mbn" id="YYN-iU-CC3"/>
-                                <segue destination="YPW-yq-RJ5" kind="presentation" id="sqW-6R-S85"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="YPW-yq-RJ5" kind="presentation" identifier="segueAuthentication" id="jc4-Zc-lbV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DxV-it-e6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -64,7 +66,7 @@
                 <viewControllerPlaceholder storyboardName="Authentication" id="YPW-yq-RJ5" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9VM-OB-HLZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536" y="-201"/>
+            <point key="canvasLocation" x="610" y="124"/>
         </scene>
     </scenes>
 </document>

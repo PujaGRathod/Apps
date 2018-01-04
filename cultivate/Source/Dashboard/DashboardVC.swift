@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import Firebase
+import GoogleSignIn
+import FirebaseAuth
+import FBSDKLoginKit
 
 class DashboardVC: UIViewController {
 
@@ -34,8 +36,14 @@ class DashboardVC: UIViewController {
     */
 
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
-        try? Auth.auth().signOut()
-        
+        GIDSignIn.sharedInstance().signOut()
+        FBSDKLoginManager().logOut()
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error.localizedDescription)
+        }
+        self.performSegue(withIdentifier: "segueAuthentication", sender: nil)
     }
     
 }
