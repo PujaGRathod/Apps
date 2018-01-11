@@ -13,27 +13,16 @@ import FBSDKLoginKit
 
 class DashboardVC: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var dashboardTableViewAdapter = DashboardTableViewAdapter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        self.dashboardTableViewAdapter.setup(for: self.tableView, delegate: self)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
         GIDSignIn.sharedInstance().signOut()
@@ -45,5 +34,9 @@ class DashboardVC: UIViewController {
         }
         self.performSegue(withIdentifier: "segueAuthentication", sender: nil)
     }
+    
+}
+
+extension DashboardVC: DashboardTableViewAdapterDelegate {
     
 }

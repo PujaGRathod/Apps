@@ -37,6 +37,12 @@
 		BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */; };
 		BFC985611FE79AAF0041E32D /* cultivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC985601FE79AAF0041E32D /* cultivateTests.swift */; };
 		BFC9856C1FE79AAF0041E32D /* cultivateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */; };
+		BFD0168920073A960054365F /* DashboardTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */; };
+		BFD0168D20073AEC0054365F /* DashboardContactTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168B20073AEC0054365F /* DashboardContactTblCell.swift */; };
+		BFD0168E20073AEC0054365F /* DashboardContactTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD0168C20073AEC0054365F /* DashboardContactTblCell.xib */; };
+		BFD016902007401B0054365F /* FollowupDateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168F2007401B0054365F /* FollowupDateGenerator.swift */; };
+		BFD01693200747630054365F /* DashboardTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD01692200747630054365F /* DashboardTableViewHeader.swift */; };
+		BFD01695200747680054365F /* DashboardTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD01694200747680054365F /* DashboardTableViewHeader.xib */; };
 		BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D7881FE79F300091F4A8 /* GoogleService-Info.plist */; };
 		BFE9D7961FE79F300091F4A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D78B1FE79F300091F4A8 /* LaunchScreen.storyboard */; };
 		BFE9D7971FE79F300091F4A8 /* Extra.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D78D1FE79F300091F4A8 /* Extra.storyboard */; };
@@ -107,6 +113,12 @@
 		BFC985671FE79AAF0041E32D /* cultivateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cultivateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cultivateUITests.swift; sourceTree = "<group>"; };
 		BFC9856D1FE79AAF0041E32D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewAdapter.swift; sourceTree = "<group>"; };
+		BFD0168B20073AEC0054365F /* DashboardContactTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardContactTblCell.swift; sourceTree = "<group>"; };
+		BFD0168C20073AEC0054365F /* DashboardContactTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardContactTblCell.xib; sourceTree = "<group>"; };
+		BFD0168F2007401B0054365F /* FollowupDateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowupDateGenerator.swift; sourceTree = "<group>"; };
+		BFD01692200747630054365F /* DashboardTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewHeader.swift; sourceTree = "<group>"; };
+		BFD01694200747680054365F /* DashboardTableViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardTableViewHeader.xib; sourceTree = "<group>"; };
 		BFE9D7881FE79F300091F4A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BFE9D7891FE79F300091F4A8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFE9D78C1FE79F300091F4A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -198,6 +210,7 @@
 				BF7F48C81FE8EE1C00737FE5 /* String.swift */,
 				BF7F48D21FE9015600737FE5 /* CULButton.swift */,
 				BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */,
+				BFD0168F2007401B0054365F /* FollowupDateGenerator.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -205,7 +218,10 @@
 		BF6379B71FFCA57C009C30E8 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				BFD01691200747530054365F /* DashboardTableViewHeader */,
+				BFD0168A20073ADD0054365F /* DashboardContactTblCell */,
 				BF6379B81FFCA587009C30E8 /* DashboardVC.swift */,
+				BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -268,6 +284,24 @@
 				BFC9856D1FE79AAF0041E32D /* Info.plist */,
 			);
 			path = cultivateUITests;
+			sourceTree = "<group>";
+		};
+		BFD0168A20073ADD0054365F /* DashboardContactTblCell */ = {
+			isa = PBXGroup;
+			children = (
+				BFD0168B20073AEC0054365F /* DashboardContactTblCell.swift */,
+				BFD0168C20073AEC0054365F /* DashboardContactTblCell.xib */,
+			);
+			path = DashboardContactTblCell;
+			sourceTree = "<group>";
+		};
+		BFD01691200747530054365F /* DashboardTableViewHeader */ = {
+			isa = PBXGroup;
+			children = (
+				BFD01692200747630054365F /* DashboardTableViewHeader.swift */,
+				BFD01694200747680054365F /* DashboardTableViewHeader.xib */,
+			);
+			path = DashboardTableViewHeader;
 			sourceTree = "<group>";
 		};
 		BFE9D7871FE79F300091F4A8 /* Configurations */ = {
@@ -485,11 +519,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF4A5AAA1FEA742900012B40 /* Authentication.storyboard in Resources */,
+				BFD01695200747680054365F /* DashboardTableViewHeader.xib in Resources */,
 				BFE9D7961FE79F300091F4A8 /* LaunchScreen.storyboard in Resources */,
 				BFE9D7AA1FE7AB9A0091F4A8 /* FooterView.xib in Resources */,
 				BFE9D7A21FE7A0440091F4A8 /* Onboarding.storyboard in Resources */,
 				BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */,
 				BFE9D7971FE79F300091F4A8 /* Extra.storyboard in Resources */,
+				BFD0168E20073AEC0054365F /* DashboardContactTblCell.xib in Resources */,
 				BFE9D7981FE79F300091F4A8 /* Assets.xcassets in Resources */,
 				BF6379B61FFCA54F009C30E8 /* Dashboard.storyboard in Resources */,
 				BF7F48D81FE9089A00737FE5 /* ContactTblCell.xib in Resources */,
@@ -707,6 +743,7 @@
 				BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */,
 				BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */,
 				BFEF92321FE7D586000ED577 /* ForgotPasswordVC.swift in Sources */,
+				BFD0168D20073AEC0054365F /* DashboardContactTblCell.swift in Sources */,
 				BF7F48C71FE8E9B800737FE5 /* ContactsWorker.swift in Sources */,
 				BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */,
 				591EA6371FEA77730001B494 /* UIViewControllerExtension.swift in Sources */,
@@ -718,6 +755,8 @@
 				BFF28FEB1FFB634B00036150 /* ExtendedSplashVC.swift in Sources */,
 				BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */,
 				BF4A5AAC1FEA746900012B40 /* WebLinkVC.swift in Sources */,
+				BFD016902007401B0054365F /* FollowupDateGenerator.swift in Sources */,
+				BFD01693200747630054365F /* DashboardTableViewHeader.swift in Sources */,
 				BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */,
 				591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */,
 				BFE9D79F1FE7A0210091F4A8 /* SignupVC.swift in Sources */,
@@ -728,6 +767,7 @@
 				591EA6381FEA77730001B494 /* StringExtension.swift in Sources */,
 				BFEF92301FE7D2C3000ED577 /* LoginVC.swift in Sources */,
 				BF7F48CF1FE8FE3300737FE5 /* AddTagsInformationVC.swift in Sources */,
+				BFD0168920073A960054365F /* DashboardTableViewAdapter.swift in Sources */,
 				BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

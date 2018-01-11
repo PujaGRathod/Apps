@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="93" id="KGk-i7-Jjw" customClass="DashboardContactTblCell" customModule="cultivate" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="It6-fT-x5G">
+                        <rect key="frame" x="5" y="5" width="310" height="87.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXn-JX-iyN">
+                                <rect key="frame" x="11" y="8" width="33" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMt-fQ-xdk">
+                                <rect key="frame" x="11" y="32" width="44.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.3529411764705882" green="0.34509803921568627" blue="0.34509803921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuZ-hI-xy1">
+                                <rect key="frame" x="249" y="21" width="46" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="aU3-sQ-vmf"/>
+                                    <constraint firstAttribute="width" secondItem="nuZ-hI-xy1" secondAttribute="height" multiplier="1:1" id="bTf-cj-gYb"/>
+                                </constraints>
+                                <state key="normal" image="ic_log_action_46pt"/>
+                                <connections>
+                                    <action selector="followupButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="AkN-Df-Z9w"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="0.33000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dMt-fQ-xdk" firstAttribute="leading" secondItem="It6-fT-x5G" secondAttribute="leading" constant="11" id="E35-TY-MUw"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nuZ-hI-xy1" secondAttribute="bottom" constant="8" id="JaD-xq-H9X"/>
+                            <constraint firstItem="sXn-JX-iyN" firstAttribute="top" secondItem="It6-fT-x5G" secondAttribute="top" constant="8" id="Pn0-Sj-MhY"/>
+                            <constraint firstItem="nuZ-hI-xy1" firstAttribute="centerY" secondItem="It6-fT-x5G" secondAttribute="centerY" id="VVp-jd-Sys"/>
+                            <constraint firstItem="nuZ-hI-xy1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dMt-fQ-xdk" secondAttribute="trailing" constant="8" id="XMY-4L-YE9"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dMt-fQ-xdk" secondAttribute="bottom" constant="8" id="bfk-mH-NJc"/>
+                            <constraint firstAttribute="trailing" secondItem="nuZ-hI-xy1" secondAttribute="trailing" constant="15" id="hSA-He-xLR"/>
+                            <constraint firstItem="sXn-JX-iyN" firstAttribute="leading" secondItem="It6-fT-x5G" secondAttribute="leading" constant="11" id="jlk-BA-XLf"/>
+                            <constraint firstItem="dMt-fQ-xdk" firstAttribute="top" secondItem="sXn-JX-iyN" secondAttribute="bottom" constant="8" id="kZs-SO-eVd"/>
+                            <constraint firstItem="nuZ-hI-xy1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sXn-JX-iyN" secondAttribute="trailing" constant="8" id="qFl-iN-4rg"/>
+                            <constraint firstItem="nuZ-hI-xy1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="It6-fT-x5G" secondAttribute="top" constant="8" id="ugr-px-R69"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="It6-fT-x5G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="56v-qd-67r"/>
+                    <constraint firstAttribute="bottom" secondItem="It6-fT-x5G" secondAttribute="bottom" id="BjB-Be-Teh"/>
+                    <constraint firstAttribute="trailing" secondItem="It6-fT-x5G" secondAttribute="trailing" constant="5" id="Du5-2B-yte"/>
+                    <constraint firstItem="It6-fT-x5G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="cuD-PV-asV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="contactNameLabel" destination="dMt-fQ-xdk" id="poc-Au-nXe"/>
+                <outlet property="containerView" destination="It6-fT-x5G" id="bXo-vk-AF2"/>
+                <outlet property="dateLabel" destination="sXn-JX-iyN" id="x3S-lc-sjk"/>
+            </connections>
+            <point key="canvasLocation" x="25" y="76.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_log_action_46pt" width="46" height="46"/>
+    </resources>
+</document>

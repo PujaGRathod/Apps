@@ -42,7 +42,19 @@
                     <view key="view" contentMode="scaleToFill" id="hPW-wx-92G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5ZS-no-5oB">
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5ZS-no-5oB" firstAttribute="top" secondItem="T28-Kj-S26" secondAttribute="top" id="Bg1-p8-D3R"/>
+                            <constraint firstItem="5ZS-no-5oB" firstAttribute="leading" secondItem="T28-Kj-S26" secondAttribute="leading" id="Gd1-na-Tb7"/>
+                            <constraint firstItem="T28-Kj-S26" firstAttribute="trailing" secondItem="5ZS-no-5oB" secondAttribute="trailing" id="o7I-gn-jhb"/>
+                            <constraint firstItem="T28-Kj-S26" firstAttribute="bottom" secondItem="5ZS-no-5oB" secondAttribute="bottom" id="oVm-6P-KCw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="T28-Kj-S26"/>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="pHo-25-jsw">
@@ -53,6 +65,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="5ZS-no-5oB" id="na3-ex-ZUA"/>
                         <segue destination="YPW-yq-RJ5" kind="presentation" identifier="segueAuthentication" id="jc4-Zc-lbV"/>
                     </connections>
                 </viewController>

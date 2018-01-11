@@ -57,6 +57,7 @@ class CULContact {
         return list.joined(separator: " ")
     }
     var followupFrequency: CULFollowupFrequency = CULFollowupFrequency.none
+    var followupDate: Date?
     var tag: CULTag?
 }
 
