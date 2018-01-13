@@ -19,10 +19,12 @@
 		BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D390B1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift */; };
 		BF2D390E1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D390D1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift */; };
 		BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D39101FE8E65700AF63EC /* CULContact.swift */; };
+		BF499EA2200A016F00C3EE33 /* LogFollowupPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF499EA1200A016F00C3EE33 /* LogFollowupPopupVC.swift */; };
 		BF4A5AAA1FEA742900012B40 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF4A5AA81FEA742800012B40 /* Authentication.storyboard */; };
 		BF4A5AAC1FEA746900012B40 /* WebLinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */; };
 		BF6379B61FFCA54F009C30E8 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */; };
 		BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6379B81FFCA587009C30E8 /* DashboardVC.swift */; };
+		BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */; };
 		BF7F48C71FE8E9B800737FE5 /* ContactsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */; };
 		BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48C81FE8EE1C00737FE5 /* String.swift */; };
 		BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */; };
@@ -92,10 +94,12 @@
 		BF2D390B1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactInstructionsVC.swift; sourceTree = "<group>"; };
 		BF2D390D1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTableViewAdapter.swift; sourceTree = "<group>"; };
 		BF2D39101FE8E65700AF63EC /* CULContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULContact.swift; sourceTree = "<group>"; };
+		BF499EA1200A016F00C3EE33 /* LogFollowupPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFollowupPopupVC.swift; sourceTree = "<group>"; };
 		BF4A5AA91FEA742900012B40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkVC.swift; sourceTree = "<group>"; };
 		BF6379B51FFCA54F009C30E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Dashboard.storyboard; sourceTree = "<group>"; };
 		BF6379B81FFCA587009C30E8 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
+		BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsVC.swift; sourceTree = "<group>"; };
 		BF7F48C61FE8E9B800737FE5 /* ContactsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsWorker.swift; sourceTree = "<group>"; };
 		BF7F48C81FE8EE1C00737FE5 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFollowupFrequenciesInformationVC.swift; sourceTree = "<group>"; };
@@ -228,8 +232,17 @@
 				BF6379B81FFCA587009C30E8 /* DashboardVC.swift */,
 				BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */,
 				BFC8C2582009E9860014062E /* ReschedulePopupVC.swift */,
+				BF499EA1200A016F00C3EE33 /* LogFollowupPopupVC.swift */,
 			);
 			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		BF6E5587200A146400906E75 /* Contact Details */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */,
+			);
+			path = "Contact Details";
 			sourceTree = "<group>";
 		};
 		BF7F48D41FE9088C00737FE5 /* ContactTblCell */ = {
@@ -350,6 +363,7 @@
 		BFE9D7911FE79F300091F4A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BF6E5587200A146400906E75 /* Contact Details */,
 				BF6379B71FFCA57C009C30E8 /* Dashboard */,
 				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
 				BFF28FEA1FFB634B00036150 /* ExtendedSplashVC.swift */,
@@ -634,6 +648,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KLCPopup/KLCPopup.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SZTextView/SZTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -654,6 +669,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KLCPopup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SZTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -781,11 +797,13 @@
 				BF7F48D31FE9015600737FE5 /* CULButton.swift in Sources */,
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
 				BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */,
+				BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */,
 				BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */,
 				591EA6381FEA77730001B494 /* StringExtension.swift in Sources */,
 				BFEF92301FE7D2C3000ED577 /* LoginVC.swift in Sources */,
 				BF7F48CF1FE8FE3300737FE5 /* AddTagsInformationVC.swift in Sources */,
 				BFD0168920073A960054365F /* DashboardTableViewAdapter.swift in Sources */,
+				BF499EA2200A016F00C3EE33 /* LogFollowupPopupVC.swift in Sources */,
 				BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,6 +15,8 @@ target 'cultivate' do
   pod 'TTTAttributedLabel'
   pod 'IQKeyboardManagerSwift'
   pod 'KLCPopup', :git => 'https://github.com/jmascia/KLCPopup'
+  pod 'SZTextView'
+
 
   target 'cultivateTests' do
     inherit! :search_paths

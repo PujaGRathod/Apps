@@ -27,6 +27,7 @@ class DashboardTableViewAdapter: NSObject {
     private var tableView: UITableView!
     private var searchController: UISearchController?
     
+    var contactSelected: ((_ contact: CULContact)->Void)?
     var followupButtonTapped: ((_ indexPath: IndexPath, _ contact: CULContact)->Void)?
     var rescheduleButtonTapped: ((_ indexPath: IndexPath, _ contact: CULContact)->Void)?
     
@@ -213,6 +214,10 @@ extension DashboardTableViewAdapter: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.contactSelected?(self.contact(for: indexPath))
     }
 }
 

@@ -56,7 +56,12 @@ enum CULFollowupFrequency: String {
     }
 }
 
+//TODO: Change this to struct
 class CULContact {
+ 
+    struct Followup {
+        var date: Date?
+    }
     
     var db_Identifier: String!
     var identifier: String!
@@ -82,6 +87,7 @@ class CULContact {
     var followupFrequency: CULFollowupFrequency = CULFollowupFrequency.none
     var followupDate: Date?
     var tag: CULTag?
+    var followups = [Followup]()
 }
 
 struct CULTag {

@@ -20,6 +20,7 @@ class DashboardVC: UIViewController {
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
     private var dashboardTableViewAdapter = DashboardTableViewAdapter()
     private var reschedulePopupVC: ReschedulePopupVC?
+    private var logFollowupPopupVC: LogFollowupPopupVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +38,15 @@ class DashboardVC: UIViewController {
         self.dashboardTableViewAdapter.followupButtonTapped = { indexPath, contact in
             // Followup button tapped for a contact from tableView
             print("Followup: \(contact.name), index: \(indexPath.section),\(indexPath.item)")
+            self.logFollowupPopup(for: contact, tableViewIndexPath: indexPath)
         }
         self.dashboardTableViewAdapter.rescheduleButtonTapped = { indexPath, contact in
             // Reschedule button tapped for a contact from tableView
             print("Reschedule: \(contact.name), index: \(indexPath.section),\(indexPath.item)")
             self.reschedulePopup(for: contact, tableViewIndexPath: indexPath)
+        }
+        self.dashboardTableViewAdapter.contactSelected = { contact in
+            self.performSegue(withIdentifier: "segueContactDetails", sender: contact)
         }
     }
     
@@ -56,6 +61,14 @@ class DashboardVC: UIViewController {
             })
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueContactDetails" {
+            if let vc = segue.destination as? ContactDetailsVC {
+                vc.contact = sender as! CULContact
+            }
+        }
+    }
 
     func reschedulePopup(for contact: CULContact, tableViewIndexPath: IndexPath) {
         self.reschedulePopupVC = self.storyboard?.instantiateViewController(withIdentifier: "ReschedulePopupVC") as? ReschedulePopupVC
@@ -68,10 +81,37 @@ class DashboardVC: UIViewController {
             reschedulePopupVC.presentingVC = self
             // Ugly hack to force system to load the UIView
             print(reschedulePopupVC.view)
-            let layout = KLCPopupLayout(horizontal: .center, vertical: .center)
+            
+            let verticalLayout = KLCPopupVerticalLayout.aboveCenter
+            let layout = KLCPopupLayout(horizontal: .center, vertical: verticalLayout)
+            
             let contentView = reschedulePopupVC.viewForPopup()
             let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
             reschedulePopupVC.popup = popup
+            if let popup = popup {
+                popup.show(with: layout);
+            }
+        }
+    }
+    
+    func logFollowupPopup(for contact: CULContact, tableViewIndexPath: IndexPath) {
+        self.logFollowupPopupVC = self.storyboard?.instantiateViewController(withIdentifier: "LogFollowupPopupVC") as? LogFollowupPopupVC
+        if let logFollowupPopupVC = self.logFollowupPopupVC {
+            logFollowupPopupVC.followupDateUpdated = {
+                self.dashboardTableViewAdapter.reloadData()
+            }
+            logFollowupPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
+            logFollowupPopupVC.contact = contact
+            logFollowupPopupVC.presentingVC = self
+            // Ugly hack to force system to load the UIView
+            print(logFollowupPopupVC.view)
+            
+            let verticalLayout = KLCPopupVerticalLayout.aboveCenter
+            let layout = KLCPopupLayout(horizontal: .center, vertical: verticalLayout)
+            
+            let contentView = logFollowupPopupVC.viewForPopup()
+            let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+            logFollowupPopupVC.popup = popup
             if let popup = popup {
                 popup.show(with: layout);
             }

@@ -13,8 +13,8 @@ import KLCPopup
 class ReschedulePopupVC: UIViewController {
     
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var datePickerContainerView: UIView!
-    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet var datePickerContainerView: UIView!
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateTextField: UITextField!
     
     var followupDateUpdated: (()->Void)?
@@ -37,10 +37,6 @@ class ReschedulePopupVC: UIViewController {
         self.containerView.layer.cornerRadius = 5
         self.dateTextField.inputView = self.datePickerContainerView
         self.datePicker.minimumDate = Date()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         self.dateTextField.becomeFirstResponder()
     }
     
@@ -55,6 +51,7 @@ class ReschedulePopupVC: UIViewController {
                 if let error = error {
                     self.showAlert("Error", message: error.localizedDescription)
                 } else {
+                    self.dateTextField.resignFirstResponder()
                     self.followupDateUpdated?()
                 }
             })
@@ -63,11 +60,16 @@ class ReschedulePopupVC: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        self.dateTextField.resignFirstResponder()
         self.popup.dismiss(true)
     }
     
     @IBAction func datePickerDateChanged(_ sender: UIDatePicker) {
         self.showDateIntextField(sender.date)
+    }
+    
+    @IBAction func changeRescheduleButtonTapped(_ sender: UIButton) {
+        self.dateTextField.becomeFirstResponder()
     }
     
     private func showDateIntextField(_ date: Date) {
