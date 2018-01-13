@@ -11,18 +11,21 @@ import UIKit
 class DashboardContactTblCell: UITableViewCell {
 
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contactNameLabel: UILabel!
     
     private var contact: CULContact!
+    
+    var followupButtonTapped: ((CULContact)->Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.contactNameLabel.text = "This is some long name. Really really long name."
         
-        self.containerView.layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 0.35)
-        self.containerView.layer.borderWidth = 1
+        self.borderView.layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 0.35)
+        self.borderView.layer.borderWidth = 0.5
     }
 
     func set(contact: CULContact) {
@@ -57,6 +60,6 @@ class DashboardContactTblCell: UITableViewCell {
     }
     
     @IBAction func followupButtonTapped(_ sender: UIButton) {
-        
+        self.followupButtonTapped?(self.contact)
     }
 }

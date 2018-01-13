@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol DashboardTableViewAdapterDelegate {
-    
-}
-
 class DashboardTableViewAdapter: NSObject {
 
     struct Section {
@@ -24,14 +20,17 @@ class DashboardTableViewAdapter: NSObject {
         }
     }
     
-    private var contacts: [CULContact] = []
-    private var sectionWiseContacts: [Section] = []
+    private var contacts = [CULContact]()
+    private var filteredContacts = [CULContact]()
+    private var sectionWiseContacts = [Section]()
     
     private var tableView: UITableView!
-    private var delegate: DashboardTableViewAdapterDelegate?
+    private var searchController: UISearchController?
     
-    func setup(for tableView: UITableView, delegate: DashboardTableViewAdapterDelegate) {
-        self.delegate = delegate
+    var followupButtonTapped: ((_ indexPath: IndexPath, _ contact: CULContact)->Void)?
+    var rescheduleButtonTapped: ((_ indexPath: IndexPath, _ contact: CULContact)->Void)?
+    
+    func setup(for tableView: UITableView, searchController: UISearchController) {
         self.tableView = tableView
         
         let nib = UINib(nibName: "DashboardContactTblCell", bundle: nil)
@@ -43,6 +42,10 @@ class DashboardTableViewAdapter: NSObject {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        self.tableView.rowHeight = 66
+        
+        self.searchController = searchController
+        
         self.getContacts()
     }
     
@@ -51,13 +54,14 @@ class DashboardTableViewAdapter: NSObject {
             CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
                 DispatchQueue.main.async {
                     self.contacts = contacts
+                    self.updateContactsIfRequired()
                     self.formatContactsForAdapter()
                 }
             })
         }
     }
     
-    private func formatContactsForAdapter() {
+    private func updateContactsIfRequired() {
         self.contacts = FollowupDateGenerator.assignInitialFollowupDates(for: self.contacts)
         
         if let user = CULFirebaseGateway.shared.loggedInUser {
@@ -66,12 +70,24 @@ class DashboardTableViewAdapter: NSObject {
             })
         }
         
+        self.sortContacts()
+    }
+
+    func reloadData() {
+        self.sortContacts()
+        self.formatContactsForAdapter()
+    }
+    
+    private func sortContacts() {
         self.contacts.sort { (contact1, contact2) -> Bool in
             if let date1 = contact1.followupDate, let date2 = contact2.followupDate {
                 return date1 < date2
             }
             return false
         }
+    }
+    
+    private func formatContactsForAdapter() {
         
         var followupsInNext30Days = [CULContact]()
         var restOfFollowups = [CULContact]()
@@ -123,28 +139,114 @@ class DashboardTableViewAdapter: NSObject {
 
 extension DashboardTableViewAdapter: UITableViewDataSource, UITableViewDelegate {
     
+    private func contact(for indexPath: IndexPath) -> CULContact {
+        if self.isFiltering() {
+            return self.filteredContacts[indexPath.item]
+        } else {
+            return self.sectionWiseContacts[indexPath.section].rows[indexPath.item].contact
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
+        if self.isFiltering() {
+            return 1
+        }
         return self.sectionWiseContacts.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.isFiltering() {
+            return self.filteredContacts.count
+        }
         return self.sectionWiseContacts[section].rows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardContactTblCell", for: indexPath) as! DashboardContactTblCell
-        let contact = self.sectionWiseContacts[indexPath.section].rows[indexPath.item].contact
-        cell.set(contact: contact)
+        cell.set(contact: self.contact(for: indexPath))
+        cell.followupButtonTapped = { contact in
+            self.followupButtonTapped?(indexPath, contact)
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if self.isFiltering() {
+            return 0
+        }
         return 28 + 8
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if self.isFiltering() {
+            return nil
+        }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DashboardTableViewHeader") as! DashboardTableViewHeader
         headerView.titleLabel.text = self.sectionWiseContacts[section].title
         return headerView
     }
+    
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let reschedule = UIContextualAction(style: UIContextualAction.Style.normal, title: "Reschedule") { (action, view, completionHandler) in
+            let contact = self.contact(for: indexPath)
+            self.rescheduleButtonTapped?(indexPath, contact)
+            completionHandler(true)
+        }
+        reschedule.backgroundColor = UIColor.red
+        
+        let swipeActionConfig = UISwipeActionsConfiguration(actions: [reschedule])
+        swipeActionConfig.performsFirstActionWithFullSwipe = true
+        return swipeActionConfig
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let reschedule = UITableViewRowAction(style: .normal, title: "Reschedule") { action, index in
+            let contact = self.contact(for: indexPath)
+            self.rescheduleButtonTapped?(indexPath, contact)
+        }
+        reschedule.backgroundColor = UIColor.red
+        
+        return [reschedule]
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
+
+extension DashboardTableViewAdapter {
+    
+    func set(searchController: UISearchController) {
+        self.searchController = searchController
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return self.searchController?.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        self.filteredContacts = self.contacts.filter({ (contact) -> Bool in
+            let nameMatched = contact.name.lowercased().contains(searchText.lowercased())
+            if let tagName = contact.tag?.name {
+                let tagMatched = tagName.lowercased().contains(searchText.lowercased())
+                return nameMatched || tagMatched
+            }
+            return nameMatched
+        })
+        self.tableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return self.searchController?.isActive ?? false && !self.searchBarIsEmpty()
+    }
+}
+
+extension DashboardTableViewAdapter: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        self.filterContentForSearchText(searchController.searchBar.text ?? "")
+    }
+}
+
+

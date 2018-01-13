@@ -84,6 +84,25 @@ class CULFirebaseGateway {
         return raw
     }
     
+    func getTags(for user: CULUser, _ completion:@escaping (([CULTag])->Void)) {
+        let ref = Firestore.firestore().collection("users").document(user.id).collection("tags")
+        ref.getDocuments { (snapshots, error) in
+            var tags: [CULTag] = []
+            for document in snapshots?.documents ?? [] {
+                var tag = self.tag(from: document.data())
+                tag.identifier = document.documentID
+                tags.append(tag)
+            }
+            completion(tags)
+        }
+    }
+    
+    private func tag(from raw: [String:Any]) -> CULTag {
+        var tag = CULTag()
+        tag.name = raw["name"] as? String
+        return tag
+    }
+    
     
     // Get all contacts for the current user
     func getContacts(for user: CULUser, _ completion:@escaping (([CULContact])->Void)) {
@@ -96,7 +115,10 @@ class CULFirebaseGateway {
                     contacts.append(contact)
                 }
             }
-            completion(contacts)
+            self.getTags(for: user, { (tags) in
+                contacts = self.map(tags: tags, with: contacts)
+                completion(contacts)
+            })
         }
     }
     
@@ -113,7 +135,10 @@ class CULFirebaseGateway {
         if let freq = raw["followupFrequency"] as? String {
             contact.followupFrequency = CULFollowupFrequency(rawValue: freq) ?? .none
         }
-        contact.tag?.identifier = raw["tag"] as? String
+        
+        var tag = CULTag()
+        tag.identifier = raw["tag"] as? String
+        contact.tag = tag
         
         if let string = raw["followupDate"] as? String {
             if let timeInterval = Double(string) {
@@ -122,5 +147,17 @@ class CULFirebaseGateway {
         }
         
         return contact
+    }
+    
+    private func map(tags: [CULTag], with contacts: [CULContact]) -> [CULContact] {
+        for contact in contacts {
+            for tag in tags {
+                if tag.identifier == contact.tag?.identifier {
+                    contact.tag = tag
+                    break
+                }
+            }
+        }
+        return contacts
     }
 }

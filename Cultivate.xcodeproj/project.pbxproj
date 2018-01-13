@@ -36,6 +36,7 @@
 		BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */; };
 		BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */; };
 		BFC8C2572009C8A60014062E /* CULFirebaseGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C2562009C8A60014062E /* CULFirebaseGateway.swift */; };
+		BFC8C2592009E9860014062E /* ReschedulePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C2582009E9860014062E /* ReschedulePopupVC.swift */; };
 		BFC985611FE79AAF0041E32D /* cultivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC985601FE79AAF0041E32D /* cultivateTests.swift */; };
 		BFC9856C1FE79AAF0041E32D /* cultivateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */; };
 		BFD0168920073A960054365F /* DashboardTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */; };
@@ -108,6 +109,7 @@
 		BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedVC.swift; sourceTree = "<group>"; };
 		BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULTextField.swift; sourceTree = "<group>"; };
 		BFC8C2562009C8A60014062E /* CULFirebaseGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CULFirebaseGateway.swift; sourceTree = "<group>"; };
+		BFC8C2582009E9860014062E /* ReschedulePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReschedulePopupVC.swift; sourceTree = "<group>"; };
 		BFC985481FE79AAE0041E32D /* cultivate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cultivate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9855C1FE79AAF0041E32D /* cultivateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cultivateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC985601FE79AAF0041E32D /* cultivateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cultivateTests.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				BFD0168A20073ADD0054365F /* DashboardContactTblCell */,
 				BF6379B81FFCA587009C30E8 /* DashboardVC.swift */,
 				BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */,
+				BFC8C2582009E9860014062E /* ReschedulePopupVC.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/KLCPopup/KLCPopup.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
@@ -648,6 +652,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KLCPopup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
@@ -750,6 +755,7 @@
 				BFE9D7A51FE7A1330091F4A8 /* WelcomeVC.swift in Sources */,
 				BFE9D7A81FE7AB920091F4A8 /* FooterView.swift in Sources */,
 				BFC8C2572009C8A60014062E /* CULFirebaseGateway.swift in Sources */,
+				BFC8C2592009E9860014062E /* ReschedulePopupVC.swift in Sources */,
 				BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */,
 				BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */,
 				BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */,

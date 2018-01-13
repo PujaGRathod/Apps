@@ -14,6 +14,7 @@ target 'cultivate' do
   pod 'FBSDKCoreKit'
   pod 'TTTAttributedLabel'
   pod 'IQKeyboardManagerSwift'
+  pod 'KLCPopup', :git => 'https://github.com/jmascia/KLCPopup'
 
   target 'cultivateTests' do
     inherit! :search_paths
