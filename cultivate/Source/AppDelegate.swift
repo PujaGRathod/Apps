@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             CULUser.checkIfUserExist(with: currentUser.uid, completion: { (loggedInUser, success) in
                 DispatchQueue.main.async {
-                    
+                    CULFirebaseGateway.shared.loggedInUser = loggedInUser
                     guard let user = loggedInUser else {
                         
                         let welcomeNavigationController: UINavigationController = authStoryboard.instantiateViewController(withIdentifier: "navWelcomeVC") as! UINavigationController

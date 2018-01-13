@@ -23,62 +23,42 @@ class OnboardingCompletedVC: UIViewController {
         self.footerView.setProgressCompletion()
         
         // Upload contacts to the user
-        
-        
-        guard let currentUser = Auth.auth().currentUser else {
-            return
-        }
-        
-        let store: Firestore = Firestore.firestore()
-        
-        let batch: WriteBatch = store.batch()
-        
-        for contact in self.contacts {
-            let data: [String:Any] = self.convertContactToRawData(contact)
-            let ref = store.collection("users").document(currentUser.uid).collection("contacts").document()
-            batch.setData(data, forDocument: ref)
-        }
-        
-        let ref = store.collection("users").document(currentUser.uid)
-        batch.updateData([ "isOnBoardingComplete" : true ], forDocument: ref)
-
-        batch.commit { (error) in
-            if let error = error {
-                // Error
-                self.showAlert("Error", message: error.localizedDescription)
-            } else {
-                // Success
-                self.dataUploaded = true
-                if self.userTappedOnButton == true {
-                    self.performSegue(withIdentifier: "segueDashboard", sender: nil)
-                }
-            }
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            self.uploadData(for: user)
         }
         
     }
     
-    private func convertContactToRawData(_ contact: CULContact) -> [String:Any] {
-        var raw: [String:Any] = [:]
+    func uploadData(for user: CULUser) {
+        let group = DispatchGroup()
         
-        raw["identifier"] = contact.identifier
-        
-        if let first_name = contact.first_name {
-            raw["first_name"] = first_name
-        }
-
-        if let last_name = contact.last_name {
-            raw["last_name"] = last_name
-        }
-        
-        raw["followupFrequency"] = contact.followupFrequency.rawValue
-        
-        if let tagId = contact.tag?.identifier {
-            raw["tag"] = tagId
+        group.enter()
+        CULFirebaseGateway.shared.addNew(contacts: self.contacts, for: user) { (error) in
+            if let error = error {
+                // Error
+                self.showAlert("Error", message: error.localizedDescription)
+            }
+            group.leave()
         }
         
-        return raw
+        group.enter()
+        CULFirebaseGateway.shared.setOnboardingCompleted(for: user) { (error) in
+            if let error = error {
+                // Error
+                self.showAlert("Error", message: error.localizedDescription)
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            // Success
+            self.dataUploaded = true
+            if self.userTappedOnButton == true {
+                self.performSegue(withIdentifier: "segueDashboard", sender: nil)
+            }
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

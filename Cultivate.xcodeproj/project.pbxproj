@@ -35,6 +35,7 @@
 		BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4370C1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift */; };
 		BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */; };
 		BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */; };
+		BFC8C2572009C8A60014062E /* CULFirebaseGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C2562009C8A60014062E /* CULFirebaseGateway.swift */; };
 		BFC985611FE79AAF0041E32D /* cultivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC985601FE79AAF0041E32D /* cultivateTests.swift */; };
 		BFC9856C1FE79AAF0041E32D /* cultivateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */; };
 		BFD0168920073A960054365F /* DashboardTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */; };
@@ -106,6 +107,7 @@
 		BFA4370C1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowupFrequencyListTableViewAdapter.swift; sourceTree = "<group>"; };
 		BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedVC.swift; sourceTree = "<group>"; };
 		BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULTextField.swift; sourceTree = "<group>"; };
+		BFC8C2562009C8A60014062E /* CULFirebaseGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CULFirebaseGateway.swift; sourceTree = "<group>"; };
 		BFC985481FE79AAE0041E32D /* cultivate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cultivate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9855C1FE79AAF0041E32D /* cultivateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cultivateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC985601FE79AAF0041E32D /* cultivateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cultivateTests.swift; sourceTree = "<group>"; };
@@ -202,15 +204,16 @@
 		BF2D390F1FE8E63E00AF63EC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				BF1298A61FEA8E710058C8EC /* CULNavigationController.swift */,
-				591EA6341FEA77730001B494 /* Extensions */,
 				BF7F48D41FE9088C00737FE5 /* ContactTblCell */,
-				BF2D39101FE8E65700AF63EC /* CULContact.swift */,
-				591EA6391FEA777A0001B494 /* CULUser.swift */,
-				BF7F48C81FE8EE1C00737FE5 /* String.swift */,
 				BF7F48D21FE9015600737FE5 /* CULButton.swift */,
+				BF2D39101FE8E65700AF63EC /* CULContact.swift */,
+				BF1298A61FEA8E710058C8EC /* CULNavigationController.swift */,
 				BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */,
+				591EA6391FEA777A0001B494 /* CULUser.swift */,
+				591EA6341FEA77730001B494 /* Extensions */,
+				BFC8C2552009C8A60014062E /* FirebaseGateway */,
 				BFD0168F2007401B0054365F /* FollowupDateGenerator.swift */,
+				BF7F48C81FE8EE1C00737FE5 /* String.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -233,6 +236,14 @@
 				BF7F48D61FE9089A00737FE5 /* ContactTblCell.xib */,
 			);
 			path = ContactTblCell;
+			sourceTree = "<group>";
+		};
+		BFC8C2552009C8A60014062E /* FirebaseGateway */ = {
+			isa = PBXGroup;
+			children = (
+				BFC8C2562009C8A60014062E /* CULFirebaseGateway.swift */,
+			);
+			path = FirebaseGateway;
 			sourceTree = "<group>";
 		};
 		BFC9853F1FE79AAE0041E32D = {
@@ -738,6 +749,7 @@
 			files = (
 				BFE9D7A51FE7A1330091F4A8 /* WelcomeVC.swift in Sources */,
 				BFE9D7A81FE7AB920091F4A8 /* FooterView.swift in Sources */,
+				BFC8C2572009C8A60014062E /* CULFirebaseGateway.swift in Sources */,
 				BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */,
 				BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */,
 				BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */,
