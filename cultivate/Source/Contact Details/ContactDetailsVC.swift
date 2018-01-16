@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import MessageUI
+import KLCPopup
 
 class ContactDetailsVC: UIViewController {
 
@@ -30,9 +31,9 @@ class ContactDetailsVC: UIViewController {
     @IBOutlet weak var nextFollowupDateValueButton: UIButton!
     @IBOutlet weak var notesTextView: UITextView!
     
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    
     var contact: CULContact!
+    
+    private var reschedulePopupVC: ReschedulePopupVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -248,11 +249,32 @@ class ContactDetailsVC: UIViewController {
     }
     
     @IBAction func changeFollowupDateTapped(_ sender: UIButton) {
-        
+        self.reschedulePopup(for: contact)
     }
-    
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        
+
+    func reschedulePopup(for contact: CULContact) {
+        self.reschedulePopupVC = self.storyboard?.instantiateViewController(withIdentifier: "ReschedulePopupVC") as? ReschedulePopupVC
+        if let reschedulePopupVC = self.reschedulePopupVC {
+            reschedulePopupVC.followupDateUpdated = { updatedContact in
+                self.contact.followupDate = updatedContact.followupDate
+                self.display(contact: self.contact)
+            }
+            reschedulePopupVC.view.translatesAutoresizingMaskIntoConstraints = false
+            reschedulePopupVC.contact = contact
+            reschedulePopupVC.presentingVC = self
+            // Ugly hack to force system to load the UIView
+            print(reschedulePopupVC.view)
+            
+            let verticalLayout = KLCPopupVerticalLayout.aboveCenter
+            let layout = KLCPopupLayout(horizontal: .center, vertical: verticalLayout)
+            
+            let contentView = reschedulePopupVC.viewForPopup()
+            let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+            reschedulePopupVC.popup = popup
+            if let popup = popup {
+                popup.show(with: layout);
+            }
+        }
     }
 }
 

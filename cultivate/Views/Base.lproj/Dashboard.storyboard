@@ -899,11 +899,6 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="NzC-0z-ebk">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="IeI-mY-dX5">
-                            <connections>
-                                <action selector="saveButtonTapped:" destination="0Sv-1O-EqN" id="aYR-3X-vZC"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
@@ -918,7 +913,6 @@
                         <outlet property="nextFollowupDateValueButton" destination="Ftu-ri-3Rb" id="YYr-fS-63W"/>
                         <outlet property="notesTextView" destination="H4Y-8Y-bb4" id="mDo-Om-5rz"/>
                         <outlet property="profileImageView" destination="ZIm-lN-Ll0" id="4il-fM-8TF"/>
-                        <outlet property="saveButton" destination="IeI-mY-dX5" id="l98-Ho-w4y"/>
                         <outlet property="scrollView" destination="i3R-Qy-r44" id="SQ8-Bf-u4B"/>
                         <outlet property="sendEmailView" destination="iWO-a5-pUa" id="iHa-sb-Wyb"/>
                         <outlet property="sendMessageView" destination="bqG-BK-lOc" id="6Ue-hH-7kw"/>
