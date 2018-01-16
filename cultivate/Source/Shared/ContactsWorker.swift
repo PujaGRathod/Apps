@@ -24,7 +24,7 @@ class ContactsWorker {
         self.getContacts( {(contacts, sortedKeys, error) in
             if (error == nil) {
                 DispatchQueue.main.async(execute: {
-//                    self.tableView.reloadData()
+                    //                    self.tableView.reloadData()
                 })
             }
         })
@@ -47,7 +47,7 @@ class ContactsWorker {
             let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {  action in
                 completion([:], [], error)
                 self.viewcontroller.dismiss(animated: true, completion: {
-//                    self.contactDelegate?.epContactPicker(self, didContactFetchFailed: error)
+                    //                    self.contactDelegate?.epContactPicker(self, didContactFetchFailed: error)
                 })
             })
             alert.addAction(okAction)
@@ -78,7 +78,7 @@ class ContactsWorker {
                     //Ordering contacts based on alphabets in firstname
                     contactsArray.append(contact)
                     var key: String = "#"
-
+                    
                     //If ordering has to be happening via family name change it here.
                     var firstLetter = contact.givenName[0..<1]
                     switch contactFetchRequest.sortOrder {
@@ -93,7 +93,7 @@ class ContactsWorker {
                         key = firstLetter!.uppercased()
                     }
                     var contacts = [CNContact]()
-
+                    
                     if let segregatedContact = self.orderedContacts[key] {
                         contacts = segregatedContact
                     }
@@ -140,14 +140,81 @@ class ContactsWorker {
                 CNContactImageDataAvailableKey as CNKeyDescriptor,
                 CNContactPhoneNumbersKey as CNKeyDescriptor,
                 CNContactEmailAddressesKey as CNKeyDescriptor,
+                CNContactInstantMessageAddressesKey as CNKeyDescriptor,
         ]
     }
     
     class func createCULContact(from cnContact: CNContact) -> CULContact {
-        let contact: CULContact = CULContact()
+        var contact: CULContact = CULContact()
         contact.identifier = cnContact.identifier
         contact.first_name = cnContact.givenName
         contact.last_name = cnContact.familyName
+
+        //        if let components = cnContact.birthday {
+        //            let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        //            contact.birthday = calendar.date(from: components)
+        //        }
+        
         return contact
+    }
+    
+    func getPhoneNumbers(forContactIdentifier identifier: String) -> [String:String] {
+        var phoneNumbers = [String:String]()
+        var cnContact: CNContact?
+        
+        if self.contactsStore == nil {
+            //ContactStore is control for accessing the Contacts
+            self.contactsStore = CNContactStore()
+        }
+        
+        do {
+            cnContact = try self.contactsStore?.unifiedContact(withIdentifier: identifier, keysToFetch: self.allowedContactKeys())
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        guard let contact = cnContact else {
+            return phoneNumbers
+        }
+        
+        for phoneNumber in contact.phoneNumbers {
+            var key: String = "phone"
+            if let label = phoneNumber.label, label.isEmpty == false {
+                key = CNLabeledValue<NSString>.localizedString(forLabel: label)
+            }
+            phoneNumbers[key] = phoneNumber.value.stringValue
+        }
+        return phoneNumbers
+    }
+    
+    func getEmailAddresses(forContactIdentifier identifier: String) -> [String:String] {
+        var emailAddresses = [String:String]()
+        
+        var cnContact: CNContact?
+        
+        if self.contactsStore == nil {
+            //ContactStore is control for accessing the Contacts
+            self.contactsStore = CNContactStore()
+        }
+        
+        do {
+            cnContact = try self.contactsStore?.unifiedContact(withIdentifier: identifier, keysToFetch: self.allowedContactKeys())
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        guard let contact = cnContact else {
+            return emailAddresses
+        }
+        
+        for emailAddress in contact.emailAddresses {
+            var key: String = "email"
+            if let label = emailAddress.label, label.isEmpty == false {
+                key = CNLabeledValue<NSString>.localizedString(forLabel: label)
+            }
+            emailAddresses[key] = emailAddress.value as String
+        }
+        
+        return emailAddresses
     }
 }

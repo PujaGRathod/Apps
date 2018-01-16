@@ -103,8 +103,9 @@ class SetFollowupFrequenciesVC: UIViewController {
     
     func set(followupFrequency: CULFollowupFrequency, for contact: CULContact) {
         if let index: Int = self.index(for: contact) {
-            contact.followupFrequency = followupFrequency
-            self.contacts[index] = contact
+            var updatedContact = contact
+            updatedContact.followupFrequency = followupFrequency
+            self.contacts[index] = updatedContact
         } else {
             self.printErrorMessageWhenContctIfNotFoundInTheList()
         }

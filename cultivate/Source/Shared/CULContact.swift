@@ -6,7 +6,7 @@
 //  Copyright © 2017 Akshit Zaveri. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum CULFollowupFrequency: String {
     case two_weeks = "two_weeks"
@@ -56,18 +56,26 @@ enum CULFollowupFrequency: String {
     }
 }
 
-//TODO: Change this to struct
-class CULContact {
- 
+struct CULContact: Equatable {
+    
+    static func ==(lhs: CULContact, rhs: CULContact) -> Bool {
+        return lhs.db_Identifier == rhs.db_Identifier
+    }
+    
     struct Followup {
         var date: Date?
     }
     
+    // Database identifier. E.g Firebase
     var db_Identifier: String!
+    
+    // Contact book identifier
     var identifier: String!
+    
+    var profileImageURL: URL?
+    
     var first_name: String?
     var last_name: String?
-    
     var name: String {
         var list: [String] = []
         if let fName: String = self.first_name,
@@ -84,10 +92,34 @@ class CULContact {
         return list.joined(separator: " ")
     }
     
+    var initials: String {
+        var initialsList = [Character]()
+        if let a = self.first_name?.first {
+            initialsList.append(a)
+        }
+        if let a = self.last_name?.first {
+            initialsList.append(a)
+        }
+        return String(initialsList)
+    }
+    
     var followupFrequency: CULFollowupFrequency = CULFollowupFrequency.none
     var followupDate: Date?
+    var userReadableFollowupDateString: String {
+        if let date = self.followupDate {
+            let df = DateFormatter()
+            df.dateStyle = .medium
+            df.timeStyle = .none
+            return df.string(from: date)
+        }
+        return ""
+    }
+    
     var tag: CULTag?
     var followups = [Followup]()
+    var notes: String?
+    var birthday: Date?
+    var phoneNumbers = [String]()
 }
 
 struct CULTag {

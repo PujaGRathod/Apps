@@ -118,8 +118,9 @@ class AddTagsVC: UIViewController {
     
     func set(tag: CULTag, for contact: CULContact) {
         if let index: Int = self.index(for: contact) {
-            contact.tag = tag
-            self.contacts[index] = contact
+            var updatedContact = contact
+            updatedContact.tag = tag
+            self.contacts[index] = updatedContact
             
             self.txtAddNewTag.text = nil
             self.tagListTableViewAdapter.search(tag: "")

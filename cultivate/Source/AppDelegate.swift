@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let currentUser = Auth.auth().currentUser {
             
+            print("Current user: \(currentUser.uid)")
+            
             let authStoryboard: UIStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
             let extendedSplashVC: ExtendedSplashVC = authStoryboard.instantiateViewController(withIdentifier: "ExtendedSplashVC") as!ExtendedSplashVC
             self.window?.rootViewController = extendedSplashVC

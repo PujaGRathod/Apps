@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SDWebImage
+import MessageUI
 
 class ContactDetailsVC: UIViewController {
 
@@ -14,8 +16,21 @@ class ContactDetailsVC: UIViewController {
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet var valueViews: [UIView]!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameInitialsLabel: UILabel!
+    @IBOutlet weak var sendMessageView: UIView!
+    @IBOutlet weak var callPhoneView: UIView!
+    @IBOutlet weak var sendEmailView: UIView!
+    @IBOutlet weak var callFaceTimeView: UIView!
+    @IBOutlet weak var followupFrequencyValueButton: UIButton!
+    @IBOutlet weak var tagValueButton: UIButton!
+    @IBOutlet weak var nextFollowupDateValueButton: UIButton!
+    @IBOutlet weak var notesTextView: UITextView!
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var contact: CULContact!
     
@@ -28,6 +43,8 @@ class ContactDetailsVC: UIViewController {
         for view in self.valueViews {
             self.addBorderAndBackground(to: view)
         }
+        
+        self.display(contact: self.contact)
     }
 
     private func addBorderAndBackground(to view: UIView) {
@@ -38,12 +55,219 @@ class ContactDetailsVC: UIViewController {
         view.layer.borderWidth = 1
     }
     
+    private func display(contact: CULContact) {
+        self.nameInitialsLabel.isHidden = true
+        if let url = contact.profileImageURL {
+            self.profileImageView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                if image == nil || error != nil {
+                    self.show(nameInitials: contact.initials)
+                }
+            })
+        } else {
+            self.show(nameInitials: contact.initials)
+        }
+        
+        self.nameLabel.text = contact.name
+        self.followupFrequencyValueButton.setTitle(contact.followupFrequency.values.description, for: UIControlState.normal)
+        self.tagValueButton.setTitle(contact.tag?.name ?? "None", for: UIControlState.normal)
+        self.nextFollowupDateValueButton.setTitle(contact.userReadableFollowupDateString, for: .normal)
+        self.notesTextView.text = contact.notes
+    }
+    
+    private func show(nameInitials: String) {
+        self.nameInitialsLabel.isHidden = false
+        self.nameInitialsLabel.text = nameInitials
+    }
+    
     @IBAction func sectionChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 1:
             self.scrollView.setContentOffset(self.historyTableView.frame.origin, animated: true)
         default:
             self.scrollView.setContentOffset(self.detailView.frame.origin, animated: true)
+        }
+    }
+    
+    @IBAction func sendMessageButtonTapped(_ sender: UIButton) {
+        let worker = ContactsWorker()
+        let numbers = worker.getPhoneNumbers(forContactIdentifier: self.contact.identifier)
+        print(numbers)
+        
+        let actionSheet = UIAlertController(title: "Choose", message: "Tap a number to message", preferredStyle: UIAlertControllerStyle.actionSheet)
+        for key in numbers.keys {
+            guard let number = numbers[key] else {
+                continue
+            }
+            let title = "\(key): \(number)"
+            let handler: ((UIAlertAction)->Void) = { (action) in
+                guard let num = number.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed) else {
+                    return
+                }
+                
+                if MFMessageComposeViewController.canSendText() == false {
+                    return
+                }
+                
+                let composeVC = MFMessageComposeViewController()
+                composeVC.messageComposeDelegate = self
+                
+                // Configure the fields of the interface.
+                composeVC.recipients = [num]
+                composeVC.body = ""
+                
+                // Present the view controller modally.
+                self.present(composeVC, animated: true, completion: nil)
+                
+            }
+            actionSheet.addAction(UIAlertAction(title: title, style: UIAlertActionStyle.default, handler: handler))
+        }
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
+            print("Cancelled calling")
+        }))
+        self.present(actionSheet, animated: true) {
+        }
+    }
+    
+    @IBAction func callPhoneButtonTapped(_ sender: UIButton) {
+        let worker = ContactsWorker()
+        let numbers = worker.getPhoneNumbers(forContactIdentifier: self.contact.identifier)
+        print(numbers)
+        
+        let actionSheet = UIAlertController(title: "Choose", message: "Tap a number to call", preferredStyle: UIAlertControllerStyle.actionSheet)
+        for key in numbers.keys {
+            guard let number = numbers[key] else {
+                continue
+            }
+            let title = "\(key): \(number)"
+            let handler: ((UIAlertAction)->Void) = { (action) in
+                guard let num = number.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed) else {
+                    return
+                }
+                guard let url = URL(string: "tel:\(num)") else {
+                    return
+                }
+                UIApplication.shared.open(url, options: [:], completionHandler: { (finished) in
+                })
+            }
+            actionSheet.addAction(UIAlertAction(title: title, style: UIAlertActionStyle.default, handler: handler))
+        }
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
+            print("Cancelled calling")
+        }))
+        self.present(actionSheet, animated: true) {
+        }
+    }
+    
+    @IBAction func sendEmailButtonTapped(_ sender: UIButton) {
+        let worker = ContactsWorker()
+        let emails = worker.getEmailAddresses(forContactIdentifier: self.contact.identifier)
+        print(emails)
+        
+        let actionSheet = UIAlertController(title: "Choose", message: "Tap an email address", preferredStyle: UIAlertControllerStyle.actionSheet)
+        for key in emails.keys {
+            guard let email = emails[key] else {
+                continue
+            }
+            let title = "\(key): \(email)"
+            let handler: ((UIAlertAction)->Void) = { (action) in
+                
+                if MFMailComposeViewController.canSendMail() == false {
+                    return
+                }
+                
+                let mailComposer = MFMailComposeViewController()
+                mailComposer.mailComposeDelegate = self
+                mailComposer.setToRecipients([ email ])
+                self.present(mailComposer, animated: true, completion: {
+                })
+            }
+            actionSheet.addAction(UIAlertAction(title: title, style: UIAlertActionStyle.default, handler: handler))
+        }
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
+        }))
+        self.present(actionSheet, animated: true) {
+        }
+    }
+    
+    @IBAction func callFaceTimeButtonTapped(_ sender: UIButton) {
+        let worker = ContactsWorker()
+        
+        let numbers = worker.getPhoneNumbers(forContactIdentifier: self.contact.identifier)
+        let emails = worker.getEmailAddresses(forContactIdentifier: self.contact.identifier)
+        
+        print(numbers)
+        
+        let actionSheet = UIAlertController(title: "Choose", message: "Tap a number to FaceTime", preferredStyle: UIAlertControllerStyle.actionSheet)
+        for key in numbers.keys {
+            guard let number = numbers[key] else {
+                continue
+            }
+            let title = "\(key): \(number)"
+            let handler: ((UIAlertAction)->Void) = { (action) in
+                guard let num = number.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed) else {
+                    return
+                }
+                guard let url = URL(string: "facetime:\(num)") else {
+                    return
+                }
+                UIApplication.shared.open(url, options: [:], completionHandler: { (finished) in
+                })
+            }
+            actionSheet.addAction(UIAlertAction(title: title, style: UIAlertActionStyle.default, handler: handler))
+        }
+        for key in emails.keys {
+            guard let email = emails[key] else {
+                continue
+            }
+            let title = "\(key): \(email)"
+            let handler: ((UIAlertAction)->Void) = { (action) in
+                guard let email = email.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed) else {
+                    return
+                }
+                guard let url = URL(string: "facetime:\(email)") else {
+                    return
+                }
+                UIApplication.shared.open(url, options: [:], completionHandler: { (finished) in
+                })
+            }
+            actionSheet.addAction(UIAlertAction(title: title, style: UIAlertActionStyle.default, handler: handler))
+        }
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
+            print("Cancelled facetime call")
+        }))
+        self.present(actionSheet, animated: true) {
+        }
+    }
+    
+    @IBAction func changeFollowupFrequencyTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func changeTagTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func changeFollowupDateTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        
+    }
+}
+
+extension ContactDetailsVC: MFMessageComposeViewControllerDelegate {
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true) {
+        }
+    }
+}
+
+extension ContactDetailsVC: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true) {
         }
     }
 }

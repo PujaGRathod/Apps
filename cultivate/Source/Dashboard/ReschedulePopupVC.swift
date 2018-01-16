@@ -17,13 +17,15 @@ class ReschedulePopupVC: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateTextField: UITextField!
     
-    var followupDateUpdated: (()->Void)?
+    var followupDateUpdated: ((CULContact)->Void)?
     
     var contact: CULContact!{
         didSet {
             if let date = self.contact.followupDate {
-                self.showDateIntextField(date)
+                self.dateTextField.text = self.contact.userReadableFollowupDateString
                 self.datePicker.date = date
+            } else {
+                //TODO: Assign a followup date if not found
             }
         }
     }
@@ -52,7 +54,7 @@ class ReschedulePopupVC: UIViewController {
                     self.showAlert("Error", message: error.localizedDescription)
                 } else {
                     self.dateTextField.resignFirstResponder()
-                    self.followupDateUpdated?()
+                    self.followupDateUpdated?(self.contact)
                 }
             })
         }
@@ -65,17 +67,11 @@ class ReschedulePopupVC: UIViewController {
     }
     
     @IBAction func datePickerDateChanged(_ sender: UIDatePicker) {
-        self.showDateIntextField(sender.date)
+        self.contact.followupDate = self.datePicker.date
+        self.dateTextField.text = self.contact.userReadableFollowupDateString
     }
     
     @IBAction func changeRescheduleButtonTapped(_ sender: UIButton) {
         self.dateTextField.becomeFirstResponder()
-    }
-    
-    private func showDateIntextField(_ date: Date) {
-        let df = DateFormatter()
-        df.dateStyle = .medium
-        df.timeStyle = .none
-        self.dateTextField.text = df.string(from: date)
     }
 }

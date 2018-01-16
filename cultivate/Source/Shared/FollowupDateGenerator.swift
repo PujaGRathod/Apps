@@ -34,6 +34,7 @@ class FollowupDateGenerator {
          5. Do this for all contacts
          */
         
+        var assignedContacts = [CULContact]()
         for contact in contacts {
             let values = contact.followupFrequency.values
             let totalDays = values.totalDays
@@ -44,14 +45,21 @@ class FollowupDateGenerator {
                     days += random_days
                     datecomponents.day = days
                 } else {
+                    assignedContacts.append(contact)
                     continue
                 }
                 let followupDate = self.calendar.date(from: datecomponents)
-                contact.followupDate = followupDate
+                
+                var assignedContact = contact
+                assignedContact.followupDate = followupDate
+                assignedContacts.append(assignedContact)
+                
                 print("Followup date set \(String(describing: contact.followupDate)) for \(contact.name)")
+            } else {
+                assignedContacts.append(contact)
             }
         }
-        return contacts
+        return assignedContacts
     }
     
     /*

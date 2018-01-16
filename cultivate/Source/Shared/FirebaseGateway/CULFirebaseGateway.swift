@@ -110,7 +110,7 @@ class CULFirebaseGateway {
         ref.getDocuments { (snapshots, error) in
             var contacts: [CULContact] = []
             for document in snapshots?.documents ?? [] {
-                if let contact = self.contact(from: document.data()) {
+                if var contact = self.contact(from: document.data()) {
                     contact.db_Identifier = document.documentID
                     contacts.append(contact)
                 }
@@ -123,7 +123,7 @@ class CULFirebaseGateway {
     }
     
     private func contact(from raw: [String:Any]) -> CULContact? {
-        let contact = CULContact()
+        var contact = CULContact()
         
         guard let identifier = raw["identifier"] as? String else {
             return nil
@@ -150,14 +150,19 @@ class CULFirebaseGateway {
     }
     
     private func map(tags: [CULTag], with contacts: [CULContact]) -> [CULContact] {
+        var mappedContacts = [CULContact]()
         for contact in contacts {
+            var contactTag: CULTag?
             for tag in tags {
                 if tag.identifier == contact.tag?.identifier {
-                    contact.tag = tag
+                    contactTag = tag
                     break
                 }
             }
+            var mappedContact = contact
+            mappedContact.tag = contactTag
+            mappedContacts.append(mappedContact)
         }
-        return contacts
+        return mappedContacts
     }
 }

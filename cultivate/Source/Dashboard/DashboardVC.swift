@@ -73,8 +73,8 @@ class DashboardVC: UIViewController {
     func reschedulePopup(for contact: CULContact, tableViewIndexPath: IndexPath) {
         self.reschedulePopupVC = self.storyboard?.instantiateViewController(withIdentifier: "ReschedulePopupVC") as? ReschedulePopupVC
         if let reschedulePopupVC = self.reschedulePopupVC {
-            reschedulePopupVC.followupDateUpdated = {
-                self.dashboardTableViewAdapter.reloadData()
+            reschedulePopupVC.followupDateUpdated = { updatedContact in
+                self.dashboardTableViewAdapter.update(contact: updatedContact)
             }
             reschedulePopupVC.view.translatesAutoresizingMaskIntoConstraints = false
             reschedulePopupVC.contact = contact
@@ -97,8 +97,8 @@ class DashboardVC: UIViewController {
     func logFollowupPopup(for contact: CULContact, tableViewIndexPath: IndexPath) {
         self.logFollowupPopupVC = self.storyboard?.instantiateViewController(withIdentifier: "LogFollowupPopupVC") as? LogFollowupPopupVC
         if let logFollowupPopupVC = self.logFollowupPopupVC {
-            logFollowupPopupVC.followupDateUpdated = {
-                self.dashboardTableViewAdapter.reloadData()
+            logFollowupPopupVC.followupDateUpdated = { updatedContact in
+                self.dashboardTableViewAdapter.update(contact: updatedContact)
             }
             logFollowupPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
             logFollowupPopupVC.contact = contact

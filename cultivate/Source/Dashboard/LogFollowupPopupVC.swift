@@ -21,7 +21,7 @@ class LogFollowupPopupVC: UIViewController {
     @IBOutlet weak var detailsToRememberTextView: SZTextView!
     @IBOutlet weak var contactListTableView: UITableView!
     
-    var followupDateUpdated: (()->Void)?
+    var followupDateUpdated: ((CULContact)->Void)?
     
     private var filteredContactList = [CULContact]()
     var allContacts = [CULContact]()
@@ -93,7 +93,8 @@ class LogFollowupPopupVC: UIViewController {
     }
     
     @IBAction func datePickerDateChanged(_ sender: UIDatePicker) {
-        self.showDateIntextField(sender.date)
+        self.contact.followupDate = sender.date
+        self.dateTextField.text = contact.userReadableFollowupDateString
     }
     
     @IBAction func changeRescheduleButtonTapped(_ sender: UIButton) {
@@ -125,16 +126,7 @@ class LogFollowupPopupVC: UIViewController {
     
     private func showContactDetails(_ contact: CULContact) {
         self.contactTextField.text = contact.name
-        if let date = contact.followupDate {
-            self.showDateIntextField(date)
-        }
-    }
-    
-    private func showDateIntextField(_ date: Date) {
-        let df = DateFormatter()
-        df.dateStyle = .medium
-        df.timeStyle = .none
-        self.dateTextField.text = df.string(from: date)
+        self.dateTextField.text = contact.userReadableFollowupDateString
     }
 }
 

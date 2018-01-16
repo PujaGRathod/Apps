@@ -33,19 +33,8 @@ class DashboardContactTblCell: UITableViewCell {
         
         self.contactNameLabel.text = contact.name
         
-        self.dateLabel.text = self.userReadableString(from: contact.followupDate ?? Date())
+        self.dateLabel.text = contact.userReadableFollowupDateString
         self.dateLabel.textColor = self.color(for: contact.followupDate ?? Date())
-    }
-    
-    private func userReadableString(from date: Date?) -> String {
-        guard let date = date else {
-            return ""
-        }
-        
-        let dateformatter = DateFormatter()
-        dateformatter.dateStyle = .medium
-        dateformatter.timeStyle = .none
-        return dateformatter.string(from: date)
     }
     
     private func color(for date: Date?) -> UIColor {

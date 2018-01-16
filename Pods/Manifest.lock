@@ -93,6 +93,9 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Protobuf (3.5.0)
+  - SDWebImage (4.2.3):
+    - SDWebImage/Core (= 4.2.3)
+  - SDWebImage/Core (4.2.3)
   - SZTextView (1.3.0)
   - TTTAttributedLabel (2.0.0)
 
@@ -106,6 +109,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - IQKeyboardManagerSwift
   - KLCPopup (from `https://github.com/jmascia/KLCPopup`)
+  - SDWebImage
   - SZTextView
   - TTTAttributedLabel
 
@@ -142,9 +146,10 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
+  SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 9b21e537a7aa1eac09dbb24f249c036b77bd9351
+PODFILE CHECKSUM: fb8e1368260c134db16c2135e7e07d28a560c786
 
 COCOAPODS: 1.3.1

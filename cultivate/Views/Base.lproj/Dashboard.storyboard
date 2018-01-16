@@ -111,7 +111,7 @@
                                                     <action selector="cancelButtonTapped:" destination="ubc-WO-JRx" eventType="touchUpInside" id="CbQ-Nw-qdN"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defer follow-up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoG-dR-yG7">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defer follow-up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UoG-dR-yG7">
                                                 <rect key="frame" x="114" y="0.0" width="118.5" height="44"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -540,6 +540,9 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22i-Wd-E3N">
                                                                         <rect key="frame" x="0.0" y="0.0" width="62" height="63"/>
+                                                                        <connections>
+                                                                            <action selector="sendMessageButtonTapped:" destination="0Sv-1O-EqN" eventType="touchUpInside" id="aD1-dg-pm2"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hti-SR-2XL">
                                                                         <rect key="frame" x="0.5" y="47.5" width="62" height="16"/>
@@ -571,6 +574,9 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBE-mn-0e4">
                                                                         <rect key="frame" x="0.0" y="0.0" width="62" height="63"/>
+                                                                        <connections>
+                                                                            <action selector="callPhoneButtonTapped:" destination="0Sv-1O-EqN" eventType="touchUpInside" id="Atl-zS-ZrL"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gA8-js-8CN">
                                                                         <rect key="frame" x="0.5" y="47.5" width="62" height="16"/>
@@ -602,6 +608,9 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrA-gC-1Ed">
                                                                         <rect key="frame" x="0.0" y="0.0" width="62" height="63"/>
+                                                                        <connections>
+                                                                            <action selector="sendEmailButtonTapped:" destination="0Sv-1O-EqN" eventType="touchUpInside" id="U81-dJ-s4F"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDu-iv-kV9">
                                                                         <rect key="frame" x="0.0" y="47.5" width="62" height="16"/>
@@ -633,6 +642,9 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HeC-qv-PvN">
                                                                         <rect key="frame" x="0.0" y="0.0" width="62" height="63"/>
+                                                                        <connections>
+                                                                            <action selector="callFaceTimeButtonTapped:" destination="0Sv-1O-EqN" eventType="touchUpInside" id="XZl-xh-54s"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="FaceTime" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hx4-HV-6No">
                                                                         <rect key="frame" x="0.5" y="47.5" width="62" height="16"/>
@@ -686,6 +698,9 @@
                                                                         <state key="normal" title="Every two-months">
                                                                             <color key="titleColor" red="0.38039215686274508" green="0.36862745098039218" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeFollowupFrequencyTapped:" destination="0Sv-1O-EqN" eventType="touchUpInside" id="lV5-NU-DsP"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DownArrow" translatesAutoresizingMaskIntoConstraints="NO" id="3YE-fv-6xr">
                                                                         <rect key="frame" x="308" y="17" width="35" height="35"/>
@@ -728,6 +743,9 @@
                                                                         <state key="normal" title="Every two-months">
                                                                             <color key="titleColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeTagTapped:" destination="0Sv-1O-EqN" eventType="touchUpInside" id="b7V-jL-fUZ"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DownArrow" translatesAutoresizingMaskIntoConstraints="NO" id="b7K-B7-dLj">
                                                                         <rect key="frame" x="308" y="17" width="35" height="35"/>
@@ -770,6 +788,9 @@
                                                                         <state key="normal" title="Every two-months">
                                                                             <color key="titleColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="changeFollowupDateTapped:" destination="0Sv-1O-EqN" eventType="touchUpInside" id="Xeo-DT-Dk2"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconCalendar" translatesAutoresizingMaskIntoConstraints="NO" id="qTZ-bZ-lC2">
                                                                         <rect key="frame" x="308" y="17" width="35" height="35"/>
@@ -878,14 +899,30 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="NzC-0z-ebk">
                         <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="IeI-mY-dX5">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="0Sv-1O-EqN" id="aYR-3X-vZC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
+                        <outlet property="callFaceTimeView" destination="fEz-1K-yGx" id="FcS-4G-etQ"/>
+                        <outlet property="callPhoneView" destination="KqY-py-V0Q" id="8vl-Qg-xxm"/>
                         <outlet property="detailView" destination="XT5-S2-AyY" id="T9N-58-Svb"/>
+                        <outlet property="followupFrequencyValueButton" destination="13T-vj-fqY" id="eHD-e4-Qwc"/>
                         <outlet property="headerView" destination="pQz-xO-waf" id="AAe-tf-7wQ"/>
                         <outlet property="historyTableView" destination="pdO-aY-Hx3" id="0To-s8-Vd2"/>
+                        <outlet property="nameInitialsLabel" destination="ecf-mY-5hO" id="O8F-aC-EjV"/>
+                        <outlet property="nameLabel" destination="EOk-Dv-1UP" id="jjC-Hd-U1l"/>
+                        <outlet property="nextFollowupDateValueButton" destination="Ftu-ri-3Rb" id="YYr-fS-63W"/>
+                        <outlet property="notesTextView" destination="H4Y-8Y-bb4" id="mDo-Om-5rz"/>
                         <outlet property="profileImageView" destination="ZIm-lN-Ll0" id="4il-fM-8TF"/>
+                        <outlet property="saveButton" destination="IeI-mY-dX5" id="l98-Ho-w4y"/>
                         <outlet property="scrollView" destination="i3R-Qy-r44" id="SQ8-Bf-u4B"/>
+                        <outlet property="sendEmailView" destination="iWO-a5-pUa" id="iHa-sb-Wyb"/>
+                        <outlet property="sendMessageView" destination="bqG-BK-lOc" id="6Ue-hH-7kw"/>
+                        <outlet property="tagValueButton" destination="hV8-cB-5dP" id="UfG-rz-tPR"/>
                         <outletCollection property="valueViews" destination="13T-vj-fqY" collectionClass="NSMutableArray" id="Xrf-kl-Ne8"/>
                         <outletCollection property="valueViews" destination="H4Y-8Y-bb4" collectionClass="NSMutableArray" id="Xnp-iy-N8z"/>
                         <outletCollection property="valueViews" destination="Ftu-ri-3Rb" collectionClass="NSMutableArray" id="Cwl-xt-msQ"/>
