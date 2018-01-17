@@ -25,12 +25,46 @@ enum CULFollowupFrequency: String {
         var years: Int
         var description: String
         
-        var totalDays: Int {
-            let days = self.days
-            let daysInWeeks = self.weeks*7
-            let daysInMonth = Int(Double(self.months)*30.42)
-            let daysInYears = self.years*365
-            return days + daysInWeeks + daysInMonth + daysInYears
+//        var totalDays: Int {
+//            let days = self.days
+//            let daysInWeeks = self.weeks*7
+//            let daysInMonth = Int(Double(self.months)*30.42)
+//            let daysInYears = self.years*365
+//            return days + daysInWeeks + daysInMonth + daysInYears
+//        }
+        
+        func totalDaysFromToday() -> Int? {
+            let date = Date()
+            if let maximumDate = self.dateByAddingComponentsTo(date) {
+                let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+                let components = calendar.dateComponents([.day], from: date, to: maximumDate)
+                return components.day
+            }
+            return nil
+        }
+        
+        func dateByAddingComponentsTo(_ date: Date) -> Date? {
+            
+            var unit: Calendar.Component!
+            var value: Int!
+            if self.days > 0 {
+                unit = Calendar.Component.day
+                value = self.days
+            } else if self.weeks > 0 {
+                unit = Calendar.Component.day
+                value = self.weeks * 7
+            } else if self.months > 0 {
+                unit = Calendar.Component.month
+                value = self.months
+            } else if self.years > 0 {
+                unit = Calendar.Component.year
+                value = self.years
+            } else {
+                return nil
+            }
+            
+            let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+            return calendar.date(byAdding: unit, value: value, to: date)
         }
     }
     
@@ -69,6 +103,17 @@ struct CULContact: Equatable {
     
     struct Followup {
         var date: Date?
+        var notes: String?
+        
+        var userReadableDateString: String {
+            if let date = self.date {
+                let df = DateFormatter()
+                df.dateStyle = .medium
+                df.timeStyle = .none
+                return df.string(from: date)
+            }
+            return ""
+        }
     }
     
     // Database identifier. E.g Firebase

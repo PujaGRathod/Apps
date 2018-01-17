@@ -37,7 +37,7 @@ class FollowupDateGenerator {
         var assignedContacts = [CULContact]()
         for contact in contacts {
             let values = contact.followupFrequency.values
-            let totalDays = values.totalDays
+            let totalDays = values.totalDaysFromToday() ?? 0
             let random_days = self.generateRandomNumber(between: 0, totalDays)
             if contact.followupDate == nil {
                 var datecomponents = self.calendar.dateComponents(self.allDateComponents, from: Date())

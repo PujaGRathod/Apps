@@ -14,15 +14,15 @@ class CULFirebaseGateway {
     static let shared = CULFirebaseGateway()
     var loggedInUser: CULUser?
     
-//    func getLoggedInUser(_ completion: @escaping ((CULUser?)->Void)) {
-//        if let currentUser = Auth.auth().currentUser {
-//            CULUser.checkIfUserExist(with: currentUser.uid, completion: { (loggedInUser, success) in
-//                completion(loggedInUser)
-//            })
-//        } else {
-//            completion(nil)
-//        }
-//    }
+    //    func getLoggedInUser(_ completion: @escaping ((CULUser?)->Void)) {
+    //        if let currentUser = Auth.auth().currentUser {
+    //            CULUser.checkIfUserExist(with: currentUser.uid, completion: { (loggedInUser, success) in
+    //                completion(loggedInUser)
+    //            })
+    //        } else {
+    //            completion(nil)
+    //        }
+    //    }
     
     func setOnboardingCompleted(for user: CULUser, completion: @escaping ((Error?)->Void)) {
         let store: Firestore = Firestore.firestore()
@@ -168,5 +168,62 @@ class CULFirebaseGateway {
             mappedContacts.append(mappedContact)
         }
         return mappedContacts
+    }
+    
+    func addNew(followup: CULContact.Followup, for contact: CULContact, loggedInUser: CULUser, _ completion: @escaping ((Error?)->Void)) {
+        let store = Firestore.firestore()
+        let data = self.convertFollowupToRawData(followup)
+        let keysCount = data.keys.count
+        guard keysCount > 0 else {
+            let error = NSError(domain: "No data to update", code: 0, userInfo: [:])
+            completion(error)
+            return
+        }
+        let ref = store.collection("users").document(loggedInUser.id).collection("contacts").document(contact.db_Identifier).collection("followups").document()
+        ref.setData(data) { (error) in
+            completion(error)
+        }
+    }
+    
+    private func convertFollowupToRawData(_ followup: CULContact.Followup) -> [String:Any] {
+        var data = [String:Any]()
+        guard let timeInterval = followup.date?.timeIntervalSinceReferenceDate else {
+            return [:]
+        }
+        
+        data["date"] = String(describing: timeInterval)
+        data["notes"] = followup.notes ?? ""
+        
+        return data
+    }
+    
+    func getFollowups(for contact: CULContact, loggedInUser: CULUser, _ completion: @escaping (([CULContact.Followup],Error?)->Void)) {
+        let store = Firestore.firestore()
+        let ref = store.collection("users").document(loggedInUser.id).collection("contacts").document(contact.db_Identifier).collection("followups")
+        ref.getDocuments { (snapshot, error) in
+            var followups = [CULContact.Followup]()
+            for document in snapshot?.documents ?? [] {
+                if let followup = self.followup(from: document.data()) {
+                    followups.append(followup)
+                }
+            }
+            completion(followups, error)
+        }
+    }
+    
+    private func followup(from raw: [String:Any]) -> CULContact.Followup? {
+        var followup = CULContact.Followup()
+        
+        if let string = raw["date"] as? String,
+            let timeInterval = Double(string) {
+            
+            followup.date = Date(timeIntervalSinceReferenceDate: timeInterval)
+        } else {
+            return nil
+        }
+        
+        followup.notes = raw["notes"] as? String
+        
+        return followup
     }
 }

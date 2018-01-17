@@ -12,7 +12,7 @@ import SZTextView
 
 class LogFollowupPopupVC: UIViewController {
     
-    @IBOutlet weak var sumbitButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet var datePickerContainerView: UIView!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -21,18 +21,11 @@ class LogFollowupPopupVC: UIViewController {
     @IBOutlet weak var detailsToRememberTextView: SZTextView!
     @IBOutlet weak var contactListTableView: UITableView!
     
-    var followupDateUpdated: ((CULContact)->Void)?
+    var followupLogged: ((_ contact: CULContact)->Void)?
     
     private var filteredContactList = [CULContact]()
     var allContacts = [CULContact]()
-    var contact: CULContact! {
-        didSet {
-            self.showContactDetails(contact)
-            if let date = self.contact.followupDate {
-                self.datePicker.date = date
-            }
-        }
-    }
+    var contact: CULContact?
     var presentingVC: UIViewController!
     var popup: KLCPopup!
     
@@ -41,6 +34,7 @@ class LogFollowupPopupVC: UIViewController {
         self.containerView.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
         self.containerView.layer.borderWidth = 0.5
         self.containerView.layer.cornerRadius = 5
+        
         self.dateTextField.inputView = self.datePickerContainerView
         self.datePicker.minimumDate = Date()
         
@@ -65,6 +59,12 @@ class LogFollowupPopupVC: UIViewController {
         }
         
         self.detailsToRememberTextView.becomeFirstResponder()
+    }
+    
+    func loadContactDetails() {
+        let date = self.contact?.followupFrequency.values.dateByAddingComponentsTo(Date())
+        self.contact?.followupDate = date
+        self.showContactDetails(contact)
     }
     
     private func setPlaceHolderForContactTextField() {
@@ -93,8 +93,8 @@ class LogFollowupPopupVC: UIViewController {
     }
     
     @IBAction func datePickerDateChanged(_ sender: UIDatePicker) {
-        self.contact.followupDate = sender.date
-        self.dateTextField.text = contact.userReadableFollowupDateString
+        self.contact?.followupDate = sender.date
+        self.dateTextField.text = self.contact?.userReadableFollowupDateString
     }
     
     @IBAction func changeRescheduleButtonTapped(_ sender: UIButton) {
@@ -102,21 +102,35 @@ class LogFollowupPopupVC: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
-        
-        self.showAlert("Under development", message: "Still working on this")
-        
-        //        self.contact.followupDate = self.datePicker.date
-        //        if let user = CULFirebaseGateway.shared.loggedInUser {
-        //            CULFirebaseGateway.shared.update(contacts: [self.contact], for: user, completion: { (error) in
-        //                if let error = error {
-        //                    self.showAlert("Error", message: error.localizedDescription)
-        //                } else {
-        //                    self.dateTextField.resignFirstResponder()
-        //                    self.followupDateUpdated?()
-        //                }
-        //            })
-        //        }
-        //        self.popup.dismiss(true)
+        var followup = CULContact.Followup()
+        followup.date = Date()
+        followup.notes = self.detailsToRememberTextView.text
+        if let user = CULFirebaseGateway.shared.loggedInUser, let contact = self.contact {
+            CULFirebaseGateway.shared.addNew(followup: followup, for: contact, loggedInUser: user) { (error) in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self.showAlert("Error", message: error.localizedDescription)
+                    } else {
+                        self.updateNextFollowupDate(for: contact, loggedInUser: user)
+                    }
+                    self.popup.dismiss(true)
+                }
+            }
+        }
+    }
+    
+    private func updateNextFollowupDate(for contact: CULContact, loggedInUser: CULUser) {
+        CULFirebaseGateway.shared.update(contacts: [contact], for: loggedInUser) { (error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.showAlert("Error", message: error.localizedDescription)
+                } else {
+                    self.dateTextField.resignFirstResponder()
+                    self.followupLogged?(contact)
+                }
+                self.popup.dismiss(true)
+            }
+        }
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
@@ -124,29 +138,20 @@ class LogFollowupPopupVC: UIViewController {
         self.popup.dismiss(true)
     }
     
-    private func showContactDetails(_ contact: CULContact) {
-        self.contactTextField.text = contact.name
-        self.dateTextField.text = contact.userReadableFollowupDateString
-    }
-}
-
-
-extension LogFollowupPopupVC {
-    
-    func isFiltering() -> Bool {
-        return self.contactTextField.text?.isEmpty ?? true
-    }
-    
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        self.filteredContactList = self.allContacts.filter({ (contact) -> Bool in
-            return contact.name.lowercased().contains(searchText.lowercased())
-        })
-        self.contactListTableView.isHidden = !(self.filteredContactList.count > 0)
-        self.contactListTableView.reloadData()
-    }
-    
-    @objc func contactTextDidChange() {
-        self.filterContentForSearchText(self.contactTextField.text ?? "")
+    private func showContactDetails(_ contact: CULContact?) {
+        if let contact = contact {
+            self.contactTextField.text = contact.name
+            self.dateTextField.text = contact.userReadableFollowupDateString
+            if let date = self.contact?.followupDate {
+                self.datePicker.date = date
+            } else {
+                self.datePicker.date = Date()
+            }
+        } else {
+            self.contactTextField.text = ""
+            self.dateTextField.text = ""
+            self.datePicker.date = Date()
+        }
     }
 }
 
@@ -164,7 +169,32 @@ extension LogFollowupPopupVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.contact = self.filteredContactList[indexPath.item]
-        self.showContactDetails(self.contact)
+        self.submitButton.isEnabled = true
+        self.loadContactDetails()
         self.contactListTableView.isHidden = true
+    }
+}
+
+extension LogFollowupPopupVC: UITextFieldDelegate {
+
+    func isFiltering() -> Bool {
+        return self.contactTextField.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        self.filteredContactList = self.allContacts.filter({ (contact) -> Bool in
+            return contact.name.lowercased().contains(searchText.lowercased())
+        })
+        self.contactListTableView.isHidden = !(self.filteredContactList.count > 0)
+        self.contactListTableView.reloadData()
+    }
+    
+    @objc func contactTextDidChange() {
+        self.submitButton.isEnabled = false
+        self.filterContentForSearchText(self.contactTextField.text ?? "")
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.contactTextField.text = self.contact?.name
     }
 }

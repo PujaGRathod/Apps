@@ -34,6 +34,7 @@ class ContactDetailsVC: UIViewController {
     var contact: CULContact!
     
     private var reschedulePopupVC: ReschedulePopupVC?
+    private var historyTableViewAdapter = ContactLogHistoryTableViewAdapter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,8 @@ class ContactDetailsVC: UIViewController {
         for view in self.valueViews {
             self.addBorderAndBackground(to: view)
         }
+        
+        self.historyTableViewAdapter.set(tableView: self.historyTableView, contact: self.contact)
         
         self.display(contact: self.contact)
     }

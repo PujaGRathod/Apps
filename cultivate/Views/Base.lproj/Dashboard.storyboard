@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,11 +65,19 @@
                         <viewLayoutGuide key="safeArea" id="T28-Kj-S26"/>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="pHo-25-jsw">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="m9s-gg-eZZ">
-                            <connections>
-                                <action selector="logoutTapped:" destination="PHu-bs-Mbn" id="YYN-iU-CC3"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="ic_log_action_30pt" width="44" id="eHt-Pf-rNU">
+                                <inset key="imageInsets" minX="7" minY="7" maxX="7" maxY="7"/>
+                                <connections>
+                                    <action selector="logFollowupButtonTapped:" destination="PHu-bs-Mbn" id="m7m-rh-Clr"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Logout" id="m9s-gg-eZZ">
+                                <connections>
+                                    <action selector="logoutTapped:" destination="PHu-bs-Mbn" id="YYN-iU-CC3"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="5ZS-no-5oB" id="na3-ex-ZUA"/>
@@ -286,6 +295,9 @@
                                                 <state key="normal" title="Submit">
                                                     <color key="titleColor" red="0.30588235289999999" green="0.58431372550000005" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="submitButtonTapped:" destination="aq2-SH-nTa" eventType="touchUpInside" id="tDd-kK-PaO"/>
                                                 </connections>
@@ -320,6 +332,9 @@
                                         <color key="textColor" red="0.30588235289999999" green="0.58431372550000005" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="aq2-SH-nTa" id="xbB-Dx-j13"/>
+                                        </connections>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6z-A7-gvX" customClass="SZTextView">
                                         <rect key="frame" x="0.0" y="78.5" width="345" height="145"/>
@@ -437,7 +452,7 @@
                         <outlet property="datePickerContainerView" destination="diT-tj-Hqj" id="qfK-qE-4aV"/>
                         <outlet property="dateTextField" destination="lj0-7j-gYS" id="tO0-WB-xSr"/>
                         <outlet property="detailsToRememberTextView" destination="q6z-A7-gvX" id="ULs-yU-THe"/>
-                        <outlet property="sumbitButton" destination="qu9-gT-haI" id="8pB-76-wLP"/>
+                        <outlet property="submitButton" destination="qu9-gT-haI" id="8pB-76-wLP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qpw-IJ-Eh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -858,16 +873,26 @@
                                                     <constraint firstAttribute="trailing" secondItem="iPa-SC-iIh" secondAttribute="trailing" constant="16" id="ij2-0L-yO0"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pdO-aY-Hx3">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pdO-aY-Hx3">
                                                 <rect key="frame" x="375" y="0.0" width="375" height="410"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </tableView>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GA8-TA-3wh">
+                                                <rect key="frame" x="399" y="0.0" width="1" height="410"/>
+                                                <color key="backgroundColor" red="0.81960784310000001" green="0.80784313730000001" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="1" id="LkI-YG-3Xa"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="GA8-TA-3wh" firstAttribute="top" secondItem="pdO-aY-Hx3" secondAttribute="top" id="71e-lg-Ayg"/>
                                             <constraint firstItem="pdO-aY-Hx3" firstAttribute="leading" secondItem="XT5-S2-AyY" secondAttribute="trailing" id="BFr-ae-D7w"/>
+                                            <constraint firstItem="GA8-TA-3wh" firstAttribute="bottom" secondItem="pdO-aY-Hx3" secondAttribute="bottom" id="K2I-7A-8Fm"/>
                                             <constraint firstItem="pdO-aY-Hx3" firstAttribute="top" secondItem="jKc-K7-k2t" secondAttribute="top" id="RWV-5G-16x"/>
                                             <constraint firstAttribute="bottom" secondItem="pdO-aY-Hx3" secondAttribute="bottom" id="SdI-4M-d1T"/>
+                                            <constraint firstItem="GA8-TA-3wh" firstAttribute="leading" secondItem="pdO-aY-Hx3" secondAttribute="leading" constant="24" id="TFN-s8-ROn"/>
                                             <constraint firstItem="XT5-S2-AyY" firstAttribute="top" secondItem="jKc-K7-k2t" secondAttribute="top" id="dKA-iK-VF4"/>
                                             <constraint firstAttribute="bottom" secondItem="XT5-S2-AyY" secondAttribute="bottom" id="fqY-Dj-UNS"/>
                                             <constraint firstAttribute="trailing" secondItem="pdO-aY-Hx3" secondAttribute="trailing" id="gbk-jh-8dZ"/>
@@ -935,5 +960,6 @@
         <image name="IconCalendar" width="22" height="23"/>
         <image name="Message_Enabled" width="40" height="40"/>
         <image name="Phone_Enabled" width="40" height="40"/>
+        <image name="ic_log_action_30pt" width="30" height="30"/>
     </resources>
 </document>

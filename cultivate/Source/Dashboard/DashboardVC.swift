@@ -94,10 +94,10 @@ class DashboardVC: UIViewController {
         }
     }
     
-    func logFollowupPopup(for contact: CULContact, tableViewIndexPath: IndexPath) {
+    func logFollowupPopup(for contact: CULContact?, tableViewIndexPath: IndexPath?) {
         self.logFollowupPopupVC = self.storyboard?.instantiateViewController(withIdentifier: "LogFollowupPopupVC") as? LogFollowupPopupVC
         if let logFollowupPopupVC = self.logFollowupPopupVC {
-            logFollowupPopupVC.followupDateUpdated = { updatedContact in
+            logFollowupPopupVC.followupLogged = { updatedContact in
                 self.dashboardTableViewAdapter.update(contact: updatedContact)
             }
             logFollowupPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
@@ -105,7 +105,6 @@ class DashboardVC: UIViewController {
             logFollowupPopupVC.presentingVC = self
             // Ugly hack to force system to load the UIView
             print(logFollowupPopupVC.view)
-            
             let verticalLayout = KLCPopupVerticalLayout.aboveCenter
             let layout = KLCPopupLayout(horizontal: .center, vertical: verticalLayout)
             
@@ -113,10 +112,16 @@ class DashboardVC: UIViewController {
             let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
             logFollowupPopupVC.popup = popup
             if let popup = popup {
-                popup.show(with: layout);
+                popup.show(with: layout)
             }
+            logFollowupPopupVC.loadContactDetails()
         }
     }
+    
+    @IBAction func logFollowupButtonTapped(_ sender: UIBarButtonItem) {
+        self.logFollowupPopup(for: nil, tableViewIndexPath: nil)
+    }
+    
     
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
         GIDSignIn.sharedInstance().signOut()

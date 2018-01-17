@@ -15,6 +15,9 @@
 		591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6391FEA777A0001B494 /* CULUser.swift */; };
 		BF04F49C200F12E5008B74E9 /* OnboardingDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF04F49B200F12E5008B74E9 /* OnboardingDataStore.swift */; };
 		BF1298A71FEA8E710058C8EC /* CULNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1298A61FEA8E710058C8EC /* CULNavigationController.swift */; };
+		BF141911200F4C3400BFEA07 /* ContactLogHistoryTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF141910200F4C3400BFEA07 /* ContactLogHistoryTableViewAdapter.swift */; };
+		BF141915200F4EEB00BFEA07 /* ContactHistoryTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF141913200F4EEB00BFEA07 /* ContactHistoryTblCell.swift */; };
+		BF141916200F4EEB00BFEA07 /* ContactHistoryTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF141914200F4EEB00BFEA07 /* ContactHistoryTblCell.xib */; };
 		BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */; };
 		BF1B634C200DFC46000E50A5 /* ContactsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1B634B200DFC46000E50A5 /* ContactsWorker.swift */; };
 		BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */; };
@@ -91,6 +94,9 @@
 		B9240D895B6E5D12F9FC0DB0 /* Pods-cultivate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivate/Pods-cultivate.debug.xcconfig"; sourceTree = "<group>"; };
 		BF04F49B200F12E5008B74E9 /* OnboardingDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataStore.swift; sourceTree = "<group>"; };
 		BF1298A61FEA8E710058C8EC /* CULNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CULNavigationController.swift; sourceTree = "<group>"; };
+		BF141910200F4C3400BFEA07 /* ContactLogHistoryTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactLogHistoryTableViewAdapter.swift; sourceTree = "<group>"; };
+		BF141913200F4EEB00BFEA07 /* ContactHistoryTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactHistoryTblCell.swift; sourceTree = "<group>"; };
+		BF141914200F4EEB00BFEA07 /* ContactHistoryTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactHistoryTblCell.xib; sourceTree = "<group>"; };
 		BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsListTableViewAdapter.swift; sourceTree = "<group>"; };
 		BF1B634B200DFC46000E50A5 /* ContactsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsWorker.swift; sourceTree = "<group>"; };
 		BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListVC.swift; sourceTree = "<group>"; };
@@ -209,6 +215,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BF141912200F4EE100BFEA07 /* ContactHistoryTblCell */ = {
+			isa = PBXGroup;
+			children = (
+				BF141913200F4EEB00BFEA07 /* ContactHistoryTblCell.swift */,
+				BF141914200F4EEB00BFEA07 /* ContactHistoryTblCell.xib */,
+			);
+			path = ContactHistoryTblCell;
+			sourceTree = "<group>";
+		};
 		BF2D390F1FE8E63E00AF63EC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,7 +258,9 @@
 		BF6E5587200A146400906E75 /* Contact Details */ = {
 			isa = PBXGroup;
 			children = (
+				BF141912200F4EE100BFEA07 /* ContactHistoryTblCell */,
 				BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */,
+				BF141910200F4C3400BFEA07 /* ContactLogHistoryTableViewAdapter.swift */,
 			);
 			path = "Contact Details";
 			sourceTree = "<group>";
@@ -555,6 +572,7 @@
 				BFE9D7AA1FE7AB9A0091F4A8 /* FooterView.xib in Resources */,
 				BFE9D7A21FE7A0440091F4A8 /* Onboarding.storyboard in Resources */,
 				BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */,
+				BF141916200F4EEB00BFEA07 /* ContactHistoryTblCell.xib in Resources */,
 				BFE9D7971FE79F300091F4A8 /* Extra.storyboard in Resources */,
 				BFD0168E20073AEC0054365F /* DashboardContactTblCell.xib in Resources */,
 				BFE9D7981FE79F300091F4A8 /* Assets.xcassets in Resources */,
@@ -779,6 +797,7 @@
 				BFC8C2572009C8A60014062E /* CULFirebaseGateway.swift in Sources */,
 				BFC8C2592009E9860014062E /* ReschedulePopupVC.swift in Sources */,
 				BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */,
+				BF141915200F4EEB00BFEA07 /* ContactHistoryTblCell.swift in Sources */,
 				BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */,
 				BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */,
 				BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */,
@@ -800,6 +819,7 @@
 				591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */,
 				BFE9D79F1FE7A0210091F4A8 /* SignupVC.swift in Sources */,
 				BF7F48D31FE9015600737FE5 /* CULButton.swift in Sources */,
+				BF141911200F4C3400BFEA07 /* ContactLogHistoryTableViewAdapter.swift in Sources */,
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
 				BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */,
 				BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */,
