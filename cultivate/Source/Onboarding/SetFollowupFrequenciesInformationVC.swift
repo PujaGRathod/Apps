@@ -19,6 +19,13 @@ class SetFollowupFrequenciesInformationVC: UIViewController {
         super.viewDidLoad()
         self.footerView.setCurrentStep(to: OnboardingStep.setPriorityLevels)
         self.selectedContacts = OnboardingDataStore.shared.getContacts()
+        
         self.lblInformation.text = self.lblInformation.text?.replacingOccurrences(of: "<COUNT>", with: "\(self.selectedContacts.count)")
+        
+        if self.selectedContacts.count > 0 {
+            self.lblInformation.text = self.lblInformation.text?.replacingOccurrences(of: "<PLURAL-LETTER>", with: "s")
+        } else {
+            self.lblInformation.text = self.lblInformation.text?.replacingOccurrences(of: "<PLURAL-LETTER>", with: "")
+        }
     }
 }

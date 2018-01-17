@@ -48,7 +48,7 @@
                                 <rect key="frame" x="16" y="156" width="343" height="203"/>
                                 <string key="text">Select the people from your iOS Contacts app that you would like to cultivate relationships with.
  
-Choose contacts who you value but communicate with infrequently (i.e. less than a weekly basis). 
+Choose contacts who you value but communicate with infrequently (i.e. less than once a week). 
 
 You’ll have the opportunity to change your selected contacts later on.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -204,11 +204,11 @@ You’ll have the opportunity to change your selected contacts later on.</string
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuN-KB-SM0">
                                 <rect key="frame" x="16" y="156" width="343" height="223.5"/>
-                                <string key="text">You've selected &lt;COUNT&gt; contacts. You'll be able to edit your selected contacts later on.
+                                <string key="text">You've selected &lt;COUNT&gt; contact&lt;PLURAL-LETTER&gt;. You'll be able to edit your selected contacts later on.
  
 Next you will choose how often you would like to follow-up with each of your selected contacts.
 
-Cultivate will automatically schedule recommended follow-up dates based on the priority levels you set for each contact.</string>
+Cultivate will automatically schedule recommended follow-up date based on the follow-up frequencies.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
