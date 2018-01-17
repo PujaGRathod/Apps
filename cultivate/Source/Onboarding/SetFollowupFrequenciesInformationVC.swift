@@ -18,22 +18,7 @@ class SetFollowupFrequenciesInformationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.footerView.setCurrentStep(to: OnboardingStep.setPriorityLevels)
+        self.selectedContacts = OnboardingDataStore.shared.getContacts()
         self.lblInformation.text = self.lblInformation.text?.replacingOccurrences(of: "<COUNT>", with: "\(self.selectedContacts.count)")
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueShowSetFollowupFrequenciesVC",
-            let viewcontroller: SetFollowupFrequenciesVC = segue.destination as? SetFollowupFrequenciesVC {
-            viewcontroller.contacts = self.selectedContacts
-        }
-    }
-
 }

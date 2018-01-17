@@ -22,6 +22,8 @@ class OnboardingCompletedVC: UIViewController {
         super.viewDidLoad()
         self.footerView.setProgressCompletion()
         
+        self.contacts = OnboardingDataStore.shared.getContacts()
+        
         // Upload contacts to the user
         if let user = CULFirebaseGateway.shared.loggedInUser {
             self.uploadData(for: user)
@@ -72,16 +74,4 @@ class OnboardingCompletedVC: UIViewController {
         }
         return true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    
 }

@@ -24,9 +24,12 @@ class ContactsListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.selectedContacts = OnboardingDataStore.shared.getContacts()
+        
         self.adjustContinueButtonVisibility()
         self.contactsListTableViewAdapter.delegate = self
-        self.contactsListTableViewAdapter.set(tableView: self.tblContactsList)
+        self.contactsListTableViewAdapter.set(tableView: self.tblContactsList, with: self.selectedContacts)
         
         self.searchController.searchResultsUpdater = self.contactsListTableViewAdapter
         self.searchController.obscuresBackgroundDuringPresentation = false
@@ -50,21 +53,11 @@ class ContactsListVC: UIViewController {
     }
     
     func adjustContinueButtonVisibility() {
-        self.bottomMarginConstraintForContinueButton.constant = (selectedContacts.count > 0) ? 12 : -64
+        self.bottomMarginConstraintForContinueButton.constant = (self.selectedContacts.count > 0) ? 12 : -64
         self.view.layoutIfNeeded()
     }
     
     // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueShowFollowupFrequenciesInformationVC",
-            let viewcontroller: SetFollowupFrequenciesInformationVC = segue.destination as? SetFollowupFrequenciesInformationVC {
-            self.selectedContacts.sort(by: { (contact1, contact2) -> Bool in
-                return contact1.name > contact2.name
-            })
-            viewcontroller.selectedContacts = self.selectedContacts
-        }
-    }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "segueShowFollowupFrequenciesInformationVC" && self.selectedContacts.count == 0 {
@@ -83,8 +76,8 @@ class ContactsListVC: UIViewController {
 
 extension ContactsListVC: ContactListTableViewAdapterDelegate {
     func selectionChanged(selectedContacts: [CULContact]) {
-        self.selectedContacts = selectedContacts
-        self.lblSelectedContactsCount.text = "\(selectedContacts.count)"
+        self.selectedContacts = OnboardingDataStore.shared.update(contacts: selectedContacts)
+        self.lblSelectedContactsCount.text = "\(self.selectedContacts.count)"
         
         UIView.animate(withDuration: 0.27) {
             self.adjustContinueButtonVisibility()

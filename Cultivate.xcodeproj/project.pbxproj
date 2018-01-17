@@ -13,6 +13,7 @@
 		591EA6371FEA77730001B494 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6351FEA77730001B494 /* UIViewControllerExtension.swift */; };
 		591EA6381FEA77730001B494 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6361FEA77730001B494 /* StringExtension.swift */; };
 		591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591EA6391FEA777A0001B494 /* CULUser.swift */; };
+		BF04F49C200F12E5008B74E9 /* OnboardingDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF04F49B200F12E5008B74E9 /* OnboardingDataStore.swift */; };
 		BF1298A71FEA8E710058C8EC /* CULNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1298A61FEA8E710058C8EC /* CULNavigationController.swift */; };
 		BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */; };
 		BF1B634C200DFC46000E50A5 /* ContactsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1B634B200DFC46000E50A5 /* ContactsWorker.swift */; };
@@ -88,6 +89,7 @@
 		A527A60A714358D782BE7612 /* Pods-cultivateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AFEAE65D87570891E2BFFE1B /* Pods-cultivateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivateUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivateUITests/Pods-cultivateUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9240D895B6E5D12F9FC0DB0 /* Pods-cultivate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cultivate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cultivate/Pods-cultivate.debug.xcconfig"; sourceTree = "<group>"; };
+		BF04F49B200F12E5008B74E9 /* OnboardingDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataStore.swift; sourceTree = "<group>"; };
 		BF1298A61FEA8E710058C8EC /* CULNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CULNavigationController.swift; sourceTree = "<group>"; };
 		BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsListTableViewAdapter.swift; sourceTree = "<group>"; };
 		BF1B634B200DFC46000E50A5 /* ContactsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsWorker.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */,
 				BF7F48CC1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift */,
 				BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */,
+				BF04F49B200F12E5008B74E9 /* OnboardingDataStore.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
 				BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */,
 				BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */,
+				BF04F49C200F12E5008B74E9 /* OnboardingDataStore.swift in Sources */,
 				BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */,
 				591EA6381FEA77730001B494 /* StringExtension.swift in Sources */,
 				BFEF92301FE7D2C3000ED577 /* LoginVC.swift in Sources */,

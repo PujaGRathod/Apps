@@ -26,10 +26,13 @@ class ContactListTableViewAdapter: NSObject {
     private lazy var worker: ContactsWorker = ContactsWorker()
     var delegate: ContactListTableViewAdapterDelegate?
     
-    func set(tableView: UITableView) {
+    func set(tableView: UITableView, with selectedContacts: [CULContact]) {
         self.tableView = tableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.selectedContacts = selectedContacts
+        self.selectionChanged()
         
         let nib: UINib = UINib(nibName: "ContactTblCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "ContactTblCell")
@@ -54,7 +57,7 @@ class ContactListTableViewAdapter: NSObject {
     }
     
     func isContactSelected(_ contactToCheck: CULContact) -> Bool {
-        if let _: Int = self.selectedContacts.index(where: { $0.identifier == contactToCheck.identifier }) {
+        if let _ = self.selectedContacts.index(where: { $0.identifier == contactToCheck.identifier }) {
             return true
         }
         return false
@@ -66,7 +69,7 @@ class ContactListTableViewAdapter: NSObject {
     }
     
     func removeContactFromSelected(_ contactToDeselect: CULContact) {
-        if let index: Int = self.selectedContacts.index(where: { $0.identifier == contactToDeselect.identifier }) {
+        if let index = self.selectedContacts.index(where: { $0.identifier == contactToDeselect.identifier }) {
             self.selectedContacts.remove(at: index)
             self.selectionChanged()
         }
@@ -78,14 +81,6 @@ class ContactListTableViewAdapter: NSObject {
 }
 
 extension ContactListTableViewAdapter {
-    
-//    func setupSearchController(on viewcontroller: UIViewController) {
-//        self.searchController = UISearchController(searchResultsController: viewcontroller)
-//        searchController!.searchResultsUpdater = self
-//        searchController!.obscuresBackgroundDuringPresentation = false
-//        searchController!.searchBar.placeholder = "Search contacts"
-//        self.delegate?.searchControllerSetupCompleted(searchController!)
-//    }
     
     func set(searchController: UISearchController) {
         self.searchController = searchController

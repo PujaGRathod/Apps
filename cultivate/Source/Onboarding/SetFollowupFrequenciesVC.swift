@@ -25,6 +25,9 @@ class SetFollowupFrequenciesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.contacts = OnboardingDataStore.shared.getContacts()
+        
         self.frequencyListTableViewAdapter.set(tableView: self.tblFrequencyList)
         self.frequencyListTableViewAdapter.delegate = self
         
@@ -38,6 +41,7 @@ class SetFollowupFrequenciesVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.contacts = OnboardingDataStore.shared.getContacts()
         self.tblFrequencyList.reloadData()
     }
 
@@ -55,14 +59,6 @@ class SetFollowupFrequenciesVC: UIViewController {
         return false
     }
     
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueShowAddTagsInformationVC", let viewcontroller: AddTagsInformationVC = segue.destination as? AddTagsInformationVC {
-            viewcontroller.contacts = self.contacts
-        }
-    }
-    
     private func setInformation(for contact: CULContact) {
         self.lblContactName.text = contact.name
         
@@ -77,6 +73,7 @@ class SetFollowupFrequenciesVC: UIViewController {
         if let index: Int = self.index(for: contact) {
             let nextIndex: Int = index + 1
             if nextIndex == self.contacts.count {
+                self.currentContact = self.contacts[index]
                 // The contact is the last one on the list. We should move to the next screen now.
                 self.performSegue(withIdentifier: "segueShowAddTagsInformationVC", sender: self.contacts)
             } else {
@@ -102,10 +99,12 @@ class SetFollowupFrequenciesVC: UIViewController {
     }
     
     func set(followupFrequency: CULFollowupFrequency, for contact: CULContact) {
-        if let index: Int = self.index(for: contact) {
+        if let _ = self.index(for: contact) {
             var updatedContact = contact
             updatedContact.followupFrequency = followupFrequency
-            self.contacts[index] = updatedContact
+//            self.contacts[index] = updatedContact
+            OnboardingDataStore.shared.update(contact: updatedContact)
+            self.contacts = OnboardingDataStore.shared.getContacts()
         } else {
             self.printErrorMessageWhenContctIfNotFoundInTheList()
         }

@@ -17,20 +17,7 @@ class AddTagsInformationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.footerView.setCurrentStep(to: OnboardingStep.addTags)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueShowAddTagsVC", let viewcontroller: AddTagsVC = segue.destination as? AddTagsVC {
-            viewcontroller.contacts = self.contacts
-        }
+        self.contacts = OnboardingDataStore.shared.getContacts()
     }
 
 }

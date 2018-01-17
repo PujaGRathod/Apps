@@ -57,6 +57,11 @@ enum CULFollowupFrequency: String {
 }
 
 struct CULContact: Equatable {
+ 
+    enum SortOrder {
+        case givenName
+        case familyName
+    }
     
     static func ==(lhs: CULContact, rhs: CULContact) -> Bool {
         return lhs.db_Identifier == rhs.db_Identifier

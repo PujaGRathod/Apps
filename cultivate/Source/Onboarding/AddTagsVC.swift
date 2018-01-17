@@ -28,6 +28,8 @@ class AddTagsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.contacts = OnboardingDataStore.shared.getContacts()
+        
         self.tagListTableViewAdapter.set(tableView: self.tblTagsList)
         self.tagListTableViewAdapter.delegate = self
         self.tagListTableViewAdapter.textField = self.txtAddNewTag
@@ -46,19 +48,12 @@ class AddTagsVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.contacts = OnboardingDataStore.shared.getContacts()
         self.tblTagsList.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueShowOnboardingCompletedVC",
-            let vc: OnboardingCompletedVC = segue.destination as? OnboardingCompletedVC {
-            
-            vc.contacts = sender as! [CULContact]
-        }
     }
     
     @IBAction func textFieldEditingChanged(_ sender: Any) {
@@ -92,6 +87,7 @@ class AddTagsVC: UIViewController {
         if let index: Int = self.index(for: contact) {
             let nextIndex: Int = index + 1
             if nextIndex == self.contacts.count {
+                self.currentContact = self.contacts[index]
                 // The contact is the last one on the list. We should move to the next screen now.
                 self.performSegue(withIdentifier: "segueShowOnboardingCompletedVC", sender: self.contacts)
             } else {
@@ -117,10 +113,11 @@ class AddTagsVC: UIViewController {
     }
     
     func set(tag: CULTag, for contact: CULContact) {
-        if let index: Int = self.index(for: contact) {
+        if let _ = self.index(for: contact) {
             var updatedContact = contact
             updatedContact.tag = tag
-            self.contacts[index] = updatedContact
+            OnboardingDataStore.shared.update(contact: updatedContact)
+            self.contacts = OnboardingDataStore.shared.getContacts()
             
             self.txtAddNewTag.text = nil
             self.tagListTableViewAdapter.search(tag: "")

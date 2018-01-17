@@ -128,6 +128,16 @@ class ContactsWorker {
         }
     }
     
+    func getSortOrder() -> CULContact.SortOrder {
+        let contactFetchRequest = CNContactFetchRequest(keysToFetch: self.allowedContactKeys())
+        switch contactFetchRequest.sortOrder {
+        case .familyName, .none:
+            return CULContact.SortOrder.familyName
+        default:
+            return CULContact.SortOrder.givenName
+        }
+    }
+    
     func allowedContactKeys() -> [CNKeyDescriptor]{
         //We have to provide only the keys which we have to access. We should avoid unnecessary keys when fetching the contact. Reducing the keys means faster the access.
         return [CNContactNamePrefixKey as CNKeyDescriptor,
