@@ -81,6 +81,8 @@ class CULFirebaseGateway {
             raw["followupDate"] = String(describing: date.timeIntervalSinceReferenceDate)
         }
         
+        raw["notes"] = contact.notes ?? ""
+        
         return raw
     }
     
@@ -145,6 +147,8 @@ class CULFirebaseGateway {
                 contact.followupDate = Date(timeIntervalSinceReferenceDate: timeInterval)
             }
         }
+        
+        contact.notes = raw["notes"] as? String
         
         return contact
     }

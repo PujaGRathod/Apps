@@ -47,6 +47,16 @@ class ContactDetailsVC: UIViewController {
         
         self.display(contact: self.contact)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(ContactDetailsVC.notesTextEditingDidEnd), name:  NSNotification.Name.UITextViewTextDidEndEditing, object: self.notesTextView)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextViewTextDidEndEditing, object: self.notesTextView)
+    }
 
     private func addBorderAndBackground(to view: UIView) {
         view.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
@@ -252,7 +262,7 @@ class ContactDetailsVC: UIViewController {
         self.reschedulePopup(for: contact)
     }
 
-    func reschedulePopup(for contact: CULContact) {
+    private func reschedulePopup(for contact: CULContact) {
         self.reschedulePopupVC = self.storyboard?.instantiateViewController(withIdentifier: "ReschedulePopupVC") as? ReschedulePopupVC
         if let reschedulePopupVC = self.reschedulePopupVC {
             reschedulePopupVC.followupDateUpdated = { updatedContact in
@@ -272,8 +282,21 @@ class ContactDetailsVC: UIViewController {
             let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
             reschedulePopupVC.popup = popup
             if let popup = popup {
-                popup.show(with: layout);
+                popup.show(with: layout)
             }
+        }
+    }
+    
+    @objc private func notesTextEditingDidEnd() {
+        self.contact.notes = self.notesTextView.text
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.update(contacts: [self.contact], for: user, completion: { (error) in
+                if let error = error {
+                    self.showAlert("Error", message: error.localizedDescription)
+                } else {
+                    print("Notes updated")
+                }
+            })
         }
     }
 }
