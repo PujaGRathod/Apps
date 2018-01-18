@@ -32,7 +32,8 @@ class ContactDetailsVC: UIViewController {
     @IBOutlet weak var notesTextView: UITextView!
     
     var contact: CULContact!
-    
+    private var frequencyPickerPopupVC: FrequencyPickerPopupVC?
+    private var tagPickerPopupVC: TagPickerPopupVC?
     private var reschedulePopupVC: ReschedulePopupVC?
     private var historyTableViewAdapter = ContactLogHistoryTableViewAdapter()
     
@@ -254,11 +255,11 @@ class ContactDetailsVC: UIViewController {
     }
     
     @IBAction func changeFollowupFrequencyTapped(_ sender: UIButton) {
-        
+        self.showFrequencyPicker(for: self.contact)
     }
     
     @IBAction func changeTagTapped(_ sender: UIButton) {
-        
+        self.showTagPicker(for: self.contact)
     }
     
     @IBAction func changeFollowupDateTapped(_ sender: UIButton) {
@@ -292,14 +293,69 @@ class ContactDetailsVC: UIViewController {
     
     @objc private func notesTextEditingDidEnd() {
         self.contact.notes = self.notesTextView.text
+        self.update(contact: self.contact)
+    }
+    
+    private func update(contact: CULContact) {
         if let user = CULFirebaseGateway.shared.loggedInUser {
-            CULFirebaseGateway.shared.update(contacts: [self.contact], for: user, completion: { (error) in
+            CULFirebaseGateway.shared.update(contacts: [contact], for: user, completion: { (error) in
                 if let error = error {
                     self.showAlert("Error", message: error.localizedDescription)
                 } else {
-                    print("Notes updated")
+                    print("Contact updated")
                 }
             })
+        }
+    }
+
+    func showFrequencyPicker(for contact: CULContact?) {
+        self.frequencyPickerPopupVC = self.storyboard?.instantiateViewController(withIdentifier: "FrequencyPickerPopupVC") as? FrequencyPickerPopupVC
+        if let frequencyPickerPopupVC = self.frequencyPickerPopupVC {
+            frequencyPickerPopupVC.frequencyUpdated = { updatedFrequency in
+                self.contact.followupFrequency = updatedFrequency
+                self.display(contact: self.contact)
+                self.update(contact: self.contact)
+            }
+            frequencyPickerPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
+            frequencyPickerPopupVC.selectedFrequency = contact?.followupFrequency
+            frequencyPickerPopupVC.presentingVC = self
+            // Ugly hack to force system to load the UIView
+            print(frequencyPickerPopupVC.view)
+            
+            let layout = KLCPopupLayout(horizontal: .center, vertical: .center)
+            
+            let contentView = frequencyPickerPopupVC.viewForPopup()
+            let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+            frequencyPickerPopupVC.popup = popup
+            if let popup = popup {
+                popup.show(with: layout)
+            }
+            frequencyPickerPopupVC.validateSubmitButton()
+        }
+    }
+    
+    func showTagPicker(for contact: CULContact?) {
+        self.tagPickerPopupVC = self.storyboard?.instantiateViewController(withIdentifier: "TagPickerPopupVC") as? TagPickerPopupVC
+        if let tagPickerPopupVC = self.tagPickerPopupVC {
+            tagPickerPopupVC.tagUpdated = { updatedTag in
+                self.contact.tag = updatedTag
+                self.display(contact: self.contact)
+                self.update(contact: self.contact)
+            }
+            tagPickerPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
+            tagPickerPopupVC.presentingVC = self
+            // Ugly hack to force system to load the UIView
+            print(tagPickerPopupVC.view)
+            
+            let layout = KLCPopupLayout(horizontal: .center, vertical: .center)
+            
+            let contentView = tagPickerPopupVC.viewForPopup()
+            let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+            tagPickerPopupVC.popup = popup
+            if let popup = popup {
+                popup.show(with: layout)
+            }
+            tagPickerPopupVC.set(tag: contact?.tag)
         }
     }
 }

@@ -75,6 +75,8 @@ class CULFirebaseGateway {
         
         if let tagId = contact.tag?.identifier {
             raw["tag"] = tagId
+        } else {
+            raw["tag"] = ""
         }
         
         if let date = contact.followupDate {

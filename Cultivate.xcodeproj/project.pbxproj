@@ -18,6 +18,13 @@
 		BF141911200F4C3400BFEA07 /* ContactLogHistoryTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF141910200F4C3400BFEA07 /* ContactLogHistoryTableViewAdapter.swift */; };
 		BF141915200F4EEB00BFEA07 /* ContactHistoryTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF141913200F4EEB00BFEA07 /* ContactHistoryTblCell.swift */; };
 		BF141916200F4EEB00BFEA07 /* ContactHistoryTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF141914200F4EEB00BFEA07 /* ContactHistoryTblCell.xib */; };
+		BF14191B200FC7E500BFEA07 /* FrequencyPickerPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14191A200FC7E500BFEA07 /* FrequencyPickerPopupVC.swift */; };
+		BF14191E200FC7F700BFEA07 /* FrequencyPickerTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14191C200FC7F700BFEA07 /* FrequencyPickerTblCell.swift */; };
+		BF14191F200FC7F700BFEA07 /* FrequencyPickerTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF14191D200FC7F700BFEA07 /* FrequencyPickerTblCell.xib */; };
+		BF14192320107D9F00BFEA07 /* TagPickerTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14192120107D9F00BFEA07 /* TagPickerTblCell.swift */; };
+		BF14192420107D9F00BFEA07 /* TagPickerTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF14192220107D9F00BFEA07 /* TagPickerTblCell.xib */; };
+		BF14192620107DAC00BFEA07 /* TagPickerPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14192520107DAC00BFEA07 /* TagPickerPopupVC.swift */; };
+		BF14192820109DFD00BFEA07 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14192720109DFD00BFEA07 /* UIFont.swift */; };
 		BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */; };
 		BF1B634C200DFC46000E50A5 /* ContactsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1B634B200DFC46000E50A5 /* ContactsWorker.swift */; };
 		BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */; };
@@ -97,6 +104,13 @@
 		BF141910200F4C3400BFEA07 /* ContactLogHistoryTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactLogHistoryTableViewAdapter.swift; sourceTree = "<group>"; };
 		BF141913200F4EEB00BFEA07 /* ContactHistoryTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactHistoryTblCell.swift; sourceTree = "<group>"; };
 		BF141914200F4EEB00BFEA07 /* ContactHistoryTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactHistoryTblCell.xib; sourceTree = "<group>"; };
+		BF14191A200FC7E500BFEA07 /* FrequencyPickerPopupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyPickerPopupVC.swift; sourceTree = "<group>"; };
+		BF14191C200FC7F700BFEA07 /* FrequencyPickerTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyPickerTblCell.swift; sourceTree = "<group>"; };
+		BF14191D200FC7F700BFEA07 /* FrequencyPickerTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FrequencyPickerTblCell.xib; sourceTree = "<group>"; };
+		BF14192120107D9F00BFEA07 /* TagPickerTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPickerTblCell.swift; sourceTree = "<group>"; };
+		BF14192220107D9F00BFEA07 /* TagPickerTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagPickerTblCell.xib; sourceTree = "<group>"; };
+		BF14192520107DAC00BFEA07 /* TagPickerPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPickerPopupVC.swift; sourceTree = "<group>"; };
+		BF14192720109DFD00BFEA07 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		BF19D1D41FEA3A5F00B55506 /* TagsListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsListTableViewAdapter.swift; sourceTree = "<group>"; };
 		BF1B634B200DFC46000E50A5 /* ContactsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsWorker.swift; sourceTree = "<group>"; };
 		BF2D39091FE8DFBC00AF63EC /* ContactsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListVC.swift; sourceTree = "<group>"; };
@@ -224,9 +238,31 @@
 			path = ContactHistoryTblCell;
 			sourceTree = "<group>";
 		};
+		BF141919200FC7DE00BFEA07 /* Frequency picker */ = {
+			isa = PBXGroup;
+			children = (
+				BF14191A200FC7E500BFEA07 /* FrequencyPickerPopupVC.swift */,
+				BF14191C200FC7F700BFEA07 /* FrequencyPickerTblCell.swift */,
+				BF14191D200FC7F700BFEA07 /* FrequencyPickerTblCell.xib */,
+			);
+			path = "Frequency picker";
+			sourceTree = "<group>";
+		};
+		BF14192020107D9000BFEA07 /* Tag picker */ = {
+			isa = PBXGroup;
+			children = (
+				BF14192520107DAC00BFEA07 /* TagPickerPopupVC.swift */,
+				BF14192120107D9F00BFEA07 /* TagPickerTblCell.swift */,
+				BF14192220107D9F00BFEA07 /* TagPickerTblCell.xib */,
+			);
+			path = "Tag picker";
+			sourceTree = "<group>";
+		};
 		BF2D390F1FE8E63E00AF63EC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BF14192020107D9000BFEA07 /* Tag picker */,
+				BF141919200FC7DE00BFEA07 /* Frequency picker */,
 				BF1B634B200DFC46000E50A5 /* ContactsWorker.swift */,
 				BF7F48D41FE9088C00737FE5 /* ContactTblCell */,
 				BF7F48D21FE9015600737FE5 /* CULButton.swift */,
@@ -238,6 +274,7 @@
 				BFC8C2552009C8A60014062E /* FirebaseGateway */,
 				BFD0168F2007401B0054365F /* FollowupDateGenerator.swift */,
 				BF7F48C81FE8EE1C00737FE5 /* String.swift */,
+				BF14192720109DFD00BFEA07 /* UIFont.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -383,9 +420,9 @@
 		BFE9D7911FE79F300091F4A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
 				BF6E5587200A146400906E75 /* Contact Details */,
 				BF6379B71FFCA57C009C30E8 /* Dashboard */,
-				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
 				BFF28FEA1FFB634B00036150 /* ExtendedSplashVC.swift */,
 				BFE9D79D1FE79FFF0091F4A8 /* Login */,
 				BFE9D79B1FE79FFF0091F4A8 /* Onboarding */,
@@ -567,6 +604,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF4A5AAA1FEA742900012B40 /* Authentication.storyboard in Resources */,
+				BF14192420107D9F00BFEA07 /* TagPickerTblCell.xib in Resources */,
+				BF14191F200FC7F700BFEA07 /* FrequencyPickerTblCell.xib in Resources */,
 				BFD01695200747680054365F /* DashboardTableViewHeader.xib in Resources */,
 				BFE9D7961FE79F300091F4A8 /* LaunchScreen.storyboard in Resources */,
 				BFE9D7AA1FE7AB9A0091F4A8 /* FooterView.xib in Resources */,
@@ -799,10 +838,13 @@
 				BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */,
 				BF141915200F4EEB00BFEA07 /* ContactHistoryTblCell.swift in Sources */,
 				BF2D390C1FE8DFD900AF63EC /* SelectContactInstructionsVC.swift in Sources */,
+				BF14192620107DAC00BFEA07 /* TagPickerPopupVC.swift in Sources */,
 				BF19D1D51FEA3A5F00B55506 /* TagsListTableViewAdapter.swift in Sources */,
 				BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */,
 				BFEF92321FE7D586000ED577 /* ForgotPasswordVC.swift in Sources */,
+				BF14192320107D9F00BFEA07 /* TagPickerTblCell.swift in Sources */,
 				BFD0168D20073AEC0054365F /* DashboardContactTblCell.swift in Sources */,
+				BF14191B200FC7E500BFEA07 /* FrequencyPickerPopupVC.swift in Sources */,
 				BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */,
 				591EA6371FEA77730001B494 /* UIViewControllerExtension.swift in Sources */,
 				BF2D390E1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift in Sources */,
@@ -813,6 +855,7 @@
 				BFF28FEB1FFB634B00036150 /* ExtendedSplashVC.swift in Sources */,
 				BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */,
 				BF4A5AAC1FEA746900012B40 /* WebLinkVC.swift in Sources */,
+				BF14192820109DFD00BFEA07 /* UIFont.swift in Sources */,
 				BFD016902007401B0054365F /* FollowupDateGenerator.swift in Sources */,
 				BFD01693200747630054365F /* DashboardTableViewHeader.swift in Sources */,
 				BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */,
@@ -823,6 +866,7 @@
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
 				BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */,
 				BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */,
+				BF14191E200FC7F700BFEA07 /* FrequencyPickerTblCell.swift in Sources */,
 				BF04F49C200F12E5008B74E9 /* OnboardingDataStore.swift in Sources */,
 				BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */,
 				591EA6381FEA77730001B494 /* StringExtension.swift in Sources */,

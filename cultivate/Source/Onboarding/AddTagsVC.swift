@@ -112,7 +112,7 @@ class AddTagsVC: UIViewController {
         }
     }
     
-    func set(tag: CULTag, for contact: CULContact) {
+    func set(tag: CULTag?, for contact: CULContact) {
         if let _ = self.index(for: contact) {
             var updatedContact = contact
             updatedContact.tag = tag
@@ -160,8 +160,8 @@ extension AddTagsVC: UITextFieldDelegate {
 }
 
 extension AddTagsVC: TagsListTableViewAdapterDelegate {
-    func selected(tag: CULTag, for contact: CULContact) {
-        self.set(tag: tag, for: contact)
-        self.setContact(after: contact)
+    func selected(tag: CULTag?, for contact: CULContact?) {
+        self.set(tag: tag, for: self.currentContact)
+        self.setContact(after: self.currentContact)
     }
 }

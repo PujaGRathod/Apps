@@ -10,28 +10,59 @@ import UIKit
 import Firebase
 
 protocol TagsListTableViewAdapterDelegate {
-    func selected(tag: CULTag, for contact: CULContact)
+    func selected(tag: CULTag?, for contact: CULContact?)
 }
 
 class TagsListTableViewAdapter: NSObject {
-
+    
     private var tags: [CULTag] = []
     private var filteredTags: [CULTag] = []
-    private var contact: CULContact!
-    private var selectedTag: CULTag?
+    private var contact: CULContact?
+    var selectedTag: CULTag?
     private var searchText: String = ""
     private var tableView: UITableView!
     var textField: UITextField?
-    
+    var shouldUseCustomCell: Bool = false
     var delegate: TagsListTableViewAdapterDelegate?
     
     func set(tableView: UITableView) {
         self.tableView = tableView
-        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
+        
+        if self.shouldUseCustomCell {
+            let nib = UINib(nibName: "TagPickerTblCell", bundle: nil)
+            self.tableView.register(nib, forCellReuseIdentifier: "cell")
+        } else {
+            self.textField?.textAlignment = .left
+            self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
+        }
+        self.tableView.rowHeight = 44
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
         self.loadTags()
+    }
+    
+    func setupTextField() {
+        if self.shouldUseCustomCell {
+            self.textField?.textAlignment = .center
+            
+            let text = "Add tag"
+            let attributes: [NSAttributedStringKey:Any] = [
+                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17).bold,
+                NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+            ]
+            self.textField?.attributedPlaceholder = NSMutableAttributedString(string: text, attributes: attributes)
+            self.textField?.leftView = nil
+            self.textField?.leftViewMode = .never
+        } else {
+            var color = UIColor.gray
+            if self.tags.count == 0 {
+                color = UIColor.black
+            }
+            let attributes: [NSAttributedStringKey:Any] = [
+                NSAttributedStringKey.foregroundColor: color
+            ]
+            self.textField?.attributedPlaceholder = NSMutableAttributedString(string: "Add tags", attributes: attributes)
+        }
     }
     
     func loadTags() {
@@ -39,18 +70,7 @@ class TagsListTableViewAdapter: NSObject {
             self.tags = tags
             self.filteredTags = self.tags
             self.tableView.reloadData()
-            
-            if self.tags.count == 0 {
-                let attributes: [NSAttributedStringKey:Any] = [
-                    NSAttributedStringKey.foregroundColor: UIColor.black
-                ]
-                self.textField?.attributedPlaceholder = NSMutableAttributedString(string: "Add tags", attributes: attributes)
-            } else {
-                let attributes: [NSAttributedStringKey:Any] = [
-                    NSAttributedStringKey.foregroundColor: UIColor.gray
-                ]
-                self.textField?.attributedPlaceholder = NSMutableAttributedString(string: "Add tags", attributes: attributes)
-            }
+            self.setupTextField()
         }
     }
     
@@ -150,6 +170,14 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if self.shouldUseCustomCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TagPickerTblCell
+            let tag = self.tags[indexPath.item]
+            cell.set(tag: tag, isSelected: (self.selectedTag?.identifier == tag.identifier))
+            return cell
+        }
+        
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = UIColor.clear
         cell.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
@@ -165,7 +193,9 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = tag?.name ?? "N.A"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
             
-            if self.contact.tag?.identifier == tag?.identifier {
+            if self.contact?.tag?.identifier == tag?.identifier ||
+                self.selectedTag?.identifier == tag?.identifier {
+                
                 cell.accessoryType = UITableViewCellAccessoryType.checkmark
             } else {
                 cell.accessoryType = UITableViewCellAccessoryType.none
@@ -181,15 +211,22 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
             
             self.add(tag: self.searchText, completion: { (tag) in
                 if let tag = tag {
+                    self.selectedTag = tag
                     self.delegate?.selected(tag: tag, for: self.contact)
                 }
             })
         } else {
+            
             // Call delegate method
-            let tag:CULTag = self.filteredTags[indexPath.item]
-            self.delegate?.selected(tag: tag, for: self.contact)
+            let tag = self.filteredTags[indexPath.item]
+            if self.selectedTag?.identifier == tag.identifier {
+                self.selectedTag = nil
+            } else {
+                self.selectedTag = tag
+            }
+            self.delegate?.selected(tag: self.selectedTag, for: self.contact)
         }
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
     }
 }
