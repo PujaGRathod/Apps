@@ -96,6 +96,7 @@ PODS:
   - SDWebImage (4.2.3):
     - SDWebImage/Core (= 4.2.3)
   - SDWebImage/Core (4.2.3)
+  - SWRevealViewController (2.3.0)
   - SZTextView (1.3.0)
   - TTTAttributedLabel (2.0.0)
 
@@ -110,6 +111,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - KLCPopup (from `https://github.com/jmascia/KLCPopup`)
   - SDWebImage
+  - SWRevealViewController
   - SZTextView
   - TTTAttributedLabel
 
@@ -147,9 +149,10 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: fb8e1368260c134db16c2135e7e07d28a560c786
+PODFILE CHECKSUM: 64f0445f4dda59258dd06b456c30fc4c9610b136
 
 COCOAPODS: 1.3.1

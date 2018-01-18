@@ -47,7 +47,7 @@ class TagsListTableViewAdapter: NSObject {
             
             let text = "Add tag"
             let attributes: [NSAttributedStringKey:Any] = [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17).bold,
+                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17).boldItalic,
                 NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
             ]
             self.textField?.attributedPlaceholder = NSMutableAttributedString(string: text, attributes: attributes)

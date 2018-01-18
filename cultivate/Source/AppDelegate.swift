@@ -11,6 +11,9 @@ import Firebase
 import FBSDKCoreKit
 import GoogleSignIn
 import IQKeyboardManagerSwift
+import SWRevealViewController
+
+var hamburgerMenuVC: CULHamburgerMenuVC!
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -46,9 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if user.isOnBoardingComplete == true {
                         // Show dashboard
-                        let dashboardStoryboard: UIStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
-                        let dashboardNavController: UINavigationController = dashboardStoryboard.instantiateInitialViewController() as! UINavigationController
-                        self.window?.rootViewController = dashboardNavController
+                        let dashboardStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
+                        let revealViewController = dashboardStoryboard.instantiateInitialViewController() as! SWRevealViewController
+                        self.window?.rootViewController = revealViewController
+                        hamburgerMenuVC = revealViewController.rearViewController as! CULHamburgerMenuVC
                     } else {
                         // Show onboarding
                         let onboardingStoryboard: UIStoryboard = UIStoryboard(name: "Onboarding", bundle: nil)

@@ -17,6 +17,7 @@ target 'cultivate' do
   pod 'KLCPopup', :git => 'https://github.com/jmascia/KLCPopup'
   pod 'SZTextView'
   pod 'SDWebImage'
+  pod 'SWRevealViewController'
 
   target 'cultivateTests' do
     inherit! :search_paths

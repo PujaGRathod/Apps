@@ -15,6 +15,7 @@ import KLCPopup
 class DashboardVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     private var contacts: [CULContact] = []
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
@@ -24,6 +25,8 @@ class DashboardVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        hamburgerMenuVC.configure(self.menuButton, view: self.view)
         
         self.searchController.searchResultsUpdater = self.dashboardTableViewAdapter
         self.searchController.obscuresBackgroundDuringPresentation = false

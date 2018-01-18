@@ -52,6 +52,8 @@
 		BFC8C2592009E9860014062E /* ReschedulePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C2582009E9860014062E /* ReschedulePopupVC.swift */; };
 		BFC985611FE79AAF0041E32D /* cultivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC985601FE79AAF0041E32D /* cultivateTests.swift */; };
 		BFC9856C1FE79AAF0041E32D /* cultivateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */; };
+		BFCA7D3E2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA7D3D2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift */; };
+		BFCA7D402010C17800E717CB /* CULHamburgerMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA7D3F2010C17800E717CB /* CULHamburgerMenuVC.swift */; };
 		BFD0168920073A960054365F /* DashboardTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */; };
 		BFD0168D20073AEC0054365F /* DashboardContactTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168B20073AEC0054365F /* DashboardContactTblCell.swift */; };
 		BFD0168E20073AEC0054365F /* DashboardContactTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD0168C20073AEC0054365F /* DashboardContactTblCell.xib */; };
@@ -143,6 +145,8 @@
 		BFC985671FE79AAF0041E32D /* cultivateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cultivateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cultivateUITests.swift; sourceTree = "<group>"; };
 		BFC9856D1FE79AAF0041E32D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFCA7D3D2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULHamburgerMenuBarButton.swift; sourceTree = "<group>"; };
+		BFCA7D3F2010C17800E717CB /* CULHamburgerMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULHamburgerMenuVC.swift; sourceTree = "<group>"; };
 		BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewAdapter.swift; sourceTree = "<group>"; };
 		BFD0168B20073AEC0054365F /* DashboardContactTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardContactTblCell.swift; sourceTree = "<group>"; };
 		BFD0168C20073AEC0054365F /* DashboardContactTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardContactTblCell.xib; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 				BFD0168F2007401B0054365F /* FollowupDateGenerator.swift */,
 				BF7F48C81FE8EE1C00737FE5 /* String.swift */,
 				BF14192720109DFD00BFEA07 /* UIFont.swift */,
+				BFCA7D3D2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -429,6 +434,7 @@
 				BF2D390F1FE8E63E00AF63EC /* Shared */,
 				BFE9D79C1FE79FFF0091F4A8 /* Signup */,
 				BFE9D7A31FE7A12A0091F4A8 /* Welcome */,
+				BFCA7D3F2010C17800E717CB /* CULHamburgerMenuVC.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -709,6 +715,7 @@
 				"${BUILT_PRODUCTS_DIR}/KLCPopup/KLCPopup.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SWRevealViewController/SWRevealViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SZTextView/SZTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
@@ -731,6 +738,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KLCPopup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWRevealViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SZTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
@@ -834,6 +842,7 @@
 				BFE9D7A81FE7AB920091F4A8 /* FooterView.swift in Sources */,
 				BF1B634C200DFC46000E50A5 /* ContactsWorker.swift in Sources */,
 				BFC8C2572009C8A60014062E /* CULFirebaseGateway.swift in Sources */,
+				BFCA7D402010C17800E717CB /* CULHamburgerMenuVC.swift in Sources */,
 				BFC8C2592009E9860014062E /* ReschedulePopupVC.swift in Sources */,
 				BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */,
 				BF141915200F4EEB00BFEA07 /* ContactHistoryTblCell.swift in Sources */,
@@ -873,6 +882,7 @@
 				BFEF92301FE7D2C3000ED577 /* LoginVC.swift in Sources */,
 				BF7F48CF1FE8FE3300737FE5 /* AddTagsInformationVC.swift in Sources */,
 				BFD0168920073A960054365F /* DashboardTableViewAdapter.swift in Sources */,
+				BFCA7D3E2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift in Sources */,
 				BF499EA2200A016F00C3EE33 /* LogFollowupPopupVC.swift in Sources */,
 				BF2D39111FE8E65700AF63EC /* CULContact.swift in Sources */,
 			);
