@@ -17,7 +17,7 @@ class AddTagsInformationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.footerView.setCurrentStep(to: OnboardingStep.addTags)
-        self.contacts = OnboardingDataStore.shared.getContacts()
+        self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
     }
 
 }

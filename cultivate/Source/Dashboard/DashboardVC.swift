@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import GoogleSignIn
-import FirebaseAuth
-import FBSDKLoginKit
 import KLCPopup
 
 class DashboardVC: UIViewController {
@@ -26,6 +23,12 @@ class DashboardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // TODO: Find a better place for this single line
+        hamburgerMenuVC = self.revealViewController().rearViewController as! CULHamburgerMenuVC
+        if ContactSelectionProcessDataStore.shared.getContacts().count > 0 {
+            ContactSelectionProcessDataStore.shared.empty()
+        }
+        
         hamburgerMenuVC.configure(self.menuButton, view: self.view)
         
         self.searchController.searchResultsUpdater = self.dashboardTableViewAdapter
@@ -123,17 +126,5 @@ class DashboardVC: UIViewController {
     
     @IBAction func logFollowupButtonTapped(_ sender: UIBarButtonItem) {
         self.logFollowupPopup(for: nil, tableViewIndexPath: nil)
-    }
-    
-    
-    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
-        GIDSignIn.sharedInstance().signOut()
-        FBSDKLoginManager().logOut()
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print(error.localizedDescription)
-        }
-        self.performSegue(withIdentifier: "segueAuthentication", sender: nil)
     }
 }

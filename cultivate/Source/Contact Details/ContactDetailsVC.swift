@@ -342,6 +342,7 @@ class ContactDetailsVC: UIViewController {
                 self.display(contact: self.contact)
                 self.update(contact: self.contact)
             }
+            tagPickerPopupVC.shouldShowAddNewTagTextField = true
             tagPickerPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
             tagPickerPopupVC.presentingVC = self
             // Ugly hack to force system to load the UIView

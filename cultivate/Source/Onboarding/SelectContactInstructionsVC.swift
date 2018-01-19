@@ -15,6 +15,7 @@ class SelectContactInstructionsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.footerView.setCurrentStep(to: OnboardingStep.chooseContacts)
+        ContactSelectionProcessDataStore.shared.mode = .onboarding
     }
     
     override func viewWillAppear(_ animated: Bool) {

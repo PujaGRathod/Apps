@@ -16,6 +16,7 @@ protocol ContactListTableViewAdapterDelegate {
 
 class ContactListTableViewAdapter: NSObject {
     
+    private var tagToFilterBy: CULTag?
     private var contacts: [String: [CULContact]] = [:]
     private var allContacts: [CULContact] = []
     private var filteredContacts: [CULContact] = []
@@ -25,6 +26,7 @@ class ContactListTableViewAdapter: NSObject {
     private var searchController: UISearchController?
     private lazy var worker: ContactsWorker = ContactsWorker()
     var delegate: ContactListTableViewAdapterDelegate?
+    var allowMultipleSelection = false
     
     func set(tableView: UITableView, with selectedContacts: [CULContact]) {
         self.tableView = tableView
@@ -36,7 +38,9 @@ class ContactListTableViewAdapter: NSObject {
         
         let nib: UINib = UINib(nibName: "ContactTblCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "ContactTblCell")
-        
+    }
+    
+    func loadContactsFromAddressbook() {
         // Get list of all contacts from the user's phonebook
         self.worker.getContacts { (contacts, sortedKeys, error) in
             self.contacts = contacts
@@ -53,6 +57,44 @@ class ContactListTableViewAdapter: NSObject {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+        }
+    }
+    
+    func load(contacts: [CULContact]) {
+        self.allContacts = contacts
+        
+        var orderedContacts = [String: [CULContact]]() //Contacts ordered in dictionary alphabetically
+        var key: String = "#"
+        let sortOrder = ContactsWorker().getSortOrder()
+        
+        for contact in contacts {
+            var firstLetter = contact.last_name?[0..<1]
+            if sortOrder == .givenName {
+                firstLetter = contact.first_name?[0..<1]
+            }
+            if firstLetter?.containsAlphabets() == true {
+                key = firstLetter!.uppercased()
+            }
+            
+            var segregatedContacts = [CULContact]()
+            if let segregatedContactsForKey = orderedContacts[key] {
+                segregatedContacts = segregatedContactsForKey
+            }
+            segregatedContacts.append(contact)
+            orderedContacts[key] = segregatedContacts
+        }
+        var sortedContactKeys = [String]()
+        sortedContactKeys = Array(orderedContacts.keys).sorted(by: <)
+        if sortedContactKeys.first == "#" {
+            sortedContactKeys.removeFirst()
+            sortedContactKeys.append("#")
+        }
+        
+        self.sortedKeys = sortedContactKeys
+        self.contacts = orderedContacts
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
@@ -84,11 +126,8 @@ extension ContactListTableViewAdapter {
     
     func set(searchController: UISearchController) {
         self.searchController = searchController
+        self.searchController?.searchBar.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
     }
-    
-    //    func add(searchController: UISearchController) {
-    //        self.searchController = searchController
-    //    }
     
     func searchBarIsEmpty() -> Bool {
         return self.searchController?.searchBar.text?.isEmpty ?? true
@@ -102,7 +141,8 @@ extension ContactListTableViewAdapter {
     }
     
     func isFiltering() -> Bool {
-        return self.searchController?.isActive ?? false && !self.searchBarIsEmpty()
+        let isSearching = self.searchController?.isActive ?? false && !self.searchBarIsEmpty()
+        return isSearching
     }
 }
 
@@ -182,14 +222,19 @@ extension ContactListTableViewAdapter: UITableViewDelegate, UITableViewDataSourc
         } else {
             contact = self.getCultivateContact(for: indexPath)
         }
-        if self.isContactSelected(contact) {
-            // Deselect
-            self.removeContactFromSelected(contact)
+        
+        if self.allowMultipleSelection {
+            if self.isContactSelected(contact) {
+                // Deselect
+                self.removeContactFromSelected(contact)
+            } else {
+                // Select
+                self.addContactToSelected(contact)
+            }
+            tableView.reloadData()
         } else {
-            // Select
-            self.addContactToSelected(contact)
+            self.delegate?.selectionChanged(selectedContacts: [contact])
         }
-        tableView.reloadData()
     }
 }
 

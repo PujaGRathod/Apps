@@ -46,6 +46,7 @@ class DashboardTableViewAdapter: NSObject {
         self.tableView.rowHeight = 66
         
         self.searchController = searchController
+        self.searchController?.searchBar.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
         
         self.getContacts()
     }

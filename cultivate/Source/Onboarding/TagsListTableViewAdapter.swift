@@ -10,12 +10,13 @@ import UIKit
 import Firebase
 
 protocol TagsListTableViewAdapterDelegate {
+    func tagsLoaded(_ tags: [CULTag])
     func selected(tag: CULTag?, for contact: CULContact?)
 }
 
 class TagsListTableViewAdapter: NSObject {
     
-    private var tags: [CULTag] = []
+    var tags: [CULTag] = []
     private var filteredTags: [CULTag] = []
     private var contact: CULContact?
     var selectedTag: CULTag?
@@ -38,21 +39,24 @@ class TagsListTableViewAdapter: NSObject {
         self.tableView.rowHeight = 44
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.loadTags()
     }
     
     func setupTextField() {
+        guard let textField = self.textField else {
+            return
+        }
+        
         if self.shouldUseCustomCell {
-            self.textField?.textAlignment = .center
+            textField.textAlignment = .center
             
             let text = "Add tag"
             let attributes: [NSAttributedStringKey:Any] = [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17).boldItalic,
                 NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
             ]
-            self.textField?.attributedPlaceholder = NSMutableAttributedString(string: text, attributes: attributes)
-            self.textField?.leftView = nil
-            self.textField?.leftViewMode = .never
+            textField.attributedPlaceholder = NSMutableAttributedString(string: text, attributes: attributes)
+            textField.leftView = nil
+            textField.leftViewMode = .never
         } else {
             var color = UIColor.gray
             if self.tags.count == 0 {
@@ -61,12 +65,19 @@ class TagsListTableViewAdapter: NSObject {
             let attributes: [NSAttributedStringKey:Any] = [
                 NSAttributedStringKey.foregroundColor: color
             ]
-            self.textField?.attributedPlaceholder = NSMutableAttributedString(string: "Add tags", attributes: attributes)
+            textField.attributedPlaceholder = NSMutableAttributedString(string: "Add tags", attributes: attributes)
         }
     }
     
-    func loadTags() {
+    func loadAllAvailableTags() {
         self.getTags { (tags) in
+            self.load(tags: tags)
+        }
+    }
+    
+    func load(tags: [CULTag]) {
+        DispatchQueue.main.async {
+            self.delegate?.tagsLoaded(tags)
             self.tags = tags
             self.filteredTags = self.tags
             self.tableView.reloadData()
@@ -135,7 +146,7 @@ class TagsListTableViewAdapter: NSObject {
                 } else {
                     print("Success")
                     completion(tag)
-                    self.loadTags()
+                    self.loadAllAvailableTags()
                 }
             }
         }

@@ -9,13 +9,18 @@
 import UIKit
 
 class CULNavigationController: UINavigationController {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     override func popViewController(animated: Bool) -> UIViewController? {
         return super.popViewController(animated: animated)
     }
 }
 
 extension CULNavigationController: UINavigationBarDelegate {
-
+    
 //    func navigationBar(_ navigationBar: UINavigationBar, shouldPush item: UINavigationItem) -> Bool {
 //        return true
 //    }
@@ -38,6 +43,12 @@ extension CULNavigationController: UINavigationBarDelegate {
         } else if let viewcontroller: AddTagsVC = self.viewControllers.last as? AddTagsVC,
             viewcontroller.isKind(of: AddTagsVC.classForCoder()) == true {
             print("AddTagsVC")
+            if viewcontroller.shouldPopViewController() == false {
+                return false
+            }
+        } else if let viewcontroller: OnboardingCompletedVC = self.viewControllers.last as? OnboardingCompletedVC,
+            viewcontroller.isKind(of: OnboardingCompletedVC.classForCoder()) == true {
+            print("OnboardingCompletedVC")
             if viewcontroller.shouldPopViewController() == false {
                 return false
             }

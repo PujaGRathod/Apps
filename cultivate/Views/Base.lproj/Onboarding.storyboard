@@ -117,7 +117,7 @@ You’ll have the opportunity to change your selected contacts later on.</string
         <!--Select contacts-->
         <scene sceneID="zDp-9G-d0c">
             <objects>
-                <viewController title="Select contacts" id="Nml-Y5-ZEC" customClass="ContactsListVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactsListVC" title="Select contacts" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Nml-Y5-ZEC" customClass="ContactsListVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kq6-6a-sPG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,7 +139,7 @@ You’ll have the opportunity to change your selected contacts later on.</string
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="cAU-qO-jkZ" kind="show" identifier="segueShowFollowupFrequenciesInformationVC" id="hpE-hk-GAj"/>
+                                    <action selector="continueButtonTapped:" destination="Nml-Y5-ZEC" eventType="touchUpInside" id="DXW-pR-LGz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -188,6 +188,8 @@ You’ll have the opportunity to change your selected contacts later on.</string
                         <outlet property="lblSelectedContactsCount" destination="7gk-4D-Xgv" id="CSi-7m-Smh"/>
                         <outlet property="tblContactsList" destination="Ice-WQ-5km" id="wFl-wV-ZrM"/>
                         <outlet property="viewSelectedContactsCount" destination="eys-ee-maT" id="PT3-5Y-KaP"/>
+                        <segue destination="cAU-qO-jkZ" kind="show" identifier="segueShowFollowupFrequenciesInformationVC" id="8rw-7F-7jV"/>
+                        <segue destination="FPF-jS-j8i" kind="show" identifier="segueSelectFrequency" id="OIS-oq-jfr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N4j-4K-NYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -271,7 +273,7 @@ Cultivate will automatically schedule recommended follow-up date based on the fo
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JWS-4U-EQ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1464.8" y="124.58770614692655"/>
+            <point key="canvasLocation" x="1455" y="-265"/>
         </scene>
         <!--Set follow-up frequencies-->
         <scene sceneID="kFk-i0-A7g">
@@ -320,6 +322,7 @@ Cultivate will automatically schedule recommended follow-up date based on the fo
                         <outlet property="lblContactName" destination="nTY-Bz-Udf" id="qQG-Nq-ggr"/>
                         <outlet property="tblFrequencyList" destination="TBw-4r-Hzg" id="EDu-8u-Nxq"/>
                         <segue destination="wX7-HE-xwT" kind="show" identifier="segueShowAddTagsInformationVC" id="oPU-Rs-Iif"/>
+                        <segue destination="wMO-YL-KQ0" kind="show" identifier="segueAddTags" id="fka-uv-ZOQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TDm-3E-nsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -426,7 +429,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wwv-9I-UqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2980" y="124.58770614692655"/>
+            <point key="canvasLocation" x="3014" y="524"/>
         </scene>
         <!--Add tags-->
         <scene sceneID="wXP-ke-eHO">
@@ -437,7 +440,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="hWY-Tv-QuJ">
-                                <rect key="frame" x="0.0" y="232.5" width="375" height="434.5"/>
+                                <rect key="frame" x="0.0" y="233" width="375" height="360"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="iXR-kt-0zb">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -466,6 +469,21 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                     </constraints>
                                 </view>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmm-5U-XFc" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
+                                <rect key="frame" x="24" y="605" width="327" height="50"/>
+                                <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="q79-Bg-chz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="continueButtonTapped:" destination="Nml-Y5-ZEC" eventType="touchUpInside" id="jN7-jW-mKm"/>
+                                    <segue destination="cPq-97-pvr" kind="show" id="mku-Xg-epZ"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/42" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nl1-mj-x4U">
                                 <rect key="frame" x="171" y="140" width="33" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -481,23 +499,29 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="iQs-aX-beC" firstAttribute="trailing" secondItem="qmm-5U-XFc" secondAttribute="trailing" constant="24" id="0Di-pO-5KF"/>
                             <constraint firstItem="c6y-46-aJP" firstAttribute="leading" secondItem="iQs-aX-beC" secondAttribute="leading" constant="16" id="2Zu-XZ-ykG"/>
+                            <constraint firstItem="iQs-aX-beC" firstAttribute="bottom" secondItem="qmm-5U-XFc" secondAttribute="bottom" constant="12" id="3S7-zc-xuB"/>
                             <constraint firstItem="nl1-mj-x4U" firstAttribute="top" secondItem="iQs-aX-beC" secondAttribute="top" constant="24" id="6YU-dN-eYh"/>
                             <constraint firstItem="nl1-mj-x4U" firstAttribute="centerX" secondItem="iQs-aX-beC" secondAttribute="centerX" id="9Po-qp-4aR"/>
                             <constraint firstItem="c6y-46-aJP" firstAttribute="top" secondItem="nl1-mj-x4U" secondAttribute="bottom" constant="24" id="Bfe-C4-W1v"/>
+                            <constraint firstItem="qmm-5U-XFc" firstAttribute="leading" secondItem="iQs-aX-beC" secondAttribute="leading" constant="24" id="DLM-q4-3VN"/>
+                            <constraint firstItem="qmm-5U-XFc" firstAttribute="top" secondItem="hWY-Tv-QuJ" secondAttribute="bottom" constant="12" id="Mhv-b3-f7K"/>
                             <constraint firstItem="hWY-Tv-QuJ" firstAttribute="leading" secondItem="iQs-aX-beC" secondAttribute="leading" id="WKh-TU-wfm"/>
                             <constraint firstItem="hWY-Tv-QuJ" firstAttribute="top" secondItem="c6y-46-aJP" secondAttribute="bottom" constant="24" id="hFp-sG-XFi"/>
-                            <constraint firstItem="iQs-aX-beC" firstAttribute="bottom" secondItem="hWY-Tv-QuJ" secondAttribute="bottom" id="meP-un-9WC"/>
                             <constraint firstItem="iQs-aX-beC" firstAttribute="trailing" secondItem="hWY-Tv-QuJ" secondAttribute="trailing" id="q0S-Yn-5KO"/>
                             <constraint firstItem="iQs-aX-beC" firstAttribute="trailing" secondItem="c6y-46-aJP" secondAttribute="trailing" constant="16" id="reB-Yh-Si0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iQs-aX-beC"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add tags" id="opU-Df-w7c"/>
+                    <navigationItem key="navigationItem" title="Add tags" id="opU-Df-w7c">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="2za-bd-WF0"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="headerView" destination="iXR-kt-0zb" id="ApJ-z3-Ok9"/>
                         <outlet property="lblContactCount" destination="nl1-mj-x4U" id="3zo-DC-ij9"/>
                         <outlet property="lblContactName" destination="c6y-46-aJP" id="gDr-LZ-p62"/>
+                        <outlet property="skipButtonBottomConstraint" destination="3S7-zc-xuB" id="odf-zd-g3A"/>
                         <outlet property="tblTagsList" destination="hWY-Tv-QuJ" id="13B-t7-DrK"/>
                         <outlet property="txtAddNewTag" destination="Cto-Wd-WYj" id="ouD-Jt-wcS"/>
                         <segue destination="cPq-97-pvr" kind="show" identifier="segueShowOnboardingCompletedVC" id="8T6-s2-ML5"/>
@@ -505,7 +529,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vbQ-5I-9un" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3857" y="-215"/>
+            <point key="canvasLocation" x="3856.8000000000002" y="-215.44227886056973"/>
         </scene>
         <!--Onboarding CompletedVC-->
         <scene sceneID="SpY-EE-Xxb">
@@ -516,7 +540,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations! You’ve successfully completed setting up your Cultivate account" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dv8-CG-DAp">
-                                <rect key="frame" x="16" y="216" width="343" height="41"/>
+                                <rect key="frame" x="16" y="261" width="343" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -529,7 +553,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abg-ZI-hXR" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="24" y="289" width="327" height="50"/>
+                                <rect key="frame" x="24" y="334" width="327" height="50"/>
                                 <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="b6l-64-ZeN"/>
@@ -538,21 +562,27 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 <state key="normal" title="Get started">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <segue destination="dmD-YG-3e7" kind="presentation" identifier="segueDashboard" id="7iU-sj-mgP"/>
-                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nice!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ar-sG-JVD">
+                                <rect key="frame" x="16" y="204" width="343" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <color key="textColor" red="0.37647058823529411" green="0.57647058823529407" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Dv8-CG-DAp" firstAttribute="leading" secondItem="NZP-Fc-AcK" secondAttribute="leading" constant="16" id="3IH-wJ-xWy"/>
-                            <constraint firstItem="Dv8-CG-DAp" firstAttribute="top" secondItem="NZP-Fc-AcK" secondAttribute="top" constant="100" id="4bu-4H-I9A"/>
+                            <constraint firstItem="Dv8-CG-DAp" firstAttribute="top" secondItem="9ar-sG-JVD" secondAttribute="bottom" constant="21" id="8Zj-yy-GRA"/>
+                            <constraint firstItem="9ar-sG-JVD" firstAttribute="leading" secondItem="NZP-Fc-AcK" secondAttribute="leading" constant="16" id="CKK-Ue-HQH"/>
                             <constraint firstItem="NZP-Fc-AcK" firstAttribute="trailing" secondItem="Dv8-CG-DAp" secondAttribute="trailing" constant="16" id="MO2-Yt-7rZ"/>
                             <constraint firstItem="Abg-ZI-hXR" firstAttribute="top" secondItem="Dv8-CG-DAp" secondAttribute="bottom" constant="32" id="Qt4-Aa-NCb"/>
                             <constraint firstItem="XEN-lf-a7m" firstAttribute="leading" secondItem="NZP-Fc-AcK" secondAttribute="leading" id="beS-L4-dDE"/>
                             <constraint firstItem="NZP-Fc-AcK" firstAttribute="trailing" secondItem="XEN-lf-a7m" secondAttribute="trailing" id="eJL-Z2-84L"/>
+                            <constraint firstItem="9ar-sG-JVD" firstAttribute="top" secondItem="NZP-Fc-AcK" secondAttribute="top" constant="88" id="f4o-vR-WaO"/>
                             <constraint firstItem="NZP-Fc-AcK" firstAttribute="trailing" secondItem="Abg-ZI-hXR" secondAttribute="trailing" constant="24" id="fie-Bm-AeL"/>
                             <constraint firstItem="Abg-ZI-hXR" firstAttribute="leading" secondItem="NZP-Fc-AcK" secondAttribute="leading" constant="24" id="jIS-BM-FoQ"/>
+                            <constraint firstItem="NZP-Fc-AcK" firstAttribute="trailing" secondItem="9ar-sG-JVD" secondAttribute="trailing" constant="16" id="lsE-YK-XtY"/>
                             <constraint firstItem="NZP-Fc-AcK" firstAttribute="bottom" secondItem="XEN-lf-a7m" secondAttribute="bottom" id="wJp-ED-rrN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NZP-Fc-AcK"/>
@@ -561,7 +591,11 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         <barButtonItem key="backBarButtonItem" title="Back" id="Dqe-I5-NPw"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="finishButton" destination="Abg-ZI-hXR" id="ScC-jj-j4e"/>
                         <outlet property="footerView" destination="XEN-lf-a7m" id="Fu3-ED-Djn"/>
+                        <outlet property="messageLabel" destination="Dv8-CG-DAp" id="ZcE-DH-Ws0"/>
+                        <outlet property="titleLabel" destination="9ar-sG-JVD" id="d5z-4P-A19"/>
+                        <segue destination="dmD-YG-3e7" kind="presentation" identifier="segueDashboard" id="VSh-rB-wCu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoR-ZV-Dax" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -579,5 +613,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="8T6-s2-ML5"/>
+        <segue reference="fka-uv-ZOQ"/>
+        <segue reference="OIS-oq-jfr"/>
     </inferredMetricsTieBreakers>
 </document>

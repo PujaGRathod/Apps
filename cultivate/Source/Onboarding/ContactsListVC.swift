@@ -16,6 +16,7 @@ class ContactsListVC: UIViewController {
     @IBOutlet weak var lblSelectedContactsCount: UILabel!
     @IBOutlet weak var bottomMarginConstraintForContinueButton: NSLayoutConstraint!
     
+    var mode: ContactSelectionProcessDataStore.Mode?
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
     lazy var filteredContacts: [CULContact] = []
     lazy var allContacts: [CULContact] = []
@@ -25,21 +26,42 @@ class ContactsListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.selectedContacts = OnboardingDataStore.shared.getContacts()
+        if let mode = self.mode {
+            ContactSelectionProcessDataStore.shared.mode = mode
+        }
+        if self.mode == .onboarding {
+            self.selectedContacts = ContactSelectionProcessDataStore.shared.getContacts()
+            self.setTableViewAdapterWithSelectedContacts()
+        } else if self.mode == .updatingContacts {
+            self.title = "Edit Contacts"
+            if let user = CULFirebaseGateway.shared.loggedInUser {
+                CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
+                    self.selectedContacts = contacts
+                    self.setTableViewAdapterWithSelectedContacts()
+                })
+            }
+        }
         
         self.adjustContinueButtonVisibility()
-        self.contactsListTableViewAdapter.delegate = self
-        self.contactsListTableViewAdapter.set(tableView: self.tblContactsList, with: self.selectedContacts)
         
-        self.searchController.searchResultsUpdater = self.contactsListTableViewAdapter
-        self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search contacts"
-        if #available(iOS 11.0, *) {
-            self.navigationItem.searchController = searchController
+    }
+    
+    func setTableViewAdapterWithSelectedContacts() {
+        DispatchQueue.main.async {
+            self.contactsListTableViewAdapter.delegate = self
+            self.contactsListTableViewAdapter.set(tableView: self.tblContactsList, with: self.selectedContacts)
+            self.contactsListTableViewAdapter.loadContactsFromAddressbook()
+            self.searchController.searchResultsUpdater = self.contactsListTableViewAdapter
+            self.searchController.obscuresBackgroundDuringPresentation = false
+            self.searchController.searchBar.placeholder = "Search contacts"
+            if #available(iOS 11.0, *) {
+                self.navigationItem.searchController = self.searchController
+            }
+            self.definesPresentationContext = true
+            
+            self.contactsListTableViewAdapter.allowMultipleSelection = true
+            self.contactsListTableViewAdapter.set(searchController: self.searchController)
         }
-        self.definesPresentationContext = true
-        
-        self.contactsListTableViewAdapter.set(searchController: self.searchController)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,14 +79,17 @@ class ContactsListVC: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    // MARK: - Navigation
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "segueShowFollowupFrequenciesInformationVC" && self.selectedContacts.count == 0 {
+    @IBAction func continueButtonTapped(_ sender: CULButton) {
+        if self.selectedContacts.count == 0 {
             self.showErrorMessageForContactSelection()
-            return false
+            return
         }
-        return true
+        if self.mode == .onboarding  {
+             self.performSegue(withIdentifier: "segueShowFollowupFrequenciesInformationVC", sender: nil)
+        } else if self.mode == .updatingContacts {
+            ContactSelectionProcessDataStore.shared.setNewContacts(from: self.selectedContacts)
+            self.performSegue(withIdentifier: "segueSelectFrequency", sender: nil)
+        }
     }
     
     private func showErrorMessageForContactSelection() {
@@ -76,7 +101,7 @@ class ContactsListVC: UIViewController {
 
 extension ContactsListVC: ContactListTableViewAdapterDelegate {
     func selectionChanged(selectedContacts: [CULContact]) {
-        self.selectedContacts = OnboardingDataStore.shared.update(contacts: selectedContacts)
+        self.selectedContacts = ContactSelectionProcessDataStore.shared.update(contacts: selectedContacts)
         self.lblSelectedContactsCount.text = "\(self.selectedContacts.count)"
         
         UIView.animate(withDuration: 0.27) {

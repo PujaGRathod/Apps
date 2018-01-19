@@ -25,9 +25,7 @@ class SetFollowupFrequenciesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.contacts = OnboardingDataStore.shared.getContacts()
-        
+        self.getContacts()
         self.frequencyListTableViewAdapter.set(tableView: self.tblFrequencyList)
         self.frequencyListTableViewAdapter.delegate = self
         
@@ -41,12 +39,16 @@ class SetFollowupFrequenciesVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.contacts = OnboardingDataStore.shared.getContacts()
+        self.getContacts()
         self.tblFrequencyList.reloadData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    func getContacts() {
+        if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+            self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
+        } else {
+            self.contacts = ContactSelectionProcessDataStore.shared.getNewContacts()
+        }
     }
     
     func shouldPopViewController() -> Bool {
@@ -63,7 +65,11 @@ class SetFollowupFrequenciesVC: UIViewController {
         self.lblContactName.text = contact.name
         
         if let index: Int = self.index(for: contact) {
-             self.lblContactCount.text = "\(index+1)/\(self.contacts.count)"
+            var middleString = ""
+            if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+                middleString = " new"
+            }
+            self.lblContactCount.text = "\(index+1)/\(self.contacts.count)\(middleString) contacts"
         } else {
             self.printErrorMessageWhenContctIfNotFoundInTheList()
         }
@@ -75,7 +81,11 @@ class SetFollowupFrequenciesVC: UIViewController {
             if nextIndex == self.contacts.count {
                 self.currentContact = self.contacts[index]
                 // The contact is the last one on the list. We should move to the next screen now.
-                self.performSegue(withIdentifier: "segueShowAddTagsInformationVC", sender: self.contacts)
+                if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+                    self.performSegue(withIdentifier: "segueShowAddTagsInformationVC", sender: nil)
+                } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+                    self.performSegue(withIdentifier: "segueAddTags", sender: nil)
+                }
             } else {
                 self.currentContact = self.contacts[nextIndex]
             }
@@ -102,9 +112,13 @@ class SetFollowupFrequenciesVC: UIViewController {
         if let _ = self.index(for: contact) {
             var updatedContact = contact
             updatedContact.followupFrequency = followupFrequency
-//            self.contacts[index] = updatedContact
-            OnboardingDataStore.shared.update(contact: updatedContact)
-            self.contacts = OnboardingDataStore.shared.getContacts()
+            if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+                ContactSelectionProcessDataStore.shared.update(contact: updatedContact)
+                self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
+            } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+                ContactSelectionProcessDataStore.shared.update(newContact: updatedContact)
+                self.contacts = ContactSelectionProcessDataStore.shared.getNewContacts()
+            }
         } else {
             self.printErrorMessageWhenContctIfNotFoundInTheList()
         }

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import GoogleSignIn
+import FirebaseAuth
+import FBSDKLoginKit
 
 class CULHamburgerMenuVC: UITableViewController {
 
@@ -20,5 +23,23 @@ class CULHamburgerMenuVC: UITableViewController {
             menuButton.action = Selector(("revealToggle:"))
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1, indexPath.item == 3 {
+            // Logout
+            self.logoutTapped()
+        }
+    }
+    
+    private func logoutTapped() {
+        GIDSignIn.sharedInstance().signOut()
+        FBSDKLoginManager().logOut()
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error.localizedDescription)
+        }
+        self.performSegue(withIdentifier: "segueAuthentication", sender: nil)
     }
 }

@@ -24,15 +24,15 @@ class AddTagsVC: UIViewController {
     @IBOutlet weak var txtAddNewTag: UITextField!
     @IBOutlet weak var tblTagsList: UITableView!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var skipButtonBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.contacts = OnboardingDataStore.shared.getContacts()
-        
+        self.getContacts()
         self.tagListTableViewAdapter.set(tableView: self.tblTagsList)
         self.tagListTableViewAdapter.delegate = self
         self.tagListTableViewAdapter.textField = self.txtAddNewTag
+        self.tagListTableViewAdapter.loadAllAvailableTags()
         
         self.tblTagsList.tableHeaderView = self.headerView
         
@@ -44,16 +44,25 @@ class AddTagsVC: UIViewController {
             // FATAL ERROR
             // There's no contact to followup
         }
+        
+        if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+            self.skipButtonBottomConstraint.constant = -62
+            self.view.setNeedsLayout()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.contacts = OnboardingDataStore.shared.getContacts()
+        self.getContacts()
         self.tblTagsList.reloadData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    func getContacts() {
+        if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+            self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
+        } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+            self.contacts = ContactSelectionProcessDataStore.shared.getNewContacts()
+        }
     }
     
     @IBAction func textFieldEditingChanged(_ sender: Any) {
@@ -116,8 +125,13 @@ class AddTagsVC: UIViewController {
         if let _ = self.index(for: contact) {
             var updatedContact = contact
             updatedContact.tag = tag
-            OnboardingDataStore.shared.update(contact: updatedContact)
-            self.contacts = OnboardingDataStore.shared.getContacts()
+            if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+                ContactSelectionProcessDataStore.shared.update(contact: updatedContact)
+                self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
+            } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+                ContactSelectionProcessDataStore.shared.update(newContact: updatedContact)
+                self.contacts = ContactSelectionProcessDataStore.shared.getNewContacts()
+            }
             
             self.txtAddNewTag.text = nil
             self.tagListTableViewAdapter.search(tag: "")
@@ -160,6 +174,11 @@ extension AddTagsVC: UITextFieldDelegate {
 }
 
 extension AddTagsVC: TagsListTableViewAdapterDelegate {
+    
+    func tagsLoaded(_ tags: [CULTag]) {
+        
+    }
+    
     func selected(tag: CULTag?, for contact: CULContact?) {
         self.set(tag: tag, for: self.currentContact)
         self.setContact(after: self.currentContact)

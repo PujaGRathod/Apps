@@ -117,7 +117,7 @@ struct CULContact: Equatable {
     }
     
     // Database identifier. E.g Firebase
-    var db_Identifier: String!
+    var db_Identifier: String?
     
     // Contact book identifier
     var identifier: String!

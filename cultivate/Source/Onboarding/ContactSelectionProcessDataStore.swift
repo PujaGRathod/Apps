@@ -8,11 +8,36 @@
 
 import Foundation
 
-class OnboardingDataStore {
+class ContactSelectionProcessDataStore {
     
-    static let shared = OnboardingDataStore()
+    enum Mode {
+        case onboarding
+        case updatingContacts
+    }
+    
+    static let shared = ContactSelectionProcessDataStore()
     
     private var selectedContacts = [CULContact]()
+    var mode: Mode?
+    private var newContacts = [CULContact]()
+    
+    func empty() {
+        self.selectedContacts = []
+    }
+    
+    func setNewContacts(from allContacts: [CULContact]) {
+        var contacts = [CULContact]()
+        for contact in allContacts {
+            if contact.db_Identifier == nil {
+                contacts.append(contact)
+            }
+        }
+        self.newContacts = contacts
+    }
+    
+    func getNewContacts() -> [CULContact] {
+        return self.newContacts
+    }
     
     func update(contacts: [CULContact]) -> [CULContact] {
         if self.selectedContacts.count == 0 {
@@ -30,6 +55,15 @@ class OnboardingDataStore {
         }
         self.sortContacts()
         return self.selectedContacts
+    }
+    
+    func update(newContact: CULContact) {
+        for (index, selectedContact) in self.newContacts.enumerated() {
+            if newContact.identifier == selectedContact.identifier {
+                self.newContacts[index] = newContact
+                break
+            }
+        }
     }
     
     func update(contact: CULContact) {

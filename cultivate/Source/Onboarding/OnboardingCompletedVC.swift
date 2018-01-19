@@ -10,10 +10,13 @@ import UIKit
 import Firebase
 
 class OnboardingCompletedVC: UIViewController {
-
+    
     var contacts: [CULContact] = []
     
     @IBOutlet weak var footerView: FooterView!
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var finishButton: CULButton!
     
     private var dataUploaded: Bool = false
     private var userTappedOnButton: Bool = false
@@ -22,13 +25,24 @@ class OnboardingCompletedVC: UIViewController {
         super.viewDidLoad()
         self.footerView.setProgressCompletion()
         
-        self.contacts = OnboardingDataStore.shared.getContacts()
+        if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+            self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
+        } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+            self.contacts = ContactSelectionProcessDataStore.shared.getNewContacts()
+            self.titleLabel.isHidden = false
+            self.messageLabel.text = "You've finished editing your Inner circle."
+            self.finishButton.setTitle("Finish", for: .normal)
+        }
         
         // Upload contacts to the user
         if let user = CULFirebaseGateway.shared.loggedInUser {
             self.uploadData(for: user)
         }
         
+    }
+    
+    func shouldPopViewController() -> Bool {
+        return false
     }
     
     func uploadData(for user: CULUser) {
@@ -43,35 +57,39 @@ class OnboardingCompletedVC: UIViewController {
             group.leave()
         }
         
-        group.enter()
-        CULFirebaseGateway.shared.setOnboardingCompleted(for: user) { (error) in
-            if let error = error {
-                // Error
-                self.showAlert("Error", message: error.localizedDescription)
+        
+        if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+            group.enter()
+            CULFirebaseGateway.shared.setOnboardingCompleted(for: user) { (error) in
+                if let error = error {
+                    // Error
+                    self.showAlert("Error", message: error.localizedDescription)
+                }
+                group.leave()
             }
-            group.leave()
         }
         
         group.notify(queue: DispatchQueue.main) {
             // Success
             self.dataUploaded = true
             if self.userTappedOnButton == true {
-                self.performSegue(withIdentifier: "segueDashboard", sender: nil)
+                self.nextVC()
             }
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "segueDashboard" {
-            self.userTappedOnButton = true
-            if self.dataUploaded == false {
-                return false
-            }
+    private func nextVC() {
+        if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+            self.performSegue(withIdentifier: "segueDashboard", sender: nil)
+        } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+            self.navigationController?.popToRootViewController(animated: true)
         }
-        return true
+    }
+    
+    @IBAction func finishButtonTapped(_ sender: UIButton) {
+        self.userTappedOnButton = true
+        if self.dataUploaded == true {
+            self.nextVC()
+        }
     }
 }

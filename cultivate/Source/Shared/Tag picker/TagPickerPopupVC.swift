@@ -17,9 +17,13 @@ class TagPickerPopupVC: UIViewController {
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var txtAddNewTag: UITextField!
+    @IBOutlet weak var textFieldHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var headerView: UIView!
     
     private lazy var tagListTableViewAdapter: TagsListTableViewAdapter = TagsListTableViewAdapter()
+    private var tags = [CULTag]()
     
+    var shouldShowAddNewTagTextField = false
     var tagUpdated: ((CULTag?)->Void)?
     var selectedTag: CULTag?
     var presentingVC: UIViewController!
@@ -27,20 +31,29 @@ class TagPickerPopupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        self.headerView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
         self.containerView.layer.borderWidth = 0.5
         self.containerView.layer.cornerRadius = 5
     }
     
-    func set(tag: CULTag?) {
+    func set(tag: CULTag?, allTags: [CULTag] = []) {
         self.selectedTag = tag
         self.tagListTableViewAdapter.selectedTag = tag
         self.tagListTableViewAdapter.shouldUseCustomCell = true
         self.tagListTableViewAdapter.set(tableView: self.tableView)
         self.tagListTableViewAdapter.delegate = self
-        self.tagListTableViewAdapter.textField = self.txtAddNewTag
-        self.tagListTableViewAdapter.setupTextField()
+        if self.shouldShowAddNewTagTextField {
+            self.tableView.tableHeaderView = self.headerView
+            self.tagListTableViewAdapter.textField = self.txtAddNewTag
+            self.tagListTableViewAdapter.setupTextField()
+        }
+        self.tagListTableViewAdapter.selectedTag = self.selectedTag
+        if allTags.count == 0 {
+            self.tagListTableViewAdapter.loadAllAvailableTags()
+        } else {
+            self.tagListTableViewAdapter.load(tags: allTags)
+        }
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
@@ -91,5 +104,9 @@ extension TagPickerPopupVC: UITextFieldDelegate {
 extension TagPickerPopupVC: TagsListTableViewAdapterDelegate {
     func selected(tag: CULTag?, for contact: CULContact?) {
         self.selectedTag = tag
+    }
+    
+    func tagsLoaded(_ tags: [CULTag]) {
+        // TODO: Resize the tableview here
     }
 }

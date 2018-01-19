@@ -35,9 +35,10 @@ class CULFirebaseGateway {
     func addNew(contacts: [CULContact], for user: CULUser, completion: @escaping ((Error?)->Void)) {
         let store: Firestore = Firestore.firestore()
         let batch: WriteBatch = store.batch()
-        for contact in contacts {
-            let data: [String:Any] = self.convertContactToRawData(contact)
+        for var contact in contacts {
             let ref = store.collection("users").document(user.id).collection("contacts").document()
+            contact.db_Identifier = ref.documentID
+            let data: [String:Any] = self.convertContactToRawData(contact)
             batch.setData(data, forDocument: ref)
         }
         batch.commit { (error) in
@@ -50,8 +51,10 @@ class CULFirebaseGateway {
         let batch: WriteBatch = store.batch()
         for contact in contacts {
             let data: [String:Any] = self.convertContactToRawData(contact)
-            let ref = store.collection("users").document(user.id).collection("contacts").document(contact.db_Identifier)
-            batch.updateData(data, forDocument: ref)
+            if let id = contact.db_Identifier {
+                let ref = store.collection("users").document(user.id).collection("contacts").document(id)
+                batch.updateData(data, forDocument: ref)
+            }
         }
         batch.commit { (error) in
             completion(error)
@@ -181,9 +184,11 @@ class CULFirebaseGateway {
             completion(error)
             return
         }
-        let ref = store.collection("users").document(loggedInUser.id).collection("contacts").document(contact.db_Identifier).collection("followups").document()
-        ref.setData(data) { (error) in
-            completion(error)
+        if let id = contact.db_Identifier{
+            let ref = store.collection("users").document(loggedInUser.id).collection("contacts").document(id).collection("followups").document()
+            ref.setData(data) { (error) in
+                completion(error)
+            }
         }
     }
     
@@ -201,15 +206,17 @@ class CULFirebaseGateway {
     
     func getFollowups(for contact: CULContact, loggedInUser: CULUser, _ completion: @escaping (([CULContact.Followup],Error?)->Void)) {
         let store = Firestore.firestore()
-        let ref = store.collection("users").document(loggedInUser.id).collection("contacts").document(contact.db_Identifier).collection("followups")
-        ref.getDocuments { (snapshot, error) in
-            var followups = [CULContact.Followup]()
-            for document in snapshot?.documents ?? [] {
-                if let followup = self.followup(from: document.data()) {
-                    followups.append(followup)
+        if let id = contact.db_Identifier {
+            let ref = store.collection("users").document(loggedInUser.id).collection("contacts").document(id).collection("followups")
+            ref.getDocuments { (snapshot, error) in
+                var followups = [CULContact.Followup]()
+                for document in snapshot?.documents ?? [] {
+                    if let followup = self.followup(from: document.data()) {
+                        followups.append(followup)
+                    }
                 }
+                completion(followups, error)
             }
-            completion(followups, error)
         }
     }
     
