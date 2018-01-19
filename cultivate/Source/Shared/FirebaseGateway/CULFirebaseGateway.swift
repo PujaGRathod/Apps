@@ -14,16 +14,6 @@ class CULFirebaseGateway {
     static let shared = CULFirebaseGateway()
     var loggedInUser: CULUser?
     
-    //    func getLoggedInUser(_ completion: @escaping ((CULUser?)->Void)) {
-    //        if let currentUser = Auth.auth().currentUser {
-    //            CULUser.checkIfUserExist(with: currentUser.uid, completion: { (loggedInUser, success) in
-    //                completion(loggedInUser)
-    //            })
-    //        } else {
-    //            completion(nil)
-    //        }
-    //    }
-    
     func setOnboardingCompleted(for user: CULUser, completion: @escaping ((Error?)->Void)) {
         let store: Firestore = Firestore.firestore()
         let ref = store.collection("users").document(user.id)
@@ -248,5 +238,13 @@ class CULFirebaseGateway {
         followup.notes = raw["notes"] as? String
         
         return followup
+    }
+    
+    func submit(feedback: String, for user: CULUser, _ completion: @escaping ((Error?)->Void)) {
+        let store = Firestore.firestore()
+        let ref = store.collection("feedbacks").document()
+        ref.setData([ "notes": feedback, "user": user.id ]) { (error) in
+            completion(error)
+        }
     }
 }

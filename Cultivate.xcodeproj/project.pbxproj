@@ -45,6 +45,7 @@
 		BF7F48D31FE9015600737FE5 /* CULButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48D21FE9015600737FE5 /* CULButton.swift */; };
 		BF7F48D71FE9089A00737FE5 /* ContactTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48D51FE9089A00737FE5 /* ContactTblCell.swift */; };
 		BF7F48D81FE9089A00737FE5 /* ContactTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF7F48D61FE9089A00737FE5 /* ContactTblCell.xib */; };
+		BF80EFF120125FD7002A19CC /* SubmitFeedbackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF80EFF020125FD7002A19CC /* SubmitFeedbackVC.swift */; };
 		BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4370C1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift */; };
 		BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */; };
 		BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */; };
@@ -135,6 +136,7 @@
 		BF7F48D21FE9015600737FE5 /* CULButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULButton.swift; sourceTree = "<group>"; };
 		BF7F48D51FE9089A00737FE5 /* ContactTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTblCell.swift; sourceTree = "<group>"; };
 		BF7F48D61FE9089A00737FE5 /* ContactTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTblCell.xib; sourceTree = "<group>"; };
+		BF80EFF020125FD7002A19CC /* SubmitFeedbackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitFeedbackVC.swift; sourceTree = "<group>"; };
 		BFA4370C1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowupFrequencyListTableViewAdapter.swift; sourceTree = "<group>"; };
 		BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedVC.swift; sourceTree = "<group>"; };
 		BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULTextField.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				BFE9D79C1FE79FFF0091F4A8 /* Signup */,
 				BFE9D7A31FE7A12A0091F4A8 /* Welcome */,
 				BFCA7D3F2010C17800E717CB /* CULHamburgerMenuVC.swift */,
+				BF80EFF020125FD7002A19CC /* SubmitFeedbackVC.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -873,6 +876,7 @@
 				BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */,
 				591EA6371FEA77730001B494 /* UIViewControllerExtension.swift in Sources */,
 				BF2D390E1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift in Sources */,
+				BF80EFF120125FD7002A19CC /* SubmitFeedbackVC.swift in Sources */,
 				BF7F48CD1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift in Sources */,
 				BF1298A71FEA8E710058C8EC /* CULNavigationController.swift in Sources */,
 				BF7F48D71FE9089A00737FE5 /* ContactTblCell.swift in Sources */,
