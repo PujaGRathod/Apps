@@ -61,6 +61,20 @@ class CULFirebaseGateway {
         }
     }
     
+    func delete(contacts: [CULContact], for user: CULUser, _ completion: @escaping ((Error?)->Void)) {
+        let store = Firestore.firestore()
+        let batch = store.batch()
+        for contact in contacts {
+            if let id = contact.db_Identifier {
+                let ref = store.collection("users").document(user.id).collection("contacts").document(id)
+                batch.deleteDocument(ref)
+            }
+        }
+        batch.commit { (error) in
+            completion(error)
+        }
+    }
+    
     private func convertContactToRawData(_ contact: CULContact) -> [String:Any] {
         var raw: [String:Any] = [:]
         

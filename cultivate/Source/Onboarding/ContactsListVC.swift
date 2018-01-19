@@ -87,8 +87,35 @@ class ContactsListVC: UIViewController {
         if self.mode == .onboarding  {
              self.performSegue(withIdentifier: "segueShowFollowupFrequenciesInformationVC", sender: nil)
         } else if self.mode == .updatingContacts {
-            ContactSelectionProcessDataStore.shared.setNewContacts(from: self.selectedContacts)
-            self.performSegue(withIdentifier: "segueSelectFrequency", sender: nil)
+            self.getDeselectedContacts(from: self.selectedContacts, { (contactsToDelete) in
+                if let user = CULFirebaseGateway.shared.loggedInUser {
+                    CULFirebaseGateway.shared.delete(contacts: contactsToDelete, for: user, { (error) in
+                        print("Error while deleting: \(error?.localizedDescription ?? "N.A")")
+                    })
+                }
+                ContactSelectionProcessDataStore.shared.setNewContacts(from: self.selectedContacts)
+                if ContactSelectionProcessDataStore.shared.getNewContacts().count > 0 {
+                    self.performSegue(withIdentifier: "segueSelectFrequency", sender: nil)
+                }
+            })
+        }
+    }
+    
+    /*
+     If the contact from cultivate contact list is NOT available in the selectedContacts list. then it should be removed from cultivate contacts.
+     */
+    private func getDeselectedContacts(from selectedContacts: [CULContact], _ completion: @escaping (([CULContact])->Void)) {
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
+                var cultivateContactsToDelete = [CULContact]()
+                let currentCultivateContacts = contacts
+                for cultivateContact in currentCultivateContacts {
+                    if selectedContacts.filter({ $0.identifier == cultivateContact.identifier }).first == nil {
+                        cultivateContactsToDelete.append(cultivateContact)
+                    }
+                }
+                completion(cultivateContactsToDelete)
+            })
         }
     }
     

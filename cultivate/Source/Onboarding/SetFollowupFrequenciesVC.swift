@@ -134,8 +134,10 @@ class SetFollowupFrequenciesVC: UIViewController {
 }
 
 extension SetFollowupFrequenciesVC: FollowupFrequencyListTableViewAdapterDelegate {
-    func selected(frequency: CULFollowupFrequency, for contact: CULContact) {
-        self.set(followupFrequency: frequency, for: contact)
-        self.setContact(after: contact)
+    func selected(frequency: CULFollowupFrequency, for contact: CULContact?) {
+        if let contact = contact {
+            self.set(followupFrequency: frequency, for: contact)
+            self.setContact(after: contact)
+        }
     }
 }

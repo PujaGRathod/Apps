@@ -33,13 +33,18 @@ class CULHamburgerMenuVC: UITableViewController {
     }
     
     private func logoutTapped() {
-        GIDSignIn.sharedInstance().signOut()
-        FBSDKLoginManager().logOut()
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print(error.localizedDescription)
-        }
-        self.performSegue(withIdentifier: "segueAuthentication", sender: nil)
+        let alert = UIAlertController(title: "Sure?", message: "Do you really want to Logout?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Logout", style: UIAlertActionStyle.destructive, handler: { (action) in
+            GIDSignIn.sharedInstance().signOut()
+            FBSDKLoginManager().logOut()
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print(error.localizedDescription)
+            }
+            self.performSegue(withIdentifier: "segueAuthentication", sender: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FollowupFrequencyListTableViewAdapterDelegate {
-    func selected(frequency: CULFollowupFrequency, for contact: CULContact)
+    func selected(frequency: CULFollowupFrequency, for contact: CULContact?)
 }
 
 class FollowupFrequencyListTableViewAdapter: NSObject {
@@ -28,7 +28,7 @@ class FollowupFrequencyListTableViewAdapter: NSObject {
         }
     }
     private var tableView: UITableView!
-    private var contact: CULContact!
+    private var contact: CULContact?
     private var selectedFrequency: CULFollowupFrequency?
 
     var delegate: FollowupFrequencyListTableViewAdapterDelegate?
@@ -66,7 +66,7 @@ extension FollowupFrequencyListTableViewAdapter:UITableViewDelegate, UITableView
         let frequency: CULFollowupFrequency = self.frequency(for: indexPath)
         cell.textLabel?.text = frequency.values.description
         
-        if self.contact.followupFrequency == frequency {
+        if self.contact?.followupFrequency == frequency {
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
         } else {
             cell.accessoryType = UITableViewCellAccessoryType.none

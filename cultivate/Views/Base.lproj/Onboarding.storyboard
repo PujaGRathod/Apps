@@ -562,6 +562,9 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 <state key="normal" title="Get started">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="finishButtonTapped:" destination="cPq-97-pvr" eventType="touchUpInside" id="7fw-uH-395"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nice!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ar-sG-JVD">
                                 <rect key="frame" x="16" y="204" width="343" height="36"/>
