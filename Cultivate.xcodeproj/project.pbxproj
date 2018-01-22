@@ -37,6 +37,7 @@
 		BF6379B61FFCA54F009C30E8 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */; };
 		BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6379B81FFCA587009C30E8 /* DashboardVC.swift */; };
 		BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */; };
+		BF6F61D4201616D200A49B08 /* CULBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F61D3201616D200A49B08 /* CULBarButtonItem.swift */; };
 		BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48C81FE8EE1C00737FE5 /* String.swift */; };
 		BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */; };
 		BF7F48CD1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CC1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift */; };
@@ -128,6 +129,7 @@
 		BF6379B51FFCA54F009C30E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Dashboard.storyboard; sourceTree = "<group>"; };
 		BF6379B81FFCA587009C30E8 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsVC.swift; sourceTree = "<group>"; };
+		BF6F61D3201616D200A49B08 /* CULBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULBarButtonItem.swift; sourceTree = "<group>"; };
 		BF7F48C81FE8EE1C00737FE5 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BF7F48CA1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFollowupFrequenciesInformationVC.swift; sourceTree = "<group>"; };
 		BF7F48CC1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFollowupFrequenciesVC.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				BF7F48C81FE8EE1C00737FE5 /* String.swift */,
 				BF14192720109DFD00BFEA07 /* UIFont.swift */,
 				BFCA7D3D2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift */,
+				BF6F61D3201616D200A49B08 /* CULBarButtonItem.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Instructions/Instructions.framework",
 				"${BUILT_PRODUCTS_DIR}/KLCPopup/KLCPopup.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -753,6 +757,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instructions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KLCPopup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -875,6 +880,7 @@
 				BF14191B200FC7E500BFEA07 /* FrequencyPickerPopupVC.swift in Sources */,
 				BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */,
 				591EA6371FEA77730001B494 /* UIViewControllerExtension.swift in Sources */,
+				BF6F61D4201616D200A49B08 /* CULBarButtonItem.swift in Sources */,
 				BF2D390E1FE8E5D700AF63EC /* ContactListTableViewAdapter.swift in Sources */,
 				BF80EFF120125FD7002A19CC /* SubmitFeedbackVC.swift in Sources */,
 				BF7F48CD1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift in Sources */,

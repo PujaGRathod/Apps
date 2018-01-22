@@ -13,16 +13,21 @@ class ContactSelectionProcessDataStore {
     enum Mode {
         case onboarding
         case updatingContacts
+        case addMissingTags
     }
     
     static let shared = ContactSelectionProcessDataStore()
     
     private var selectedContacts = [CULContact]()
-    var mode: Mode?
     private var newContacts = [CULContact]()
+    var contactsWithMissingTags = [CULContact]()
+    
+    var mode: Mode?
     
     func empty() {
         self.selectedContacts = []
+        self.newContacts = []
+        self.contactsWithMissingTags = []
     }
     
     func setNewContacts(from allContacts: [CULContact]) {
@@ -95,5 +100,14 @@ class ContactSelectionProcessDataStore {
     
     func getContacts() -> [CULContact] {
         return self.selectedContacts
+    }
+    
+    func update(contactWithMissingTag: CULContact) {
+        for (index, contact) in self.contactsWithMissingTags.enumerated() {
+            if contactWithMissingTag.identifier == contact.identifier {
+                self.contactsWithMissingTags[index] = contactWithMissingTag
+                break
+            }
+        }
     }
 }

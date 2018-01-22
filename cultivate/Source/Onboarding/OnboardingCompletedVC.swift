@@ -32,6 +32,11 @@ class OnboardingCompletedVC: UIViewController {
             self.titleLabel.isHidden = false
             self.messageLabel.text = "You've finished editing your Inner circle."
             self.finishButton.setTitle("Finish", for: .normal)
+        } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+            self.contacts = ContactSelectionProcessDataStore.shared.contactsWithMissingTags
+            self.titleLabel.isHidden = false
+            self.messageLabel.text = "You've finished adding tags."
+            self.finishButton.setTitle("Finish", for: .normal)
         }
         
         // Upload contacts to the user
@@ -49,12 +54,22 @@ class OnboardingCompletedVC: UIViewController {
         let group = DispatchGroup()
         
         group.enter()
-        CULFirebaseGateway.shared.addNew(contacts: self.contacts, for: user) { (error) in
-            if let error = error {
-                // Error
-                self.showAlert("Error", message: error.localizedDescription)
+        if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+            CULFirebaseGateway.shared.update(contacts: self.contacts, for: user, completion: { (error) in
+                if let error = error {
+                    // Error
+                    self.showAlert("Error", message: error.localizedDescription)
+                }
+                group.leave()
+            })
+        } else {
+            CULFirebaseGateway.shared.addNew(contacts: self.contacts, for: user) { (error) in
+                if let error = error {
+                    // Error
+                    self.showAlert("Error", message: error.localizedDescription)
+                }
+                group.leave()
             }
-            group.leave()
         }
         
         
@@ -70,26 +85,31 @@ class OnboardingCompletedVC: UIViewController {
         }
         
         group.notify(queue: DispatchQueue.main) {
+            
             // Success
             self.dataUploaded = true
             if self.userTappedOnButton == true {
-                self.nextVC()
+                self.showNextVC()
             }
-        }
-    }
-    
-    private func nextVC() {
-        if ContactSelectionProcessDataStore.shared.mode == .onboarding {
-            self.performSegue(withIdentifier: "segueDashboard", sender: nil)
-        } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
-            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
     @IBAction func finishButtonTapped(_ sender: UIButton) {
         self.userTappedOnButton = true
         if self.dataUploaded == true {
-            self.nextVC()
+            self.showNextVC()
+        }
+    }
+    
+    private func showNextVC() {
+        ContactSelectionProcessDataStore.shared.empty()
+        
+        if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+            self.performSegue(withIdentifier: "segueDashboard", sender: nil)
+        } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+            self.navigationController?.popToRootViewController(animated: true)
+        } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+            self.performSegue(withIdentifier: "segueDashboard", sender: nil)
         }
     }
 }

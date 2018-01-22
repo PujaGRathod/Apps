@@ -47,4 +47,10 @@ class CULHamburgerMenuVC: UITableViewController {
         alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueAddMissingTags" {
+            ContactSelectionProcessDataStore.shared.mode = .addMissingTags
+        }
+    }
 }

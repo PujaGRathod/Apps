@@ -434,41 +434,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ss-z8-qNa" customClass="CULTextField" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="36" y="249" width="303" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCq-5w-XaG">
+                                <rect key="frame" x="16" y="132" width="343" height="275"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ss-z8-qNa" customClass="CULTextField" customModule="cultivate" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="117" width="303" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="F74-AP-ArX"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GQ-NN-1BK" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="205" width="303" height="50"/>
+                                        <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="OPp-kc-xDr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="forgotPasswordButtonTapped:" destination="v3Y-9R-NK2" eventType="touchUpInside" id="H7d-Zl-xNS"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Please enter your e-mail address and we will send you account recovery instructions" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5m-eU-rYM">
+                                        <rect key="frame" x="20" y="20" width="303" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6D-kZ-7qi">
+                                        <rect key="frame" x="20" y="173" width="303" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="F74-AP-ArX"/>
+                                    <constraint firstItem="j6D-kZ-7qi" firstAttribute="top" secondItem="0Ss-z8-qNa" secondAttribute="bottom" constant="16" id="5vj-6A-GlG"/>
+                                    <constraint firstItem="5GQ-NN-1BK" firstAttribute="leading" secondItem="gCq-5w-XaG" secondAttribute="leading" constant="20" id="7Bo-lI-ERU"/>
+                                    <constraint firstAttribute="trailing" secondItem="j6D-kZ-7qi" secondAttribute="trailing" constant="20" id="Jlh-0k-k1E"/>
+                                    <constraint firstItem="d5m-eU-rYM" firstAttribute="top" secondItem="gCq-5w-XaG" secondAttribute="top" constant="20" id="OzB-af-MCw"/>
+                                    <constraint firstAttribute="trailing" secondItem="5GQ-NN-1BK" secondAttribute="trailing" constant="20" id="UNU-dq-Emd"/>
+                                    <constraint firstItem="j6D-kZ-7qi" firstAttribute="leading" secondItem="gCq-5w-XaG" secondAttribute="leading" constant="20" id="Ysi-Ep-PPV"/>
+                                    <constraint firstItem="0Ss-z8-qNa" firstAttribute="top" secondItem="d5m-eU-rYM" secondAttribute="bottom" constant="36" id="eYx-MH-z81"/>
+                                    <constraint firstAttribute="trailing" secondItem="0Ss-z8-qNa" secondAttribute="trailing" constant="20" id="hAg-Mj-u76"/>
+                                    <constraint firstAttribute="trailing" secondItem="d5m-eU-rYM" secondAttribute="trailing" constant="20" id="o2D-rV-fli"/>
+                                    <constraint firstItem="d5m-eU-rYM" firstAttribute="leading" secondItem="gCq-5w-XaG" secondAttribute="leading" constant="20" id="rcB-hI-LZa"/>
+                                    <constraint firstItem="0Ss-z8-qNa" firstAttribute="leading" secondItem="gCq-5w-XaG" secondAttribute="leading" constant="20" id="wgI-6m-klb"/>
+                                    <constraint firstAttribute="bottom" secondItem="5GQ-NN-1BK" secondAttribute="bottom" constant="20" id="xWO-VI-R1W"/>
+                                    <constraint firstItem="5GQ-NN-1BK" firstAttribute="top" secondItem="j6D-kZ-7qi" secondAttribute="bottom" constant="16" id="yB1-g8-0OY"/>
                                 </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GQ-NN-1BK" customClass="CULButton" customModule="cultivate" customModuleProvider="target">
-                                <rect key="frame" x="36" y="337" width="303" height="50"/>
-                                <color key="backgroundColor" red="0.62352941179999999" green="0.76862745099999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="OPp-kc-xDr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Submit">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="forgotPasswordButtonTapped:" destination="v3Y-9R-NK2" eventType="touchUpInside" id="H7d-Zl-xNS"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your e-mail address and we will send you account recovery instructions" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5m-eU-rYM">
-                                <rect key="frame" x="36" y="152" width="303" height="61"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.3803921569" green="0.36862745099999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6D-kZ-7qi">
-                                <rect key="frame" x="36" y="305" width="303" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account recovery instructions will be sent to your e-mail shortly." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmt-OK-veT">
                                 <rect key="frame" x="36" y="423" width="303" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -478,21 +499,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Qmt-OK-veT" firstAttribute="top" secondItem="5GQ-NN-1BK" secondAttribute="bottom" constant="36" id="07t-oo-eQF"/>
-                            <constraint firstItem="0Ss-z8-qNa" firstAttribute="top" secondItem="d5m-eU-rYM" secondAttribute="bottom" constant="36" id="1Fj-Ri-tJd"/>
-                            <constraint firstItem="0Ss-z8-qNa" firstAttribute="leading" secondItem="G35-TC-a9k" secondAttribute="leading" constant="36" id="8MK-me-33e"/>
-                            <constraint firstItem="G35-TC-a9k" firstAttribute="trailing" secondItem="d5m-eU-rYM" secondAttribute="trailing" constant="36" id="Agw-20-2xm"/>
-                            <constraint firstItem="d5m-eU-rYM" firstAttribute="top" secondItem="G35-TC-a9k" secondAttribute="top" constant="36" id="GCh-ef-8h8"/>
-                            <constraint firstItem="G35-TC-a9k" firstAttribute="trailing" secondItem="0Ss-z8-qNa" secondAttribute="trailing" constant="36" id="M6S-xT-Qyz"/>
+                            <constraint firstItem="gCq-5w-XaG" firstAttribute="leading" secondItem="G35-TC-a9k" secondAttribute="leading" constant="16" id="Inp-3h-3aq"/>
+                            <constraint firstItem="G35-TC-a9k" firstAttribute="trailing" secondItem="gCq-5w-XaG" secondAttribute="trailing" constant="16" id="KCF-yV-cGN"/>
                             <constraint firstItem="Qmt-OK-veT" firstAttribute="leading" secondItem="G35-TC-a9k" secondAttribute="leading" constant="36" id="Q3A-XG-d0L"/>
-                            <constraint firstItem="G35-TC-a9k" firstAttribute="trailing" secondItem="5GQ-NN-1BK" secondAttribute="trailing" constant="36" id="QU1-mO-m72"/>
-                            <constraint firstItem="d5m-eU-rYM" firstAttribute="leading" secondItem="G35-TC-a9k" secondAttribute="leading" constant="36" id="SI8-MY-xCV"/>
-                            <constraint firstItem="5GQ-NN-1BK" firstAttribute="leading" secondItem="G35-TC-a9k" secondAttribute="leading" constant="36" id="TC6-xw-Pj8"/>
                             <constraint firstItem="G35-TC-a9k" firstAttribute="trailing" secondItem="Qmt-OK-veT" secondAttribute="trailing" constant="36" id="VkC-IQ-bjW"/>
-                            <constraint firstItem="j6D-kZ-7qi" firstAttribute="top" secondItem="0Ss-z8-qNa" secondAttribute="bottom" constant="16" id="XEf-T3-gb0"/>
-                            <constraint firstItem="j6D-kZ-7qi" firstAttribute="leading" secondItem="G35-TC-a9k" secondAttribute="leading" constant="36" id="ZsB-5C-rKK"/>
-                            <constraint firstItem="G35-TC-a9k" firstAttribute="trailing" secondItem="j6D-kZ-7qi" secondAttribute="trailing" constant="36" id="aWJ-ED-9Fc"/>
-                            <constraint firstItem="5GQ-NN-1BK" firstAttribute="top" secondItem="j6D-kZ-7qi" secondAttribute="bottom" constant="16" id="qMY-24-yO6"/>
+                            <constraint firstItem="gCq-5w-XaG" firstAttribute="top" secondItem="G35-TC-a9k" secondAttribute="top" constant="16" id="dOa-g5-MC5"/>
+                            <constraint firstItem="Qmt-OK-veT" firstAttribute="top" secondItem="gCq-5w-XaG" secondAttribute="bottom" constant="16" id="ssu-9X-zwd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G35-TC-a9k"/>
                     </view>
@@ -500,8 +512,10 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="WUo-Cx-RiN"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="forgotPasswordContentView" destination="gCq-5w-XaG" id="RC1-Pr-rK9"/>
                         <outlet property="forgotPasswordErrorLabel" destination="j6D-kZ-7qi" id="hv9-ED-mzT"/>
                         <outlet property="forgotPasswordSuccessLabel" destination="Qmt-OK-veT" id="jud-hQ-dhG"/>
+                        <outlet property="submitButton" destination="5GQ-NN-1BK" id="YtM-CZ-Ahs"/>
                         <outlet property="txtEmail" destination="0Ss-z8-qNa" id="BB2-Kk-wLF"/>
                     </connections>
                 </viewController>

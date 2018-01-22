@@ -14,6 +14,8 @@ class ForgotPasswordVC: UIViewController {
     @IBOutlet weak var txtEmail: CULTextField!
     @IBOutlet weak var forgotPasswordSuccessLabel: UILabel!
     @IBOutlet weak var forgotPasswordErrorLabel: UILabel!
+    @IBOutlet weak var submitButton: CULButton!
+    @IBOutlet weak var forgotPasswordContentView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,18 +28,33 @@ class ForgotPasswordVC: UIViewController {
     }
 
     @IBAction func forgotPasswordButtonTapped(_ sender: CULButton) {
+        self.txtEmail.resignFirstResponder()
+        self.submitButton.isUserInteractionEnabled = false
         if let email: String = self.txtEmail.text {
             Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
-                if error != nil {
-                    self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
-                    self.forgotPasswordErrorLabel.text = "Invalid email address"
-                    self.forgotPasswordSuccessLabel.isHidden = true
-                } else {
-                    // Success
-                    self.txtEmail.setTextfieldMode(to: CULTextFieldMode.success)
-                    self.forgotPasswordErrorLabel.text = ""
-                    self.forgotPasswordSuccessLabel.isHidden = false
+                DispatchQueue.main.async {
+                    self.forgotPasswordResponse(error: error)
                 }
+            })
+        }
+    }
+    
+    private func forgotPasswordResponse(error: Error?) {
+        if error != nil {
+            self.submitButton.isHidden = false
+            self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
+            self.forgotPasswordErrorLabel.text = "Invalid email address"
+            self.forgotPasswordSuccessLabel.isHidden = true
+            self.submitButton.isUserInteractionEnabled = true
+        } else {
+            // Success
+            self.txtEmail.setTextfieldMode(to: CULTextFieldMode.success)
+            self.forgotPasswordErrorLabel.text = ""
+            self.forgotPasswordSuccessLabel.isHidden = false
+            UIView.animate(withDuration: 0.5, animations: {
+                self.submitButton.alpha = 0
+            }, completion: { (finished) in
+                self.submitButton.isHidden = true
             })
         }
     }

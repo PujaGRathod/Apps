@@ -9,6 +9,7 @@
 import UIKit
 import KLCPopup
 import SZTextView
+import Instructions
 
 class LogFollowupPopupVC: UIViewController {
     
@@ -23,6 +24,7 @@ class LogFollowupPopupVC: UIViewController {
     
     var followupLogged: ((_ contact: CULContact)->Void)?
     
+    private var coachMarksController = CoachMarksController()
     private var filteredContactList = [CULContact]()
     var allContacts = [CULContact]()
     var contact: CULContact?
@@ -57,8 +59,25 @@ class LogFollowupPopupVC: UIViewController {
                 self.allContacts = contacts
             })
         }
-        
-        self.detailsToRememberTextView.becomeFirstResponder()
+    }
+    
+    func showHelpPopovers() {
+        if self.shouldShowHelp() {
+            self.didShowHelp()
+            self.coachMarksController.dataSource = self
+            self.coachMarksController.start(on: self)
+        }
+    }
+    
+    private func shouldShowHelp() -> Bool {
+        let defaults = UserDefaults.standard
+        return !(defaults.bool(forKey: "LOG_FOLLOW-UP_HELP"))
+    }
+    
+    private func didShowHelp() {
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "LOG_FOLLOW-UP_HELP")
+        defaults.synchronize()
     }
     
     func loadContactDetails() {
@@ -198,3 +217,42 @@ extension LogFollowupPopupVC: UITextFieldDelegate {
         self.contactTextField.text = self.contact?.name
     }
 }
+
+extension LogFollowupPopupVC: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+    
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 2
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        if index == 0 {
+            return coachMarksController.helper.makeCoachMark(for: self.detailsToRememberTextView)
+        } else {
+            return coachMarksController.helper.makeCoachMark(for: self.dateTextField)
+        }
+        
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, withNextText: false, arrowOrientation: coachMark.arrowOrientation)
+
+        var hintText = ""
+        if index == 0 {
+            hintText = "Impress your friends by remembering important details from your conversations."
+        } else {
+            hintText = "Cultivate automatically calculates the next follow-up date based on your preferred follow-up frequency for the contact.\n\nYou can manually set the next follow-up by selecting the date"
+        }
+        coachViews.bodyView.hintLabel.text = hintText
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+    
+}
+
+//extension LogFollowupPopupVC: UIPopoverPresentationControllerDelegate {
+//
+//    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+//        return .none
+//    }
+//}
+

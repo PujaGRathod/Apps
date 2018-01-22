@@ -9,7 +9,7 @@
 import UIKit
 
 class AddTagsVC: UIViewController {
-
+    
     var contacts: [CULContact] = []
     private lazy var tagListTableViewAdapter: TagsListTableViewAdapter = TagsListTableViewAdapter()
     private var currentContact: CULContact! {
@@ -28,7 +28,7 @@ class AddTagsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getContacts()
+        
         self.tagListTableViewAdapter.set(tableView: self.tblTagsList)
         self.tagListTableViewAdapter.delegate = self
         self.tagListTableViewAdapter.textField = self.txtAddNewTag
@@ -36,19 +36,20 @@ class AddTagsVC: UIViewController {
         
         self.tblTagsList.tableHeaderView = self.headerView
         
+        self.getContacts()
+        
         self.txtAddNewTag.delegate = self
         
-        if let contact: CULContact = self.contacts.first {
-            self.currentContact = contact
-        } else {
-            // FATAL ERROR
-            // There's no contact to followup
+        self.skipButtonBottomConstraint.constant = -62
+        if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+            self.skipButtonBottomConstraint.constant = 12
+        } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+            let menuButton = UIBarButtonItem()
+            menuButton.image = #imageLiteral(resourceName: "ic_menu")
+            self.navigationItem.leftBarButtonItem = menuButton
+            hamburgerMenuVC.configure(menuButton, view: self.view)
         }
-        
-        if ContactSelectionProcessDataStore.shared.mode == .onboarding {
-            self.skipButtonBottomConstraint.constant = -62
-            self.view.setNeedsLayout()
-        }
+        self.view.setNeedsLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,13 +57,46 @@ class AddTagsVC: UIViewController {
         self.getContacts()
         self.tblTagsList.reloadData()
     }
-
+    
     func getContacts() {
         if ContactSelectionProcessDataStore.shared.mode == .onboarding {
             self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
+            self.setCurrentContact()
         } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
             self.contacts = ContactSelectionProcessDataStore.shared.getNewContacts()
+            self.setCurrentContact()
+        } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+            if let user = CULFirebaseGateway.shared.loggedInUser {
+                CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
+                    DispatchQueue.main.async {
+                        self.showContactsWithMissingTags(contacts)
+                        self.setCurrentContact()
+                    }
+                })
+            }
         }
+    }
+    
+    private func setCurrentContact() {
+        if let contact: CULContact = self.contacts.first {
+            self.currentContact = contact
+        } else {
+            // FATAL ERROR
+            // There's no contact to followup
+        }
+    }
+    
+    private func showContactsWithMissingTags(_ contacts: [CULContact]) {
+        self.contacts = contacts.filter({ (contact) -> Bool in
+            if contact.tag == nil {
+                return true
+            } else if contact.tag?.identifier == nil {
+                return true
+            }
+            return false
+        })
+        ContactSelectionProcessDataStore.shared.contactsWithMissingTags = self.contacts
+        self.tblTagsList.reloadData()
     }
     
     @IBAction func textFieldEditingChanged(_ sender: Any) {
@@ -81,12 +115,16 @@ class AddTagsVC: UIViewController {
         self.setContact(before: self.currentContact)
         return false
     }
-
+    
     private func setInformation(for contact: CULContact) {
         self.lblContactName.text = contact.name
         
         if let index: Int = self.index(for: contact) {
-            self.lblContactCount.text = "\(index+1)/\(self.contacts.count)"
+            var middleString = ""
+            if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+                middleString = " contact\((self.contacts.count > 1) ? "s":"") with no tag"
+            }
+            self.lblContactCount.text = "\(index+1)/\(self.contacts.count)\(middleString)"
         } else {
             self.printErrorMessageWhenContctIfNotFoundInTheList()
         }
@@ -98,7 +136,15 @@ class AddTagsVC: UIViewController {
             if nextIndex == self.contacts.count {
                 self.currentContact = self.contacts[index]
                 // The contact is the last one on the list. We should move to the next screen now.
-                self.performSegue(withIdentifier: "segueShowOnboardingCompletedVC", sender: self.contacts)
+                
+                if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+                    _ = ContactSelectionProcessDataStore.shared.update(contacts: self.contacts)
+                } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+                    ContactSelectionProcessDataStore.shared.setNewContacts(from: self.contacts)
+                } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+                    ContactSelectionProcessDataStore.shared.contactsWithMissingTags = self.contacts
+                }
+                self.performSegue(withIdentifier: "segueShowOnboardingCompletedVC", sender: nil)
             } else {
                 self.currentContact = self.contacts[nextIndex]
             }
@@ -131,6 +177,9 @@ class AddTagsVC: UIViewController {
             } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
                 ContactSelectionProcessDataStore.shared.update(newContact: updatedContact)
                 self.contacts = ContactSelectionProcessDataStore.shared.getNewContacts()
+            } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+                ContactSelectionProcessDataStore.shared.update(contactWithMissingTag: updatedContact)
+                self.contacts = ContactSelectionProcessDataStore.shared.contactsWithMissingTags
             }
             
             self.txtAddNewTag.text = nil

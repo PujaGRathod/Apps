@@ -14,6 +14,7 @@ class DashboardContactTblCell: UITableViewCell {
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contactNameLabel: UILabel!
+    @IBOutlet weak var logFollowupButton: UIButton!
     
     private var contact: CULContact!
     

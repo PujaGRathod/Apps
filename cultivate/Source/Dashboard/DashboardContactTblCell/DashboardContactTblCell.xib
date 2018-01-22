@@ -83,6 +83,7 @@
                 <outlet property="contactNameLabel" destination="dMt-fQ-xdk" id="poc-Au-nXe"/>
                 <outlet property="containerView" destination="It6-fT-x5G" id="bXo-vk-AF2"/>
                 <outlet property="dateLabel" destination="sXn-JX-iyN" id="x3S-lc-sjk"/>
+                <outlet property="logFollowupButton" destination="nuZ-hI-xy1" id="yh1-1A-Jb3"/>
             </connections>
             <point key="canvasLocation" x="25" y="65"/>
         </tableViewCell>

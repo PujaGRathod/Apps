@@ -18,6 +18,7 @@ target 'cultivate' do
   pod 'SZTextView'
   pod 'SDWebImage'
   pod 'SWRevealViewController'
+  pod 'Instructions', '~> 1.0.0'
 
   target 'cultivateTests' do
     inherit! :search_paths

@@ -23,10 +23,12 @@ class DashboardTableViewAdapter: NSObject {
     private var contacts = [CULContact]()
     private var filteredContacts = [CULContact]()
     private var sectionWiseContacts = [Section]()
+    private var firstLogFollowupButton: UIButton?
     
     private var tableView: UITableView!
     private var searchController: UISearchController?
     
+    var contactsLoaded: (()->Void)?
     var contactSelected: ((_ contact: CULContact)->Void)?
     var followupButtonTapped: ((_ indexPath: IndexPath, _ contact: CULContact)->Void)?
     var rescheduleButtonTapped: ((_ indexPath: IndexPath, _ contact: CULContact)->Void)?
@@ -58,6 +60,7 @@ class DashboardTableViewAdapter: NSObject {
                     self.contacts = contacts
                     self.updateContactsIfRequired()
                     self.formatContactsForAdapter()
+                    self.contactsLoaded?()
                 }
             })
         }
@@ -144,6 +147,10 @@ class DashboardTableViewAdapter: NSObject {
         
         self.tableView.reloadData()
     }
+    
+    func getFirstLogFollowupButton() -> UIButton? {
+        return self.firstLogFollowupButton
+    }
 }
 
 extension DashboardTableViewAdapter: UITableViewDataSource, UITableViewDelegate {
@@ -175,6 +182,14 @@ extension DashboardTableViewAdapter: UITableViewDataSource, UITableViewDelegate 
         cell.set(contact: self.contact(for: indexPath))
         cell.followupButtonTapped = { contact in
             self.followupButtonTapped?(indexPath, contact)
+        }
+        if indexPath.item == 0 {
+            if indexPath.section == 0 {
+                self.firstLogFollowupButton = cell.logFollowupButton
+            }
+            if indexPath.section == 1, self.firstLogFollowupButton == nil {
+                self.firstLogFollowupButton = cell.logFollowupButton
+            }
         }
         return cell
     }

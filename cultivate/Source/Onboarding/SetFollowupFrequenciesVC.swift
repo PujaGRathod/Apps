@@ -46,7 +46,7 @@ class SetFollowupFrequenciesVC: UIViewController {
     func getContacts() {
         if ContactSelectionProcessDataStore.shared.mode == .onboarding {
             self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
-        } else {
+        } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
             self.contacts = ContactSelectionProcessDataStore.shared.getNewContacts()
         }
     }

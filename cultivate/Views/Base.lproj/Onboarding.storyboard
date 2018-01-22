@@ -434,7 +434,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
         <!--Add tags-->
         <scene sceneID="wXP-ke-eHO">
             <objects>
-                <viewController id="wMO-YL-KQ0" customClass="AddTagsVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddTagsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wMO-YL-KQ0" customClass="AddTagsVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SAM-Kj-BPL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

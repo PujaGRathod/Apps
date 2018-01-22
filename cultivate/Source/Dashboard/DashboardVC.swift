@@ -8,12 +8,16 @@
 
 import UIKit
 import KLCPopup
+import Instructions
 
 class DashboardVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var logFollowupButton: UIBarButtonItem!
+    @IBOutlet weak var firstCoachMarkView: UIView!
     
+    private var coachMarksController = CoachMarksController()
     private var contacts: [CULContact] = []
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
     private var dashboardTableViewAdapter = DashboardTableViewAdapter()
@@ -38,6 +42,10 @@ class DashboardVC: UIViewController {
             self.navigationItem.searchController = searchController
         }
         self.definesPresentationContext = true
+        
+        self.dashboardTableViewAdapter.contactsLoaded = {
+            self.showHelpPopovers()
+        }
         
         self.dashboardTableViewAdapter.setup(for: self.tableView, searchController: self.searchController)
         
@@ -67,7 +75,7 @@ class DashboardVC: UIViewController {
             })
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueContactDetails" {
             if let vc = segue.destination as? ContactDetailsVC {
@@ -106,10 +114,11 @@ class DashboardVC: UIViewController {
             logFollowupPopupVC.followupLogged = { updatedContact in
                 self.dashboardTableViewAdapter.update(contact: updatedContact)
             }
-            logFollowupPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
             logFollowupPopupVC.contact = contact
             logFollowupPopupVC.presentingVC = self
+            
             // Ugly hack to force system to load the UIView
+            logFollowupPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
             print(logFollowupPopupVC.view)
             let verticalLayout = KLCPopupVerticalLayout.aboveCenter
             let layout = KLCPopupLayout(horizontal: .center, vertical: verticalLayout)
@@ -118,13 +127,80 @@ class DashboardVC: UIViewController {
             let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
             logFollowupPopupVC.popup = popup
             if let popup = popup {
+                logFollowupPopupVC.loadContactDetails()
+                popup.didFinishShowingCompletion = {
+                    logFollowupPopupVC.showHelpPopovers()
+                }
                 popup.show(with: layout)
             }
-            logFollowupPopupVC.loadContactDetails()
         }
     }
     
     @IBAction func logFollowupButtonTapped(_ sender: UIBarButtonItem) {
         self.logFollowupPopup(for: nil, tableViewIndexPath: nil)
+    }
+}
+
+extension DashboardVC: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+    
+    func showHelpPopovers() {
+        if self.shouldShowHelp() {
+            self.didShowHelp()
+            self.coachMarksController.dataSource = self
+            self.coachMarksController.start(on: self)
+        }
+    }
+    
+    private func shouldShowHelp() -> Bool {
+        let defaults = UserDefaults.standard
+        return !(defaults.bool(forKey: "DASHBOARD_HELP"))
+    }
+    
+    private func didShowHelp() {
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "DASHBOARD_HELP")
+        defaults.synchronize()
+    }
+
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 3
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        if index == 0 {
+            return coachMarksController.helper.makeCoachMark(for: self.firstCoachMarkView, pointOfInterest: nil, cutoutPathMaker: { (rect) -> UIBezierPath in
+                return UIBezierPath(rect: rect)
+            })
+        } else if index == 1 {
+            if let button = self.dashboardTableViewAdapter.getFirstLogFollowupButton() {
+                return coachMarksController.helper.makeCoachMark(for: button)
+            } else {
+                return coachMarksController.helper.makeCoachMark(for: self.tableView)
+            }
+        } else {
+            if let view = self.logFollowupButton.view {
+                return coachMarksController.helper.makeCoachMark(for: view)
+            } else {
+                return coachMarksController.helper.makeCoachMark(for: self.view)
+            }
+        }
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        
+        let shouldShowArrow = (index == 0) ? false : true
+        let arrowOrientation: CoachMarkArrowOrientation? = (index == 0) ? nil : coachMark.arrowOrientation
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: shouldShowArrow, withNextText: false, arrowOrientation: arrowOrientation)
+        
+        var hintText = ""
+        if index == 0 {
+            hintText = "Welcome to the Dashboard! This is where you will find your next suggested follow-up dates for each of your Cultivate Contacts\n\nCultivate automatically suggests follow-ups based on 1) the last date you reached out to that contact and  2) your selected follow-up frequency for that contact.\n\nTap the screen anywhere to continue"
+        } else if index == 1 {
+            hintText = "Select the “log follow-up” icon after you complete a follow-up with a contact.\n\nYou can also swipe left on a contact to reschedule the follow-up"
+        } else if index == 2 {
+            hintText = "You can also log a follow-up with any Cultivate contact, even if they’re aren’t listed below\n\nThis may be useful if you have an unexpected run-in with one of your Cultivate contacts"
+        }
+        coachViews.bodyView.hintLabel.text = hintText
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 }
