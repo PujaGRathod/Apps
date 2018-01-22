@@ -31,5 +31,6 @@ class ContactHistoryTblCell: UITableViewCell {
     func set(followup: CULContact.Followup) {
         self.dateLabel.text = followup.userReadableDateString
         self.notesLabel.text = followup.notes
+        self.notesBackgroudView.isHidden = (followup.notes?.count == 0) ? true : false
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import MessageUI
 import KLCPopup
+import ContactsUI
 
 class ContactDetailsVC: UIViewController {
 
@@ -57,6 +58,20 @@ class ContactDetailsVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ContactDetailsVC.notesTextEditingDidEnd), name:  NSNotification.Name.UITextViewTextDidEndEditing, object: self.notesTextView)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        ContactsWorker().addTestData()
+        
+//        if let contact = ContactsWorker().getCNContact(for: self.contact.identifier) {
+//            let vc = CNContactViewController(for: contact)
+//            vc.delegate = self
+//            vc.allowsActions = true
+//            vc.contactStore = ContactsWorker().getContactStore()
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextViewTextDidEndEditing, object: self.notesTextView)
@@ -71,22 +86,27 @@ class ContactDetailsVC: UIViewController {
     }
     
     private func display(contact: CULContact) {
-        self.nameInitialsLabel.isHidden = true
-        if let url = contact.profileImageURL {
-            self.profileImageView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
-                if image == nil || error != nil {
-                    self.show(nameInitials: contact.initials)
-                }
-            })
-        } else {
-            self.show(nameInitials: contact.initials)
-        }
-        
+        self.loadProfileImage(for: contact)
         self.nameLabel.text = contact.name
         self.followupFrequencyValueButton.setTitle(contact.followupFrequency.values.description, for: UIControlState.normal)
         self.tagValueButton.setTitle(contact.tag?.name ?? "None", for: UIControlState.normal)
         self.nextFollowupDateValueButton.setTitle(contact.userReadableFollowupDateString, for: .normal)
         self.notesTextView.text = contact.notes
+    }
+    
+    func loadProfileImage(for contact: CULContact) {
+        self.nameInitialsLabel.isHidden = true
+        if let image = ContactsWorker().getThumbnailImage(forContactIdentifier: contact.identifier) {
+            self.profileImageView.image = image
+//        } else if let url = contact.profileImageURL {
+//            self.profileImageView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+//                if image == nil || error != nil {
+//                    self.show(nameInitials: contact.initials)
+//                }
+//            })
+        } else {
+            self.show(nameInitials: contact.initials)
+        }
     }
     
     private func show(nameInitials: String) {
@@ -373,6 +393,14 @@ extension ContactDetailsVC: MFMailComposeViewControllerDelegate {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true) {
+        }
+    }
+}
+
+extension ContactDetailsVC: CNContactViewControllerDelegate {
+    
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+        viewController.dismiss(animated: true) {
         }
     }
 }

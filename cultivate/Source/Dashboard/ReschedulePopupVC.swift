@@ -38,12 +38,25 @@ class ReschedulePopupVC: UIViewController {
         self.containerView.layer.borderWidth = 0.5
         self.containerView.layer.cornerRadius = 5
         self.dateTextField.inputView = self.datePickerContainerView
-        self.datePicker.minimumDate = Date()
+        self.setRangeOfDatePicker()
         self.dateTextField.becomeFirstResponder()
     }
     
     func viewForPopup() -> UIView {
         return self.containerView
+    }
+    
+    private func setRangeOfDatePicker() {
+        self.datePicker.minimumDate = Date()
+        
+        let calendar = Calendar(identifier: .gregorian)
+        var datecomps = calendar.dateComponents([.day,.month,.year], from: Date())
+        if let year = datecomps.year {
+            datecomps.year = year + 1
+            datecomps.month = 12
+            datecomps.day = 31
+        }
+        self.datePicker.maximumDate = calendar.date(from: datecomps)
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {

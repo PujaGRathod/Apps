@@ -103,17 +103,30 @@ class SignupVC: UIViewController {
                 return
             }
             if let user = user {
-                print("User account created with: \(email)")
-                let userlocal = CULUser(withName: name, email: user.email ?? email, id: user.uid)
-                userlocal.save()
-                // Open onboarding
-                self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
+//                if let email = user.email {
+//                    user.sendEmailVerification(completion: { (error) in
+//                        self.showAlert("Sent", message: "A verification email has been sent at \(email). Please check your inbox.")
+//                        self.createCULUserAndShowOnboarding(name: name, email: email, id: user.uid)
+//                    })
+//                } else {
+                    self.createCULUserAndShowOnboarding(name: name, email: email, id: user.uid)
+//                }
             } else {
                 print("Error: user is nil FIR AUTH")
             }
         }
     }
-
+    
+    private func createCULUserAndShowOnboarding(name: String, email: String, id: String) {
+        print("User account created with: \(email)")
+        let userlocal = CULUser(withName: name, email: email, id: id)
+        userlocal.save()
+        DispatchQueue.main.async {
+            // Open onboarding
+            self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
+        }
+    }
+    
     func signoutUser() {
         do {
             try Auth.auth().signOut()

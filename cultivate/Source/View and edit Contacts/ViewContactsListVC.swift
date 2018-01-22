@@ -27,17 +27,8 @@ class ViewContactsListVC: UIViewController {
         super.viewDidLoad()
         hamburgerMenuVC.configure(self.menuButton, view: self.view)
         
-        if let user = CULFirebaseGateway.shared.loggedInUser {
-            CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
-                DispatchQueue.main.async {
-                    self.show(contacts: contacts)
-                    self.tags = self.getTags(from: contacts)
-                }
-            })
-        }
-        
         self.addBorderAndBackground(to: self.tagFilterView)
-        self.tagValueButton.setTitle(self.selectedTag?.name ?? "None", for: .normal)
+        self.tagValueButton.setTitle(self.selectedTag?.name ?? "No filter", for: .normal)
     }
     
     private func addBorderAndBackground(to view: UIView) {
@@ -50,6 +41,14 @@ class ViewContactsListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
+                DispatchQueue.main.async {
+                    self.show(contacts: contacts)
+                    self.tags = self.getTags(from: contacts)
+                }
+            })
+        }
         if let selectedRowIndexPath = self.tblContactsList.indexPathForSelectedRow {
             self.tblContactsList.deselectRow(at: selectedRowIndexPath, animated: true)
         }
@@ -90,7 +89,7 @@ class ViewContactsListVC: UIViewController {
         if let tagPickerPopupVC = self.tagPickerPopupVC {
             tagPickerPopupVC.tagUpdated = { updatedTag in
                 self.selectedTag = updatedTag
-                var tagName = "None"
+                var tagName = "No filter"
                 if let tag = updatedTag {
                     tagName = tag.name
                 }

@@ -66,6 +66,7 @@ class AddTagsVC: UIViewController {
             self.contacts = ContactSelectionProcessDataStore.shared.getNewContacts()
             self.setCurrentContact()
         } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+            self.showUI(hidden: true)
             if let user = CULFirebaseGateway.shared.loggedInUser {
                 CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
                     DispatchQueue.main.async {
@@ -95,8 +96,21 @@ class AddTagsVC: UIViewController {
             }
             return false
         })
-        ContactSelectionProcessDataStore.shared.contactsWithMissingTags = self.contacts
-        self.tblTagsList.reloadData()
+        if self.contacts.count == 0 {
+            self.showUI(hidden: true)
+            self.lblContactName.text = "There are no contacts without tags!"
+            self.lblContactName.isHidden = false
+        } else {
+            self.showUI(hidden: false)
+            ContactSelectionProcessDataStore.shared.contactsWithMissingTags = self.contacts
+            self.tblTagsList.reloadData()
+        }
+    }
+    
+    private func showUI(hidden: Bool) {
+        self.tblTagsList.isHidden = hidden
+        self.lblContactName.isHidden = hidden
+        self.lblContactCount.isHidden = hidden
     }
     
     @IBAction func textFieldEditingChanged(_ sender: Any) {

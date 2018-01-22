@@ -122,7 +122,8 @@ struct CULContact: Equatable {
     // Contact book identifier
     var identifier: String!
     
-    var profileImageURL: URL?
+//    var profileImageURL: URL?
+    var profileImage: UIImage?
     
     var first_name: String?
     var last_name: String?

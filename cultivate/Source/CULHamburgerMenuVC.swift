@@ -12,9 +12,28 @@ import FirebaseAuth
 import FBSDKLoginKit
 
 class CULHamburgerMenuVC: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let gesture = self.revealViewController().panGestureRecognizer(),
+            let frontVC = self.revealViewController().frontViewController {
+            self.revealViewController().view.addGestureRecognizer(gesture)
+            frontVC.revealViewController().tapGestureRecognizer()
+            frontVC.view.isUserInteractionEnabled = false
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let gesture = self.revealViewController().panGestureRecognizer(),
+            let view = self.revealViewController().frontViewController.view {
+            view.addGestureRecognizer(gesture)
+            view.isUserInteractionEnabled = true
+        }
     }
     
     func configure(_ menuButton: UIBarButtonItem, view: UIView) {

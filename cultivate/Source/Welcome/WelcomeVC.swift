@@ -175,6 +175,16 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
                 } else {
                     print("Email on FIR User: \(user.email ?? "nil")")
                 }
+                
+//                if let email = user.email {
+//                    user.sendEmailVerification(completion: { (error) in
+//                        self.showAlert("Sent", message: "A verification email has been sent at \(email). Please check your inbox.")
+//                        self.createCULUserAndShowOnboarding(name: name, email: email, id: user.uid)
+//                    })
+//                } else {
+//                    self.createCULUserAndShowOnboarding(name: name, email: email, id: user.uid)
+//                }
+                
                 print("User account created with: \(credential.provider)")
                 self.checkandCreateUser(id: user.uid, email: user.email ?? email, name: user.displayName ?? name)
             } else {

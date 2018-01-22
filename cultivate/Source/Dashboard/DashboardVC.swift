@@ -9,6 +9,7 @@
 import UIKit
 import KLCPopup
 import Instructions
+import StoreKit
 
 class DashboardVC: UIViewController {
 
@@ -44,6 +45,7 @@ class DashboardVC: UIViewController {
         self.definesPresentationContext = true
         
         self.dashboardTableViewAdapter.contactsLoaded = {
+            self.updateContacts()
             self.showHelpPopovers()
         }
         
@@ -66,16 +68,15 @@ class DashboardVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Generate initial followup dates for all contacts
-        self.contacts = FollowupDateGenerator.assignInitialFollowupDates(for: self.contacts)
-        if let user = CULFirebaseGateway.shared.loggedInUser {
-            CULFirebaseGateway.shared.update(contacts: self.contacts, for: user, completion: { (error) in
-                print("Contacts saved - DashboardVC")
-            })
-        }
+        self.dashboardTableViewAdapter.getContacts()
+        self.updateContacts()
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.askForReview()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueContactDetails" {
             if let vc = segue.destination as? ContactDetailsVC {
@@ -84,6 +85,16 @@ class DashboardVC: UIViewController {
         }
     }
 
+    func updateContacts() {
+        // Generate initial followup dates for all contacts
+        self.contacts = FollowupDateGenerator.assignInitialFollowupDates(for: self.contacts)
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.update(contacts: self.contacts, for: user, completion: { (error) in
+                print("Contacts saved - DashboardVC")
+            })
+        }
+    }
+    
     func reschedulePopup(for contact: CULContact, tableViewIndexPath: IndexPath) {
         self.reschedulePopupVC = self.storyboard?.instantiateViewController(withIdentifier: "ReschedulePopupVC") as? ReschedulePopupVC
         if let reschedulePopupVC = self.reschedulePopupVC {
@@ -201,6 +212,26 @@ extension DashboardVC: CoachMarksControllerDataSource, CoachMarksControllerDeleg
             hintText = "You can also log a follow-up with any Cultivate contact, even if they’re aren’t listed below\n\nThis may be useful if you have an unexpected run-in with one of your Cultivate contacts"
         }
         coachViews.bodyView.hintLabel.text = hintText
+        
+//        coachViews.bodyView.layer.borderWidth = 3
+//        coachViews.bodyView.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+//        coachViews.bodyView.layer.cornerRadius = 8
+        
+//        coachViews.arrowView?.layer.borderWidth = 3
+//        coachViews.arrowView?.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+//        coachViews.bodyView.layer.cornerRadius = 8
+        
+//        coachViews.arrowView?.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+//        coachViews.arrowView?.isHighlighted = true
+        
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+}
+
+extension DashboardVC {
+    
+    func askForReview() {
+        let reviewManager = RequestReviewManager()
+        reviewManager.askForReview()
     }
 }

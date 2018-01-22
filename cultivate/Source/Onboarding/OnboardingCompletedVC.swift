@@ -32,11 +32,13 @@ class OnboardingCompletedVC: UIViewController {
             self.titleLabel.isHidden = false
             self.messageLabel.text = "You've finished editing your Inner circle."
             self.finishButton.setTitle("Finish", for: .normal)
+            self.footerView.isHidden = true
         } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
             self.contacts = ContactSelectionProcessDataStore.shared.contactsWithMissingTags
             self.titleLabel.isHidden = false
             self.messageLabel.text = "You've finished adding tags."
             self.finishButton.setTitle("Finish", for: .normal)
+            self.footerView.isHidden = true
         }
         
         // Upload contacts to the user

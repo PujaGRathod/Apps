@@ -49,8 +49,6 @@ class DashboardTableViewAdapter: NSObject {
         
         self.searchController = searchController
         self.searchController?.searchBar.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
-        
-        self.getContacts()
     }
     
     func getContacts() {
@@ -126,7 +124,7 @@ class DashboardTableViewAdapter: NSObject {
         
         var section1 = Section()
         section1.index = 0
-        section1.title = "Suggested follow-ups for the next 30 days"
+        section1.title = "Follow-ups for the next 30 days"
         var rows1 = [Section.Row]()
         for (index, contact) in followupsInNext30Days.enumerated() {
             rows1.append(Section.Row(index: index, contact: contact))
@@ -135,7 +133,7 @@ class DashboardTableViewAdapter: NSObject {
         
         
         var section2 = Section()
-        section2.title = "All other suggested follow-ups"
+        section2.title = "All other follow-ups"
         section2.index = 1
         var rows2 = [Section.Row]()
         for (index, contact) in restOfFollowups.enumerated() {
@@ -176,7 +174,7 @@ extension DashboardTableViewAdapter: UITableViewDataSource, UITableViewDelegate 
         }
         return self.sectionWiseContacts[section].rows.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardContactTblCell", for: indexPath) as! DashboardContactTblCell
         cell.set(contact: self.contact(for: indexPath))

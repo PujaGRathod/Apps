@@ -58,6 +58,7 @@
 		BFCA7D402010C17800E717CB /* CULHamburgerMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA7D3F2010C17800E717CB /* CULHamburgerMenuVC.swift */; };
 		BFCA7D432010D0CF00E717CB /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCA7D412010D0CF00E717CB /* Contact.storyboard */; };
 		BFCA7D462010D49400E717CB /* ViewContactsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA7D452010D49400E717CB /* ViewContactsListVC.swift */; };
+		BFCC33552016345000D75309 /* RequestReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC33542016345000D75309 /* RequestReviewManager.swift */; };
 		BFD0168920073A960054365F /* DashboardTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */; };
 		BFD0168D20073AEC0054365F /* DashboardContactTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168B20073AEC0054365F /* DashboardContactTblCell.swift */; };
 		BFD0168E20073AEC0054365F /* DashboardContactTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD0168C20073AEC0054365F /* DashboardContactTblCell.xib */; };
@@ -155,6 +156,7 @@
 		BFCA7D3F2010C17800E717CB /* CULHamburgerMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULHamburgerMenuVC.swift; sourceTree = "<group>"; };
 		BFCA7D422010D0CF00E717CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Contact.storyboard; sourceTree = "<group>"; };
 		BFCA7D452010D49400E717CB /* ViewContactsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContactsListVC.swift; sourceTree = "<group>"; };
+		BFCC33542016345000D75309 /* RequestReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewManager.swift; sourceTree = "<group>"; };
 		BFD0168820073A960054365F /* DashboardTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewAdapter.swift; sourceTree = "<group>"; };
 		BFD0168B20073AEC0054365F /* DashboardContactTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardContactTblCell.swift; sourceTree = "<group>"; };
 		BFD0168C20073AEC0054365F /* DashboardContactTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardContactTblCell.xib; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				BF14192720109DFD00BFEA07 /* UIFont.swift */,
 				BFCA7D3D2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift */,
 				BF6F61D3201616D200A49B08 /* CULBarButtonItem.swift */,
+				BFCC33542016345000D75309 /* RequestReviewManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				BFD01693200747630054365F /* DashboardTableViewHeader.swift in Sources */,
 				BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */,
 				591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */,
+				BFCC33552016345000D75309 /* RequestReviewManager.swift in Sources */,
 				BFE9D79F1FE7A0210091F4A8 /* SignupVC.swift in Sources */,
 				BF7F48D31FE9015600737FE5 /* CULButton.swift in Sources */,
 				BF141911200F4C3400BFEA07 /* ContactLogHistoryTableViewAdapter.swift in Sources */,
@@ -1113,7 +1117,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6K2394RR4;
 				INFOPLIST_FILE = "$(SRCROOT)/cultivate/Configurations/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cultivate.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1132,7 +1136,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6K2394RR4;
 				INFOPLIST_FILE = "$(SRCROOT)/cultivate/Configurations/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cultivate.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

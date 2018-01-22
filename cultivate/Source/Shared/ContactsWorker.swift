@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import ContactsUI
 
 typealias ContactsHandler = (_ orderedContacts : [String: [CULContact]], _ sortedContactKeys: [String], _ error : NSError?) -> Void
 
@@ -140,17 +141,19 @@ class ContactsWorker {
     
     func allowedContactKeys() -> [CNKeyDescriptor]{
         //We have to provide only the keys which we have to access. We should avoid unnecessary keys when fetching the contact. Reducing the keys means faster the access.
-        return [CNContactNamePrefixKey as CNKeyDescriptor,
-                CNContactGivenNameKey as CNKeyDescriptor,
-                CNContactFamilyNameKey as CNKeyDescriptor,
-                CNContactOrganizationNameKey as CNKeyDescriptor,
-                CNContactBirthdayKey as CNKeyDescriptor,
-                CNContactImageDataKey as CNKeyDescriptor,
-                CNContactThumbnailImageDataKey as CNKeyDescriptor,
-                CNContactImageDataAvailableKey as CNKeyDescriptor,
-                CNContactPhoneNumbersKey as CNKeyDescriptor,
-                CNContactEmailAddressesKey as CNKeyDescriptor,
-                CNContactInstantMessageAddressesKey as CNKeyDescriptor,
+        return [
+            CNContactNamePrefixKey as CNKeyDescriptor,
+            CNContactGivenNameKey as CNKeyDescriptor,
+            CNContactFamilyNameKey as CNKeyDescriptor,
+            CNContactOrganizationNameKey as CNKeyDescriptor,
+            CNContactBirthdayKey as CNKeyDescriptor,
+            CNContactImageDataKey as CNKeyDescriptor,
+            CNContactThumbnailImageDataKey as CNKeyDescriptor,
+            CNContactImageDataAvailableKey as CNKeyDescriptor,
+            CNContactPhoneNumbersKey as CNKeyDescriptor,
+            CNContactEmailAddressesKey as CNKeyDescriptor,
+            CNContactInstantMessageAddressesKey as CNKeyDescriptor,
+            CNContactViewController.descriptorForRequiredKeys(),
         ]
     }
     
@@ -159,7 +162,6 @@ class ContactsWorker {
         contact.identifier = cnContact.identifier
         contact.first_name = cnContact.givenName
         contact.last_name = cnContact.familyName
-
         //        if let components = cnContact.birthday {
         //            let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         //            contact.birthday = calendar.date(from: components)
@@ -168,21 +170,21 @@ class ContactsWorker {
         return contact
     }
     
+    func getThumbnailImage(forContactIdentifier identifier: String) -> UIImage? {
+        let cnContact = self.getCNContact(for: identifier)
+        var profileImage: UIImage? = nil
+        if let data = cnContact?.thumbnailImageData,
+            let image = UIImage(data: data) {
+            
+            profileImage = image
+        }
+        return profileImage
+    }
+    
     func getPhoneNumbers(forContactIdentifier identifier: String) -> [String:String] {
         var phoneNumbers = [String:String]()
-        var cnContact: CNContact?
         
-        if self.contactsStore == nil {
-            //ContactStore is control for accessing the Contacts
-            self.contactsStore = CNContactStore()
-        }
-        
-        do {
-            cnContact = try self.contactsStore?.unifiedContact(withIdentifier: identifier, keysToFetch: self.allowedContactKeys())
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-        
+        let cnContact = self.getCNContact(for: identifier)
         guard let contact = cnContact else {
             return phoneNumbers
         }
@@ -200,19 +202,7 @@ class ContactsWorker {
     func getEmailAddresses(forContactIdentifier identifier: String) -> [String:String] {
         var emailAddresses = [String:String]()
         
-        var cnContact: CNContact?
-        
-        if self.contactsStore == nil {
-            //ContactStore is control for accessing the Contacts
-            self.contactsStore = CNContactStore()
-        }
-        
-        do {
-            cnContact = try self.contactsStore?.unifiedContact(withIdentifier: identifier, keysToFetch: self.allowedContactKeys())
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-        
+        let cnContact = self.getCNContact(for: identifier)
         guard let contact = cnContact else {
             return emailAddresses
         }
@@ -226,5 +216,46 @@ class ContactsWorker {
         }
         
         return emailAddresses
+    }
+    
+    func getCNContact(for identifier: String) -> CNContact? {
+        var cnContact: CNContact?
+        
+        self.contactsStore = self.getContactStore()
+        
+        do {
+            cnContact = try self.contactsStore?.unifiedContact(withIdentifier: identifier, keysToFetch: self.allowedContactKeys())
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        return cnContact
+    }
+    
+    func getContactStore() -> CNContactStore? {
+        if self.contactsStore == nil {
+            //ContactStore is control for accessing the Contacts
+            self.contactsStore = CNContactStore()
+        }
+        return self.contactsStore
+    }
+
+    func addTestData() {
+        let mutableContact = self.getCNContact(for: "410FE041-5C4E-48DA-B4DE-04C15EA3DBAC")?.mutableCopy() as? CNMutableContact
+        
+        let value = CNInstantMessageAddress(username: "Id", service: "Cultivate")
+        let label = CNLabeledValue(label: "Label", value: value)
+        mutableContact?.instantMessageAddresses.append(label)
+        
+        let store = self.getContactStore()
+
+        let saveRequest = CNSaveRequest()
+        saveRequest.update(mutableContact!)
+        
+        do {
+            try store?.execute(saveRequest)
+        } catch {
+            print(error)
+        }
     }
 }
