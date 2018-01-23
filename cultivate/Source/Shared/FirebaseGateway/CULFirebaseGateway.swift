@@ -114,6 +114,22 @@ class CULFirebaseGateway {
         return tag
     }
     
+    private func convertTagToRawData(_ tag: CULTag) -> [String:Any] {
+        var rawData = [String:Any]()
+        rawData["name"] = tag.name
+        return rawData
+    }
+    
+    func update(tag: CULTag, for user: CULUser, completion: @escaping ((Error?)->Void)) {
+        let store: Firestore = Firestore.firestore()
+        let data = self.convertTagToRawData(tag)
+        if let id = tag.identifier {
+            let ref = store.collection("users").document(user.id).collection("tags").document(id)
+            ref.updateData(data, completion: { (error) in
+                completion(error)
+            })
+        }
+    }
     
     // Get all contacts for the current user
     func getContacts(for user: CULUser, _ completion:@escaping (([CULContact])->Void)) {

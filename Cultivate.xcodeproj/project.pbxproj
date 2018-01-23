@@ -49,6 +49,8 @@
 		BF80EFF120125FD7002A19CC /* SubmitFeedbackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF80EFF020125FD7002A19CC /* SubmitFeedbackVC.swift */; };
 		BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4370C1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift */; };
 		BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */; };
+		BFA6228620174664008C0435 /* RenameTagsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA6228520174664008C0435 /* RenameTagsVC.swift */; };
+		BFA6228820174DF4008C0435 /* EditTagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA6228720174DF4008C0435 /* EditTagVC.swift */; };
 		BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */; };
 		BFC8C2572009C8A60014062E /* CULFirebaseGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C2562009C8A60014062E /* CULFirebaseGateway.swift */; };
 		BFC8C2592009E9860014062E /* ReschedulePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C2582009E9860014062E /* ReschedulePopupVC.swift */; };
@@ -142,6 +144,8 @@
 		BF80EFF020125FD7002A19CC /* SubmitFeedbackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitFeedbackVC.swift; sourceTree = "<group>"; };
 		BFA4370C1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowupFrequencyListTableViewAdapter.swift; sourceTree = "<group>"; };
 		BFA4370E1FEA2BE200E2E886 /* OnboardingCompletedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletedVC.swift; sourceTree = "<group>"; };
+		BFA6228520174664008C0435 /* RenameTagsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameTagsVC.swift; sourceTree = "<group>"; };
+		BFA6228720174DF4008C0435 /* EditTagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagVC.swift; sourceTree = "<group>"; };
 		BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULTextField.swift; sourceTree = "<group>"; };
 		BFC8C2562009C8A60014062E /* CULFirebaseGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CULFirebaseGateway.swift; sourceTree = "<group>"; };
 		BFC8C2582009E9860014062E /* ReschedulePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReschedulePopupVC.swift; sourceTree = "<group>"; };
@@ -328,6 +332,15 @@
 			path = ContactTblCell;
 			sourceTree = "<group>";
 		};
+		BFA6228420174658008C0435 /* Rename Tags */ = {
+			isa = PBXGroup;
+			children = (
+				BFA6228520174664008C0435 /* RenameTagsVC.swift */,
+				BFA6228720174DF4008C0435 /* EditTagVC.swift */,
+			);
+			path = "Rename Tags";
+			sourceTree = "<group>";
+		};
 		BFC8C2552009C8A60014062E /* FirebaseGateway */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,18 +459,19 @@
 		BFE9D7911FE79F300091F4A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				BFCA7D442010D48C00E717CB /* View and edit Contacts */,
 				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
 				BF6E5587200A146400906E75 /* Contact Details */,
+				BFCA7D3F2010C17800E717CB /* CULHamburgerMenuVC.swift */,
 				BF6379B71FFCA57C009C30E8 /* Dashboard */,
 				BFF28FEA1FFB634B00036150 /* ExtendedSplashVC.swift */,
 				BFE9D79D1FE79FFF0091F4A8 /* Login */,
 				BFE9D79B1FE79FFF0091F4A8 /* Onboarding */,
+				BFA6228420174658008C0435 /* Rename Tags */,
 				BF2D390F1FE8E63E00AF63EC /* Shared */,
 				BFE9D79C1FE79FFF0091F4A8 /* Signup */,
-				BFE9D7A31FE7A12A0091F4A8 /* Welcome */,
-				BFCA7D3F2010C17800E717CB /* CULHamburgerMenuVC.swift */,
 				BF80EFF020125FD7002A19CC /* SubmitFeedbackVC.swift */,
+				BFCA7D442010D48C00E717CB /* View and edit Contacts */,
+				BFE9D7A31FE7A12A0091F4A8 /* Welcome */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -869,6 +883,7 @@
 				BFCA7D462010D49400E717CB /* ViewContactsListVC.swift in Sources */,
 				BF1B634C200DFC46000E50A5 /* ContactsWorker.swift in Sources */,
 				BFC8C2572009C8A60014062E /* CULFirebaseGateway.swift in Sources */,
+				BFA6228820174DF4008C0435 /* EditTagVC.swift in Sources */,
 				BFCA7D402010C17800E717CB /* CULHamburgerMenuVC.swift in Sources */,
 				BFC8C2592009E9860014062E /* ReschedulePopupVC.swift in Sources */,
 				BFA4370D1FEA0BA900E2E886 /* FollowupFrequencyListTableViewAdapter.swift in Sources */,
@@ -893,6 +908,7 @@
 				BFF28FEB1FFB634B00036150 /* ExtendedSplashVC.swift in Sources */,
 				BF2D390A1FE8DFBC00AF63EC /* ContactsListVC.swift in Sources */,
 				BF4A5AAC1FEA746900012B40 /* WebLinkVC.swift in Sources */,
+				BFA6228620174664008C0435 /* RenameTagsVC.swift in Sources */,
 				BF14192820109DFD00BFEA07 /* UIFont.swift in Sources */,
 				BFD016902007401B0054365F /* FollowupDateGenerator.swift in Sources */,
 				BFD01693200747630054365F /* DashboardTableViewHeader.swift in Sources */,

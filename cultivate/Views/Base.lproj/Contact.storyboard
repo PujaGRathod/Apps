@@ -602,6 +602,96 @@
             </objects>
             <point key="canvasLocation" x="2172" y="1267"/>
         </scene>
+        <!--Rename tags-->
+        <scene sceneID="t4v-eV-ORP">
+            <objects>
+                <viewController id="3bu-ZL-jn2" customClass="RenameTagsVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SK5-6H-dS5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C0L-cz-3J3">
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexColor" red="0.25882352939999997" green="0.4039215686" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Select a tag to rename it" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W8m-fa-eKy">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.37647058823529411" green="0.57647058823529407" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ksY-Rp-qGd" firstAttribute="bottom" secondItem="C0L-cz-3J3" secondAttribute="bottom" id="7Cr-t2-iLx"/>
+                            <constraint firstItem="C0L-cz-3J3" firstAttribute="top" secondItem="ksY-Rp-qGd" secondAttribute="top" id="H7x-vs-Vdz"/>
+                            <constraint firstItem="C0L-cz-3J3" firstAttribute="leading" secondItem="ksY-Rp-qGd" secondAttribute="leading" id="kjM-MA-ed3"/>
+                            <constraint firstItem="ksY-Rp-qGd" firstAttribute="trailing" secondItem="C0L-cz-3J3" secondAttribute="trailing" id="mZs-Ek-2Tt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ksY-Rp-qGd"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Rename tags" id="X92-NI-glb">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="ffF-Vm-FmV" customClass="CULHamburgerMenuBarButton" customModule="cultivate" customModuleProvider="target"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="ffF-Vm-FmV" id="2yS-vh-hLU"/>
+                        <outlet property="tagsTableView" destination="C0L-cz-3J3" id="wJz-4r-c2F"/>
+                        <segue destination="b8H-fe-D5T" kind="presentation" identifier="segueEditTag" id="fzj-jG-jQT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VYj-hb-VhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-242" y="2180"/>
+        </scene>
+        <!--Edit TagVC-->
+        <scene sceneID="5I6-yJ-aaS">
+            <objects>
+                <viewController id="tw3-VA-xHz" customClass="EditTagVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yWf-1J-p8h">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F8N-bn-p1i" customClass="CULTextField" customModule="cultivate" customModuleProvider="target">
+                                <rect key="frame" x="16" y="132" width="343" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="wpI-uX-GbW"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="F8N-bn-p1i" firstAttribute="leading" secondItem="tlT-vo-OA1" secondAttribute="leading" constant="16" id="Hp6-X2-v2c"/>
+                            <constraint firstItem="tlT-vo-OA1" firstAttribute="trailing" secondItem="F8N-bn-p1i" secondAttribute="trailing" constant="16" id="I3U-xl-gHG"/>
+                            <constraint firstItem="F8N-bn-p1i" firstAttribute="top" secondItem="tlT-vo-OA1" secondAttribute="top" constant="16" id="klG-kv-Fyu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tlT-vo-OA1"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="GHd-ch-zt3">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="zgm-jQ-aNp">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="tw3-VA-xHz" id="2jD-Lk-amf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="Law-8B-Y9D">
+                            <connections>
+                                <action selector="submitButtonTapped:" destination="tw3-VA-xHz" id="3JX-F9-zqM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textField" destination="F8N-bn-p1i" id="tEW-cp-2bt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wkm-56-e7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1271" y="2179"/>
+        </scene>
         <!--Tag Picker PopupVC-->
         <scene sceneID="MeP-aL-8fI">
             <objects>
@@ -1038,6 +1128,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ge-oS-QlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-243" y="1685"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mvM-UI-zzs">
+            <objects>
+                <navigationController storyboardIdentifier="navRenameTags" id="hTK-O0-p64" customClass="CULNavigationController" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="hC1-IK-RUn">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.37647058820000001" green="0.57647058819999997" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.37647058820000001" green="0.57647058819999997" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                            <color key="textColor" red="0.37647058820000001" green="0.57647058819999997" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3bu-ZL-jn2" kind="relationship" relationship="rootViewController" id="c16-Yo-koR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1rG-uZ-k1X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1039" y="2179"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="I1g-D9-Lnf">
+            <objects>
+                <navigationController id="b8H-fe-D5T" customClass="CULNavigationController" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Did-F1-GGb">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.37647058820000001" green="0.57647058819999997" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.87450980389999999" green="0.89411764709999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.37647058820000001" green="0.57647058819999997" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                            <color key="textColor" red="0.37647058820000001" green="0.57647058819999997" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="tw3-VA-xHz" kind="relationship" relationship="rootViewController" id="BNp-Km-gnT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O8e-Ex-CYX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="535" y="2178"/>
         </scene>
     </scenes>
     <resources>

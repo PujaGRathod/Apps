@@ -25,6 +25,7 @@ class TagsListTableViewAdapter: NSObject {
     var textField: UITextField?
     var shouldUseCustomCell: Bool = false
     var delegate: TagsListTableViewAdapterDelegate?
+    var shouldShowSelection = true
     
     func set(tableView: UITableView) {
         self.tableView = tableView
@@ -204,12 +205,12 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = tag?.name ?? "N.A"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
             
+            cell.accessoryType = UITableViewCellAccessoryType.none
             if self.contact?.tag?.identifier == tag?.identifier ||
                 self.selectedTag?.identifier == tag?.identifier {
-                
-                cell.accessoryType = UITableViewCellAccessoryType.checkmark
-            } else {
-                cell.accessoryType = UITableViewCellAccessoryType.none
+                if self.shouldShowSelection {
+                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
+                }
             }
         }
         

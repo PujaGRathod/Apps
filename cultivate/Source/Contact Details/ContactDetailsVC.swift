@@ -61,7 +61,7 @@ class ContactDetailsVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        ContactsWorker().addTestData()
+//        ContactsWorker().addTestData()
         
 //        if let contact = ContactsWorker().getCNContact(for: self.contact.identifier) {
 //            let vc = CNContactViewController(for: contact)
