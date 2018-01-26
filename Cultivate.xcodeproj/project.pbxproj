@@ -34,6 +34,7 @@
 		BF499EA2200A016F00C3EE33 /* LogFollowupPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF499EA1200A016F00C3EE33 /* LogFollowupPopupVC.swift */; };
 		BF4A5AAA1FEA742900012B40 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF4A5AA81FEA742800012B40 /* Authentication.storyboard */; };
 		BF4A5AAC1FEA746900012B40 /* WebLinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */; };
+		BF56EE1D201B2BE100415DD5 /* FirebaseAnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF56EE1C201B2BE100415DD5 /* FirebaseAnalyticsManager.swift */; };
 		BF6379B61FFCA54F009C30E8 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */; };
 		BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6379B81FFCA587009C30E8 /* DashboardVC.swift */; };
 		BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */; };
@@ -129,6 +130,7 @@
 		BF499EA1200A016F00C3EE33 /* LogFollowupPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFollowupPopupVC.swift; sourceTree = "<group>"; };
 		BF4A5AA91FEA742900012B40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkVC.swift; sourceTree = "<group>"; };
+		BF56EE1C201B2BE100415DD5 /* FirebaseAnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsManager.swift; sourceTree = "<group>"; };
 		BF6379B51FFCA54F009C30E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Dashboard.storyboard; sourceTree = "<group>"; };
 		BF6379B81FFCA587009C30E8 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsVC.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				BFCA7D3D2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift */,
 				BF6F61D3201616D200A49B08 /* CULBarButtonItem.swift */,
 				BFCC33542016345000D75309 /* RequestReviewManager.swift */,
+				BF56EE1C201B2BE100415DD5 /* FirebaseAnalyticsManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
 				BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */,
 				BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */,
+				BF56EE1D201B2BE100415DD5 /* FirebaseAnalyticsManager.swift in Sources */,
 				BF14191E200FC7F700BFEA07 /* FrequencyPickerTblCell.swift in Sources */,
 				BF04F49C200F12E5008B74E9 /* ContactSelectionProcessDataStore.swift in Sources */,
 				BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */,

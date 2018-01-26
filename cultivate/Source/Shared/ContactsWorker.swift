@@ -91,34 +91,38 @@ class ContactsWorker {
                     contactsArray.append(contact)
                     var key: String = "#"
                     
-                    //  If ordering has to be happening via family name change it here.
-                    var firstLetter = contact.givenName[0..<1]
-                    switch contactFetchRequest.sortOrder {
-                    case .givenName:
-                        if contact.givenName.count == 0 {
-                            firstLetter = contact.familyName[0..<1]
-                        } else {
-                            firstLetter = contact.givenName[0..<1]
+                    if contact.givenName.count == 0, contact.familyName.count == 0 {
+                        // Do not add show this contact. This contact does not have any name
+                    } else {
+                        //  If ordering has to be happening via family name change it here.
+                        var firstLetter = contact.givenName[0..<1]
+                        switch contactFetchRequest.sortOrder {
+                        case .givenName:
+                            if contact.givenName.count == 0 {
+                                firstLetter = contact.familyName[0..<1]
+                            } else {
+                                firstLetter = contact.givenName[0..<1]
+                            }
+                        case .familyName, .none, .userDefault:
+                            fallthrough
+                        default:
+                            if contact.familyName.count == 0 {
+                                firstLetter = contact.givenName[0..<1]
+                            } else {
+                                firstLetter = contact.familyName[0..<1]
+                            }
                         }
-                    case .familyName, .none, .userDefault:
-                        fallthrough
-                    default:
-                        if contact.familyName.count == 0 {
-                            firstLetter = contact.givenName[0..<1]
-                        } else {
-                            firstLetter = contact.familyName[0..<1]
+                        if firstLetter?.containsAlphabets() == true {
+                            key = firstLetter!.uppercased()
                         }
+                        var contacts = [CNContact]()
+                        
+                        if let segregatedContact = self.orderedContacts[key] {
+                            contacts = segregatedContact
+                        }
+                        contacts.append(contact)
+                        self.orderedContacts[key] = contacts
                     }
-                    if firstLetter?.containsAlphabets() == true {
-                        key = firstLetter!.uppercased()
-                    }
-                    var contacts = [CNContact]()
-                    
-                    if let segregatedContact = self.orderedContacts[key] {
-                        contacts = segregatedContact
-                    }
-                    contacts.append(contact)
-                    self.orderedContacts[key] = contacts
                     
                 })
                 

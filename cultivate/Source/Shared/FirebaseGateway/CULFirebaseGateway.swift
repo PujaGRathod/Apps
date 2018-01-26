@@ -17,7 +17,11 @@ class CULFirebaseGateway {
     func setOnboardingCompleted(for user: CULUser, completion: @escaping ((Error?)->Void)) {
         let store: Firestore = Firestore.firestore()
         let ref = store.collection("users").document(user.id)
-        ref.updateData([ "isOnBoardingComplete" : true ]) { (error) in
+        let data: [String:Any] = [
+            "isOnBoardingComplete" : true,
+            "onboardingCompletionDate": Date().timeIntervalSinceReferenceDate
+        ]
+        ref.updateData(data) { (error) in
             completion(error)
         }
     }

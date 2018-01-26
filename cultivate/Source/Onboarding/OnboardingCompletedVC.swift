@@ -66,11 +66,23 @@ class OnboardingCompletedVC: UIViewController {
             })
         } else {
             CULFirebaseGateway.shared.addNew(contacts: self.contacts, for: user) { (error) in
+                
+                CULFirebaseGateway.shared.getContacts(for: user, { (latestContacts) in
+                    for (index, contact) in self.contacts.enumerated() {
+                        if let latestContact = latestContacts.filter({ $0.identifier == contact.identifier }).first {
+                            self.contacts[index] = latestContact
+                        }
+                    }
+                    self.updateContacts {
+                        group.leave()
+                    }
+                })
+                
+                
                 if let error = error {
                     // Error
                     self.showAlert("Error", message: error.localizedDescription)
                 }
-                group.leave()
             }
         }
         
@@ -93,6 +105,17 @@ class OnboardingCompletedVC: UIViewController {
             if self.userTappedOnButton == true {
                 self.showNextVC()
             }
+        }
+    }
+    
+    func updateContacts(_ completion: @escaping (()->Void)) {
+        // Generate initial followup dates for all contacts
+        self.contacts = FollowupDateGenerator.assignInitialFollowupDates(for: self.contacts)
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.update(contacts: self.contacts, for: user, completion: { (error) in
+                print("Contacts saved - OnboardingCompletedVC")
+                completion()
+            })
         }
     }
     

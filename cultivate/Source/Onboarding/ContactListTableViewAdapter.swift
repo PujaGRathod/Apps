@@ -63,22 +63,33 @@ class ContactListTableViewAdapter: NSObject {
         }
     }
     
-    func load(contacts: [CULContact]) {
+    func load(contacts: [CULContact], with sortOrder: CULContact.SortOrder) {
         self.allContacts = contacts
         
         var orderedContacts = [String: [CULContact]]() //Contacts ordered in dictionary alphabetically
-        var key: String = "#"
-        let sortOrder = ContactsWorker().getSortOrder()
         
         for contact in contacts {
-            var firstLetter = contact.last_name?[0..<1]
-            if sortOrder == .firstName {
-                firstLetter = contact.first_name?[0..<1]
+            var key: String = "#"
+            var firstLetter = contact.first_name?[0..<1]
+            switch sortOrder {
+            case .firstName:
+                if contact.first_name?.count == 0 {
+                    firstLetter = contact.last_name?[0..<1]
+                } else {
+                    firstLetter = contact.first_name?[0..<1]
+                }
+            case .lastName:
+                fallthrough
+            default:
+                if contact.last_name?.count == 0 {
+                    firstLetter = contact.first_name?[0..<1]
+                } else {
+                    firstLetter = contact.last_name?[0..<1]
+                }
             }
             if firstLetter?.containsAlphabets() == true {
                 key = firstLetter!.uppercased()
             }
-            
             var segregatedContacts = [CULContact]()
             if let segregatedContactsForKey = orderedContacts[key] {
                 segregatedContacts = segregatedContactsForKey
@@ -199,10 +210,10 @@ extension ContactListTableViewAdapter: UITableViewDelegate, UITableViewDataSourc
         }
         
         guard let items = self.contacts[self.sortedKeys[section]] else {
-            return 0.01
+            return 0.001
         }
         if items.count == 0 {
-            return 0.01
+            return 0.001
         }
         
         return 30

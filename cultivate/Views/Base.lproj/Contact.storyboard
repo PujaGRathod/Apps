@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1095,11 +1096,18 @@
                     <navigationItem key="navigationItem" title="Contacts" id="fcF-FY-TXT">
                         <barButtonItem key="backBarButtonItem" title="Back" id="CVI-wA-9fQ"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="amf-od-e4j" customClass="CULHamburgerMenuBarButton" customModule="cultivate" customModuleProvider="target"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="s0p-I8-bHs">
-                            <connections>
-                                <segue destination="R0K-XU-9gL" kind="show" identifier="segueEditContacts" id="xPh-Ty-MnK"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="s0p-I8-bHs">
+                                <connections>
+                                    <segue destination="R0K-XU-9gL" kind="show" identifier="segueEditContacts" id="xPh-Ty-MnK"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="ic_sort_100pt" id="ijv-kX-d4p">
+                                <connections>
+                                    <action selector="sortButtonTapped:" destination="FSh-8W-HA1" id="mCV-ti-0bd"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="menuButton" destination="amf-od-e4j" id="AzF-3C-elj"/>
@@ -1208,5 +1216,6 @@
         <image name="Message_Enabled" width="40" height="40"/>
         <image name="Phone_Disabled" width="40" height="40"/>
         <image name="Phone_Enabled" width="40" height="40"/>
+        <image name="ic_sort_100pt" width="33" height="33"/>
     </resources>
 </document>

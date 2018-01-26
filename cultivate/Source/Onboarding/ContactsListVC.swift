@@ -35,6 +35,8 @@ class ContactsListVC: UIViewController {
         
         if let mode = self.mode {
             ContactSelectionProcessDataStore.shared.mode = mode
+        } else {
+            self.mode = ContactSelectionProcessDataStore.shared.mode
         }
         if self.mode == .onboarding {
             self.selectedContacts = ContactSelectionProcessDataStore.shared.getContacts()
@@ -98,15 +100,21 @@ class ContactsListVC: UIViewController {
              self.performSegue(withIdentifier: "segueShowFollowupFrequenciesInformationVC", sender: nil)
         } else if self.mode == .updatingContacts {
             self.getDeselectedContacts(from: self.selectedContacts, { (contactsToDelete) in
+                ContactSelectionProcessDataStore.shared.setNewContacts(from: self.selectedContacts)
                 if let user = CULFirebaseGateway.shared.loggedInUser {
                     CULFirebaseGateway.shared.delete(contacts: contactsToDelete, for: user, { (error) in
                         print("Error while deleting: \(error?.localizedDescription ?? "N.A")")
+                        proceed()
                     })
                 }
-                ContactSelectionProcessDataStore.shared.setNewContacts(from: self.selectedContacts)
-                if ContactSelectionProcessDataStore.shared.getNewContacts().count > 0 {
-                    self.performSegue(withIdentifier: "segueSelectFrequency", sender: nil)
+                func proceed() {
+                    if ContactSelectionProcessDataStore.shared.getNewContacts().count > 0 {
+                        self.performSegue(withIdentifier: "segueSelectFrequency", sender: nil)
+                    } else {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
+                
             })
         }
     }

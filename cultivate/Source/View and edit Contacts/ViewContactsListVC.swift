@@ -22,6 +22,13 @@ class ViewContactsListVC: UIViewController {
     private var selectedTag: CULTag?
     private var allContacts = [CULContact]()
     private var tagPickerPopupVC: TagPickerPopupVC?
+    private var selectedSortOrder = CULContact.SortOrder.firstName {
+        didSet {
+            let defaults = UserDefaults.standard
+            defaults.set(self.selectedSortOrder.rawValue, forKey: "KEY_CONTACT_SORT_ORDER")
+            defaults.synchronize()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +36,10 @@ class ViewContactsListVC: UIViewController {
         
         self.addBorderAndBackground(to: self.tagFilterView)
         self.tagValueButton.setTitle(self.selectedTag?.name ?? "No filter", for: .normal)
+        
+        if let sortOrder = CULContact.SortOrder(rawValue: UserDefaults.standard.integer(forKey: "KEY_CONTACT_SORT_ORDER")) {
+            self.selectedSortOrder = sortOrder
+        }
     }
     
     private func addBorderAndBackground(to view: UIView) {
@@ -70,7 +81,7 @@ class ViewContactsListVC: UIViewController {
         self.definesPresentationContext = true
         
         self.contactsListTableViewAdapter.set(searchController: self.searchController)
-        self.contactsListTableViewAdapter.load(contacts: contacts)
+        self.contactsListTableViewAdapter.load(contacts: contacts, with: self.selectedSortOrder)
     }
     
     private func filterContacts(for tag: CULTag?) {
@@ -78,9 +89,9 @@ class ViewContactsListVC: UIViewController {
             let filteredContacts = self.allContacts.filter({ (contact) -> Bool in
                 return contact.tag?.identifier == tag.identifier
             })
-            self.contactsListTableViewAdapter.load(contacts: filteredContacts)
+            self.contactsListTableViewAdapter.load(contacts: filteredContacts, with: self.selectedSortOrder)
         } else {
-            self.contactsListTableViewAdapter.load(contacts: self.allContacts)
+            self.contactsListTableViewAdapter.load(contacts: self.allContacts, with: self.selectedSortOrder)
         }
     }
     
@@ -141,6 +152,41 @@ class ViewContactsListVC: UIViewController {
     @IBAction func changeTagTapped(_ sender: UIButton) {
         self.showTagPicker()
     }
+
+    @IBAction func sortButtonTapped(_ sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: "Sort order", message: "Please select sort order", preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        var actionTitle1 = "First, Last"
+        var actionTitle2 = "Last, First"
+        let checkmark = " \u{2713}"
+        if self.selectedSortOrder == .firstName {
+            actionTitle1 += checkmark
+            actionTitle2 += "   "
+        } else {
+            actionTitle1 += "   "
+            actionTitle2 += checkmark
+        }
+        
+        let action1 = UIAlertAction(title: actionTitle1, style: UIAlertActionStyle.default, handler: { (action) in
+            self.selectedSortOrder = CULContact.SortOrder.firstName
+            self.contactsListTableViewAdapter.load(contacts: self.allContacts, with: self.selectedSortOrder)
+        })
+        actionSheet.addAction(action1)
+        
+        let action2 = UIAlertAction(title: actionTitle2, style: UIAlertActionStyle.default, handler: { (action) in
+            self.selectedSortOrder = CULContact.SortOrder.lastName
+            self.contactsListTableViewAdapter.load(contacts: self.allContacts, with: self.selectedSortOrder)
+        })
+        actionSheet.addAction(action2)
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        actionSheet.view.tintColor = self.navigationController?.navigationBar.tintColor
+        
+        self.present(actionSheet, animated: true) {
+        }
+    }
+
 }
 
 extension ViewContactsListVC: ContactListTableViewAdapterDelegate {

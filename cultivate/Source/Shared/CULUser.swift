@@ -16,14 +16,27 @@ class CULUser {
     let id: String
     var isOnBoardingComplete: Bool = false
     
-    var rawData: [String: Any] {
-        return [
+    func getRawData() -> [String:Any] {
+        var rawData: [String:Any] = [
             "id": self.id,
             "email": self.email,
             "name": self.name,
-            "isOnBoardingComplete": self.isOnBoardingComplete
-        ]
+            "isOnBoardingComplete": self.isOnBoardingComplete,
+            ]
+        
+        if let interval = self.accountCreationDate?.timeIntervalSinceReferenceDate {
+            rawData["accountCreation"] = interval
+        }
+        if let interval = self.onboardingCompletionDate?.timeIntervalSinceReferenceDate {
+            rawData["onboardingCompletionDate"] = interval
+        }
+        return rawData
     }
+    
+    
+    // MARK: Analytics properties
+    var onboardingCompletionDate: Date?
+    var accountCreationDate: Date?
     
     init(withName: String, email: String, id: String) {
         self.id = id
@@ -37,6 +50,7 @@ class CULUser {
             self.email = (data["email"] as? String) ?? ""
             self.name = (data["name"] as? String) ?? ""
             self.isOnBoardingComplete = (data["isOnBoardingComplete"] as? Bool) ?? false
+            
         } else {
             return nil
         }
@@ -57,8 +71,8 @@ class CULUser {
     
     func save() {
         let userRef = Firestore.firestore().collection("users").document(self.id)
-        print("saving user: \(self.rawData)")
-        userRef.setData(self.rawData)
+        print("saving user: \(self.getRawData())")
+        userRef.setData(self.getRawData())
     }
     
 }

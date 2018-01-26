@@ -120,6 +120,7 @@ class SignupVC: UIViewController {
     private func createCULUserAndShowOnboarding(name: String, email: String, id: String) {
         print("User account created with: \(email)")
         let userlocal = CULUser(withName: name, email: email, id: id)
+        userlocal.accountCreationDate = Date()
         userlocal.save()
         DispatchQueue.main.async {
             // Open onboarding
