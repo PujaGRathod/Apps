@@ -34,7 +34,7 @@
 		BF499EA2200A016F00C3EE33 /* LogFollowupPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF499EA1200A016F00C3EE33 /* LogFollowupPopupVC.swift */; };
 		BF4A5AAA1FEA742900012B40 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF4A5AA81FEA742800012B40 /* Authentication.storyboard */; };
 		BF4A5AAC1FEA746900012B40 /* WebLinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */; };
-		BF56EE1D201B2BE100415DD5 /* FirebaseAnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF56EE1C201B2BE100415DD5 /* FirebaseAnalyticsManager.swift */; };
+		BF56EE1D201B2BE100415DD5 /* CULFirebaseAnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF56EE1C201B2BE100415DD5 /* CULFirebaseAnalyticsManager.swift */; };
 		BF6379B61FFCA54F009C30E8 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */; };
 		BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6379B81FFCA587009C30E8 /* DashboardVC.swift */; };
 		BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */; };
@@ -68,6 +68,7 @@
 		BFD016902007401B0054365F /* FollowupDateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0168F2007401B0054365F /* FollowupDateGenerator.swift */; };
 		BFD01693200747630054365F /* DashboardTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD01692200747630054365F /* DashboardTableViewHeader.swift */; };
 		BFD01695200747680054365F /* DashboardTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD01694200747680054365F /* DashboardTableViewHeader.xib */; };
+		BFD57024201B43D700AD0973 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD57023201B43D700AD0973 /* AdSupport.framework */; };
 		BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D7881FE79F300091F4A8 /* GoogleService-Info.plist */; };
 		BFE9D7961FE79F300091F4A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D78B1FE79F300091F4A8 /* LaunchScreen.storyboard */; };
 		BFE9D7971FE79F300091F4A8 /* Extra.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFE9D78D1FE79F300091F4A8 /* Extra.storyboard */; };
@@ -130,7 +131,7 @@
 		BF499EA1200A016F00C3EE33 /* LogFollowupPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFollowupPopupVC.swift; sourceTree = "<group>"; };
 		BF4A5AA91FEA742900012B40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkVC.swift; sourceTree = "<group>"; };
-		BF56EE1C201B2BE100415DD5 /* FirebaseAnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsManager.swift; sourceTree = "<group>"; };
+		BF56EE1C201B2BE100415DD5 /* CULFirebaseAnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULFirebaseAnalyticsManager.swift; sourceTree = "<group>"; };
 		BF6379B51FFCA54F009C30E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Dashboard.storyboard; sourceTree = "<group>"; };
 		BF6379B81FFCA587009C30E8 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsVC.swift; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 		BFD0168F2007401B0054365F /* FollowupDateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowupDateGenerator.swift; sourceTree = "<group>"; };
 		BFD01692200747630054365F /* DashboardTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewHeader.swift; sourceTree = "<group>"; };
 		BFD01694200747680054365F /* DashboardTableViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardTableViewHeader.xib; sourceTree = "<group>"; };
+		BFD57023201B43D700AD0973 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		BFE9D7881FE79F300091F4A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BFE9D7891FE79F300091F4A8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFE9D78C1FE79F300091F4A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFD57024201B43D700AD0973 /* AdSupport.framework in Frameworks */,
 				5682DF834AFDF8A88F0227CE /* Pods_cultivate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +245,7 @@
 		B3BC5A0CC28E76183FE9BB05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFD57023201B43D700AD0973 /* AdSupport.framework */,
 				FF26A737BBDC0A8280FF62C6 /* Pods_cultivate.framework */,
 				D6FDA977FE33C981E8A508FA /* Pods_cultivateTests.framework */,
 				35EFDCACB8EB09D1884DE33C /* Pods_cultivateUITests.framework */,
@@ -298,7 +302,7 @@
 				BFCA7D3D2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift */,
 				BF6F61D3201616D200A49B08 /* CULBarButtonItem.swift */,
 				BFCC33542016345000D75309 /* RequestReviewManager.swift */,
-				BF56EE1C201B2BE100415DD5 /* FirebaseAnalyticsManager.swift */,
+				BF56EE1C201B2BE100415DD5 /* CULFirebaseAnalyticsManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -924,7 +928,7 @@
 				BFE9D79A1FE79F300091F4A8 /* AppDelegate.swift in Sources */,
 				BF7F48D11FE8FE4300737FE5 /* AddTagsVC.swift in Sources */,
 				BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */,
-				BF56EE1D201B2BE100415DD5 /* FirebaseAnalyticsManager.swift in Sources */,
+				BF56EE1D201B2BE100415DD5 /* CULFirebaseAnalyticsManager.swift in Sources */,
 				BF14191E200FC7F700BFEA07 /* FrequencyPickerTblCell.swift in Sources */,
 				BF04F49C200F12E5008B74E9 /* ContactSelectionProcessDataStore.swift in Sources */,
 				BF7F48CB1FE8FCB500737FE5 /* SetFollowupFrequenciesInformationVC.swift in Sources */,

@@ -399,6 +399,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                             </attributedString>
                                         </state>
                                         <connections>
+                                            <action selector="skipTagsButtonTapped:" destination="wX7-HE-xwT" eventType="touchUpInside" id="C64-bp-hoI"/>
                                             <segue destination="cPq-97-pvr" kind="show" id="jnJ-PK-klY"/>
                                         </connections>
                                     </button>
@@ -626,8 +627,8 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
         <image name="ic_sort_100pt" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8T6-s2-ML5"/>
-        <segue reference="fka-uv-ZOQ"/>
+        <segue reference="jnJ-PK-klY"/>
+        <segue reference="iD8-Wf-naK"/>
         <segue reference="OIS-oq-jfr"/>
     </inferredMetricsTieBreakers>
 </document>

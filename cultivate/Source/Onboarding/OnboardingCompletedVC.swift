@@ -89,6 +89,7 @@ class OnboardingCompletedVC: UIViewController {
         
         if ContactSelectionProcessDataStore.shared.mode == .onboarding {
             group.enter()
+            CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.onboardingCompletionDate, value: "yes")
             CULFirebaseGateway.shared.setOnboardingCompleted(for: user) { (error) in
                 if let error = error {
                     // Error
@@ -127,6 +128,11 @@ class OnboardingCompletedVC: UIViewController {
     }
     
     private func showNextVC() {
+        
+        let id = "Onboarding"
+        let name = "Completion"
+        CULFirebaseAnalyticsManager.shared.logUserTap(with: id, on: name)
+        
         ContactSelectionProcessDataStore.shared.empty()
         
         if ContactSelectionProcessDataStore.shared.mode == .onboarding {

@@ -18,8 +18,7 @@ class CULFirebaseGateway {
         let store: Firestore = Firestore.firestore()
         let ref = store.collection("users").document(user.id)
         let data: [String:Any] = [
-            "isOnBoardingComplete" : true,
-            "onboardingCompletionDate": Date().timeIntervalSinceReferenceDate
+            "isOnBoardingComplete" : true
         ]
         ref.updateData(data) { (error) in
             completion(error)

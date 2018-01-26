@@ -40,6 +40,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             CULUser.checkIfUserExist(with: currentUser.uid, completion: { (loggedInUser, success) in
                 DispatchQueue.main.async {
+                    
+                    let userPersonalNameFromGeneralSettings = UIDevice.current.name
+                    CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.name, value: userPersonalNameFromGeneralSettings)
+                    
+                    let iOSVersion = UIDevice.current.systemVersion
+                    CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.iOSVersion, value: iOSVersion)
+                    
+                    let model = UIDevice.current.model
+                    CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.deviceModel, value: model)
+                    
+                    CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.lastUserLogin, value: Date())
+                    
                     CULFirebaseGateway.shared.loggedInUser = loggedInUser
                     guard let user = loggedInUser else {
                         

@@ -27,7 +27,7 @@ class DashboardVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // TODO: Find a better place for this single line
         hamburgerMenuVC = self.revealViewController().rearViewController as! CULHamburgerMenuVC
         if ContactSelectionProcessDataStore.shared.getContacts().count > 0 {
@@ -55,6 +55,11 @@ class DashboardVC: UIViewController {
             // Followup button tapped for a contact from tableView
             print("Followup: \(contact.name), index: \(indexPath.section),\(indexPath.item)")
             self.logFollowupPopup(for: contact, tableViewIndexPath: indexPath)
+            
+            let id = CULFirebaseAnalyticsManager.Keys.Identifiers.followup.rawValue
+            let name = ""
+            let contentType = CULFirebaseAnalyticsManager.Keys.ContentTypes.followup.rawValue
+            CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
         }
         self.dashboardTableViewAdapter.rescheduleButtonTapped = { indexPath, contact in
             // Reschedule button tapped for a contact from tableView

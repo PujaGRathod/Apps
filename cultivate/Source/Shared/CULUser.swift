@@ -23,20 +23,9 @@ class CULUser {
             "name": self.name,
             "isOnBoardingComplete": self.isOnBoardingComplete,
             ]
-        
-        if let interval = self.accountCreationDate?.timeIntervalSinceReferenceDate {
-            rawData["accountCreation"] = interval
-        }
-        if let interval = self.onboardingCompletionDate?.timeIntervalSinceReferenceDate {
-            rawData["onboardingCompletionDate"] = interval
-        }
         return rawData
     }
     
-    
-    // MARK: Analytics properties
-    var onboardingCompletionDate: Date?
-    var accountCreationDate: Date?
     
     init(withName: String, email: String, id: String) {
         self.id = id

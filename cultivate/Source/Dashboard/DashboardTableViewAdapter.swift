@@ -55,6 +55,9 @@ class DashboardTableViewAdapter: NSObject {
     func getContacts() {
         if let user = CULFirebaseGateway.shared.loggedInUser {
             CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
+                
+                CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.totalNumberOfCultivateContacts, value: contacts.count)
+                
                 DispatchQueue.main.async {
                     self.contacts = contacts
                     self.updateContactsIfRequired()

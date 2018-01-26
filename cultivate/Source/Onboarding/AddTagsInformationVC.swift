@@ -19,5 +19,10 @@ class AddTagsInformationVC: UIViewController {
         self.footerView.setCurrentStep(to: OnboardingStep.addTags)
         self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
     }
-
+    
+    @IBAction func skipTagsButtonTapped(_ sender: UIButton) {
+        let id = "Tags"
+        let name = "Skip"
+        CULFirebaseAnalyticsManager.shared.logUserTap(with: id, on: name)
+    }
 }
