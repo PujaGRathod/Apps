@@ -23,10 +23,27 @@ class ContactDetailsVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameInitialsLabel: UILabel!
+    
+    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var imgViewMessage: UIImageView!
+    @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var sendMessageView: UIView!
+    
+    @IBOutlet weak var phoneButton: UIButton!
+    @IBOutlet weak var imgViewPhone: UIImageView!
+    @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var callPhoneView: UIView!
+    
+    @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var sendEmailView: UIView!
+    @IBOutlet weak var imgViewEmail: UIImageView!
+    @IBOutlet weak var emailLabel: UILabel!
+    
+    @IBOutlet weak var faceTimeButton: UIButton!
     @IBOutlet weak var callFaceTimeView: UIView!
+    @IBOutlet weak var imgViewFaceTime: UIImageView!
+    @IBOutlet weak var faceTimeLabel: UILabel!
+    
     @IBOutlet weak var followupFrequencyValueButton: UIButton!
     @IBOutlet weak var tagValueButton: UIButton!
     @IBOutlet weak var nextFollowupDateValueButton: UIButton!
@@ -37,6 +54,8 @@ class ContactDetailsVC: UIViewController {
     private var tagPickerPopupVC: TagPickerPopupVC?
     private var reschedulePopupVC: ReschedulePopupVC?
     private var historyTableViewAdapter = ContactLogHistoryTableViewAdapter()
+    private var emailAddresses = [String:String]()
+    private var phoneNumbers = [String:String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,27 +68,12 @@ class ContactDetailsVC: UIViewController {
         }
         
         self.historyTableViewAdapter.set(tableView: self.historyTableView, contact: self.contact)
-        
-        self.display(contact: self.contact)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.display(contact: self.contact)
         NotificationCenter.default.addObserver(self, selector: #selector(ContactDetailsVC.notesTextEditingDidEnd), name:  NSNotification.Name.UITextViewTextDidEndEditing, object: self.notesTextView)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        ContactsWorker().addTestData()
-        
-//        if let contact = ContactsWorker().getCNContact(for: self.contact.identifier) {
-//            let vc = CNContactViewController(for: contact)
-//            vc.delegate = self
-//            vc.allowsActions = true
-//            vc.contactStore = ContactsWorker().getContactStore()
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -92,6 +96,49 @@ class ContactDetailsVC: UIViewController {
         self.tagValueButton.setTitle(contact.tag?.name ?? "None", for: UIControlState.normal)
         self.nextFollowupDateValueButton.setTitle(contact.userReadableFollowupDateString, for: .normal)
         self.notesTextView.text = contact.notes
+        self.getEmailAddresses()
+        self.getPhoneNumbers()
+        self.setVisibilityOfViewsForEmailAndPhoneNumbers()
+    }
+    
+    private func setVisibilityOfViewsForEmailAndPhoneNumbers() {
+        
+        var arePhoneNumbersAvailable = false
+        if self.phoneNumbers.keys.count > 0 {
+            arePhoneNumbersAvailable = true
+        }
+        
+        var areEmailAddressesAvailable = false
+        if self.emailAddresses.keys.count > 0 {
+            areEmailAddressesAvailable = true
+        }
+        
+        self.emailLabel.isHighlighted = areEmailAddressesAvailable
+        self.imgViewEmail.isHighlighted = areEmailAddressesAvailable
+        self.emailButton.isUserInteractionEnabled = areEmailAddressesAvailable
+        
+        self.messageLabel.isHighlighted = arePhoneNumbersAvailable
+        self.imgViewMessage.isHighlighted = arePhoneNumbersAvailable
+        self.messageButton.isUserInteractionEnabled = arePhoneNumbersAvailable
+        
+        self.phoneLabel.isHighlighted = arePhoneNumbersAvailable
+        self.imgViewPhone.isHighlighted = arePhoneNumbersAvailable
+        self.phoneButton.isUserInteractionEnabled = arePhoneNumbersAvailable
+        
+        let isFaceTimeAvailable = (arePhoneNumbersAvailable || areEmailAddressesAvailable)
+        self.faceTimeLabel.isHighlighted = isFaceTimeAvailable
+        self.imgViewFaceTime.isHighlighted = isFaceTimeAvailable
+        self.faceTimeButton.isUserInteractionEnabled = isFaceTimeAvailable
+    }
+    
+    private func getEmailAddresses() {
+        let worker = ContactsWorker()
+        self.emailAddresses = worker.getEmailAddresses(forContactIdentifier: self.contact.identifier)
+    }
+    
+    private func getPhoneNumbers() {
+        let worker = ContactsWorker()
+        self.phoneNumbers = worker.getPhoneNumbers(forContactIdentifier: self.contact.identifier)
     }
     
     func loadProfileImage(for contact: CULContact) {
@@ -124,9 +171,8 @@ class ContactDetailsVC: UIViewController {
     }
     
     @IBAction func sendMessageButtonTapped(_ sender: UIButton) {
-        let worker = ContactsWorker()
-        let numbers = worker.getPhoneNumbers(forContactIdentifier: self.contact.identifier)
-        print(numbers)
+        
+        let numbers = self.phoneNumbers
         
         let actionSheet = UIAlertController(title: "Choose", message: "Tap a number to message", preferredStyle: UIAlertControllerStyle.actionSheet)
         for key in numbers.keys {
@@ -164,9 +210,8 @@ class ContactDetailsVC: UIViewController {
     }
     
     @IBAction func callPhoneButtonTapped(_ sender: UIButton) {
-        let worker = ContactsWorker()
-        let numbers = worker.getPhoneNumbers(forContactIdentifier: self.contact.identifier)
-        print(numbers)
+
+        let numbers = self.phoneNumbers
         
         let actionSheet = UIAlertController(title: "Choose", message: "Tap a number to call", preferredStyle: UIAlertControllerStyle.actionSheet)
         for key in numbers.keys {
@@ -194,9 +239,8 @@ class ContactDetailsVC: UIViewController {
     }
     
     @IBAction func sendEmailButtonTapped(_ sender: UIButton) {
-        let worker = ContactsWorker()
-        let emails = worker.getEmailAddresses(forContactIdentifier: self.contact.identifier)
-        print(emails)
+
+        let emails = self.emailAddresses
         
         let actionSheet = UIAlertController(title: "Choose", message: "Tap an email address", preferredStyle: UIAlertControllerStyle.actionSheet)
         for key in emails.keys {
@@ -225,12 +269,9 @@ class ContactDetailsVC: UIViewController {
     }
     
     @IBAction func callFaceTimeButtonTapped(_ sender: UIButton) {
-        let worker = ContactsWorker()
         
-        let numbers = worker.getPhoneNumbers(forContactIdentifier: self.contact.identifier)
-        let emails = worker.getEmailAddresses(forContactIdentifier: self.contact.identifier)
-        
-        print(numbers)
+        let numbers = self.phoneNumbers
+        let emails = self.emailAddresses
         
         let actionSheet = UIAlertController(title: "Choose", message: "Tap a number to FaceTime", preferredStyle: UIAlertControllerStyle.actionSheet)
         for key in numbers.keys {
@@ -379,6 +420,17 @@ class ContactDetailsVC: UIViewController {
             tagPickerPopupVC.set(tag: contact?.tag)
         }
     }
+
+    @IBAction func detailsButtonTapped(_ sender: UIBarButtonItem) {
+        if let contact = ContactsWorker().getCNContact(for: self.contact.identifier) {
+            let vc = CNContactViewController(for: contact)
+            vc.delegate = self
+            vc.allowsActions = true
+            vc.contactStore = ContactsWorker().getContactStore()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }
 
 extension ContactDetailsVC: MFMessageComposeViewControllerDelegate {

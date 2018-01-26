@@ -21,7 +21,11 @@ class ContactListTableViewAdapter: NSObject {
     private var allContacts: [CULContact] = []
     private var filteredContacts: [CULContact] = []
     private var selectedContacts: [CULContact] = []
-    private var sortedKeys: [String] = []
+    private let sortedKeys = [
+        "A","B","C","D","E","F","G","H","I","J","K","L","M",
+        "N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"
+    ]
+    private var availableSortedKeys = [String]()
     private var tableView: UITableView!
     private var searchController: UISearchController?
     private lazy var worker: ContactsWorker = ContactsWorker()
@@ -40,11 +44,10 @@ class ContactListTableViewAdapter: NSObject {
         self.tableView.register(nib, forCellReuseIdentifier: "ContactTblCell")
     }
     
-    func loadContactsFromAddressbook() {
+    func loadContactsFromAddressbook(with sortOrder: CULContact.SortOrder) {
         // Get list of all contacts from the user's phonebook
-        self.worker.getContacts { (contacts, sortedKeys, error) in
+        self.worker.getContacts(sortOrder: sortOrder) { (contacts, sortedKeys, error) in
             self.contacts = contacts
-            self.sortedKeys = sortedKeys
             
             self.allContacts = []
             for key in self.contacts.keys {
@@ -69,7 +72,7 @@ class ContactListTableViewAdapter: NSObject {
         
         for contact in contacts {
             var firstLetter = contact.last_name?[0..<1]
-            if sortOrder == .givenName {
+            if sortOrder == .firstName {
                 firstLetter = contact.first_name?[0..<1]
             }
             if firstLetter?.containsAlphabets() == true {
@@ -83,6 +86,7 @@ class ContactListTableViewAdapter: NSObject {
             segregatedContacts.append(contact)
             orderedContacts[key] = segregatedContacts
         }
+        
         var sortedContactKeys = [String]()
         sortedContactKeys = Array(orderedContacts.keys).sorted(by: <)
         if sortedContactKeys.first == "#" {
@@ -90,7 +94,8 @@ class ContactListTableViewAdapter: NSObject {
             sortedContactKeys.append("#")
         }
         
-        self.sortedKeys = sortedContactKeys
+        self.availableSortedKeys = sortedContactKeys
+        
         self.contacts = orderedContacts
         
         DispatchQueue.main.async {
@@ -177,6 +182,14 @@ extension ContactListTableViewAdapter: UITableViewDelegate, UITableViewDataSourc
         if self.isFiltering() {
             return ""
         }
+        
+        guard let items = self.contacts[self.sortedKeys[section]] else {
+            return ""
+        }
+        if items.count == 0 {
+            return ""
+        }
+        
         return self.sortedKeys[section]
     }
     
@@ -184,6 +197,14 @@ extension ContactListTableViewAdapter: UITableViewDelegate, UITableViewDataSourc
         if self.isFiltering() {
             return 0.001
         }
+        
+        guard let items = self.contacts[self.sortedKeys[section]] else {
+            return 0.01
+        }
+        if items.count == 0 {
+            return 0.01
+        }
+        
         return 30
     }
     

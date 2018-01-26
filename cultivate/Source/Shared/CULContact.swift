@@ -92,9 +92,9 @@ enum CULFollowupFrequency: String {
 
 struct CULContact: Equatable {
  
-    enum SortOrder {
-        case givenName
-        case familyName
+    enum SortOrder: Int {
+        case firstName = 1
+        case lastName = 2
     }
     
     static func ==(lhs: CULContact, rhs: CULContact) -> Bool {

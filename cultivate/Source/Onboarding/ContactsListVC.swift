@@ -22,6 +22,13 @@ class ContactsListVC: UIViewController {
     lazy var allContacts: [CULContact] = []
     lazy var selectedContacts: [CULContact] = []
     private var contactsListTableViewAdapter: ContactListTableViewAdapter = ContactListTableViewAdapter()
+    private var selectedSortOrder = CULContact.SortOrder.firstName {
+        didSet {
+            let defaults = UserDefaults.standard
+            defaults.set(self.selectedSortOrder.rawValue, forKey: "KEY_CONTACT_SORT_ORDER")
+            defaults.synchronize()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,13 +51,16 @@ class ContactsListVC: UIViewController {
         
         self.adjustContinueButtonVisibility()
         
+        if let sortOrder = CULContact.SortOrder(rawValue: UserDefaults.standard.integer(forKey: "KEY_CONTACT_SORT_ORDER")) {
+            self.selectedSortOrder = sortOrder
+        }
     }
     
     func setTableViewAdapterWithSelectedContacts() {
         DispatchQueue.main.async {
             self.contactsListTableViewAdapter.delegate = self
             self.contactsListTableViewAdapter.set(tableView: self.tblContactsList, with: self.selectedContacts)
-            self.contactsListTableViewAdapter.loadContactsFromAddressbook()
+            self.contactsListTableViewAdapter.loadContactsFromAddressbook(with: self.selectedSortOrder)
             self.searchController.searchResultsUpdater = self.contactsListTableViewAdapter
             self.searchController.obscuresBackgroundDuringPresentation = false
             self.searchController.searchBar.placeholder = "Search contacts"
@@ -98,6 +108,40 @@ class ContactsListVC: UIViewController {
                     self.performSegue(withIdentifier: "segueSelectFrequency", sender: nil)
                 }
             })
+        }
+    }
+    
+    @IBAction func sortButtonTapped(_ sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: "Sort order", message: "Please select sort order", preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        var actionTitle1 = "First, Last"
+        var actionTitle2 = "Last, First"
+        let checkmark = " \u{2713}"
+        if self.selectedSortOrder == .firstName {
+            actionTitle1 += checkmark
+            actionTitle2 += "   "
+        } else {
+            actionTitle1 += "   "
+            actionTitle2 += checkmark
+        }
+        
+        let action1 = UIAlertAction(title: actionTitle1, style: UIAlertActionStyle.default, handler: { (action) in
+            self.selectedSortOrder = CULContact.SortOrder.firstName
+            self.contactsListTableViewAdapter.loadContactsFromAddressbook(with: self.selectedSortOrder)
+        })
+        actionSheet.addAction(action1)
+
+        let action2 = UIAlertAction(title: actionTitle2, style: UIAlertActionStyle.default, handler: { (action) in
+            self.selectedSortOrder = CULContact.SortOrder.lastName
+            self.contactsListTableViewAdapter.loadContactsFromAddressbook(with: self.selectedSortOrder)
+        })
+        actionSheet.addAction(action2)
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        actionSheet.view.tintColor = self.navigationController?.navigationBar.tintColor
+        
+        self.present(actionSheet, animated: true) {
         }
     }
     

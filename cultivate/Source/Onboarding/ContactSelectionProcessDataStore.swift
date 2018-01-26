@@ -84,11 +84,11 @@ class ContactSelectionProcessDataStore {
         let sortOrder = ContactsWorker().getSortOrder()
         self.selectedContacts.sort(by: { (contact1, contact2) -> Bool in
             switch sortOrder {
-            case .familyName:
+            case .lastName:
                 if let lastName1 = contact1.last_name, let lastName2 = contact2.last_name {
                     return lastName1 < lastName2
                 }
-            case .givenName:
+            case .firstName:
                 if let firstName1 = contact1.first_name, let firstName2 = contact2.first_name {
                     return firstName1 < firstName2
                 }

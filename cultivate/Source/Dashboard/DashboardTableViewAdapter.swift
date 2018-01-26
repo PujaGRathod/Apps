@@ -30,6 +30,7 @@ class DashboardTableViewAdapter: NSObject {
     
     var contactsLoaded: (()->Void)?
     var contactSelected: ((_ contact: CULContact)->Void)?
+    var shouldExpandOtherFollowupSection = false
     var followupButtonTapped: ((_ indexPath: IndexPath, _ contact: CULContact)->Void)?
     var rescheduleButtonTapped: ((_ indexPath: IndexPath, _ contact: CULContact)->Void)?
     
@@ -143,6 +144,12 @@ class DashboardTableViewAdapter: NSObject {
         
         self.sectionWiseContacts = [ section1, section2 ]
         
+        if section1.rows.count > 0 {
+            self.shouldExpandOtherFollowupSection = false
+        } else {
+            self.shouldExpandOtherFollowupSection = true
+        }
+        
         self.tableView.reloadData()
     }
     
@@ -171,6 +178,9 @@ extension DashboardTableViewAdapter: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.isFiltering() {
             return self.filteredContacts.count
+        }
+        if section == 1, self.shouldExpandOtherFollowupSection == false {
+            return 0
         }
         return self.sectionWiseContacts[section].rows.count
     }
@@ -204,7 +214,19 @@ extension DashboardTableViewAdapter: UITableViewDataSource, UITableViewDelegate 
             return nil
         }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DashboardTableViewHeader") as! DashboardTableViewHeader
-        headerView.titleLabel.text = self.sectionWiseContacts[section].title
+        let title = self.sectionWiseContacts[section].title
+        headerView.set(title: title, index: section)
+        if section == 1, self.shouldExpandOtherFollowupSection == false {
+            headerView.setButtonVisibility(to: true)
+        } else {
+            headerView.setButtonVisibility(to: false)
+        }
+        headerView.headerTapped = { index in
+            if index == 1 {
+                self.shouldExpandOtherFollowupSection = !self.shouldExpandOtherFollowupSection
+                self.tableView.reloadData()
+            }
+        }
         return headerView
     }
     

@@ -21,17 +21,17 @@ class ContactsWorker {
     
     // MARK: - Contact Operations
     
-    open func reloadContacts() {
-        self.getContacts( {(contacts, sortedKeys, error) in
-            if (error == nil) {
-                DispatchQueue.main.async(execute: {
-                    //                    self.tableView.reloadData()
-                })
-            }
-        })
+    struct KeysTemp {
+        var firstNameFirstLetter: String
+        var lastNameFirstLetter: String
+        
+        init(_ firstNameFirstLetter: String, _ lastNameFirstLetter: String) {
+            self.firstNameFirstLetter = firstNameFirstLetter
+            self.lastNameFirstLetter = lastNameFirstLetter
+        }
     }
     
-    func getContacts(_ completion:  @escaping ContactsHandler) {
+    func getContacts(sortOrder: CULContact.SortOrder, _ completion:  @escaping ContactsHandler) {
         if contactsStore == nil {
             //ContactStore is control for accessing the Contacts
             contactsStore = CNContactStore()
@@ -64,7 +64,7 @@ class ContactsWorker {
                     })
                 }
                 else{
-                    self.getContacts(completion)
+                    self.getContacts(sortOrder: sortOrder, completion)
                 }
             })
             
@@ -73,22 +73,41 @@ class ContactsWorker {
             var contactsArray = [CNContact]()
             
             let contactFetchRequest = CNContactFetchRequest(keysToFetch: self.allowedContactKeys())
-            contactFetchRequest.sortOrder = CNContactSortOrder.userDefault
+            contactFetchRequest.unifyResults = true
+            switch sortOrder {
+            case .firstName:
+                contactFetchRequest.sortOrder = CNContactSortOrder.givenName
+            case .lastName:
+                contactFetchRequest.sortOrder = CNContactSortOrder.familyName
+            }
             do {
+                
+                self.sortedContactKeys = []
+                self.orderedContacts = [:]
+                
                 try contactsStore?.enumerateContacts(with: contactFetchRequest, usingBlock: { (contact, stop) -> Void in
+                    
                     //Ordering contacts based on alphabets in firstname
                     contactsArray.append(contact)
                     var key: String = "#"
                     
-                    //If ordering has to be happening via family name change it here.
+                    //  If ordering has to be happening via family name change it here.
                     var firstLetter = contact.givenName[0..<1]
                     switch contactFetchRequest.sortOrder {
                     case .givenName:
-                        firstLetter = contact.givenName[0..<1]
-                    case .familyName, .none:
+                        if contact.givenName.count == 0 {
+                            firstLetter = contact.familyName[0..<1]
+                        } else {
+                            firstLetter = contact.givenName[0..<1]
+                        }
+                    case .familyName, .none, .userDefault:
                         fallthrough
                     default:
-                        firstLetter = contact.familyName[0..<1]
+                        if contact.familyName.count == 0 {
+                            firstLetter = contact.givenName[0..<1]
+                        } else {
+                            firstLetter = contact.familyName[0..<1]
+                        }
                     }
                     if firstLetter?.containsAlphabets() == true {
                         key = firstLetter!.uppercased()
@@ -102,6 +121,7 @@ class ContactsWorker {
                     self.orderedContacts[key] = contacts
                     
                 })
+                
                 self.sortedContactKeys = Array(self.orderedContacts.keys).sorted(by: <)
                 if self.sortedContactKeys.first == "#" {
                     self.sortedContactKeys.removeFirst()
@@ -133,15 +153,16 @@ class ContactsWorker {
         let contactFetchRequest = CNContactFetchRequest(keysToFetch: self.allowedContactKeys())
         switch contactFetchRequest.sortOrder {
         case .familyName, .none:
-            return CULContact.SortOrder.familyName
+            return CULContact.SortOrder.lastName
         default:
-            return CULContact.SortOrder.givenName
+            return CULContact.SortOrder.firstName
         }
     }
     
     func allowedContactKeys() -> [CNKeyDescriptor]{
         //We have to provide only the keys which we have to access. We should avoid unnecessary keys when fetching the contact. Reducing the keys means faster the access.
         return [
+            CNContactNamePrefixKey as CNKeyDescriptor,
             CNContactNamePrefixKey as CNKeyDescriptor,
             CNContactGivenNameKey as CNKeyDescriptor,
             CNContactFamilyNameKey as CNKeyDescriptor,
@@ -240,22 +261,22 @@ class ContactsWorker {
         return self.contactsStore
     }
 
-    func addTestData() {
-        let mutableContact = self.getCNContact(for: "410FE041-5C4E-48DA-B4DE-04C15EA3DBAC")?.mutableCopy() as? CNMutableContact
-        
-        let value = CNInstantMessageAddress(username: "Id", service: "Cultivate")
-        let label = CNLabeledValue(label: "Label", value: value)
-        mutableContact?.instantMessageAddresses.append(label)
-        
-        let store = self.getContactStore()
-
-        let saveRequest = CNSaveRequest()
-        saveRequest.update(mutableContact!)
-        
-        do {
-            try store?.execute(saveRequest)
-        } catch {
-            print(error)
-        }
-    }
+//    func addTestData() {
+//        let mutableContact = self.getCNContact(for: "410FE041-5C4E-48DA-B4DE-04C15EA3DBAC")?.mutableCopy() as? CNMutableContact
+//
+//        let value = CNInstantMessageAddress(username: "Id", service: "Cultivate")
+//        let label = CNLabeledValue(label: "Label", value: value)
+//        mutableContact?.instantMessageAddresses.append(label)
+//
+//        let store = self.getContactStore()
+//
+//        let saveRequest = CNSaveRequest()
+//        saveRequest.update(mutableContact!)
+//
+//        do {
+//            try store?.execute(saveRequest)
+//        } catch {
+//            print(error)
+//        }
+//    }
 }

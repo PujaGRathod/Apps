@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -157,30 +158,37 @@ You’ll have the opportunity to change your selected contacts later on.</string
                     </view>
                     <navigationItem key="navigationItem" title="Select contacts" id="HVn-dv-rUj">
                         <barButtonItem key="backBarButtonItem" title="Back" id="cqT-hf-kVE"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="94P-6O-Wpb">
-                            <view key="customView" clipsSubviews="YES" contentMode="scaleToFill" id="eys-ee-maT">
-                                <rect key="frame" x="315" y="0.0" width="44" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7gk-4D-Xgv">
-                                        <rect key="frame" x="4" y="4" width="20.5" height="20.5"/>
-                                        <color key="backgroundColor" red="0.37647058820000001" green="0.57647058819999997" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="7gk-4D-Xgv" firstAttribute="leading" secondItem="eys-ee-maT" secondAttribute="leading" constant="4" id="4hy-g0-6Sm"/>
-                                    <constraint firstAttribute="width" constant="36" id="RWn-xg-o3Z"/>
-                                    <constraint firstItem="7gk-4D-Xgv" firstAttribute="top" secondItem="eys-ee-maT" secondAttribute="top" constant="4" id="dj9-O4-jHf"/>
-                                    <constraint firstAttribute="width" secondItem="eys-ee-maT" secondAttribute="height" multiplier="1:1" id="dyK-cv-4Ko"/>
-                                    <constraint firstAttribute="bottom" secondItem="7gk-4D-Xgv" secondAttribute="bottom" constant="4" id="ghS-kv-uFg"/>
-                                    <constraint firstAttribute="trailing" secondItem="7gk-4D-Xgv" secondAttribute="trailing" constant="4" id="ygr-13-reo"/>
-                                </constraints>
-                            </view>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" id="94P-6O-Wpb">
+                                <view key="customView" clipsSubviews="YES" contentMode="scaleToFill" id="eys-ee-maT">
+                                    <rect key="frame" x="315" y="0.0" width="44" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7gk-4D-Xgv">
+                                            <rect key="frame" x="4" y="4" width="20.5" height="20.5"/>
+                                            <color key="backgroundColor" red="0.37647058820000001" green="0.57647058819999997" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="7gk-4D-Xgv" firstAttribute="leading" secondItem="eys-ee-maT" secondAttribute="leading" constant="4" id="4hy-g0-6Sm"/>
+                                        <constraint firstAttribute="width" constant="36" id="RWn-xg-o3Z"/>
+                                        <constraint firstItem="7gk-4D-Xgv" firstAttribute="top" secondItem="eys-ee-maT" secondAttribute="top" constant="4" id="dj9-O4-jHf"/>
+                                        <constraint firstAttribute="width" secondItem="eys-ee-maT" secondAttribute="height" multiplier="1:1" id="dyK-cv-4Ko"/>
+                                        <constraint firstAttribute="bottom" secondItem="7gk-4D-Xgv" secondAttribute="bottom" constant="4" id="ghS-kv-uFg"/>
+                                        <constraint firstAttribute="trailing" secondItem="7gk-4D-Xgv" secondAttribute="trailing" constant="4" id="ygr-13-reo"/>
+                                    </constraints>
+                                </view>
+                            </barButtonItem>
+                            <barButtonItem image="ic_sort_100pt" id="dSr-E5-bDf">
+                                <connections>
+                                    <action selector="sortButtonTapped:" destination="Nml-Y5-ZEC" id="Fq7-iK-34V"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomMarginConstraintForContinueButton" destination="QYV-QU-DaV" id="B8H-6Y-HP0"/>
@@ -614,6 +622,9 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
             <point key="canvasLocation" x="4561" y="524"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_sort_100pt" width="33" height="33"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8T6-s2-ML5"/>
         <segue reference="fka-uv-ZOQ"/>
