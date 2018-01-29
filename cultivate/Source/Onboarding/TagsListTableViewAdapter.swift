@@ -70,19 +70,22 @@ class TagsListTableViewAdapter: NSObject {
         }
     }
     
-    func loadAllAvailableTags() {
+    func loadAllAvailableTags(_ completion: (()->Void)? = nil) {
         self.getTags { (tags) in
-            self.load(tags: tags)
+            self.load(tags: tags, {
+                completion?()
+            })
         }
     }
     
-    func load(tags: [CULTag]) {
+    func load(tags: [CULTag], _ completion: (()->Void)? = nil) {
         DispatchQueue.main.async {
             self.delegate?.tagsLoaded(tags)
             self.tags = tags
             self.filteredTags = self.tags
             self.tableView.reloadData()
             self.setupTextField()
+            completion?()
         }
     }
     
@@ -185,8 +188,16 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
         
         if self.shouldUseCustomCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TagPickerTblCell
-            let tag = self.tags[indexPath.item]
-            cell.set(tag: tag, isSelected: (self.selectedTag?.identifier == tag.identifier))
+            if self.filteredTags.count == 0,
+                self.searchText.isEmpty == false {
+                
+                cell.titleLabel.text = "Tap to create a new tag"
+                cell.titleLabel.font = UIFont.italicSystemFont(ofSize: 17)
+                cell.checkmarkImageView.isHidden = true
+            } else {
+                let tag = self.filteredTags[indexPath.item]
+                cell.set(tag: tag, isSelected: (self.selectedTag?.identifier == tag.identifier))
+            }
             return cell
         }
         

@@ -17,6 +17,7 @@ class TagPickerTblCell: UITableViewCell {
     }
     
     func set(tag: CULTag, isSelected: Bool) {
+        self.titleLabel.font = UIFont.systemFont(ofSize: 17)
         self.titleLabel.text = tag.name
         self.checkmarkImageView.isHidden = !isSelected
     }

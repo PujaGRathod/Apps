@@ -91,9 +91,8 @@ class CULTextField: UITextField {
     
     func isPasswordStrong() -> Bool {
         if let text: String = self.text, text.count >= 8 {
-            if self.hasLowercaseCharacters(),
-                self.hasUppercaseCharacters(),
-                self.hasSymbols(),
+            let hasCharacters = self.hasLowercaseCharacters() || self.hasUppercaseCharacters()
+            if hasCharacters,
                 self.hasNumbers() {
                 return true
             }

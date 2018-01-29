@@ -59,6 +59,15 @@ class LogFollowupPopupVC: UIViewController {
                 self.allContacts = contacts
             })
         }
+        
+        let calendar = Calendar(identifier: .gregorian)
+        var datecomps = calendar.dateComponents([.day,.month,.year], from: Date())
+        if let year = datecomps.year {
+            datecomps.year = year + 1
+            datecomps.month = 12
+            datecomps.day = 31
+        }
+        self.datePicker.maximumDate = calendar.date(from: datecomps)
     }
     
     func showHelpPopovers() {

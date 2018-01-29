@@ -719,7 +719,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1r-9a-sVG">
-                                <rect key="frame" x="15" y="222" width="345" height="243.5"/>
+                                <rect key="frame" x="15" y="212" width="345" height="263.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJa-Ai-wgD">
                                         <rect key="frame" x="0.0" y="-0.5" width="345" height="44"/>
@@ -779,10 +779,10 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HZ3-iG-9fC">
-                                        <rect key="frame" x="0.0" y="43.5" width="345" height="200"/>
+                                        <rect key="frame" x="0.0" y="43.5" width="345" height="220"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="jfn-6b-20X"/>
+                                            <constraint firstAttribute="height" constant="220" id="jfn-6b-20X"/>
                                         </constraints>
                                         <color key="separatorColor" red="0.61568627450000002" green="0.63529411759999999" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -811,10 +811,10 @@
                     </view>
                     <connections>
                         <outlet property="containerView" destination="c1r-9a-sVG" id="FLv-jL-Ola"/>
-                        <outlet property="containerViewWidthConstraint" destination="KqQ-Ex-eNw" id="KCB-cd-wbV"/>
                         <outlet property="headerView" destination="bsV-9W-4k6" id="DmB-zp-VvD"/>
                         <outlet property="submitButton" destination="NUW-bF-bIq" id="xlR-OA-G9J"/>
                         <outlet property="tableView" destination="HZ3-iG-9fC" id="Ntv-jA-ZY0"/>
+                        <outlet property="tableViewHeightConstraint" destination="jfn-6b-20X" id="WNJ-FZ-Ihz"/>
                         <outlet property="textFieldHeightConstraint" destination="30g-IE-Nqd" id="H7f-Nq-JLc"/>
                         <outlet property="txtAddNewTag" destination="3e5-br-AMy" id="1q2-wx-UL6"/>
                     </connections>

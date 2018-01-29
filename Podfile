@@ -19,6 +19,8 @@ target 'cultivate' do
   pod 'SDWebImage'
   pod 'SWRevealViewController'
   pod 'Instructions', '~> 1.0.0'
+pod 'Fabric', '~> 1.7.2'
+pod 'Crashlytics', '~> 3.9.3'
 
   target 'cultivateTests' do
     inherit! :search_paths

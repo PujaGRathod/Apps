@@ -1,48 +1,51 @@
 PODS:
-  - Bolts (1.8.4):
-    - Bolts/AppLinks (= 1.8.4)
-    - Bolts/Tasks (= 1.8.4)
-  - Bolts/AppLinks (1.8.4):
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.8.4)
-  - BoringSSL (9.1):
-    - BoringSSL/Implementation (= 9.1)
-    - BoringSSL/Interface (= 9.1)
-  - BoringSSL/Implementation (9.1):
-    - BoringSSL/Interface (= 9.1)
-  - BoringSSL/Interface (9.1)
-  - FBSDKCoreKit (4.28.0):
+  - Bolts/Tasks (1.9.0)
+  - BoringSSL (9.2):
+    - BoringSSL/Implementation (= 9.2)
+    - BoringSSL/Interface (= 9.2)
+  - BoringSSL/Implementation (9.2):
+    - BoringSSL/Interface (= 9.2)
+  - BoringSSL/Interface (9.2)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - Fabric (1.7.2)
+  - FBSDKCoreKit (4.30.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.28.0):
+  - FBSDKLoginKit (4.30.0):
     - FBSDKCoreKit
-  - Firebase/Auth (4.6.0):
+  - Firebase/Auth (4.8.2):
     - Firebase/Core
-    - FirebaseAuth (= 4.3.2)
-  - Firebase/Core (4.6.0):
-    - FirebaseAnalytics (= 4.0.5)
-    - FirebaseCore (= 4.0.11)
-  - Firebase/Firestore (4.6.0):
+    - FirebaseAuth (= 4.4.2)
+  - Firebase/Core (4.8.2):
+    - FirebaseAnalytics (= 4.0.9)
+    - FirebaseCore (= 4.0.14)
+  - Firebase/Firestore (4.8.2):
     - Firebase/Core
-    - FirebaseFirestore (= 0.9.2)
-  - FirebaseAnalytics (4.0.5):
+    - FirebaseFirestore (= 0.10.0)
+  - FirebaseAnalytics (4.0.9):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseAuth (4.3.2):
+  - FirebaseAuth (4.4.2):
     - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.11):
+  - FirebaseCore (4.0.14):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseFirestore (0.9.2):
+  - FirebaseFirestore (0.10.0):
     - FirebaseAnalytics (~> 4.0)
-    - FirebaseAuth (~> 4.3)
     - FirebaseCore (~> 4.0)
     - gRPC-ProtoRPC (~> 1.0)
     - leveldb-library (~> 1.18)
     - Protobuf (~> 3.1)
-  - FirebaseInstanceID (2.0.6)
+  - FirebaseInstanceID (2.0.8):
+    - FirebaseCore (~> 4.0)
   - GoogleSignIn (4.1.1):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
@@ -58,26 +61,26 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.3)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
-  - gRPC (1.7.1):
-    - gRPC-RxLibrary (= 1.7.1)
-    - gRPC/Main (= 1.7.1)
-  - gRPC-Core (1.7.1):
-    - gRPC-Core/Implementation (= 1.7.1)
-    - gRPC-Core/Interface (= 1.7.1)
-  - gRPC-Core/Implementation (1.7.1):
+  - gRPC (1.8.4):
+    - gRPC-RxLibrary (= 1.8.4)
+    - gRPC/Main (= 1.8.4)
+  - gRPC-Core (1.8.4):
+    - gRPC-Core/Implementation (= 1.8.4)
+    - gRPC-Core/Interface (= 1.8.4)
+  - gRPC-Core/Implementation (1.8.4):
     - BoringSSL (~> 9.0)
-    - gRPC-Core/Interface (= 1.7.1)
+    - gRPC-Core/Interface (= 1.8.4)
     - nanopb (~> 0.3)
-  - gRPC-Core/Interface (1.7.1)
-  - gRPC-ProtoRPC (1.7.1):
-    - gRPC (= 1.7.1)
-    - gRPC-RxLibrary (= 1.7.1)
+  - gRPC-Core/Interface (1.8.4)
+  - gRPC-ProtoRPC (1.8.4):
+    - gRPC (= 1.8.4)
+    - gRPC-RxLibrary (= 1.8.4)
     - Protobuf (~> 3.0)
-  - gRPC-RxLibrary (1.7.1)
-  - gRPC/Main (1.7.1):
-    - gRPC-Core (= 1.7.1)
-    - gRPC-RxLibrary (= 1.7.1)
-  - GTMOAuth2 (1.1.5):
+  - gRPC-RxLibrary (1.8.4)
+  - gRPC/Main (1.8.4):
+    - gRPC-Core (= 1.8.4)
+    - gRPC-RxLibrary (= 1.8.4)
+  - GTMOAuth2 (1.1.6):
     - GTMSessionFetcher (~> 1.1)
   - GTMSessionFetcher (1.1.12):
     - GTMSessionFetcher/Full (= 1.1.12)
@@ -85,7 +88,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
   - Instructions (1.0.0)
-  - IQKeyboardManagerSwift (5.0.6)
+  - IQKeyboardManagerSwift (5.0.7)
   - KLCPopup (1.1)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
@@ -103,6 +106,8 @@ PODS:
 
 DEPENDENCIES:
   - Bolts
+  - Crashlytics (~> 3.9.3)
+  - Fabric (~> 1.7.2)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Firebase/Auth
@@ -127,26 +132,28 @@ CHECKOUT OPTIONS:
     :git: https://github.com/jmascia/KLCPopup
 
 SPEC CHECKSUMS:
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  BoringSSL: 84318770d120503ab1a6aaf1df777c5ca053697e
-  FBSDKCoreKit: ca961e279113f691fd83dc634c0bbad9d4e3f370
-  FBSDKLoginKit: b077381c27d800f21661757e8140cf2c80a91e4a
-  Firebase: 27321a925aa85520618255a7c630859e0502ccbd
-  FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
-  FirebaseAuth: e58563adb207a43910a2ed87fecb9fa7d556df5a
-  FirebaseCore: 2a946ece8fbe3ce1fdeeb55324f273caade22df9
-  FirebaseFirestore: a24dfccb54f883d82ee4cc086623fc2058e143b8
-  FirebaseInstanceID: 24958382a1011bba5aaff37e334e7a650b9118f5
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  BoringSSL: f3d6b8ce199b9c450a8cfc14895d07a2627fc232
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  FBSDKCoreKit: 7c4bba2877781a131ab5d54c0a78c405d4307b62
+  FBSDKLoginKit: fe7a7e82373dc5daad92e1623219e86224ab1fb1
+  Firebase: 7d3b8cd837ad9fcd391657734c0d56dab8e9a5a3
+  FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
+  FirebaseAuth: bd2738c5c1e92b108ba5f7f7335908097a4e50bb
+  FirebaseCore: 2e0b98fb2d64ca8140136beff15772bdd14d2dd7
+  FirebaseFirestore: 713f0c555e7af5ac03d0fec0e2477c48857f4977
+  FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
   GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  gRPC: b56decfd0094854d2ccfe80c8fb767237dace3be
-  gRPC-Core: 95c4968ae43d29219226f22b656d9f625904281e
-  gRPC-ProtoRPC: b7259f51cbc19b77c7a38d96f52a00c3a4ea1637
-  gRPC-RxLibrary: 4f46343e74e74a7ee8373ffeeaf772dfb330cbd7
-  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
+  gRPC: 572520c17b794362388d5c95396329592a3c199b
+  gRPC-Core: af0d4f0a53735e335fccc815c50c0a03da695287
+  gRPC-ProtoRPC: 6596fde8d27e0718d7de1de1dc99a951d832a809
+  gRPC-RxLibrary: f6b1432a667c3354c7b345affed9886c0d4ff549
+  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   Instructions: 11b6744e572b8cab6f61e9445403cb95fcde68f1
-  IQKeyboardManagerSwift: 02bfbb0dff71c66d0ab77d80d25dfce0c3717735
+  IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
   KLCPopup: f233d3334c4808d1087ede03b3ae72fc3fc8a2aa
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -156,6 +163,6 @@ SPEC CHECKSUMS:
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: ccdc4abd922d7c8b3c7be044e3b7d5e81ee327b9
+PODFILE CHECKSUM: a89a13a36c2c5293da9cec9307a49c4f66bdf6f1
 
 COCOAPODS: 1.3.1

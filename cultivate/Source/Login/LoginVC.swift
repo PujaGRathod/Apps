@@ -109,6 +109,9 @@ class LoginVC: UIViewController {
 
     func checkandCreateUser(id: String, email: String, name: String) {
         CULUser.checkIfUserExist(with: id, completion: { (fetchedUser, exist)  in
+            
+            CULFirebaseGateway.shared.loggedInUser = fetchedUser
+            
             if exist && fetchedUser != nil {
                 print("user is old")
                 if fetchedUser?.isOnBoardingComplete == true {
@@ -122,6 +125,7 @@ class LoginVC: UIViewController {
                 print("user is new")
                 let user = CULUser(withName: name, email: email, id: id)
                 user.save()
+                
                 // Open onboarding
                 self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
             }

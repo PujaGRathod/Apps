@@ -15,13 +15,13 @@ class TagPickerPopupVC: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var txtAddNewTag: UITextField!
     @IBOutlet weak var textFieldHeightConstraint: NSLayoutConstraint!
     @IBOutlet var headerView: UIView!
     
     private lazy var tagListTableViewAdapter: TagsListTableViewAdapter = TagsListTableViewAdapter()
     private var tags = [CULTag]()
+    private var popupHeightConstraint: NSLayoutConstraint!
     
     var shouldShowAddNewTagTextField = false
     var tagUpdated: ((CULTag?)->Void)?
@@ -38,6 +38,9 @@ class TagPickerPopupVC: UIViewController {
     }
     
     func set(tag: CULTag?, allTags: [CULTag] = []) {
+//        self.popupHeightConstraint = popup.heightAnchor.constraint(equalToConstant: 200)
+//        self.popupHeightConstraint.isActive = true
+        
         self.selectedTag = tag
         self.tagListTableViewAdapter.selectedTag = tag
         self.tagListTableViewAdapter.shouldUseCustomCell = true
@@ -50,10 +53,26 @@ class TagPickerPopupVC: UIViewController {
         }
         self.tagListTableViewAdapter.selectedTag = self.selectedTag
         if allTags.count == 0 {
-            self.tagListTableViewAdapter.loadAllAvailableTags()
+            self.tagListTableViewAdapter.loadAllAvailableTags {
+                self.adjustTableViewHeight()
+            }
         } else {
             self.tagListTableViewAdapter.load(tags: allTags)
+            self.adjustTableViewHeight()
         }
+    }
+    
+    private func adjustTableViewHeight() {
+        var height = self.tableView.rowHeight * CGFloat(self.tagListTableViewAdapter.tags.count)
+        let maxHeight = 4 * self.tableView.rowHeight
+        if self.shouldShowAddNewTagTextField {
+            height += 44
+        }
+        self.tableViewHeightConstraint.constant = min(height, maxHeight)
+//        self.popupHeightConstraint.constant = self.containerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        self.view.layoutIfNeeded()
+        
+        self.popup.show(with: KLCPopupLayoutCenter)
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {

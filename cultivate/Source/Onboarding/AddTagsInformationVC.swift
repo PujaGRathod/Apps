@@ -12,12 +12,15 @@ class AddTagsInformationVC: UIViewController {
 
     var contacts: [CULContact] = []
     
+    @IBOutlet weak var skipTagsButton: UIButton!
     @IBOutlet weak var footerView: FooterView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.footerView.setCurrentStep(to: OnboardingStep.addTags)
         self.contacts = ContactSelectionProcessDataStore.shared.getContacts()
+        
+        self.skipTagsButton.titleLabel?.font = UIFont.italicSystemFont(ofSize: 16)
     }
     
     @IBAction func skipTagsButtonTapped(_ sender: UIButton) {

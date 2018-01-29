@@ -118,12 +118,20 @@ class SignupVC: UIViewController {
     }
     
     private func createCULUserAndShowOnboarding(name: String, email: String, id: String) {
+        
+        if let currentUser = Auth.auth().currentUser {
+            CULUser.checkIfUserExist(with: currentUser.uid, completion: { (loggedInUser, success) in
+                CULFirebaseGateway.shared.loggedInUser = loggedInUser
+            })
+        }
+        
         CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.accountCreationDate, value: Date())
         CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.email, value: email)
         CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.name, value: name)
         print("User account created with: \(email)")
         let userlocal = CULUser(withName: name, email: email, id: id)
         userlocal.save()
+        
         DispatchQueue.main.async {
             // Open onboarding
             self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)

@@ -383,13 +383,11 @@ class ContactDetailsVC: UIViewController {
             // Ugly hack to force system to load the UIView
             print(frequencyPickerPopupVC.view)
             
-            let layout = KLCPopupLayout(horizontal: .center, vertical: .center)
-            
             let contentView = frequencyPickerPopupVC.viewForPopup()
             let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
             frequencyPickerPopupVC.popup = popup
             if let popup = popup {
-                popup.show(with: layout)
+                popup.show(with: KLCPopupLayoutCenter)
             }
             frequencyPickerPopupVC.validateSubmitButton()
         }
@@ -409,14 +407,9 @@ class ContactDetailsVC: UIViewController {
             // Ugly hack to force system to load the UIView
             print(tagPickerPopupVC.view)
             
-            let layout = KLCPopupLayout(horizontal: .center, vertical: .center)
-            
             let contentView = tagPickerPopupVC.viewForPopup()
             let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
             tagPickerPopupVC.popup = popup
-            if let popup = popup {
-                popup.show(with: layout)
-            }
             tagPickerPopupVC.set(tag: contact?.tag)
         }
     }

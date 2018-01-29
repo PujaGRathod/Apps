@@ -380,23 +380,16 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                             <segue destination="wMO-YL-KQ0" kind="show" identifier="segueShowAddTagsVC" id="iD8-Wf-naK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zP9-8g-XsN">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zP9-8g-XsN">
                                         <rect key="frame" x="112.5" y="98.5" width="150" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="OZM-VG-1c5"/>
                                             <constraint firstAttribute="height" constant="50" id="T4I-2j-kiV"/>
                                         </constraints>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="Skip Tags">
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" metaFont="system" size="16"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Skip Tags">
+                                            <color key="titleColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="skipTagsButtonTapped:" destination="wX7-HE-xwT" eventType="touchUpInside" id="C64-bp-hoI"/>
@@ -434,6 +427,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                     </navigationItem>
                     <connections>
                         <outlet property="footerView" destination="XMV-Y5-Jew" id="3IC-dO-hR7"/>
+                        <outlet property="skipTagsButton" destination="zP9-8g-XsN" id="Pet-cd-OJZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wwv-9I-UqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
