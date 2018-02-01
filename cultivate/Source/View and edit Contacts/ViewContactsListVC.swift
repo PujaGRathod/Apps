@@ -53,7 +53,9 @@ class ViewContactsListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let user = CULFirebaseGateway.shared.loggedInUser {
+            self.showHUD(with: "Loading contacts")
             CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
+                self.hideHUD()
                 DispatchQueue.main.async {
                     self.show(contacts: contacts)
                     self.tags = self.getTags(from: contacts)

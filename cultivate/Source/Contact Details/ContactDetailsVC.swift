@@ -67,6 +67,10 @@ class ContactDetailsVC: UIViewController {
             self.addBorderAndBackground(to: view)
         }
         
+        self.showHUD(on: self.historyTableView, with: "Loading...")
+        self.historyTableViewAdapter.historyLoaded = {
+            self.hideHUD(for: self.historyTableView)
+        }
         self.historyTableViewAdapter.set(tableView: self.historyTableView, contact: self.contact)
     }
     

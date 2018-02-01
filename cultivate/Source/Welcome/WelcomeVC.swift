@@ -135,16 +135,19 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         }
     }
     
-    @IBAction func googleSigninButtonTapped() {
-        GIDSignIn.sharedInstance().signIn()
-    }
+//    @IBAction func googleSigninButtonTapped() {
+//
+//        GIDSignIn.sharedInstance().signIn()
+//    }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         print("Google account disconnected: \(user.profile.email) with error:\(error.localizedDescription)")
+        self.hideHUD()
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         if let error = error {
+            self.hideHUD()
             print("Error with google signin: \(error.localizedDescription)")
             return
         }
@@ -157,6 +160,7 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     func authenticateUser(with credential: AuthCredential, name: String, email: String) {
         Auth.auth().signIn(with: credential) { (user, error) in
             if let error = error {
+                self.hideHUD()
                 let error = error as NSError
                 if let name = error.userInfo["error_name"] as? String {
                     if name == "ERROR_EMAIL_ALREADY_IN_USE" || name == "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" {
@@ -188,6 +192,7 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
                 print("User account created with: \(credential.provider)")
                 self.checkandCreateUser(id: user.uid, email: user.email ?? email, name: user.displayName ?? name)
             } else {
+                self.hideHUD()
                 print("Error: user is nil FIR AUTH")
             }
         }
@@ -197,6 +202,7 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         CULUser.checkIfUserExist(with: id, completion: { (fetchedUser, exist)  in
             if exist && fetchedUser != nil {
                 print("user is old")
+                CULFirebaseGateway.shared.loggedInUser = fetchedUser
                 if fetchedUser?.isOnBoardingComplete == true {
                     // Show dashboard
                     self.performSegue(withIdentifier: "segueDashboard", sender: nil)
@@ -209,7 +215,9 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
                 self.performSegue(withIdentifier: "segueShowOnboarding", sender: nil)
                 let user = CULUser(withName: name, email: email, id: id)
                 user.save()
+                CULFirebaseGateway.shared.loggedInUser = user
             }
+            self.hideHUD()
         })
     }
 
@@ -224,6 +232,7 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     }
 
     @IBAction func continueWithGoogleTapped(_ sender: UIButton) {
+        self.showHUD(with: "Logging you in...")
         GIDSignIn.sharedInstance().signIn()
     }
 }
@@ -243,6 +252,7 @@ extension WelcomeVC:TTTAttributedLabelDelegate {
 extension WelcomeVC: FBSDKLoginButtonDelegate {
     
     @IBAction func loginWithFacebookButtonTapped(_ sender: UIButton) {
+        self.showHUD(with: "Logging you in...")
         let login = FBSDKLoginManager()
         login.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             
@@ -251,6 +261,7 @@ extension WelcomeVC: FBSDKLoginButtonDelegate {
             }
             
             if result.isCancelled {
+                self.hideHUD()
                 print("Cancelled by user!")
             } else {
                 print("Permissions: \(result.grantedPermissions)")
@@ -258,6 +269,7 @@ extension WelcomeVC: FBSDKLoginButtonDelegate {
                 if let profileRequest = FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields": "email, id, name"]) {
                     profileRequest.start(completionHandler: { (connection, result, error) in
                         if let error = error {
+                            self.hideHUD()
                             print("Error Profile fetching: \(error.localizedDescription)")
                         } else {
                             if let result = result as? [String: Any?] {
@@ -267,6 +279,7 @@ extension WelcomeVC: FBSDKLoginButtonDelegate {
                                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                                 self.authenticateUser(with: credential, name: name ?? "", email: email ?? "")
                             } else {
+                                self.hideHUD()
                                 print("Wrong response: \(String(describing: result))")
                             }
                         }
@@ -279,6 +292,7 @@ extension WelcomeVC: FBSDKLoginButtonDelegate {
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if result.isCancelled {
+            self.hideHUD()
             print("Cancelled by user!")
         } else {
             print("Permissions: \(result.grantedPermissions)")
@@ -286,6 +300,7 @@ extension WelcomeVC: FBSDKLoginButtonDelegate {
             if let profileRequest = FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields": "email, id, name"]) {
                 profileRequest.start(completionHandler: { (connection, result, error) in
                     if let error = error {
+                        self.hideHUD()
                         print("Error Profile fetching: \(error.localizedDescription)")
                     } else {
                         if let result = result as? [String: Any?] {
@@ -295,6 +310,7 @@ extension WelcomeVC: FBSDKLoginButtonDelegate {
                             let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                             self.authenticateUser(with: credential, name: name ?? "", email: email ?? "")
                         } else {
+                            self.hideHUD()
                             print("Wrong response: \(String(describing: result))")
                         }
                     }
@@ -305,7 +321,7 @@ extension WelcomeVC: FBSDKLoginButtonDelegate {
     }
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-
+        self.hideHUD()
     }
 
 }

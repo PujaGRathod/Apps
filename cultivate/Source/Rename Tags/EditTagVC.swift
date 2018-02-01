@@ -40,11 +40,9 @@ class EditTagVC: UIViewController {
     @IBAction func submitButtonTapped(_ sender: UIBarButtonItem) {
         self.tag.name = self.textField.text
         if let user = CULFirebaseGateway.shared.loggedInUser {
+            self.navigationController?.dismiss(animated: true, completion: {
+            })
             CULFirebaseGateway.shared.update(tag: self.tag, for: user, completion: { (error) in
-                DispatchQueue.main.async {
-                    self.navigationController?.dismiss(animated: true, completion: {
-                    })
-                }
             })
         }
     }

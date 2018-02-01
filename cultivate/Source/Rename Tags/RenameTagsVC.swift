@@ -27,6 +27,7 @@ class RenameTagsVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.showHUD(with: "Loading tags")
         self.tagListTableViewAdapter.loadAllAvailableTags()
         self.tagListTableViewAdapter.selectedTag = nil
     }
@@ -44,7 +45,7 @@ class RenameTagsVC: UIViewController {
 extension RenameTagsVC: TagsListTableViewAdapterDelegate {
     
     func tagsLoaded(_ tags: [CULTag]) {
-        
+        self.hideHUD()
     }
     
     func selected(tag: CULTag?, for contact: CULContact?) {

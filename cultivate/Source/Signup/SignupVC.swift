@@ -88,8 +88,10 @@ class SignupVC: UIViewController {
     }
 
     func signupUser(with email: String, password: String, name: String) {
+        self.showHUD(with: "Signing up...")
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if let error = error {
+                self.hideHUD()
                 let error = error as NSError
                 if let name = error.userInfo["error_name"] as? String {
                     if name == "ERROR_EMAIL_ALREADY_IN_USE" || name == "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" {
@@ -112,6 +114,7 @@ class SignupVC: UIViewController {
                     self.createCULUserAndShowOnboarding(name: name, email: email, id: user.uid)
 //                }
             } else {
+                self.hideHUD()
                 print("Error: user is nil FIR AUTH")
             }
         }
@@ -131,6 +134,8 @@ class SignupVC: UIViewController {
         print("User account created with: \(email)")
         let userlocal = CULUser(withName: name, email: email, id: id)
         userlocal.save()
+        
+        self.hideHUD()
         
         DispatchQueue.main.async {
             // Open onboarding

@@ -83,6 +83,7 @@ class LoginVC: UIViewController {
 
 
     func authenticateUser(with credential: AuthCredential, name: String, email: String) {
+        self.showHUD(with: "Logging in")
         Auth.auth().signIn(with: credential) { (user, error) in
             if let error = error {
                 print("Error FIR AUTH: \(error.localizedDescription)")
@@ -111,6 +112,8 @@ class LoginVC: UIViewController {
         CULUser.checkIfUserExist(with: id, completion: { (fetchedUser, exist)  in
             
             CULFirebaseGateway.shared.loggedInUser = fetchedUser
+            
+            self.hideHUD()
             
             if exist && fetchedUser != nil {
                 print("user is old")

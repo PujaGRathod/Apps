@@ -100,15 +100,23 @@ class CULFirebaseGateway {
     
     func getTags(for user: CULUser, _ completion:@escaping (([CULTag])->Void)) {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("tags")
-        ref.getDocuments { (snapshots, error) in
+        
+        let options = QueryListenOptions()
+        options.includeQueryMetadataChanges(true)
+        var listener: ListenerRegistration?
+        listener = ref.addSnapshotListener(options: options, listener: { (snapshot, error) in
+//        ref.getDocuments { (snapshot, error) in
             var tags: [CULTag] = []
-            for document in snapshots?.documents ?? [] {
+            for document in snapshot?.documents ?? [] {
                 var tag = self.tag(from: document.data())
                 tag.identifier = document.documentID
                 tags.append(tag)
             }
+            listener?.remove()
+            tags.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
             completion(tags)
-        }
+        })
+//        }
     }
     
     private func tag(from raw: [String:Any]) -> CULTag {
@@ -137,9 +145,11 @@ class CULFirebaseGateway {
     // Get all contacts for the current user
     func getContacts(for user: CULUser, _ completion:@escaping (([CULContact])->Void)) {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("contacts")
-        ref.getDocuments { (snapshots, error) in
+        var listener: ListenerRegistration?
+        listener = ref.addSnapshotListener({ (snapshot, error) in
+//        ref.getDocuments { (snapshot, error) in
             var contacts: [CULContact] = []
-            for document in snapshots?.documents ?? [] {
+            for document in snapshot?.documents ?? [] {
                 if var contact = self.contact(from: document.data()) {
                     contact.db_Identifier = document.documentID
                     contacts.append(contact)
@@ -147,9 +157,11 @@ class CULFirebaseGateway {
             }
             self.getTags(for: user, { (tags) in
                 contacts = self.map(tags: tags, with: contacts)
+                listener?.remove()
                 completion(contacts)
             })
-        }
+        })
+//        }
     }
     
     private func contact(from raw: [String:Any]) -> CULContact? {
@@ -231,15 +243,20 @@ class CULFirebaseGateway {
         let store = Firestore.firestore()
         if let id = contact.db_Identifier {
             let ref = store.collection("users").document(loggedInUser.id).collection("contacts").document(id).collection("followups")
-            ref.getDocuments { (snapshot, error) in
+            
+            var listener: ListenerRegistration?
+            listener = ref.addSnapshotListener({ (snapshot, error) in
+//            ref.getDocuments { (snapshot, error) in
                 var followups = [CULContact.Followup]()
                 for document in snapshot?.documents ?? [] {
                     if let followup = self.followup(from: document.data()) {
                         followups.append(followup)
                     }
                 }
+                listener?.remove()
                 completion(followups, error)
-            }
+//            }
+                        })
         }
     }
     

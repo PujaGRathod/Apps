@@ -32,6 +32,7 @@ class AddTagsVC: UIViewController {
         self.tagListTableViewAdapter.set(tableView: self.tblTagsList)
         self.tagListTableViewAdapter.delegate = self
         self.tagListTableViewAdapter.textField = self.txtAddNewTag
+        self.showHUD(with: "Loading tags")
         self.tagListTableViewAdapter.loadAllAvailableTags()
         
         self.tblTagsList.tableHeaderView = self.headerView
@@ -239,7 +240,7 @@ extension AddTagsVC: UITextFieldDelegate {
 extension AddTagsVC: TagsListTableViewAdapterDelegate {
     
     func tagsLoaded(_ tags: [CULTag]) {
-        
+        self.hideHUD()
     }
     
     func selected(tag: CULTag?, for contact: CULContact?) {

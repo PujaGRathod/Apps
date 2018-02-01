@@ -18,7 +18,7 @@ class OnboardingCompletedVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var finishButton: CULButton!
     
-    private var dataUploaded: Bool = false
+//    private var dataUploaded: Bool = false
     private var userTappedOnButton: Bool = false
     
     override func viewDidLoad() {
@@ -66,14 +66,16 @@ class OnboardingCompletedVC: UIViewController {
             })
         } else {
             CULFirebaseGateway.shared.addNew(contacts: self.contacts, for: user) { (error) in
-                
+                print("New contacts added")
                 CULFirebaseGateway.shared.getContacts(for: user, { (latestContacts) in
+                    print("Contacts fetched added")
                     for (index, contact) in self.contacts.enumerated() {
                         if let latestContact = latestContacts.filter({ $0.identifier == contact.identifier }).first {
                             self.contacts[index] = latestContact
                         }
                     }
                     self.updateContacts {
+                        print("Contacts updated")
                         group.leave()
                     }
                 })
@@ -102,7 +104,7 @@ class OnboardingCompletedVC: UIViewController {
         group.notify(queue: DispatchQueue.main) {
             
             // Success
-            self.dataUploaded = true
+//            self.dataUploaded = true
             if self.userTappedOnButton == true {
                 self.showNextVC()
             }
@@ -122,9 +124,9 @@ class OnboardingCompletedVC: UIViewController {
     
     @IBAction func finishButtonTapped(_ sender: UIButton) {
         self.userTappedOnButton = true
-        if self.dataUploaded == true {
+//        if self.dataUploaded == true {
             self.showNextVC()
-        }
+//        }
     }
     
     private func showNextVC() {

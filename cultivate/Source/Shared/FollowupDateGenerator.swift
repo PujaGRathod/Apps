@@ -54,7 +54,7 @@ class FollowupDateGenerator {
                 assignedContact.followupDate = followupDate
                 assignedContacts.append(assignedContact)
                 
-                print("Followup date set \(String(describing: contact.followupDate)) for \(contact.name)")
+                print("Followup date set \(String(describing: assignedContact.followupDate)) for \(assignedContact.name)")
             } else {
                 assignedContacts.append(contact)
             }

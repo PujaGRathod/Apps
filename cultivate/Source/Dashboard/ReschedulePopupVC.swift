@@ -63,13 +63,14 @@ class ReschedulePopupVC: UIViewController {
         self.contact.followupDate = self.datePicker.date
         if let user = CULFirebaseGateway.shared.loggedInUser {
             CULFirebaseGateway.shared.update(contacts: [self.contact], for: user, completion: { (error) in
-                if let error = error {
-                    self.showAlert("Error", message: error.localizedDescription)
-                } else {
-                    self.dateTextField.resignFirstResponder()
-                    self.followupDateUpdated?(self.contact)
-                }
+//                if let error = error {
+//                    self.showAlert("Error", message: error.localizedDescription)
+//                } else {
+//
+//                }
             })
+            self.dateTextField.resignFirstResponder()
+            self.followupDateUpdated?(self.contact)
         }
         self.popup.dismiss(true)
     }

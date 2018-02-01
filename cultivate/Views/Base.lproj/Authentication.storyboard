@@ -254,7 +254,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PJz-Q9-xoF" customClass="CULTextField" customModule="cultivate" customModuleProvider="target">
                                 <rect key="frame" x="36" y="204" width="303" height="40"/>
@@ -352,7 +352,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qOA-hY-9Xs" customClass="CULTextField" customModule="cultivate" customModuleProvider="target">
                                 <rect key="frame" x="36" y="204" width="303" height="40"/>
@@ -565,7 +565,7 @@
         <image name="new-insurance-icon-30" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fqR-VV-pmF"/>
-        <segue reference="g5l-eS-uBl"/>
+        <segue reference="xd4-5g-JC7"/>
+        <segue reference="8t4-1C-VHd"/>
     </inferredMetricsTieBreakers>
 </document>

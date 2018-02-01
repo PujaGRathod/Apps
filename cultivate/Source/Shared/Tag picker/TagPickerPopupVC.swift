@@ -64,12 +64,11 @@ class TagPickerPopupVC: UIViewController {
     
     private func adjustTableViewHeight() {
         var height = self.tableView.rowHeight * CGFloat(self.tagListTableViewAdapter.tags.count)
-        let maxHeight = 4 * self.tableView.rowHeight
+        let maxHeight = 5 * self.tableView.rowHeight
         if self.shouldShowAddNewTagTextField {
             height += 44
         }
         self.tableViewHeightConstraint.constant = min(height, maxHeight)
-//        self.popupHeightConstraint.constant = self.containerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         self.view.layoutIfNeeded()
         
         self.popup.show(with: KLCPopupLayoutCenter)

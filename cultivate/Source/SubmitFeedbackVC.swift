@@ -10,7 +10,7 @@ import UIKit
 import SZTextView
 
 class SubmitFeedbackVC: UIViewController {
-
+    
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var textView: SZTextView!
     @IBOutlet weak var successLabel: UILabel!
@@ -27,27 +27,28 @@ class SubmitFeedbackVC: UIViewController {
         self.successLabel.isHidden = true
         self.successLabel.alpha = 0
     }
-
+    
     @IBAction func submitButtonTapped(_ sender: CULButton) {
         if self.textView.text.isEmpty == false {
             self.textView.resignFirstResponder()
             if let user = CULFirebaseGateway.shared.loggedInUser {
+                self.showSuccessLabel()
                 CULFirebaseGateway.shared.submit(feedback: self.textView.text, for: user, { (error) in
-                    self.submitFeedbackResponse(with: error)
+                    //                    self.submitFeedbackResponse(with: error)
                 })
             }
         }
     }
     
-    private func submitFeedbackResponse(with error: Error?) {
-        DispatchQueue.main.async {
-            if error == nil {
-                self.showSuccessLabel()
-            } else {
-                self.showAlert("Error", message: "There was a problem while submitting your feedback. Please try again later. If the problem persist, contact the developer.")
-            }
-        }
-    }
+    //    private func submitFeedbackResponse(with error: Error?) {
+    //        DispatchQueue.main.async {
+    //            if error == nil {
+    //                self.showSuccessLabel()
+    //            } else {
+    //                self.showAlert("Error", message: "There was a problem while submitting your feedback. Please try again later. If the problem persist, contact the developer.")
+    //            }
+    //        }
+    //    }
     
     private func showSuccessLabel() {
         self.successLabel.isHidden = false

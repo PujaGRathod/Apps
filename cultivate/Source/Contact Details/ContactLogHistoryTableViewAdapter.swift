@@ -12,6 +12,7 @@ class ContactLogHistoryTableViewAdapter: NSObject {
     
     private var tableView: UITableView!
     private var followups = [CULContact.Followup]()
+    var historyLoaded: (()->Void)?
     
     func set(tableView: UITableView, contact: CULContact) {
         self.tableView = tableView
@@ -30,6 +31,7 @@ class ContactLogHistoryTableViewAdapter: NSObject {
         guard let user = CULFirebaseGateway.shared.loggedInUser else {
             self.followups = []
             self.tableView.reloadData()
+            self.historyLoaded?()
             return
         }
         CULFirebaseGateway.shared.getFollowups(for: contact, loggedInUser: user) { (followups, error) in
@@ -37,6 +39,7 @@ class ContactLogHistoryTableViewAdapter: NSObject {
                 self.followups = followups
                 self.sortFollowups()
                 self.tableView.reloadData()
+                self.historyLoaded?()
             }
         }
     }

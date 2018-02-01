@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MBProgressHUD
 
 extension UIViewController {
     func showAlert(_ title: String?, message: String?) {
@@ -46,6 +47,19 @@ extension UIViewController {
             self.present(alertController, animated: true) {
 
             }
+        }
+    }
+    
+    func showHUD(on view: UIView? = nil, with text: String = "Loading") {
+        let hud = MBProgressHUD.showAdded(to: view ?? self.view, animated: true)
+        hud.mode = .indeterminate
+        hud.backgroundView.style = .blur
+        hud.label.text = text
+    }
+    
+    func hideHUD(for view: UIView? = nil) {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: view ?? self.view, animated: true)
         }
     }
 

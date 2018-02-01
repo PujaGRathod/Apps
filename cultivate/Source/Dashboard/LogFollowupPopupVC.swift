@@ -134,31 +134,37 @@ class LogFollowupPopupVC: UIViewController {
         followup.date = Date()
         followup.notes = self.detailsToRememberTextView.text
         if let user = CULFirebaseGateway.shared.loggedInUser, let contact = self.contact {
+            sender.isEnabled = false
             CULFirebaseGateway.shared.addNew(followup: followup, for: contact, loggedInUser: user) { (error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.showAlert("Error", message: error.localizedDescription)
-                    } else {
-                        self.updateNextFollowupDate(for: contact, loggedInUser: user)
-                    }
-                    self.popup.dismiss(true)
-                }
+//                DispatchQueue.main.async {
+//                    if let error = error {
+//                        sender.isEnabled = true
+//                        self.showAlert("Error", message: error.localizedDescription)
+//                    } else {
+//                        self.updateNextFollowupDate(for: contact, loggedInUser: user)
+//                        self.popup.dismiss(true)
+//                    }
+//                }
             }
+            self.updateNextFollowupDate(for: contact, loggedInUser: user)
+            self.popup.dismiss(true)
         }
     }
     
     private func updateNextFollowupDate(for contact: CULContact, loggedInUser: CULUser) {
         CULFirebaseGateway.shared.update(contacts: [contact], for: loggedInUser) { (error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self.showAlert("Error", message: error.localizedDescription)
-                } else {
-                    self.dateTextField.resignFirstResponder()
-                    self.followupLogged?(contact)
-                }
-                self.popup.dismiss(true)
-            }
+//            DispatchQueue.main.async {
+//                if let error = error {
+//                    self.showAlert("Error", message: error.localizedDescription)
+//                } else {
+//
+//                }
+//
+//            }
         }
+        self.dateTextField.resignFirstResponder()
+        self.followupLogged?(contact)
+        self.popup.dismiss(true)
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {

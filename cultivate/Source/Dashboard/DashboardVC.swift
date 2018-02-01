@@ -47,6 +47,7 @@ class DashboardVC: UIViewController {
         self.dashboardTableViewAdapter.contactsLoaded = {
             self.updateContacts()
             self.showHelpPopovers()
+            self.hideHUD()
         }
         
         self.dashboardTableViewAdapter.setup(for: self.tableView, searchController: self.searchController)
@@ -73,6 +74,7 @@ class DashboardVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.showHUD(with: "Refreshing contacts")
         self.dashboardTableViewAdapter.getContacts()
         self.updateContacts()
     }

@@ -37,21 +37,15 @@ extension CULNavigationController: UINavigationBarDelegate {
         if let viewcontroller: SetFollowupFrequenciesVC = self.viewControllers.last as? SetFollowupFrequenciesVC,
             viewcontroller.isKind(of: SetFollowupFrequenciesVC.classForCoder()) == true {
             print("SetFollowupFrequenciesVC")
-            if viewcontroller.shouldPopViewController() == false {
-                return false
-            }
+            return viewcontroller.shouldPopViewController()
         } else if let viewcontroller: AddTagsVC = self.viewControllers.last as? AddTagsVC,
             viewcontroller.isKind(of: AddTagsVC.classForCoder()) == true {
             print("AddTagsVC")
-            if viewcontroller.shouldPopViewController() == false {
-                return false
-            }
+            return viewcontroller.shouldPopViewController()
         } else if let viewcontroller: OnboardingCompletedVC = self.viewControllers.last as? OnboardingCompletedVC,
             viewcontroller.isKind(of: OnboardingCompletedVC.classForCoder()) == true {
             print("OnboardingCompletedVC")
-            if viewcontroller.shouldPopViewController() == false {
-                return false
-            }
+            return viewcontroller.shouldPopViewController()
         }
         // Pop the view controller
         _ = self.popViewController(animated: true)

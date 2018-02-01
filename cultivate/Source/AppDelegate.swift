@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAnalytics
 import FBSDKCoreKit
 import GoogleSignIn
 import IQKeyboardManagerSwift
@@ -24,7 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
         
+//        FirebaseConfiguration.shared.setLoggerLevel(.error)
+        // TODO: Remove below line
+//        FirebaseConfiguration.shared.analyticsConfiguration.setAnalyticsCollectionEnabled(false)
         FirebaseApp.configure()
+        
+        // Enabling data persistence
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = true
+        Firestore.firestore().settings = settings
+        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         IQKeyboardManager.sharedManager().enable = true

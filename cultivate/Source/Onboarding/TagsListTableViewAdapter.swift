@@ -90,34 +90,44 @@ class TagsListTableViewAdapter: NSObject {
     }
     
     private func getTags(_ completion: @escaping (([CULTag])->Void)) {
-        guard let currentUser = Auth.auth().currentUser else {
+        //        guard let currentUser = Auth.auth().currentUser else {
+        //            completion([])
+        //            return
+        //        }
+        
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.getTags(for: user, { (tags) in
+                completion(tags)
+            })
+        } else {
             completion([])
-            return
         }
         
-        let store = Firestore.firestore()
-        store.collection("users/\(currentUser.uid)/tags").getDocuments { (snapshot, error) in
-            var tags: [CULTag] = []
-            if let error = error {
-                print(error)
-            } else if let snapshot = snapshot {
-                for document in snapshot.documents {
-                    let tag = self.tag(from: document.data(), id: document.documentID)
-                    tags.append(tag)
-                }
-            }
-            completion(tags)
-        }
+        
+        
+        //        let store = Firestore.firestore()
+        //        store.collection("users/\(currentUser.uid)/tags").getDocuments { (snapshot, error) in
+        //            var tags: [CULTag] = []
+        //            if let error = error {
+        //                print(error)
+        //            } else if let snapshot = snapshot {
+        //                for document in snapshot.documents {
+        //                    let tag = self.tag(from: document.data(), id: document.documentID)
+        //                    tags.append(tag)
+        //                }
+        //            }
+        //            completion(tags)
+        //        }
     }
     
-    private func tag(from rawTag: [String:Any], id: String) -> CULTag {
-        var tag = CULTag()
-        if let name: String = rawTag["name"] as? String {
-            tag.name = name
-        }
-        tag.identifier = id
-        return tag
-    }
+    //    private func tag(from rawTag: [String:Any], id: String) -> CULTag {
+    //        var tag = CULTag()
+    //        if let name: String = rawTag["name"] as? String {
+    //            tag.name = name
+    //        }
+    //        tag.identifier = id
+    //        return tag
+    //    }
     
     func set(contact: CULContact) {
         self.contact = contact
@@ -145,14 +155,17 @@ class TagsListTableViewAdapter: NSObject {
         if let identifier = identifier {
             store.collection("users").document(currentUser.uid).collection("tags").document(identifier).setData(data) { (error) in
                 
-                if let error = error {
-                    print(error)
-                } else {
-                    print("Success")
-                    completion(tag)
-                    self.loadAllAvailableTags()
-                }
+                //                if let error = error {
+                //                    print(error)
+                //                } else {
+                //                    print("Success")
+                //                    completion(tag)
+                //                    self.loadAllAvailableTags()
+                //                }
             }
+            
+            completion(tag)
+            self.loadAllAvailableTags()
         }
     }
     
@@ -233,6 +246,8 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
             self.searchText.isEmpty == false {
             
             self.add(tag: self.searchText, completion: { (tag) in
+                self.textField?.text = ""
+                self.searchText = ""
                 if let tag = tag {
                     self.selectedTag = tag
                     self.delegate?.selected(tag: tag, for: self.contact)
