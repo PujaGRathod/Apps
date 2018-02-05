@@ -40,6 +40,11 @@ class ViewContactsListVC: UIViewController {
         if let sortOrder = CULContact.SortOrder(rawValue: UserDefaults.standard.integer(forKey: "KEY_CONTACT_SORT_ORDER")) {
             self.selectedSortOrder = sortOrder
         }
+        
+        let id = "FOLLOWUP"
+        let name = "CONTACT_DASHBOARD"
+        let contentType = "DEFER_DATE"
+        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
     }
     
     private func addBorderAndBackground(to view: UIView) {
@@ -108,6 +113,11 @@ class ViewContactsListVC: UIViewController {
                 }
                 self.tagValueButton.setTitle(tagName, for: .normal)
                 self.filterContacts(for: updatedTag)
+                
+                let id = "APPLY"
+                let name = "CULTIVATE_CONTACTS"
+                let contentType = "FILTER"
+                CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
             }
             tagPickerPopupVC.shouldShowAddNewTagTextField = false
             tagPickerPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
@@ -115,14 +125,9 @@ class ViewContactsListVC: UIViewController {
             // Ugly hack to force system to load the UIView
             print(tagPickerPopupVC.view)
             
-            let layout = KLCPopupLayout(horizontal: .center, vertical: .center)
-            
             let contentView = tagPickerPopupVC.viewForPopup()
             let popup = KLCPopup(contentView: contentView, showType: .slideInFromTop, dismissType: .slideOutToTop, maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
             tagPickerPopupVC.popup = popup
-            if let popup = popup {
-                popup.show(with: layout)
-            }
             tagPickerPopupVC.set(tag: self.selectedTag, allTags: self.tags)
         }
     }

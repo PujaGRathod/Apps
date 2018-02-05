@@ -57,8 +57,9 @@ class TagPickerPopupVC: UIViewController {
                 self.adjustTableViewHeight()
             }
         } else {
-            self.tagListTableViewAdapter.load(tags: allTags)
-            self.adjustTableViewHeight()
+            self.tagListTableViewAdapter.load(tags: allTags, {
+                self.adjustTableViewHeight()
+            })
         }
     }
     

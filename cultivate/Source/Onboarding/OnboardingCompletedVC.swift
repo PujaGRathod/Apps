@@ -18,7 +18,7 @@ class OnboardingCompletedVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var finishButton: CULButton!
     
-//    private var dataUploaded: Bool = false
+    //    private var dataUploaded: Bool = false
     private var userTappedOnButton: Bool = false
     
     override func viewDidLoad() {
@@ -104,7 +104,7 @@ class OnboardingCompletedVC: UIViewController {
         group.notify(queue: DispatchQueue.main) {
             
             // Success
-//            self.dataUploaded = true
+            //            self.dataUploaded = true
             if self.userTappedOnButton == true {
                 self.showNextVC()
             }
@@ -124,25 +124,35 @@ class OnboardingCompletedVC: UIViewController {
     
     @IBAction func finishButtonTapped(_ sender: UIButton) {
         self.userTappedOnButton = true
-//        if self.dataUploaded == true {
-            self.showNextVC()
-//        }
+        //        if self.dataUploaded == true {
+        self.showNextVC()
+        //        }
     }
     
     private func showNextVC() {
         
-        let id = "Onboarding"
-        let name = "Completion"
-        CULFirebaseAnalyticsManager.shared.logUserTap(with: id, on: name)
-        
         ContactSelectionProcessDataStore.shared.empty()
         
+        var id = ""
+        var name = ""
+        
         if ContactSelectionProcessDataStore.shared.mode == .onboarding {
+            id = "Onboarding"
+            name = "Completion"
+
             self.performSegue(withIdentifier: "segueDashboard", sender: nil)
         } else if ContactSelectionProcessDataStore.shared.mode == .updatingContacts {
+            id = "UpdatingContacts"
+            name = "Completion"
+            
             self.navigationController?.popToRootViewController(animated: true)
         } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
+            id = "AddMissingTags"
+            name = "Completion"
+            
             self.performSegue(withIdentifier: "segueDashboard", sender: nil)
         }
+        
+        CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
     }
 }

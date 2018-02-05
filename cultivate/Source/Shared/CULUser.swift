@@ -17,7 +17,7 @@ class CULUser {
     var isOnBoardingComplete: Bool = false
     
     func getRawData() -> [String:Any] {
-        var rawData: [String:Any] = [
+        let rawData: [String:Any] = [
             "id": self.id,
             "email": self.email,
             "name": self.name,

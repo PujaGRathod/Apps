@@ -201,6 +201,7 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     func checkandCreateUser(id: String, email: String, name: String) {
         CULUser.checkIfUserExist(with: id, completion: { (fetchedUser, exist)  in
             if exist && fetchedUser != nil {
+                
                 print("user is old")
                 CULFirebaseGateway.shared.loggedInUser = fetchedUser
                 if fetchedUser?.isOnBoardingComplete == true {

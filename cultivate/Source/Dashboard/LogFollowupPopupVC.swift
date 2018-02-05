@@ -31,6 +31,8 @@ class LogFollowupPopupVC: UIViewController {
     var presentingVC: UIViewController!
     var popup: KLCPopup!
     
+    private var isDateChangedManually = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.containerView.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
@@ -123,6 +125,7 @@ class LogFollowupPopupVC: UIViewController {
     @IBAction func datePickerDateChanged(_ sender: UIDatePicker) {
         self.contact?.followupDate = sender.date
         self.dateTextField.text = self.contact?.userReadableFollowupDateString
+        self.isDateChangedManually = true
     }
     
     @IBAction func changeRescheduleButtonTapped(_ sender: UIButton) {
@@ -130,6 +133,18 @@ class LogFollowupPopupVC: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
+        
+        let id = CULFirebaseAnalyticsManager.Keys.Identifiers.followup.rawValue
+        var name = CULFirebaseAnalyticsManager.Keys.Actions.submit.rawValue
+        if self.detailsToRememberTextView.text.isEmpty {
+            name += CULFirebaseAnalyticsManager.Keys.Actions.submitWithEmptyNote.rawValue
+        }
+        if self.isDateChangedManually {
+            name += CULFirebaseAnalyticsManager.Keys.Actions.submitWithManualDate.rawValue
+        }
+        let contentType = CULFirebaseAnalyticsManager.Keys.ContentTypes.followup.rawValue
+        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
+        
         var followup = CULContact.Followup()
         followup.date = Date()
         followup.notes = self.detailsToRememberTextView.text

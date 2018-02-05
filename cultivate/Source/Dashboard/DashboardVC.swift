@@ -58,7 +58,7 @@ class DashboardVC: UIViewController {
             self.logFollowupPopup(for: contact, tableViewIndexPath: indexPath)
             
             let id = CULFirebaseAnalyticsManager.Keys.Identifiers.followup.rawValue
-            let name = ""
+            let name = "CONTACT"
             let contentType = CULFirebaseAnalyticsManager.Keys.ContentTypes.followup.rawValue
             CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
         }
@@ -82,6 +82,7 @@ class DashboardVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.askForReview()
+        self.showHelpPopovers()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -107,6 +108,11 @@ class DashboardVC: UIViewController {
         if let reschedulePopupVC = self.reschedulePopupVC {
             reschedulePopupVC.followupDateUpdated = { updatedContact in
                 self.dashboardTableViewAdapter.update(contact: updatedContact)
+                
+                let id = "FOLLOWUP"
+                let name = "CONTACT_DASHBOARD"
+                let contentType = "DEFER_DATE"
+                CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
             }
             reschedulePopupVC.view.translatesAutoresizingMaskIntoConstraints = false
             reschedulePopupVC.contact = contact
@@ -156,6 +162,11 @@ class DashboardVC: UIViewController {
     
     @IBAction func logFollowupButtonTapped(_ sender: UIBarButtonItem) {
         self.logFollowupPopup(for: nil, tableViewIndexPath: nil)
+        
+        let id = CULFirebaseAnalyticsManager.Keys.Identifiers.followup.rawValue
+        let name = "STAND-ALONE"
+        let contentType = CULFirebaseAnalyticsManager.Keys.ContentTypes.followup.rawValue
+        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
     }
 }
 
@@ -171,12 +182,12 @@ extension DashboardVC: CoachMarksControllerDataSource, CoachMarksControllerDeleg
     
     private func shouldShowHelp() -> Bool {
         let defaults = UserDefaults.standard
-        return !(defaults.bool(forKey: "DASHBOARD_HELP"))
+        return !(defaults.bool(forKey: "DASHBOARD_HELP_SHOWN"))
     }
     
     private func didShowHelp() {
         let defaults = UserDefaults.standard
-        defaults.set(true, forKey: "DASHBOARD_HELP")
+        defaults.set(true, forKey: "DASHBOARD_HELP_SHOWN")
         defaults.synchronize()
     }
 
@@ -212,7 +223,7 @@ extension DashboardVC: CoachMarksControllerDataSource, CoachMarksControllerDeleg
         
         var hintText = ""
         if index == 0 {
-            hintText = "Welcome to the Dashboard! This is where you will find your next suggested follow-up dates for each of your Cultivate Contacts\n\nCultivate automatically suggests follow-ups based on 1) the last date you reached out to that contact and  2) your selected follow-up frequency for that contact.\n\nTap the screen anywhere to continue"
+            hintText = "Welcome to the Dashboard! This is where you will find your next suggested follow-up dates for each of your Cultivate Contacts\n\nCultivate automatically suggests follow-ups based on 1) the last date you reached out to that contact and  2) your selected follow-up frequency for that contact.\n\nTap to continue"
         } else if index == 1 {
             hintText = "Select the “log follow-up” icon after you complete a follow-up with a contact.\n\nYou can also swipe left on a contact to reschedule the follow-up"
         } else if index == 2 {

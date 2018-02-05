@@ -13,32 +13,38 @@ class CULFirebaseAnalyticsManager {
     
     enum Keys {
         enum UserProperties: String {
-            case name = "NAME"
-            case email = "EMAIL"
-            case iOSVersion = "iOS_VERSION"
-            case deviceModel = "DEVICE_MODEL"
-            case accountCreationDate = "ACCOUNT_CREATION_DATE"
-            case isOnboardingCompleted = "ONBOARDING_COMPLETED"
-            case onboardingCompletionDate = "ONBOARDING_DATE"
-            case lastUserLogin = "LAST_LOGIN_DATE"
-            case totalNumberOfCultivateContacts = "TOTAL_CULTIVATE_CONTACTS"
+            case name = "Name"
+            case email = "Email"
+            case iOSVersion = "iOSVersion"
+            case deviceModel = "DeviceModel"
+            case accountCreationDate = "AccountCreationDate"
+            case isOnboardingCompleted = "OnboardingCompleted"
+            case onboardingCompletionDate = "OnboardingDate"
+            case lastUserLogin = "LastLoginDate"
+            case totalNumberOfCultivateContacts = "TotalCultivateContacts"
         }
         enum ContentTypes: String {
-            case followup = "FOLLOWUP"
+            case followup = "Followup"
         }
         enum Identifiers: String {
-            case followup = "FOLLOWUP"
+            case followup = "Followup"
+        }
+        enum Actions: String {
+            case submit = "Submit"
+            case submitWithEmptyNote = "NoNote"
+            case submitWithManualDate = "ManualDate"
+            case deferDate = "DeferDate"
         }
     }
     
     static let shared = CULFirebaseAnalyticsManager()
     
-    func logUserTap(with id: String, on item: String) {
+    func logUserSelection(with id: String, on item: String) {
         self.log(id: id, itemName: item, contentType: "USER_TAP")
     }
     
-    func log(id: String, itemName: String, contentType: String) {
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+    func log(id: String, itemName: String, contentType: String, eventType: String = AnalyticsEventSelectContent) {
+        Analytics.logEvent(eventType, parameters: [
             AnalyticsParameterItemID: "id-\(id)" as NSObject,
             AnalyticsParameterItemName: itemName as NSObject,
             AnalyticsParameterContentType: contentType as NSObject
