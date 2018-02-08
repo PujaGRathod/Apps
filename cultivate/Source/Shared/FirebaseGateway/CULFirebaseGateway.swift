@@ -100,21 +100,24 @@ class CULFirebaseGateway {
     
     func getTags(for user: CULUser, _ completion:@escaping (([CULTag])->Void)) {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("tags")
-        
-        let options = QueryListenOptions()
-        options.includeQueryMetadataChanges(true)
         var listener: ListenerRegistration?
-        listener = ref.addSnapshotListener(options: options, listener: { (snapshot, error) in
+        listener = ref.addSnapshotListener({ (snapshot, error) in
 //        ref.getDocuments { (snapshot, error) in
+            
+//            if snapshot?.metadata.isFromCache == false {
+                listener?.remove()
+                print("Listener removed for getTags ********** ")
+//            }
+            
             var tags: [CULTag] = []
             for document in snapshot?.documents ?? [] {
                 var tag = self.tag(from: document.data())
                 tag.identifier = document.documentID
                 tags.append(tag)
             }
-            listener?.remove()
             tags.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
             completion(tags)
+            
         })
 //        }
     }
@@ -148,6 +151,12 @@ class CULFirebaseGateway {
         var listener: ListenerRegistration?
         listener = ref.addSnapshotListener({ (snapshot, error) in
 //        ref.getDocuments { (snapshot, error) in
+            
+//            if snapshot?.metadata.isFromCache == false {
+                listener?.remove()
+                print("Listener removed for getContacts ********** ")
+//            }
+            
             var contacts: [CULContact] = []
             for document in snapshot?.documents ?? [] {
                 if var contact = self.contact(from: document.data()) {
@@ -157,7 +166,6 @@ class CULFirebaseGateway {
             }
             self.getTags(for: user, { (tags) in
                 contacts = self.map(tags: tags, with: contacts)
-                listener?.remove()
                 completion(contacts)
             })
         })
@@ -246,6 +254,12 @@ class CULFirebaseGateway {
             
             var listener: ListenerRegistration?
             listener = ref.addSnapshotListener({ (snapshot, error) in
+                
+//                if snapshot?.metadata.isFromCache == false {
+                    listener?.remove()
+                    print("Listener removed for getFollowups ********** ")
+//                }
+                
 //            ref.getDocuments { (snapshot, error) in
                 var followups = [CULContact.Followup]()
                 for document in snapshot?.documents ?? [] {
@@ -253,7 +267,6 @@ class CULFirebaseGateway {
                         followups.append(followup)
                     }
                 }
-                listener?.remove()
                 completion(followups, error)
 //            }
                         })
