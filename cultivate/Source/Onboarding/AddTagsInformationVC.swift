@@ -26,6 +26,6 @@ class AddTagsInformationVC: UIViewController {
     @IBAction func skipTagsButtonTapped(_ sender: UIButton) {
         let id = "Tags"
         let name = "Skip"
-        CULFirebaseAnalyticsManager.shared.logUserTap(with: id, on: name)
+        CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
     }
 }

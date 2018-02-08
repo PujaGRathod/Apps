@@ -23,7 +23,7 @@ class EditTagVC: UIViewController {
         super.viewWillAppear(animated)
         self.textField.text = self.tag.name
     }
-
+    
     private func addBorderAndBackground(to view: UIView) {
         view.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         view.layer.cornerRadius = 5
@@ -44,6 +44,11 @@ class EditTagVC: UIViewController {
             })
             CULFirebaseGateway.shared.update(tag: self.tag, for: user, completion: { (error) in
             })
+            
+            let id = "Rename"
+            let name = "Tag"
+            let contentType = "Submit"
+            CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
         }
     }
 }

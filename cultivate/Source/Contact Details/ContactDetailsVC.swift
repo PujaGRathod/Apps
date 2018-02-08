@@ -176,6 +176,11 @@ class ContactDetailsVC: UIViewController {
     
     @IBAction func sendMessageButtonTapped(_ sender: UIButton) {
         
+        let id = "MESSAGE"
+        let name = "CONTACT_DETAIL"
+        let contentType = "USER_TAP"
+        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
+        
         let numbers = self.phoneNumbers
         
         let actionSheet = UIAlertController(title: "Choose", message: "Tap a number to message", preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -215,6 +220,11 @@ class ContactDetailsVC: UIViewController {
     
     @IBAction func callPhoneButtonTapped(_ sender: UIButton) {
 
+        let id = "CALL"
+        let name = "CONTACT_DETAIL"
+        let contentType = "USER_TAP"
+        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
+        
         let numbers = self.phoneNumbers
         
         let actionSheet = UIAlertController(title: "Choose", message: "Tap a number to call", preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -244,6 +254,11 @@ class ContactDetailsVC: UIViewController {
     
     @IBAction func sendEmailButtonTapped(_ sender: UIButton) {
 
+        let id = "EMAIL"
+        let name = "CONTACT_DETAIL"
+        let contentType = "USER_TAP"
+        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
+        
         let emails = self.emailAddresses
         
         let actionSheet = UIAlertController(title: "Choose", message: "Tap an email address", preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -273,6 +288,11 @@ class ContactDetailsVC: UIViewController {
     }
     
     @IBAction func callFaceTimeButtonTapped(_ sender: UIButton) {
+        
+        let id = "FACETIME"
+        let name = "CONTACT_DETAIL"
+        let contentType = "USER_TAP"
+        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
         
         let numbers = self.phoneNumbers
         let emails = self.emailAddresses
@@ -337,6 +357,12 @@ class ContactDetailsVC: UIViewController {
             reschedulePopupVC.followupDateUpdated = { updatedContact in
                 self.contact.followupDate = updatedContact.followupDate
                 self.display(contact: self.contact)
+                
+                let id = "DATE"
+                let name = "CONTACT_DETAIL"
+                let contentType = "CHANGE"
+                CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
+                
             }
             reschedulePopupVC.view.translatesAutoresizingMaskIntoConstraints = false
             reschedulePopupVC.contact = contact
@@ -359,6 +385,11 @@ class ContactDetailsVC: UIViewController {
     @objc private func notesTextEditingDidEnd() {
         self.contact.notes = self.notesTextView.text
         self.update(contact: self.contact)
+        
+        let id = "NOTES"
+        let name = "CONTACT_DETAIL"
+        let contentType = "CHANGE"
+        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
     }
     
     private func update(contact: CULContact) {
@@ -380,6 +411,11 @@ class ContactDetailsVC: UIViewController {
                 self.contact.followupFrequency = updatedFrequency
                 self.display(contact: self.contact)
                 self.update(contact: self.contact)
+                
+                let id = "FREQUENCY"
+                let name = "CONTACT_DETAIL"
+                let contentType = "CHANGE"
+                CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
             }
             frequencyPickerPopupVC.view.translatesAutoresizingMaskIntoConstraints = false
             frequencyPickerPopupVC.selectedFrequency = contact?.followupFrequency
@@ -404,6 +440,11 @@ class ContactDetailsVC: UIViewController {
                 self.contact.tag = updatedTag
                 self.display(contact: self.contact)
                 self.update(contact: self.contact)
+                
+                let id = "TAG"
+                let name = "CONTACT_DETAIL"
+                let contentType = "CHANGE"
+                CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
             }
             tagPickerPopupVC.shouldShowAddNewTagTextField = true
             tagPickerPopupVC.view.translatesAutoresizingMaskIntoConstraints = false

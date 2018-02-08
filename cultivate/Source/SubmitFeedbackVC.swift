@@ -31,6 +31,12 @@ class SubmitFeedbackVC: UIViewController {
     @IBAction func submitButtonTapped(_ sender: CULButton) {
         if self.textView.text.isEmpty == false {
             self.textView.resignFirstResponder()
+            
+            let id = "Feedback"
+            let name = "Feedback"
+            let contentType = "Submit"
+            CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
+            
             if let user = CULFirebaseGateway.shared.loggedInUser {
                 self.showSuccessLabel()
                 CULFirebaseGateway.shared.submit(feedback: self.textView.text, for: user, { (error) in
