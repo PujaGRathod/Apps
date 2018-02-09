@@ -664,7 +664,7 @@
             </objects>
             <point key="canvasLocation" x="-242" y="2180"/>
         </scene>
-        <!--Edit TagVC-->
+        <!--Rename tag-->
         <scene sceneID="5I6-yJ-aaS">
             <objects>
                 <viewController id="tw3-VA-xHz" customClass="EditTagVC" customModule="cultivate" customModuleProvider="target" sceneMemberID="viewController">
@@ -690,7 +690,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tlT-vo-OA1"/>
                     </view>
-                    <navigationItem key="navigationItem" id="GHd-ch-zt3">
+                    <navigationItem key="navigationItem" title="Rename tag" id="GHd-ch-zt3">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="zgm-jQ-aNp">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="tw3-VA-xHz" id="2jD-Lk-amf"/>

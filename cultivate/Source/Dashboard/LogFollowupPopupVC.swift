@@ -81,14 +81,17 @@ class LogFollowupPopupVC: UIViewController {
     }
     
     private func shouldShowHelp() -> Bool {
-        let defaults = UserDefaults.standard
-        return !(defaults.bool(forKey: "LOG_FOLLOW-UP_HELP"))
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            return !user.isFollowupHintsShown
+        }
+        return false
     }
     
     private func didShowHelp() {
-        let defaults = UserDefaults.standard
-        defaults.set(true, forKey: "LOG_FOLLOW-UP_HELP")
-        defaults.synchronize()
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.setFollowupHintsShown(for: user, completion: { (error) in
+            })
+        }
     }
     
     func loadContactDetails() {

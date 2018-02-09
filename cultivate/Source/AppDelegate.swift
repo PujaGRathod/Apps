@@ -30,10 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        FirebaseConfiguration.shared.analyticsConfiguration.setAnalyticsCollectionEnabled(false)
         FirebaseApp.configure()
         
-        // Enabling data persistence
-        let settings = FirestoreSettings()
-        settings.isPersistenceEnabled = true
-        Firestore.firestore().settings = settings
+        CULFirebaseGateway.shared.localPersistence(true)
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID

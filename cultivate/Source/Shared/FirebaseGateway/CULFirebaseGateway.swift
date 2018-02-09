@@ -14,6 +14,13 @@ class CULFirebaseGateway {
     static let shared = CULFirebaseGateway()
     var loggedInUser: CULUser?
     
+    func localPersistence(_ enable: Bool) {
+        // Enabling data persistence
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = enable
+        Firestore.firestore().settings = settings
+    }
+    
     func deleteUnusedTags() {
         guard let user = CULFirebaseGateway.shared.loggedInUser else {
             return
@@ -72,6 +79,28 @@ class CULFirebaseGateway {
         let ref = store.collection("users").document(user.id)
         let data: [String:Any] = [
             "isOnBoardingComplete" : true
+        ]
+        ref.updateData(data) { (error) in
+            completion(error)
+        }
+    }
+    
+    func setDashboardHintsShown(for user: CULUser, completion: @escaping ((Error?)->Void)) {
+        let store: Firestore = Firestore.firestore()
+        let ref = store.collection("users").document(user.id)
+        let data: [String:Any] = [
+            "isDashboardHintsShown" : true
+        ]
+        ref.updateData(data) { (error) in
+            completion(error)
+        }
+    }
+    
+    func setFollowupHintsShown(for user: CULUser, completion: @escaping ((Error?)->Void)) {
+        let store: Firestore = Firestore.firestore()
+        let ref = store.collection("users").document(user.id)
+        let data: [String:Any] = [
+            "isFollowupHintsShown" : true
         ]
         ref.updateData(data) { (error) in
             completion(error)

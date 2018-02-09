@@ -54,6 +54,7 @@ class CULHamburgerMenuVC: UITableViewController {
     private func logoutTapped() {
         let alert = UIAlertController(title: "Sure?", message: "Do you really want to Logout?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Logout", style: UIAlertActionStyle.destructive, handler: { (action) in
+//            CULFirebaseGateway.shared.localPersistence(false)
             GIDSignIn.sharedInstance().signOut()
             FBSDKLoginManager().logOut()
             do {

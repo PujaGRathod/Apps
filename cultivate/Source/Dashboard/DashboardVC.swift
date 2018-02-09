@@ -182,14 +182,17 @@ extension DashboardVC: CoachMarksControllerDataSource, CoachMarksControllerDeleg
     }
     
     private func shouldShowHelp() -> Bool {
-        let defaults = UserDefaults.standard
-        return !(defaults.bool(forKey: "DASHBOARD_HELP_SHOWN"))
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            return !user.isDashboardHintsShown
+        }
+        return false
     }
     
     private func didShowHelp() {
-        let defaults = UserDefaults.standard
-        defaults.set(true, forKey: "DASHBOARD_HELP_SHOWN")
-        defaults.synchronize()
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.setDashboardHintsShown(for: user, completion: { (error) in
+            })
+        }
     }
 
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {

@@ -14,7 +14,9 @@ class CULUser {
     var name: String
     var email: String
     let id: String
-    var isOnBoardingComplete: Bool = false
+    var isOnBoardingComplete = false
+    var isDashboardHintsShown = false
+    var isFollowupHintsShown = false
     
     func getRawData() -> [String:Any] {
         let rawData: [String:Any] = [
@@ -22,6 +24,8 @@ class CULUser {
             "email": self.email,
             "name": self.name,
             "isOnBoardingComplete": self.isOnBoardingComplete,
+            "isDashboardHintsShown": self.isDashboardHintsShown,
+            "isFollowupHintsShown": self.isFollowupHintsShown,
             ]
         return rawData
     }
@@ -39,7 +43,8 @@ class CULUser {
             self.email = (data["email"] as? String) ?? ""
             self.name = (data["name"] as? String) ?? ""
             self.isOnBoardingComplete = (data["isOnBoardingComplete"] as? Bool) ?? false
-            
+            self.isDashboardHintsShown = (data["isDashboardHintsShown"] as? Bool) ?? false
+            self.isFollowupHintsShown = (data["isFollowupHintsShown"] as? Bool) ?? false
         } else {
             return nil
         }

@@ -34,21 +34,34 @@ extension CULNavigationController: UINavigationBarDelegate {
 //    }
 //
     func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+        
+        func popViewController() -> Bool {
+            // Pop the view controller
+            _ = self.popViewController(animated: true)
+            return true
+        }
+        
+        
         if let viewcontroller: SetFollowupFrequenciesVC = self.viewControllers.last as? SetFollowupFrequenciesVC,
             viewcontroller.isKind(of: SetFollowupFrequenciesVC.classForCoder()) == true {
             print("SetFollowupFrequenciesVC")
-            return viewcontroller.shouldPopViewController()
+            if viewcontroller.shouldPopViewController() == false {
+                return false
+            }
         } else if let viewcontroller: AddTagsVC = self.viewControllers.last as? AddTagsVC,
             viewcontroller.isKind(of: AddTagsVC.classForCoder()) == true {
             print("AddTagsVC")
-            return viewcontroller.shouldPopViewController()
+            if viewcontroller.shouldPopViewController() == false {
+                return false
+            }
         } else if let viewcontroller: OnboardingCompletedVC = self.viewControllers.last as? OnboardingCompletedVC,
             viewcontroller.isKind(of: OnboardingCompletedVC.classForCoder()) == true {
             print("OnboardingCompletedVC")
-            return viewcontroller.shouldPopViewController()
+            if viewcontroller.shouldPopViewController() == false {
+                return false
+            }
         }
-        // Pop the view controller
-        _ = self.popViewController(animated: true)
-        return true
+        
+        return popViewController()
     }
 }

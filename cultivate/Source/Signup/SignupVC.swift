@@ -23,22 +23,6 @@ class SignupVC: UIViewController {
         self.errorLabel.text = ""
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     @IBAction func onSignupTap(_ sender: UIButton) {
         let email: String? = self.txtEmail.text
         let password: String? = self.txtPassword.text
@@ -80,13 +64,17 @@ class SignupVC: UIViewController {
         }
         
         if validationSuccess {
+            self.txtPassword.resignFirstResponder()
+            self.txtRetypePassword.resignFirstResponder()
+            self.txtEmail.resignFirstResponder()
+            
             self.errorLabel.text = ""
             self.signupUser(with: email!, password: password!, name: "")
         } else {
             self.errorLabel.text = errorMessages.joined(separator: "\n")
         }
     }
-
+    
     func signupUser(with email: String, password: String, name: String) {
         self.showHUD(with: "Signing up...")
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in

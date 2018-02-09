@@ -73,6 +73,9 @@ class LoginVC: UIViewController {
         }
         
         if validationSuccess {
+            self.txtPassword.resignFirstResponder()
+            self.txtEmail.resignFirstResponder()
+            
             self.errorLabel.text = ""
             let credntial = EmailAuthProvider.credential(withEmail: email!, password: password!)
             self.authenticateUser(with: credntial, name: "", email: email!)
@@ -86,6 +89,7 @@ class LoginVC: UIViewController {
         self.showHUD(with: "Logging in")
         Auth.auth().signIn(with: credential) { (user, error) in
             if let error = error {
+                self.hideHUD()
                 print("Error FIR AUTH: \(error.localizedDescription)")
                 self.txtEmail.setTextfieldMode(to: CULTextFieldMode.error)
                 self.txtPassword.setTextfieldMode(to: CULTextFieldMode.error)
@@ -103,6 +107,7 @@ class LoginVC: UIViewController {
                 print("User account logged in with: \(credential.provider)")
                 self.checkandCreateUser(id: user.uid, email: user.email ?? email, name: user.displayName ?? name)
             } else {
+                self.hideHUD()
                 print("Error: user is nil FIR AUTH")
             }
         }
