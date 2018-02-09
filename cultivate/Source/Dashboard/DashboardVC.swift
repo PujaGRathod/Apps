@@ -73,6 +73,7 @@ class DashboardVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        CULFirebaseGateway.shared.deleteUnusedTags()
         super.viewWillAppear(animated)
         self.showHUD(with: "Refreshing contacts")
         self.dashboardTableViewAdapter.getContacts()

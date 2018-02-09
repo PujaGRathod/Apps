@@ -68,12 +68,12 @@
                   moduleName = "cultivate"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Akshit/Codebase/Cultivate/cultivate/Source/Onboarding/ContactsListVC.swift"
-                  timestampString = "539775908.181978"
+                  timestampString = "539853057.312151"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "106"
                   endingLineNumber = "106"
-                  offsetFromSymbolStart = "32">
+                  offsetFromSymbolStart = "35">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -83,12 +83,12 @@
                   moduleName = "cultivate"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Akshit/Codebase/Cultivate/cultivate/Source/Onboarding/ContactsListVC.swift"
-                  timestampString = "539775908.1853369"
+                  timestampString = "539853057.314509"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "106"
                   endingLineNumber = "106"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "4">
                </Location>
             </Locations>
          </BreakpointContent>

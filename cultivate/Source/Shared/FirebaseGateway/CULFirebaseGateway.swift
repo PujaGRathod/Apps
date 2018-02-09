@@ -14,6 +14,59 @@ class CULFirebaseGateway {
     static let shared = CULFirebaseGateway()
     var loggedInUser: CULUser?
     
+    func deleteUnusedTags() {
+        guard let user = CULFirebaseGateway.shared.loggedInUser else {
+            return
+        }
+        
+        self.getUnusedTags { (tags) in
+            let store = Firestore.firestore()
+            let batch = store.batch()
+            for tag in tags {
+                if let id = tag.identifier {
+                    let ref = store.collection("users").document(user.id).collection("tags").document(id)
+                    batch.deleteDocument(ref)
+                }
+            }
+            batch.commit { (error) in
+                // Unused tags feleted
+            }
+        }
+    }
+    
+    private func getUnusedTags(_ completion: @escaping (([CULTag])->Void)) {
+        let group = DispatchGroup()
+        
+        var allContacts = [CULContact]()
+        var allTags = [CULTag]()
+        var unusedTags = [CULTag]()
+        
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            group.enter()
+            group.enter()
+            self.getTags(for: user, { (tags) in
+                allTags = tags
+                group.leave()
+            })
+            
+            self.getContacts(for: user, { (contacts) in
+                allContacts = contacts
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue(label: "backgroundQueue")) {
+            for tag in allTags {
+                let contactsWithTag = allContacts.filter({ $0.tag?.identifier == tag.identifier })
+                if contactsWithTag.count == 0 {
+                    // Unused tag
+                    unusedTags.append(tag)
+                }
+            }
+            completion(unusedTags)
+        }
+    }
+    
     func setOnboardingCompleted(for user: CULUser, completion: @escaping ((Error?)->Void)) {
         let store: Firestore = Firestore.firestore()
         let ref = store.collection("users").document(user.id)

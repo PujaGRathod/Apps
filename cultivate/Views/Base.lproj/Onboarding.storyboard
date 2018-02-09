@@ -251,8 +251,10 @@ Cultivate will automatically schedule recommended follow-up date based on the fo
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="UoL-O3-tGs" firstAttribute="centerY" secondItem="F7h-wF-b2h" secondAttribute="centerY" id="EW8-TL-fXn"/>
+                                    <constraint firstItem="UoL-O3-tGs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="F7h-wF-b2h" secondAttribute="top" constant="8" id="FZC-pW-cxc"/>
                                     <constraint firstAttribute="trailing" secondItem="UoL-O3-tGs" secondAttribute="trailing" constant="24" id="lQt-BC-7EC"/>
                                     <constraint firstItem="UoL-O3-tGs" firstAttribute="leading" secondItem="F7h-wF-b2h" secondAttribute="leading" constant="24" id="uyn-xq-DN7"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UoL-O3-tGs" secondAttribute="bottom" constant="8" id="y5u-UP-8vq"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -401,6 +403,8 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                 <constraints>
                                     <constraint firstItem="tsP-TQ-W0m" firstAttribute="centerY" secondItem="Y2z-ds-xLu" secondAttribute="centerY" constant="-20" id="B4c-49-S9n"/>
                                     <constraint firstItem="zP9-8g-XsN" firstAttribute="top" secondItem="tsP-TQ-W0m" secondAttribute="bottom" constant="9.5" id="WC9-5G-rOl"/>
+                                    <constraint firstItem="tsP-TQ-W0m" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Y2z-ds-xLu" secondAttribute="top" constant="8" id="Z7w-7h-hNZ"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zP9-8g-XsN" secondAttribute="bottom" constant="8" id="d3F-FG-han"/>
                                     <constraint firstAttribute="trailing" secondItem="tsP-TQ-W0m" secondAttribute="trailing" constant="24" id="lCn-gz-Zt3"/>
                                     <constraint firstItem="zP9-8g-XsN" firstAttribute="centerX" secondItem="Y2z-ds-xLu" secondAttribute="centerX" id="n2z-dr-hvB"/>
                                     <constraint firstItem="tsP-TQ-W0m" firstAttribute="leading" secondItem="Y2z-ds-xLu" secondAttribute="leading" constant="24" id="n5j-Or-ceQ"/>
@@ -455,7 +459,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="XZ5-Uk-ZcZ"/>
                                             </constraints>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.71372549019607845" green="0.80392156862745101" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                             <connections>
@@ -621,8 +625,8 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
         <image name="ic_sort_100pt" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jnJ-PK-klY"/>
+        <segue reference="mku-Xg-epZ"/>
         <segue reference="iD8-Wf-naK"/>
-        <segue reference="OIS-oq-jfr"/>
+        <segue reference="WC9-u8-GqI"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -61,7 +61,7 @@ class TagsListTableViewAdapter: NSObject {
         } else {
             var color = UIColor.gray
             if self.tags.count == 0 {
-                color = UIColor.black
+                color = #colorLiteral(red: 0.7137254902, green: 0.8039215686, blue: 0.7254901961, alpha: 1)
             }
             let attributes: [NSAttributedStringKey:Any] = [
                 NSAttributedStringKey.foregroundColor: color
@@ -203,7 +203,7 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TagPickerTblCell
             if self.filteredTags.count == 0,
                 self.searchText.isEmpty == false {
-                
+                cell.titleLabel.textColor = #colorLiteral(red: 0.7137254902, green: 0.8039215686, blue: 0.7254901961, alpha: 1)
                 cell.titleLabel.text = "Tap to create a new tag"
                 cell.titleLabel.font = UIFont.italicSystemFont(ofSize: 17)
                 cell.checkmarkImageView.isHidden = true
@@ -217,14 +217,14 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = UIColor.clear
         cell.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
-        cell.textLabel?.textColor = #colorLiteral(red: 0.3803921569, green: 0.368627451, blue: 0.3843137255, alpha: 1)
         
         if self.filteredTags.count == 0,
             self.searchText.isEmpty == false {
-            
+            cell.textLabel?.textColor = #colorLiteral(red: 0.7137254902, green: 0.8039215686, blue: 0.7254901961, alpha: 1)
             cell.textLabel?.text = "Tap to create a new tag"
             cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 17)
         } else {
+            cell.textLabel?.textColor = UIColor.black
             let tag: CULTag? = self.filteredTags[indexPath.item]
             cell.textLabel?.text = tag?.name ?? "N.A"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 17)

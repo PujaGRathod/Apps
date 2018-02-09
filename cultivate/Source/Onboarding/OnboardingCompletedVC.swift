@@ -106,6 +106,7 @@ class OnboardingCompletedVC: UIViewController {
             // Success
             //            self.dataUploaded = true
             if self.userTappedOnButton == true {
+                CULFirebaseGateway.shared.deleteUnusedTags()
                 self.showNextVC()
             }
         }

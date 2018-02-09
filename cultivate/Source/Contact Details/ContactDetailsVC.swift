@@ -441,6 +441,8 @@ class ContactDetailsVC: UIViewController {
                 self.display(contact: self.contact)
                 self.update(contact: self.contact)
                 
+                CULFirebaseGateway.shared.deleteUnusedTags()
+                
                 let id = "TAG"
                 let name = "CONTACT_DETAIL"
                 let contentType = "CHANGE"
