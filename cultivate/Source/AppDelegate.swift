@@ -20,46 +20,20 @@ var hamburgerMenuVC: CULHamburgerMenuVC!
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+//        NotificationCenter.default.addObserver(forName: NSNotification.Name.CNContactStoreDidChange, object: nil, queue: nil) { (notification) in
+//            ContactsWorker().updateCultivateContacts()
+//        }
         
         window?.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
         
-//        let contact = ContactsWorker().getCNContact(for: "EA3FDE10-D2F6-4A1D-9DBF-BC97DB5DF722")
-//        print("Contact: \(contact)")
-//        print("")
-        
-        ContactsWorker().getContacts(sortOrder: CULContact.SortOrder.firstName) { (orderedContacts, sortedContactKeys, error) in
-
-            var contacts = [CULContact]()
-            for contact in orderedContacts {
-                contacts.append(contentsOf: contact.value)
-            }
-            print(contacts)
-
-            for contact in contacts {
-                print("*")
-                print("*")
-                print("ID: \(contact.identifier)")
-                print("Name: \(contact.name)")
-                print("*")
-                print("*")
-//                if contact.identifier == "EA3FDE10-D2F6-4A1D-9DBF-BC97DB5DF722" {
-//                    print("Matched \(contact)")
-//                }
-//
-//                if contact.name == "Dushyantbhai A'bad" {
-//                    print("Matched \(contact)")
-//                }
-            }
-        }
-        
-        
-//        FirebaseConfiguration.shared.setLoggerLevel(.error)
+        //        FirebaseConfiguration.shared.setLoggerLevel(.error)
         // TODO: Remove below line
-//        FirebaseConfiguration.shared.analyticsConfiguration.setAnalyticsCollectionEnabled(false)
+        //        FirebaseConfiguration.shared.analyticsConfiguration.setAnalyticsCollectionEnabled(false)
         FirebaseApp.configure()
         
         CULFirebaseGateway.shared.localPersistence(true)
@@ -100,6 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         return
                     }
                     
+                    ContactsWorker().updateCultivateContacts()
+                    
                     if user.isOnBoardingComplete == true {
                         // Show dashboard
                         let dashboardStoryboard = UIStoryboard(name: "Dashboard", bundle: nil)
@@ -134,53 +110,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return handled
         }
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        ContactsWorker().updateCultivateContacts()
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        NotificationCenter.default.post(name: NSNotification.Name("applicationDidBecomeActive_Dashboard"), object: nil)
     }
-
+    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
     
-//    private func testFirestore() {
-//        let store: Firestore = Firestore.firestore()
-//        let data: [String:Any] = [
-//            "first": "Akshit2",
-//            "last": "Zaveri3",
-//            "born": 1990
-//        ]
-//        _ = store.collection("users").addDocument(data: data) { (error) in
-//            if let error = error {
-//                print(error)
-//            } else {
-//                print("Success")
-//            }
-//        }
-//    }
-//
-//    private func getDataFromFirestore() {
-//        let store = Firestore.firestore()
-//        store.collection("usersTestAkshit1").getDocuments { (snapshot, error) in
-//            for document in snapshot?.documents ?? [] {
-//                print(document)
-//            }
-//        }
-//    }
+    //    private func testFirestore() {
+    //        let store: Firestore = Firestore.firestore()
+    //        let data: [String:Any] = [
+    //            "first": "Akshit2",
+    //            "last": "Zaveri3",
+    //            "born": 1990
+    //        ]
+    //        _ = store.collection("users").addDocument(data: data) { (error) in
+    //            if let error = error {
+    //                print(error)
+    //            } else {
+    //                print("Success")
+    //            }
+    //        }
+    //    }
+    //
+    //    private func getDataFromFirestore() {
+    //        let store = Firestore.firestore()
+    //        store.collection("usersTestAkshit1").getDocuments { (snapshot, error) in
+    //            for document in snapshot?.documents ?? [] {
+    //                print(document)
+    //            }
+    //        }
+    //    }
 }
 

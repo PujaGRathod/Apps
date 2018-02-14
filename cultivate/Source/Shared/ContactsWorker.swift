@@ -192,12 +192,8 @@ class ContactsWorker {
         contact.identifier = cnContact.identifier
         contact.first_name = cnContact.givenName
         contact.last_name = cnContact.familyName
-        
-        //        if let components = cnContact.birthday {
-        //            let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-        //            contact.birthday = calendar.date(from: components)
-        //        }
-        
+        contact.phoneNumbers = ContactsWorker().getPhoneNumbers(from: cnContact).map({ return $0.value })
+        contact.emailAddresses = ContactsWorker().getEmailAddresses(from: cnContact).map({ return $0.value })
         return contact
     }
     
@@ -213,13 +209,16 @@ class ContactsWorker {
     }
     
     func getPhoneNumbers(forContactIdentifier identifier: String) -> [String:String] {
-        var phoneNumbers = [String:String]()
-        
         let cnContact = self.getCNContact(for: identifier)
         guard let contact = cnContact else {
-            return phoneNumbers
+            return [String:String]()
         }
         
+        return self.getPhoneNumbers(from: contact)
+    }
+    
+    private func getPhoneNumbers(from contact: CNContact) -> [String:String] {
+        var phoneNumbers = [String:String]()
         for phoneNumber in contact.phoneNumbers {
             var key: String = "phone"
             if let label = phoneNumber.label, label.isEmpty == false {
@@ -231,13 +230,16 @@ class ContactsWorker {
     }
     
     func getEmailAddresses(forContactIdentifier identifier: String) -> [String:String] {
-        var emailAddresses = [String:String]()
-        
         let cnContact = self.getCNContact(for: identifier)
         guard let contact = cnContact else {
-            return emailAddresses
+            return [String:String]()
         }
         
+        return self.getEmailAddresses(from: contact)
+    }
+    
+    private func getEmailAddresses(from contact: CNContact) -> [String:String] {
+        var emailAddresses = [String:String]()
         for emailAddress in contact.emailAddresses {
             var key: String = "email"
             if let label = emailAddress.label, label.isEmpty == false {
@@ -275,16 +277,23 @@ class ContactsWorker {
     
     
     // Contact matching
-    
     func getUnlinkedContacts(from cultivateContacts: [CULContact]) -> [CULContact] {
         var unlinkedContacts = [CULContact]()
+        
+        func append(contact: CULContact) {
+            print("Contact does not have an attached iOS contact \(contact.name)")
+            unlinkedContacts.append(contact)
+        }
+        
         for contact in cultivateContacts {
             if let identifier = contact.identifier {
                 if self.getCNContact(for: identifier) == nil {
-                    unlinkedContacts.append(contact)
+                    append(contact: contact)
+                } else {
+                    print("Contact does have an attached iOS contact \(contact.name)")
                 }
             } else {
-                unlinkedContacts.append(contact)
+                append(contact: contact)
             }
         }
         return unlinkedContacts
@@ -309,20 +318,20 @@ class ContactsWorker {
     
     func findiOSContacts(for unlinkedContacts: [CULContact],
                          from alliOSContacts: [CNContact]) -> [CULContact] {
-        
-        var unlinkedContacts = unlinkedContacts
-        for (index, unlinkedContact) in unlinkedContacts.enumerated() {
-            var unlinkedContact = unlinkedContact
+        var linkedContacts = [CULContact]()
+        for unlinkedContact in unlinkedContacts {
             for contact in alliOSContacts {
                 let areEqual = self.areEqual(cultivateContact: unlinkedContact, iOSContact: contact)
                 if areEqual {
-                    unlinkedContact.identifier = contact.identifier
-                    unlinkedContacts[index] = unlinkedContact
+                    var linkedContact = unlinkedContact
+                    linkedContact.identifier = contact.identifier
+                    linkedContacts.append(linkedContact)
+                    print("****** Found iOS contact for cultivate contact \(unlinkedContact.name)")
                     break
                 }
             }
         }
-        return unlinkedContacts
+        return linkedContacts
     }
     
     func areEqual(cultivateContact: CULContact, iOSContact: CNContact) -> Bool {
@@ -381,13 +390,13 @@ class ContactsWorker {
         return false
     }
     
+    let phoneNumberKit = PhoneNumberKit()
     func atleastOnePhoneNumberMatchedBetween(cultivatePhoneNumbers: [String], iOSContactPhoneNumbers: [CNLabeledValue<CNPhoneNumber>]) -> Bool {
         
-        let phoneNumberKit = PhoneNumberKit()
         for phoneNumber in cultivatePhoneNumbers {
-            let p1 = try? phoneNumberKit.parse(phoneNumber)
+            let p1 = try? self.phoneNumberKit.parse(phoneNumber)
             for phoneNumber1 in iOSContactPhoneNumbers {
-                let p2 = try? phoneNumberKit.parse(phoneNumber1.value.stringValue)
+                let p2 = try? self.phoneNumberKit.parse(phoneNumber1.value.stringValue)
                 if p1 == p2 {
                     return true
                 }
@@ -408,7 +417,31 @@ class ContactsWorker {
         return false
     }
     
+    func updateCultivateContacts() {
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            var allUpdatedContacts = [CULContact]()
+            CULFirebaseGateway.shared.getContacts(for: user, { (cultivateContacts) in
+                for cultivateContact in cultivateContacts {
+                    if let identifier = cultivateContact.identifier,
+                        let cnContact = self.getCNContact(for: identifier)  {
+                        
+                        let updatedContact = self.copy(from: cnContact, to: cultivateContact)
+                        allUpdatedContacts.append(updatedContact)
+                    }
+                }
+                
+                CULFirebaseGateway.shared.update(contacts: allUpdatedContacts, for: user, completion: { (error) in
+                    print("All contacts updated with latest values")
+                })
+            })
+        }
+    }
     
+    private func copy(from iOSContact: CNContact, to cultivateContact: CULContact) -> CULContact {
+        var contact = ContactsWorker.createCULContact(from: iOSContact)
+        contact.db_Identifier = cultivateContact.db_Identifier
+        return contact
+    }
     
     
     //    func addTestData() {

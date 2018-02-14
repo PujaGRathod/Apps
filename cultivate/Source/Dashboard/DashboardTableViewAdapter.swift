@@ -28,7 +28,7 @@ class DashboardTableViewAdapter: NSObject {
     private var tableView: UITableView!
     private var searchController: UISearchController?
     
-    var contactsLoaded: (()->Void)?
+    var contactsLoaded: (([CULContact])->Void)?
     var contactSelected: ((_ contact: CULContact)->Void)?
     var shouldExpandOtherFollowupSection = false
     var followupButtonTapped: ((_ indexPath: IndexPath, _ contact: CULContact)->Void)?
@@ -62,7 +62,7 @@ class DashboardTableViewAdapter: NSObject {
                     self.contacts = contacts
                     self.updateContactsIfRequired()
                     self.formatContactsForAdapter()
-                    self.contactsLoaded?()
+                    self.contactsLoaded?(contacts)
                 }
             })
         }

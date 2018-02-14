@@ -177,6 +177,9 @@ class CULFirebaseGateway {
         
         raw["notes"] = contact.notes ?? ""
         
+        raw["phoneNumbers"] = contact.phoneNumbers
+        raw["emailAddresses"] = contact.emailAddresses
+        
         return raw
     }
     
@@ -184,12 +187,12 @@ class CULFirebaseGateway {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("tags")
         var listener: ListenerRegistration?
         listener = ref.addSnapshotListener({ (snapshot, error) in
-//        ref.getDocuments { (snapshot, error) in
+            //        ref.getDocuments { (snapshot, error) in
             
-//            if snapshot?.metadata.isFromCache == false {
-                listener?.remove()
-                print("Listener removed for getTags ********** ")
-//            }
+            //            if snapshot?.metadata.isFromCache == false {
+            listener?.remove()
+            print("Listener removed for getTags ********** ")
+            //            }
             
             var tags: [CULTag] = []
             for document in snapshot?.documents ?? [] {
@@ -201,7 +204,26 @@ class CULFirebaseGateway {
             completion(tags)
             
         })
-//        }
+        //        }
+    }
+    
+    func getTag(with id: String, for user: CULUser, _ completion:@escaping ((CULTag?)->Void)) {
+        let ref = Firestore.firestore().collection("users").document(user.id).collection("tags").document(id)
+        var listener: ListenerRegistration?
+        listener = ref.addSnapshotListener({ (snapshot, error) in
+            listener?.remove()
+            print("Listener removed for getTag ********** ")
+            if let data = snapshot?.data(),
+                let dbId = snapshot?.documentID {
+                
+                var tag = self.tag(from: data)
+                tag.identifier = dbId
+                completion(tag)
+            } else {
+                completion(nil)
+            }
+        })
+        //        }
     }
     
     private func tag(from raw: [String:Any]) -> CULTag {
@@ -232,12 +254,12 @@ class CULFirebaseGateway {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("contacts")
         var listener: ListenerRegistration?
         listener = ref.addSnapshotListener({ (snapshot, error) in
-//        ref.getDocuments { (snapshot, error) in
+            //        ref.getDocuments { (snapshot, error) in
             
-//            if snapshot?.metadata.isFromCache == false {
-                listener?.remove()
-                print("Listener removed for getContacts ********** ")
-//            }
+            //            if snapshot?.metadata.isFromCache == false {
+            listener?.remove()
+            print("Listener removed for getContacts ********** ")
+            //            }
             
             var contacts: [CULContact] = []
             for document in snapshot?.documents ?? [] {
@@ -251,7 +273,35 @@ class CULFirebaseGateway {
                 completion(contacts)
             })
         })
-//        }
+        //        }
+    }
+    
+    func getContact(with id: String, for user: CULUser, _ completion:@escaping ((CULContact?)->Void)) {
+        let ref = Firestore.firestore().collection("users").document(user.id).collection("contacts").document(id)
+        var listener: ListenerRegistration?
+        listener = ref.addSnapshotListener({ (snapshot, error) in
+            listener?.remove()
+            print("Listener removed for getContact ********** ")
+            if let data = snapshot?.data(),
+                let dbId = snapshot?.documentID {
+                if var contact = self.contact(from: data) {
+                    contact.db_Identifier = dbId
+                    if let tagId = contact.tag?.identifier {
+                        self.getTag(with: tagId, for: user, { (tag) in
+                            contact.tag = tag
+                            completion(contact)
+                        })
+                    } else {
+                        completion(contact)
+                    }
+                } else {
+                    completion(nil)
+                }
+            } else {
+                completion(nil)
+            }
+        })
+        //        }
     }
     
     private func contact(from raw: [String:Any]) -> CULContact? {
@@ -279,6 +329,9 @@ class CULFirebaseGateway {
         }
         
         contact.notes = raw["notes"] as? String
+        
+        contact.phoneNumbers = raw["phoneNumbers"] as? [String] ?? []
+        contact.emailAddresses = raw["emailAddresses"] as? [String] ?? []
         
         return contact
     }

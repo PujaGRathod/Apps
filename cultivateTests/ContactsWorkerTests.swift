@@ -50,10 +50,10 @@ class ContactsWorkerTests: XCTestCase {
                                                middleName: "D",
                                                lastName: "Zaveri",
                                                phoneNumbers: [ "94390589" ],
-                                               emailAddresses: [])
+                                               emailAddresses: [ ])
         
         let linkedContacts = ContactsWorker().findiOSContacts(for: [ mockCULContact ], from: [ mockCNContact ])
-        XCTAssertEqual(linkedContacts.first!.identifier, nil)
+        XCTAssertEqual(linkedContacts.count, 0)
     }
     
     func testContactMatching() {

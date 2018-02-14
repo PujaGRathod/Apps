@@ -28,6 +28,10 @@ class DashboardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("applicationDidBecomeActive_Dashboard"), object: nil, queue: nil) { (notification) in
+            self.viewWillAppear(false)
+        }
+        
         // TODO: Find a better place for this single line
         hamburgerMenuVC = self.revealViewController().rearViewController as! CULHamburgerMenuVC
         if ContactSelectionProcessDataStore.shared.getContacts().count > 0 {
@@ -44,10 +48,11 @@ class DashboardVC: UIViewController {
         }
         self.definesPresentationContext = true
         
-        self.dashboardTableViewAdapter.contactsLoaded = {
+        self.dashboardTableViewAdapter.contactsLoaded = { contacts in
             self.updateContacts()
             self.showHelpPopovers()
             self.hideHUD()
+            self.link(contacts: contacts)
         }
         
         self.dashboardTableViewAdapter.setup(for: self.tableView, searchController: self.searchController)
@@ -91,6 +96,18 @@ class DashboardVC: UIViewController {
             if let vc = segue.destination as? ContactDetailsVC {
                 vc.contact = sender as! CULContact
             }
+        }
+    }
+    
+    // Tried to link all the unlinked cultivate contacts to iOS contacts
+    func link(contacts: [CULContact]) {
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            let worker = ContactsWorker()
+            let unlinkedContacts = worker.getUnlinkedContacts(from: contacts)
+            let linkedContacts = worker.findiOSContacts(for: unlinkedContacts)
+            CULFirebaseGateway.shared.update(contacts: linkedContacts, for: user, completion: { (error) in
+                print("Contacts linked, Error: \(String(describing: error))")
+            })
         }
     }
 

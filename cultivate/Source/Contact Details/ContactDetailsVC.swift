@@ -76,6 +76,18 @@ class ContactDetailsVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let user = CULFirebaseGateway.shared.loggedInUser,
+            let dbId = self.contact.db_Identifier {
+            
+            CULFirebaseGateway.shared.getContact(with: dbId, for: user, { (contact) in
+                DispatchQueue.main.async {
+                    self.contact = contact
+                    self.display(contact: self.contact)
+                }
+            })
+        }
+        
         self.display(contact: self.contact)
         NotificationCenter.default.addObserver(self, selector: #selector(ContactDetailsVC.notesTextEditingDidEnd), name:  NSNotification.Name.UITextViewTextDidEndEditing, object: self.notesTextView)
     }
