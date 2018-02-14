@@ -23,7 +23,7 @@ class DashboardContactTblCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.contactNameLabel.text = "This is some long name. Really really long name."
+        self.contactNameLabel.text = ""
         
         self.borderView.layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 0.35)
         self.borderView.layer.borderWidth = 0.5

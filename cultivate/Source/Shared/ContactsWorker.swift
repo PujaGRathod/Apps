@@ -9,13 +9,14 @@
 import UIKit
 import Contacts
 import ContactsUI
+import PhoneNumberKit
 
 typealias ContactsHandler = (_ orderedContacts : [String: [CULContact]], _ sortedContactKeys: [String], _ error : NSError?) -> Void
 
 class ContactsWorker {
     
-    private var orderedContacts = [String: [CNContact]]() //Contacts ordered in dicitonary alphabetically
-    private var sortedContactKeys = [String]()
+    //    private var orderedContacts = [String: [CNContact]]() //Contacts ordered in dicitonary alphabetically
+    //    private var sortedContactKeys = [String]()
     private var contactsStore: CNContactStore?
     private var viewcontroller: UIViewController!
     
@@ -70,7 +71,6 @@ class ContactsWorker {
             
         case  CNAuthorizationStatus.authorized:
             //Authorization granted by user for this app.
-            var contactsArray = [CNContact]()
             
             let contactFetchRequest = CNContactFetchRequest(keysToFetch: self.allowedContactKeys())
             contactFetchRequest.unifyResults = true
@@ -80,77 +80,82 @@ class ContactsWorker {
             case .lastName:
                 contactFetchRequest.sortOrder = CNContactSortOrder.familyName
             }
-            do {
-                
-                self.sortedContactKeys = []
-                self.orderedContacts = [:]
-                
-                try contactsStore?.enumerateContacts(with: contactFetchRequest, usingBlock: { (contact, stop) -> Void in
-                    
-                    //Ordering contacts based on alphabets in firstname
-                    contactsArray.append(contact)
-                    var key: String = "#"
-                    
-                    if contact.givenName.count == 0, contact.familyName.count == 0 {
-                        // Do not add show this contact. This contact does not have any name
-                    } else {
-                        //  If ordering has to be happening via family name change it here.
-                        var firstLetter = contact.givenName[0..<1]
-                        switch contactFetchRequest.sortOrder {
-                        case .givenName:
-                            if contact.givenName.count == 0 {
-                                firstLetter = contact.familyName[0..<1]
-                            } else {
-                                firstLetter = contact.givenName[0..<1]
-                            }
-                        case .familyName, .none, .userDefault:
-                            fallthrough
-                        default:
-                            if contact.familyName.count == 0 {
-                                firstLetter = contact.givenName[0..<1]
-                            } else {
-                                firstLetter = contact.familyName[0..<1]
-                            }
-                        }
-                        if firstLetter?.containsAlphabets() == true {
-                            key = firstLetter!.uppercased()
-                        }
-                        var contacts = [CNContact]()
-                        
-                        if let segregatedContact = self.orderedContacts[key] {
-                            contacts = segregatedContact
-                        }
-                        contacts.append(contact)
-                        self.orderedContacts[key] = contacts
-                    }
-                    
-                })
-                
-                self.sortedContactKeys = Array(self.orderedContacts.keys).sorted(by: <)
-                if self.sortedContactKeys.first == "#" {
-                    self.sortedContactKeys.removeFirst()
-                    self.sortedContactKeys.append("#")
-                }
-                
-                var orderedCultivateContacts: [String: [CULContact]] = [:]
-                
-                for key in self.orderedContacts.keys {
-                    let contactsForKey: [CNContact] = self.orderedContacts[key] ?? []
-                    var cultivateContactsForkey: [CULContact] = []
-                    for contact in contactsForKey {
-                        cultivateContactsForkey.append(ContactsWorker.createCULContact(from: contact))
-                    }
-                    orderedCultivateContacts[key] = cultivateContactsForkey
-                }
-                
-                completion(orderedCultivateContacts, self.sortedContactKeys, nil)
-            }
-                //Catching exception as enumerateContactsWithFetchRequest can throw errors
-            catch let error as NSError {
-                print(error.localizedDescription)
+            
+            var sortedContactKeys = [String]()
+            
+            var orderedContacts = self.getCNContacts(with: contactFetchRequest)
+            
+            sortedContactKeys = Array(orderedContacts.keys).sorted(by: <)
+            if sortedContactKeys.first == "#" {
+                sortedContactKeys.removeFirst()
+                sortedContactKeys.append("#")
             }
             
+            var orderedCultivateContacts: [String: [CULContact]] = [:]
+            
+            for key in orderedContacts.keys {
+                let contactsForKey: [CNContact] = orderedContacts[key] ?? []
+                var cultivateContactsForkey: [CULContact] = []
+                for contact in contactsForKey {
+                    cultivateContactsForkey.append(ContactsWorker.createCULContact(from: contact))
+                }
+                orderedCultivateContacts[key] = cultivateContactsForkey
+            }
+            
+            completion(orderedCultivateContacts, sortedContactKeys, nil)
+            
         }
+    }
+    
+    func getCNContacts(with contactFetchRequest: CNContactFetchRequest) -> [String: [CNContact]] {
+        var orderedContacts = [String: [CNContact]]()
+        var contactsArray = [CNContact]()
+        do {
+            try contactsStore?.enumerateContacts(with: contactFetchRequest, usingBlock: { (contact, stop) -> Void in
+                
+                //Ordering contacts based on alphabets in firstname
+                contactsArray.append(contact)
+                var key: String = "#"
+                
+                if contact.givenName.count == 0, contact.familyName.count == 0 {
+                    // Do not add show this contact. This contact does not have any name
+                } else {
+                    //  If ordering has to be happening via family name change it here.
+                    var firstLetter = contact.givenName[0..<1]
+                    switch contactFetchRequest.sortOrder {
+                    case .givenName:
+                        if contact.givenName.count == 0 {
+                            firstLetter = contact.familyName[0..<1]
+                        } else {
+                            firstLetter = contact.givenName[0..<1]
+                        }
+                    case .familyName, .none, .userDefault:
+                        fallthrough
+                    default:
+                        if contact.familyName.count == 0 {
+                            firstLetter = contact.givenName[0..<1]
+                        } else {
+                            firstLetter = contact.familyName[0..<1]
+                        }
+                    }
+                    if firstLetter?.containsAlphabets() == true {
+                        key = firstLetter!.uppercased()
+                    }
+                    var contacts = [CNContact]()
+                    
+                    if let segregatedContact = orderedContacts[key] {
+                        contacts = segregatedContact
+                    }
+                    contacts.append(contact)
+                    orderedContacts[key] = contacts
+                }
+                
+            })
+        } catch let error as NSError {
+            //Catching exception as enumerateContactsWithFetchRequest can throw errors
+            print(error.localizedDescription)
+        }
+        return orderedContacts
     }
     
     func getSortOrder() -> CULContact.SortOrder {
@@ -187,6 +192,7 @@ class ContactsWorker {
         contact.identifier = cnContact.identifier
         contact.first_name = cnContact.givenName
         contact.last_name = cnContact.familyName
+        
         //        if let components = cnContact.birthday {
         //            let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         //            contact.birthday = calendar.date(from: components)
@@ -264,23 +270,163 @@ class ContactsWorker {
         }
         return self.contactsStore
     }
-
-//    func addTestData() {
-//        let mutableContact = self.getCNContact(for: "410FE041-5C4E-48DA-B4DE-04C15EA3DBAC")?.mutableCopy() as? CNMutableContact
-//
-//        let value = CNInstantMessageAddress(username: "Id", service: "Cultivate")
-//        let label = CNLabeledValue(label: "Label", value: value)
-//        mutableContact?.instantMessageAddresses.append(label)
-//
-//        let store = self.getContactStore()
-//
-//        let saveRequest = CNSaveRequest()
-//        saveRequest.update(mutableContact!)
-//
-//        do {
-//            try store?.execute(saveRequest)
-//        } catch {
-//            print(error)
-//        }
-//    }
+    
+    
+    
+    
+    // Contact matching
+    
+    func getUnlinkedContacts(from cultivateContacts: [CULContact]) -> [CULContact] {
+        var unlinkedContacts = [CULContact]()
+        for contact in cultivateContacts {
+            if let identifier = contact.identifier {
+                if self.getCNContact(for: identifier) == nil {
+                    unlinkedContacts.append(contact)
+                }
+            } else {
+                unlinkedContacts.append(contact)
+            }
+        }
+        return unlinkedContacts
+    }
+    
+    private func getCNContactsArray() -> [CNContact] {
+        let contactFetchRequest = CNContactFetchRequest(keysToFetch: self.allowedContactKeys())
+        contactFetchRequest.unifyResults = true
+        contactFetchRequest.sortOrder = CNContactSortOrder.givenName
+        let orderedContacts = self.getCNContacts(with: contactFetchRequest)
+        
+        var allContacts = [CNContact]()
+        for orderedContact in orderedContacts {
+            allContacts.append(contentsOf: orderedContact.value)
+        }
+        return allContacts
+    }
+    
+    func findiOSContacts(for unlinkedContacts: [CULContact]) -> [CULContact] {
+        return self.findiOSContacts(for: unlinkedContacts, from: self.getCNContactsArray())
+    }
+    
+    func findiOSContacts(for unlinkedContacts: [CULContact],
+                         from alliOSContacts: [CNContact]) -> [CULContact] {
+        
+        var unlinkedContacts = unlinkedContacts
+        for (index, unlinkedContact) in unlinkedContacts.enumerated() {
+            var unlinkedContact = unlinkedContact
+            for contact in alliOSContacts {
+                let areEqual = self.areEqual(cultivateContact: unlinkedContact, iOSContact: contact)
+                if areEqual {
+                    unlinkedContact.identifier = contact.identifier
+                    unlinkedContacts[index] = unlinkedContact
+                    break
+                }
+            }
+        }
+        return unlinkedContacts
+    }
+    
+    func areEqual(cultivateContact: CULContact, iOSContact: CNContact) -> Bool {
+        let firstNameMatched = self.isFirstNameMatched(cultivateContact: cultivateContact, iOSContact: iOSContact)
+        let middleNameMatched = self.isMiddleNameMatched(cultivateContact: cultivateContact, iOSContact: iOSContact)
+        let lastNameMatched = self.isLastNameMatched(cultivateContact: cultivateContact, iOSContact: iOSContact)
+        if firstNameMatched, middleNameMatched, lastNameMatched {
+            return true
+        }
+        
+        let phoneNumberMatched = self.atleastOnePhoneNumberMatchedBetween(cultivatePhoneNumbers: cultivateContact.phoneNumbers, iOSContactPhoneNumbers: iOSContact.phoneNumbers)
+        if phoneNumberMatched {
+            return true
+        }
+        
+        let emailAddressMatched = self.atleastOneEmailAddressMatchedBetween(cultivateEmailAddresses: cultivateContact.emailAddresses, iOSContactEmailAddresses: iOSContact.emailAddresses)
+        if emailAddressMatched {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isFirstNameMatched(cultivateContact: CULContact, iOSContact: CNContact) -> Bool {
+        let cultivateFirstName = cultivateContact.first_name?.lowercased()
+        let iOSContactFirstName = iOSContact.givenName.lowercased()
+        if cultivateFirstName == iOSContactFirstName {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isMiddleNameMatched(cultivateContact: CULContact, iOSContact: CNContact) -> Bool {
+        guard let cultivateMiddleName = cultivateContact.middle_name?.lowercased() else {
+            return true
+        }
+        let iOSContactMiddleName = iOSContact.middleName.lowercased()
+        if iOSContactMiddleName.count == 0 {
+            return true
+        }
+        if cultivateMiddleName == iOSContactMiddleName {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isLastNameMatched(cultivateContact: CULContact, iOSContact: CNContact) -> Bool {
+        let cultivateLastName = cultivateContact.last_name?.lowercased()
+        let iOSContactLastName = iOSContact.familyName.lowercased()
+        if cultivateLastName == iOSContactLastName {
+            return true
+        }
+        
+        return false
+    }
+    
+    func atleastOnePhoneNumberMatchedBetween(cultivatePhoneNumbers: [String], iOSContactPhoneNumbers: [CNLabeledValue<CNPhoneNumber>]) -> Bool {
+        
+        let phoneNumberKit = PhoneNumberKit()
+        for phoneNumber in cultivatePhoneNumbers {
+            let p1 = try? phoneNumberKit.parse(phoneNumber)
+            for phoneNumber1 in iOSContactPhoneNumbers {
+                let p2 = try? phoneNumberKit.parse(phoneNumber1.value.stringValue)
+                if p1 == p2 {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func atleastOneEmailAddressMatchedBetween(cultivateEmailAddresses: [String], iOSContactEmailAddresses: [CNLabeledValue<NSString>]) -> Bool {
+        
+        for email in cultivateEmailAddresses {
+            let fiteredEmail = iOSContactEmailAddresses.filter({ $0.value.lowercased == email.lowercased() })
+            if fiteredEmail.count > 0 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    
+    
+    
+    //    func addTestData() {
+    //        let mutableContact = self.getCNContact(for: "410FE041-5C4E-48DA-B4DE-04C15EA3DBAC")?.mutableCopy() as? CNMutableContact
+    //
+    //        let value = CNInstantMessageAddress(username: "Id", service: "Cultivate")
+    //        let label = CNLabeledValue(label: "Label", value: value)
+    //        mutableContact?.instantMessageAddresses.append(label)
+    //
+    //        let store = self.getContactStore()
+    //
+    //        let saveRequest = CNSaveRequest()
+    //        saveRequest.update(mutableContact!)
+    //
+    //        do {
+    //            try store?.execute(saveRequest)
+    //        } catch {
+    //            print(error)
+    //        }
+    //    }
 }

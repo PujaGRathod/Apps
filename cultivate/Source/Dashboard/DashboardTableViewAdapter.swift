@@ -56,7 +56,7 @@ class DashboardTableViewAdapter: NSObject {
         if let user = CULFirebaseGateway.shared.loggedInUser {
             CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
                 
-                CULFirebaseAnalyticsManager.shared.set(property: CULFirebaseAnalyticsManager.Keys.UserProperties.totalNumberOfCultivateContacts, value: contacts.count)
+                CULFirebaseAnalyticsManager.shared.set(property: .totalNumberOfCultivateContacts, value: contacts.count)
                 
                 DispatchQueue.main.async {
                     self.contacts = contacts
@@ -236,13 +236,12 @@ extension DashboardTableViewAdapter: UITableViewDataSource, UITableViewDelegate 
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let reschedule = UIContextualAction(style: UIContextualAction.Style.normal, title: nil) { (action, view, completionHandler) in
+        let reschedule = UIContextualAction(style: UIContextualAction.Style.normal, title: "Reschedule") { (action, view, completionHandler) in
             let contact = self.contact(for: indexPath)
             self.rescheduleButtonTapped?(indexPath, contact)
             completionHandler(true)
         }
-        reschedule.image = #imageLiteral(resourceName: "Reschedule")
-//        reschedule.backgroundColor = UIColor.clear
+        reschedule.backgroundColor = UIColor.red
         
         let swipeActionConfig = UISwipeActionsConfiguration(actions: [reschedule])
         swipeActionConfig.performsFirstActionWithFullSwipe = true

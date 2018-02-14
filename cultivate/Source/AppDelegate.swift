@@ -14,6 +14,8 @@ import GoogleSignIn
 import IQKeyboardManagerSwift
 import SWRevealViewController
 
+import Contacts
+
 var hamburgerMenuVC: CULHamburgerMenuVC!
 
 @UIApplicationMain
@@ -24,6 +26,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window?.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+        
+//        let contact = ContactsWorker().getCNContact(for: "EA3FDE10-D2F6-4A1D-9DBF-BC97DB5DF722")
+//        print("Contact: \(contact)")
+//        print("")
+        
+        ContactsWorker().getContacts(sortOrder: CULContact.SortOrder.firstName) { (orderedContacts, sortedContactKeys, error) in
+
+            var contacts = [CULContact]()
+            for contact in orderedContacts {
+                contacts.append(contentsOf: contact.value)
+            }
+            print(contacts)
+
+            for contact in contacts {
+                print("*")
+                print("*")
+                print("ID: \(contact.identifier)")
+                print("Name: \(contact.name)")
+                print("*")
+                print("*")
+//                if contact.identifier == "EA3FDE10-D2F6-4A1D-9DBF-BC97DB5DF722" {
+//                    print("Matched \(contact)")
+//                }
+//
+//                if contact.name == "Dushyantbhai A'bad" {
+//                    print("Matched \(contact)")
+//                }
+            }
+        }
+        
         
 //        FirebaseConfiguration.shared.setLoggerLevel(.error)
         // TODO: Remove below line

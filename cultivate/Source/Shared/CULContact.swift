@@ -169,8 +169,11 @@ struct CULContact: Equatable {
     var tag: CULTag?
     var followups = [Followup]()
     var notes: String?
-    var birthday: Date?
+    
+    /* Extra properties saved for contact matching */
+    var middle_name: String?
     var phoneNumbers = [String]()
+    var emailAddresses = [String]()
 }
 
 struct CULTag {
