@@ -286,7 +286,7 @@ class CULFirebaseGateway {
                 let dbId = snapshot?.documentID {
                 if var contact = self.contact(from: data) {
                     contact.db_Identifier = dbId
-                    if let tagId = contact.tag?.identifier {
+                    if let tagId = contact.tag?.identifier, tagId.count > 0 {
                         self.getTag(with: tagId, for: user, { (tag) in
                             contact.tag = tag
                             completion(contact)

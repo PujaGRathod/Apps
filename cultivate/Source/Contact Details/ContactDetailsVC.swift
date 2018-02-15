@@ -13,7 +13,7 @@ import KLCPopup
 import ContactsUI
 
 class ContactDetailsVC: UIViewController {
-
+    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var detailView: UIView!
@@ -88,6 +88,24 @@ class ContactDetailsVC: UIViewController {
             })
         }
         
+        if let id = self.contact.identifier {
+            if ContactsWorker().getCNContact(for: id) == nil {
+                // Ask user to pick the contact from iOS picker
+                let alert = UIAlertController(title: "Unlinked Contact", message: "This contact does not have any contact attached to it. Please choose a contact now.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                alert.addAction(UIAlertAction(title: "Link now", style: UIAlertActionStyle.default, handler: { (action) in
+                    let controller = CNContactPickerViewController()
+                    
+                    controller.delegate = self
+                    self.present(controller, animated: true, completion: {
+                    })
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
         self.display(contact: self.contact)
         NotificationCenter.default.addObserver(self, selector: #selector(ContactDetailsVC.notesTextEditingDidEnd), name:  NSNotification.Name.UITextViewTextDidEndEditing, object: self.notesTextView)
     }
@@ -96,7 +114,7 @@ class ContactDetailsVC: UIViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextViewTextDidEndEditing, object: self.notesTextView)
     }
-
+    
     private func addBorderAndBackground(to view: UIView) {
         view.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         view.layer.cornerRadius = 5
@@ -161,12 +179,12 @@ class ContactDetailsVC: UIViewController {
         self.nameInitialsLabel.isHidden = true
         if let image = ContactsWorker().getThumbnailImage(forContactIdentifier: contact.identifier) {
             self.profileImageView.image = image
-//        } else if let url = contact.profileImageURL {
-//            self.profileImageView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
-//                if image == nil || error != nil {
-//                    self.show(nameInitials: contact.initials)
-//                }
-//            })
+            //        } else if let url = contact.profileImageURL {
+            //            self.profileImageView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+            //                if image == nil || error != nil {
+            //                    self.show(nameInitials: contact.initials)
+            //                }
+            //            })
         } else {
             self.show(nameInitials: contact.initials)
         }
@@ -231,7 +249,7 @@ class ContactDetailsVC: UIViewController {
     }
     
     @IBAction func callPhoneButtonTapped(_ sender: UIButton) {
-
+        
         let id = "CALL"
         let name = "CONTACT_DETAIL"
         let contentType = "USER_TAP"
@@ -265,7 +283,7 @@ class ContactDetailsVC: UIViewController {
     }
     
     @IBAction func sendEmailButtonTapped(_ sender: UIButton) {
-
+        
         let id = "EMAIL"
         let name = "CONTACT_DETAIL"
         let contentType = "USER_TAP"
@@ -362,7 +380,7 @@ class ContactDetailsVC: UIViewController {
     @IBAction func changeFollowupDateTapped(_ sender: UIButton) {
         self.reschedulePopup(for: contact)
     }
-
+    
     private func reschedulePopup(for contact: CULContact) {
         self.reschedulePopupVC = self.storyboard?.instantiateViewController(withIdentifier: "ReschedulePopupVC") as? ReschedulePopupVC
         if let reschedulePopupVC = self.reschedulePopupVC {
@@ -415,7 +433,7 @@ class ContactDetailsVC: UIViewController {
             })
         }
     }
-
+    
     func showFrequencyPicker(for contact: CULContact?) {
         self.frequencyPickerPopupVC = self.storyboard?.instantiateViewController(withIdentifier: "FrequencyPickerPopupVC") as? FrequencyPickerPopupVC
         if let frequencyPickerPopupVC = self.frequencyPickerPopupVC {
@@ -472,7 +490,7 @@ class ContactDetailsVC: UIViewController {
             tagPickerPopupVC.set(tag: contact?.tag)
         }
     }
-
+    
     @IBAction func detailsButtonTapped(_ sender: UIBarButtonItem) {
         if let contact = ContactsWorker().getCNContact(for: self.contact.identifier) {
             let vc = CNContactViewController(for: contact)
@@ -506,5 +524,29 @@ extension ContactDetailsVC: CNContactViewControllerDelegate {
     func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
         viewController.dismiss(animated: true) {
         }
+    }
+}
+
+extension ContactDetailsVC: CNContactPickerDelegate {
+    func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        let culContact = ContactsWorker.createCULContact(from: contact)
+        
+        self.contact.identifier = culContact.identifier
+        self.contact.first_name = culContact.first_name
+        self.contact.last_name = culContact.last_name
+        self.contact.phoneNumbers = culContact.phoneNumbers
+        self.contact.emailAddresses = culContact.emailAddresses
+            
+        self.display(contact: self.contact)
+        if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.update(contacts: [self.contact], for: user, completion: { (error) in
+                print("Done")
+            })
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
