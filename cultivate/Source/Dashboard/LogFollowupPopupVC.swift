@@ -191,18 +191,19 @@ class LogFollowupPopupVC: UIViewController {
     }
     
     private func showContactDetails(_ contact: CULContact?) {
-        if let contact = contact {
+        if var contact = contact {
             self.contactTextField.text = contact.name
-            self.dateTextField.text = contact.userReadableFollowupDateString
-            if let date = self.contact?.followupDate {
+            if let date = contact.followupDate {
                 self.datePicker.date = date
             } else {
                 self.datePicker.date = Date()
             }
+            contact.followupDate = self.datePicker.date
+            self.dateTextField.text = contact.userReadableFollowupDateString
         } else {
             self.contactTextField.text = ""
-            self.dateTextField.text = ""
             self.datePicker.date = Date()
+            self.dateTextField.text = ""
         }
     }
 }

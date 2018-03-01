@@ -281,7 +281,7 @@ class ContactsWorker {
         var unlinkedContacts = [CULContact]()
         
         func append(contact: CULContact) {
-            print("Contact does not have an attached iOS contact \(contact.name)")
+//            print("Contact does not have an attached iOS contact \(contact.name)")
             unlinkedContacts.append(contact)
         }
         
@@ -290,7 +290,7 @@ class ContactsWorker {
                 if self.getCNContact(for: identifier) == nil {
                     append(contact: contact)
                 } else {
-                    print("Contact does have an attached iOS contact \(contact.name)")
+//                    print("Contact does have an attached iOS contact \(contact.name)")
                 }
             } else {
                 append(contact: contact)
@@ -319,6 +319,8 @@ class ContactsWorker {
     func findiOSContacts(for unlinkedContacts: [CULContact],
                          from alliOSContacts: [CNContact]) -> [CULContact] {
         var linkedContacts = [CULContact]()
+        print("\(Date()) findiOSContacts(for: from:) START1")
+        
         for unlinkedContact in unlinkedContacts {
             for contact in alliOSContacts {
                 let areEqual = self.areEqual(cultivateContact: unlinkedContact, iOSContact: contact)
@@ -331,6 +333,7 @@ class ContactsWorker {
                 }
             }
         }
+        print("\(Date()) findiOSContacts(for: from:) START2")
         return linkedContacts
     }
     
@@ -393,15 +396,16 @@ class ContactsWorker {
     let phoneNumberKit = PhoneNumberKit()
     func atleastOnePhoneNumberMatchedBetween(cultivatePhoneNumbers: [String], iOSContactPhoneNumbers: [CNLabeledValue<CNPhoneNumber>]) -> Bool {
         
-        for phoneNumber in cultivatePhoneNumbers {
-            let p1 = try? self.phoneNumberKit.parse(phoneNumber)
-            for phoneNumber1 in iOSContactPhoneNumbers {
-                let p2 = try? self.phoneNumberKit.parse(phoneNumber1.value.stringValue)
-                if p1 == p2 {
-                    return true
-                }
-            }
-        }
+//        let parsedNumbers1 = self.phoneNumberKit.parse(cultivatePhoneNumbers)
+//        let parsedNumbers2 = self.phoneNumberKit.parse(iOSContactPhoneNumbers.map({ $0.value.stringValue }))
+//        
+//        for phoneNumber1 in parsedNumbers1 {
+//            for phoneNumber2 in parsedNumbers2 {
+//                if phoneNumber1 == phoneNumber2 {
+//                    return true
+//                }
+//            }
+//        }
         
         return false
     }

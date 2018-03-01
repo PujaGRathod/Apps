@@ -33,10 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //        FirebaseConfiguration.shared.setLoggerLevel(.error)
         // TODO: Remove below line
-        //        FirebaseConfiguration.shared.analyticsConfiguration.setAnalyticsCollectionEnabled(false)
+        FirebaseConfiguration.shared.analyticsConfiguration.setAnalyticsCollectionEnabled(true)
         FirebaseApp.configure()
         
-        CULFirebaseGateway.shared.localPersistence(true)
+        CULFirebaseGateway.shared.localPersistence(false)
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID

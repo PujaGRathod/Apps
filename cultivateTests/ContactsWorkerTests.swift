@@ -293,6 +293,33 @@ extension ContactsWorkerTests {
         XCTAssertEqual(contacts.first!.identifier, mockCULContact1.identifier)
         XCTAssertEqual(contacts[1].identifier, nil)
     }
+    
+    func testPerformanceGetUnlinkedContacts() {
+        self.measure {
+            let mockCULContact0 = self.mockCULContact(identifier: "mockId",
+                                                      firstName: "Akshit",
+                                                      middleName: "D",
+                                                      lastName: "Zaveri",
+                                                      phoneNumbers: [ ],
+                                                      emailAddresses: [ ])
+            let mockCULContact1 = self.mockCULContact(identifier: "mockId1",
+                                                      firstName: "Akshit",
+                                                      middleName: "D",
+                                                      lastName: "Zaveri",
+                                                      phoneNumbers: [ ],
+                                                      emailAddresses: [ ])
+            let mockCULContact2 = self.mockCULContact(firstName: "Akshit",
+                                                      middleName: "D",
+                                                      lastName: "Zaveri",
+                                                      phoneNumbers: [ ],
+                                                      emailAddresses: [ ])
+            let mockContacts = [ mockCULContact0, mockCULContact1, mockCULContact2 ]
+            let contacts = MockContactsWorker().getUnlinkedContacts(from: mockContacts)
+            XCTAssertEqual(contacts.count, 2)
+            XCTAssertEqual(contacts.first!.identifier, mockCULContact1.identifier)
+            XCTAssertEqual(contacts[1].identifier, nil)
+        }
+    }
 }
 
 class MockContactsWorker: ContactsWorker {

@@ -19,7 +19,7 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var firstCoachMarkView: UIView!
     
     private var coachMarksController = CoachMarksController()
-    private var contacts: [CULContact] = []
+//    private var contacts: [CULContact] = []
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
     private var dashboardTableViewAdapter = DashboardTableViewAdapter()
     private var reschedulePopupVC: ReschedulePopupVC?
@@ -49,10 +49,9 @@ class DashboardVC: UIViewController {
         self.definesPresentationContext = true
         
         self.dashboardTableViewAdapter.contactsLoaded = { contacts in
-            self.updateContacts()
+            self.process(contacts: contacts)
             self.showHelpPopovers()
             self.hideHUD()
-            self.link(contacts: contacts)
         }
         
         self.dashboardTableViewAdapter.setup(for: self.tableView, searchController: self.searchController)
@@ -82,7 +81,6 @@ class DashboardVC: UIViewController {
         super.viewWillAppear(animated)
         self.showHUD(with: "Refreshing contacts")
         self.dashboardTableViewAdapter.getContacts()
-        self.updateContacts()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,24 +97,43 @@ class DashboardVC: UIViewController {
         }
     }
     
+    private func process(contacts: [CULContact]) {
+        self.update(contacts: contacts, {
+            self.link(contacts: contacts, {})
+        })
+    }
+    
     // Tried to link all the unlinked cultivate contacts to iOS contacts
-    func link(contacts: [CULContact]) {
-        if let user = CULFirebaseGateway.shared.loggedInUser {
+    func link(contacts: [CULContact], _ completion: @escaping (()->Void)) {
+//        return;
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            print("\(Date()) link(contacts START **********************************")
             let worker = ContactsWorker()
+            print("\(Date()) link(contacts START1 **********************************")
             let unlinkedContacts = worker.getUnlinkedContacts(from: contacts)
+            print("\(Date()) link(contacts START2 **********************************")
             let linkedContacts = worker.findiOSContacts(for: unlinkedContacts)
-            CULFirebaseGateway.shared.update(contacts: linkedContacts, for: user, completion: { (error) in
-                print("Contacts linked, Error: \(String(describing: error))")
-            })
+            print("\(Date()) link(contacts START3 **********************************")
+            self.save(contacts: linkedContacts, completion)
         }
     }
 
-    func updateContacts() {
+    func update(contacts: [CULContact], _ completion: @escaping (()->Void)) {
+//        return;
+        
+        print("\(Date()) update(contacts:) START **********************************")
         // Generate initial followup dates for all contacts
-        self.contacts = FollowupDateGenerator.assignInitialFollowupDates(for: self.contacts)
+        let contacts = FollowupDateGenerator.assignInitialFollowupDates(for: contacts)
+        self.save(contacts: contacts, completion)
+    }
+    
+    private func save(contacts: [CULContact], _ completion: @escaping (()->Void)) {
         if let user = CULFirebaseGateway.shared.loggedInUser {
-            CULFirebaseGateway.shared.update(contacts: self.contacts, for: user, completion: { (error) in
-                print("Contacts saved - DashboardVC")
+            CULFirebaseGateway.shared.update(contacts: contacts, for: user, completion: { (error) in
+                self.dashboardTableViewAdapter.update(contacts: contacts)
+                print("\(Date()) save(contacts:) END **********************************")
+                completion()
             })
         }
     }

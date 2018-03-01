@@ -185,12 +185,12 @@ class CULFirebaseGateway {
     
     func getTags(for user: CULUser, _ completion:@escaping (([CULTag])->Void)) {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("tags")
-        var listener: ListenerRegistration?
-        listener = ref.addSnapshotListener({ (snapshot, error) in
-            //        ref.getDocuments { (snapshot, error) in
+//        var listener: ListenerRegistration?
+//        listener = ref.addSnapshotListener({ (snapshot, error) in
+                    ref.getDocuments { (snapshot, error) in
             
             //            if snapshot?.metadata.isFromCache == false {
-            listener?.remove()
+//            listener?.remove()
             print("Listener removed for getTags ********** ")
             //            }
             
@@ -203,15 +203,16 @@ class CULFirebaseGateway {
             tags.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
             completion(tags)
             
-        })
-        //        }
+//        })
+                }
     }
     
     func getTag(with id: String, for user: CULUser, _ completion:@escaping ((CULTag?)->Void)) {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("tags").document(id)
-        var listener: ListenerRegistration?
-        listener = ref.addSnapshotListener({ (snapshot, error) in
-            listener?.remove()
+//        var listener: ListenerRegistration?
+//        listener = ref.addSnapshotListener({ (snapshot, error) in
+        ref.getDocument { (snapshot, error) in
+//            listener?.remove()
             print("Listener removed for getTag ********** ")
             if let data = snapshot?.data(),
                 let dbId = snapshot?.documentID {
@@ -222,8 +223,8 @@ class CULFirebaseGateway {
             } else {
                 completion(nil)
             }
-        })
-        //        }
+//        })
+                }
     }
     
     private func tag(from raw: [String:Any]) -> CULTag {
@@ -251,14 +252,16 @@ class CULFirebaseGateway {
     
     // Get all contacts for the current user
     func getContacts(for user: CULUser, _ completion:@escaping (([CULContact])->Void)) {
+        print("\(Date()) Called getContacts ********** ")
+        
         let ref = Firestore.firestore().collection("users").document(user.id).collection("contacts")
-        var listener: ListenerRegistration?
-        listener = ref.addSnapshotListener({ (snapshot, error) in
-            //        ref.getDocuments { (snapshot, error) in
+        //        var listener: ListenerRegistration?
+        //        listener = ref.addSnapshotListener({ (snapshot, error) in
+        ref.getDocuments { (snapshot, error) in
             
             //            if snapshot?.metadata.isFromCache == false {
-            listener?.remove()
-            print("Listener removed for getContacts ********** ")
+            //            listener?.remove()
+            print("\(Date()) Ended getContacts ********** ")
             //            }
             
             var contacts: [CULContact] = []
@@ -272,15 +275,16 @@ class CULFirebaseGateway {
                 contacts = self.map(tags: tags, with: contacts)
                 completion(contacts)
             })
-        })
-        //        }
+            //        })
+        }
     }
     
     func getContact(with id: String, for user: CULUser, _ completion:@escaping ((CULContact?)->Void)) {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("contacts").document(id)
-        var listener: ListenerRegistration?
-        listener = ref.addSnapshotListener({ (snapshot, error) in
-            listener?.remove()
+//        var listener: ListenerRegistration?
+//        listener = ref.addSnapshotListener({ (snapshot, error) in
+        ref.getDocument { (snapshot, error) in
+//            listener?.remove()
             print("Listener removed for getContact ********** ")
             if let data = snapshot?.data(),
                 let dbId = snapshot?.documentID {
@@ -300,8 +304,8 @@ class CULFirebaseGateway {
             } else {
                 completion(nil)
             }
-        })
-        //        }
+//        })
+                }
     }
     
     private func contact(from raw: [String:Any]) -> CULContact? {
@@ -337,6 +341,8 @@ class CULFirebaseGateway {
     }
     
     private func map(tags: [CULTag], with contacts: [CULContact]) -> [CULContact] {
+        print("\(Date()) Mapping started ***********")
+        
         var mappedContacts = [CULContact]()
         for contact in contacts {
             var contactTag: CULTag?
@@ -350,6 +356,9 @@ class CULFirebaseGateway {
             mappedContact.tag = contactTag
             mappedContacts.append(mappedContact)
         }
+        
+        print("\(Date()) Mapping end ***********")
+        
         return mappedContacts
     }
     
@@ -387,15 +396,17 @@ class CULFirebaseGateway {
         if let id = contact.db_Identifier {
             let ref = store.collection("users").document(loggedInUser.id).collection("contacts").document(id).collection("followups")
             
-            var listener: ListenerRegistration?
-            listener = ref.addSnapshotListener({ (snapshot, error) in
+//            var listener: ListenerRegistration?
+//            listener = ref.addSnapshotListener({ (snapshot, error) in
+            
+            ref.getDocuments(completion: { (snapshot, error) in
+            
+                //                if snapshot?.metadata.isFromCache == false {
+//                listener?.remove()
+                print("Listener removed for getFollowups ********** ")
+                //                }
                 
-//                if snapshot?.metadata.isFromCache == false {
-                    listener?.remove()
-                    print("Listener removed for getFollowups ********** ")
-//                }
-                
-//            ref.getDocuments { (snapshot, error) in
+                //            ref.getDocuments { (snapshot, error) in
                 var followups = [CULContact.Followup]()
                 for document in snapshot?.documents ?? [] {
                     if let followup = self.followup(from: document.data()) {
@@ -403,8 +414,8 @@ class CULFirebaseGateway {
                     }
                 }
                 completion(followups, error)
-//            }
-                        })
+                //            }
+            })
         }
     }
     

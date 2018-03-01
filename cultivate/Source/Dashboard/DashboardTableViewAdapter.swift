@@ -80,6 +80,15 @@ class DashboardTableViewAdapter: NSObject {
         self.sortContacts()
     }
     
+    func update(contacts: [CULContact]) {
+        for contact in contacts {
+            if let index = self.contacts.index(of: contact) {
+                self.contacts[index] = contact
+            }
+        }
+        self.reloadData()
+    }
+    
     func update(contact: CULContact) {
         if let index = self.contacts.index(of: contact) {
             self.contacts[index] = contact
