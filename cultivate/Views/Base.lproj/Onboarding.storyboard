@@ -625,8 +625,8 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
         <image name="ic_sort_100pt" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jnJ-PK-klY"/>
-        <segue reference="iD8-Wf-naK"/>
-        <segue reference="WC9-u8-GqI"/>
+        <segue reference="mku-Xg-epZ"/>
+        <segue reference="fka-uv-ZOQ"/>
+        <segue reference="OIS-oq-jfr"/>
     </inferredMetricsTieBreakers>
 </document>

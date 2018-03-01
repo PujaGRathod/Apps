@@ -165,6 +165,10 @@ class CULFirebaseGateway {
         
         raw["followupFrequency"] = contact.followupFrequency.rawValue
         
+        if contact.followupFrequency == .none {
+            assertionFailure("Frequency can't be empty")
+        }
+        
         if let tagId = contact.tag?.identifier {
             raw["tag"] = tagId
         } else {
@@ -320,6 +324,9 @@ class CULFirebaseGateway {
         contact.last_name = raw["last_name"] as? String
         if let freq = raw["followupFrequency"] as? String {
             contact.followupFrequency = CULFollowupFrequency(rawValue: freq) ?? .none
+        }
+        if contact.followupFrequency == .none {
+            assertionFailure("Frequency can't be empty")
         }
         
         var tag = CULTag()

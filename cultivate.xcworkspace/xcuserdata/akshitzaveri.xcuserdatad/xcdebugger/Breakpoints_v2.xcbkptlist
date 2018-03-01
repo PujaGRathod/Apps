@@ -19,14 +19,94 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "cultivate/Source/Dashboard/DashboardVC.swift"
-            timestampString = "541592934.760487"
+            filePath = "cultivate/Source/Shared/FirebaseGateway/CULFirebaseGateway.swift"
+            timestampString = "541599835.3662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
-            landmarkName = "didShowHelp()"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "convertContactToRawData(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cultivate.CULFirebaseGateway.(convertContactToRawData in _8767AB546B1C7C0F08790B394866CD33)(cultivate.CULContact) -&gt; Swift.Dictionary&lt;Swift.String, Any&gt;"
+                  moduleName = "cultivate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Akshit/Codebase/Cultivate/cultivate/Source/Shared/FirebaseGateway/CULFirebaseGateway.swift"
+                  timestampString = "541599835.461645"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "169"
+                  endingLineNumber = "169"
+                  offsetFromSymbolStart = "1772">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #1 : @autoclosure () -&gt; Swift.String in cultivate.CULFirebaseGateway.(convertContactToRawData in _8767AB546B1C7C0F08790B394866CD33)(cultivate.CULContact) -&gt; Swift.Dictionary&lt;Swift.String, Any&gt;"
+                  moduleName = "cultivate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Akshit/Codebase/Cultivate/cultivate/Source/Shared/FirebaseGateway/CULFirebaseGateway.swift"
+                  timestampString = "541599835.468285"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "169"
+                  endingLineNumber = "169"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "cultivate/Source/Shared/FirebaseGateway/CULFirebaseGateway.swift"
+            timestampString = "541599835.366514"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
+            landmarkName = "contact(from:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cultivate.CULFirebaseGateway.(contact in _8767AB546B1C7C0F08790B394866CD33)(from: Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; Swift.Optional&lt;cultivate.CULContact&gt;"
+                  moduleName = "cultivate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Akshit/Codebase/Cultivate/cultivate/Source/Shared/FirebaseGateway/CULFirebaseGateway.swift"
+                  timestampString = "541599835.477404"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "329"
+                  endingLineNumber = "329"
+                  offsetFromSymbolStart = "2648">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #2 : @autoclosure () -&gt; Swift.String in cultivate.CULFirebaseGateway.(contact in _8767AB546B1C7C0F08790B394866CD33)(from: Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; Swift.Optional&lt;cultivate.CULContact&gt;"
+                  moduleName = "cultivate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Akshit/Codebase/Cultivate/cultivate/Source/Shared/FirebaseGateway/CULFirebaseGateway.swift"
+                  timestampString = "541599835.479305"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "329"
+                  endingLineNumber = "329"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

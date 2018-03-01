@@ -316,17 +316,45 @@ class ContactsWorker {
         return self.findiOSContacts(for: unlinkedContacts, from: self.getCNContactsArray())
     }
     
+    struct CULCNContact {
+        var iOSContact: CNContact!
+        var parsedPhoneNumbers: [PhoneNumber] = []
+    }
+    
     func findiOSContacts(for unlinkedContacts: [CULContact],
                          from alliOSContacts: [CNContact]) -> [CULContact] {
         var linkedContacts = [CULContact]()
         print("\(Date()) findiOSContacts(for: from:) START1")
         
-        for unlinkedContact in unlinkedContacts {
-            for contact in alliOSContacts {
+        
+        
+        var allCULCNContacts: [CULCNContact] = []
+        for iOSContact in alliOSContacts {
+            let parsedNumbers = ContactsWorker.phoneNumberKit.parse(iOSContact.phoneNumbers.map({ $0.value.stringValue }))
+            
+            var contactTemp = CULCNContact()
+            contactTemp.iOSContact = iOSContact
+            contactTemp.parsedPhoneNumbers = parsedNumbers
+            
+            allCULCNContacts.append(contactTemp)
+        }
+        
+        
+        var unlinkedContactsParsedNumbers: [CULContact] = []
+        for var contact in unlinkedContacts {
+            let parsedNumbers = ContactsWorker.phoneNumberKit.parse(contact.phoneNumbers)
+            contact.parsedPhoneNumbers = parsedNumbers
+            unlinkedContactsParsedNumbers.append(contact)
+        }
+        
+        
+        
+        for unlinkedContact in unlinkedContactsParsedNumbers {
+            for contact in allCULCNContacts {
                 let areEqual = self.areEqual(cultivateContact: unlinkedContact, iOSContact: contact)
                 if areEqual {
                     var linkedContact = unlinkedContact
-                    linkedContact.identifier = contact.identifier
+                    linkedContact.identifier = contact.iOSContact.identifier
                     linkedContacts.append(linkedContact)
                     print("****** Found iOS contact for cultivate contact \(unlinkedContact.name)")
                     break
@@ -337,20 +365,20 @@ class ContactsWorker {
         return linkedContacts
     }
     
-    func areEqual(cultivateContact: CULContact, iOSContact: CNContact) -> Bool {
-        let firstNameMatched = self.isFirstNameMatched(cultivateContact: cultivateContact, iOSContact: iOSContact)
-        let middleNameMatched = self.isMiddleNameMatched(cultivateContact: cultivateContact, iOSContact: iOSContact)
-        let lastNameMatched = self.isLastNameMatched(cultivateContact: cultivateContact, iOSContact: iOSContact)
+    func areEqual(cultivateContact: CULContact, iOSContact: CULCNContact) -> Bool {
+        let firstNameMatched = self.isFirstNameMatched(cultivateContact: cultivateContact, iOSContact: iOSContact.iOSContact)
+        let middleNameMatched = self.isMiddleNameMatched(cultivateContact: cultivateContact, iOSContact: iOSContact.iOSContact)
+        let lastNameMatched = self.isLastNameMatched(cultivateContact: cultivateContact, iOSContact: iOSContact.iOSContact)
         if firstNameMatched, middleNameMatched, lastNameMatched {
             return true
         }
         
-        let phoneNumberMatched = self.atleastOnePhoneNumberMatchedBetween(cultivatePhoneNumbers: cultivateContact.phoneNumbers, iOSContactPhoneNumbers: iOSContact.phoneNumbers)
+        let phoneNumberMatched = self.atleastOnePhoneNumberMatchedBetween(cultivatePhoneNumbers: cultivateContact.parsedPhoneNumbers, iOSContactPhoneNumbers: iOSContact.parsedPhoneNumbers)
         if phoneNumberMatched {
             return true
         }
         
-        let emailAddressMatched = self.atleastOneEmailAddressMatchedBetween(cultivateEmailAddresses: cultivateContact.emailAddresses, iOSContactEmailAddresses: iOSContact.emailAddresses)
+        let emailAddressMatched = self.atleastOneEmailAddressMatchedBetween(cultivateEmailAddresses: cultivateContact.emailAddresses, iOSContactEmailAddresses: iOSContact.iOSContact.emailAddresses)
         if emailAddressMatched {
             return true
         }
@@ -394,18 +422,18 @@ class ContactsWorker {
     }
     
     static let phoneNumberKit = PhoneNumberKit()
-    func atleastOnePhoneNumberMatchedBetween(cultivatePhoneNumbers: [String], iOSContactPhoneNumbers: [CNLabeledValue<CNPhoneNumber>]) -> Bool {
+    func atleastOnePhoneNumberMatchedBetween(cultivatePhoneNumbers: [PhoneNumber], iOSContactPhoneNumbers: [PhoneNumber]) -> Bool {
         
-        let parsedNumbers1 = ContactsWorker.phoneNumberKit.parse(cultivatePhoneNumbers)
-        let parsedNumbers2 = ContactsWorker.phoneNumberKit.parse(iOSContactPhoneNumbers.map({ $0.value.stringValue }))
+//        let parsedNumbers1 = ContactsWorker.phoneNumberKit.parse(cultivatePhoneNumbers)
+//        let parsedNumbers2 = ContactsWorker.phoneNumberKit.parse(iOSContactPhoneNumbers.map({ $0.value.stringValue }))
 //
-//        for phoneNumber1 in parsedNumbers1 {
-//            for phoneNumber2 in parsedNumbers2 {
-//                if phoneNumber1 == phoneNumber2 {
-//                    return true
-//                }
-//            }
-//        }
+        for cultivatePhoneNumber in cultivatePhoneNumbers {
+            for iOSContactPhoneNumber in iOSContactPhoneNumbers {
+                if cultivatePhoneNumber == iOSContactPhoneNumber {
+                    return true
+                }
+            }
+        }
         
         return false
     }
@@ -444,6 +472,11 @@ class ContactsWorker {
     private func copy(from iOSContact: CNContact, to cultivateContact: CULContact) -> CULContact {
         var contact = ContactsWorker.createCULContact(from: iOSContact)
         contact.db_Identifier = cultivateContact.db_Identifier
+        contact.followupFrequency = cultivateContact.followupFrequency
+        contact.tag = cultivateContact.tag
+        contact.followupDate = cultivateContact.followupDate
+        contact.notes = cultivateContact.notes
+        contact.followups = cultivateContact.followups
         return contact
     }
     

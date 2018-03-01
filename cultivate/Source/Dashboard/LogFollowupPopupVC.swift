@@ -89,6 +89,7 @@ class LogFollowupPopupVC: UIViewController {
     
     private func didShowHelp() {
         if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.loggedInUser?.isFollowupHintsShown = true
             CULFirebaseGateway.shared.setFollowupHintsShown(for: user, completion: { (error) in
             })
         }

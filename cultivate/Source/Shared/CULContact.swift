@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PhoneNumberKit
 
 enum CULFollowupFrequency: String {
     case two_weeks = "two_weeks"
@@ -123,7 +124,7 @@ struct CULContact: Equatable {
     var identifier: String!
     
 //    var profileImageURL: URL?
-    var profileImage: UIImage?
+//    var profileImage: UIImage?
     
     var first_name: String?
     var last_name: String?
@@ -174,9 +175,20 @@ struct CULContact: Equatable {
     var middle_name: String?
     var phoneNumbers = [String]()
     var emailAddresses = [String]()
+    
+    
+    var parsedPhoneNumbers: [PhoneNumber] = []
 }
 
 struct CULTag {
     var identifier: String!
     var name: String!
 }
+
+
+
+
+
+
+
+

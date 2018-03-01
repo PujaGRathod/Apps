@@ -225,6 +225,7 @@ extension DashboardVC: CoachMarksControllerDataSource, CoachMarksControllerDeleg
     
     private func didShowHelp() {
         if let user = CULFirebaseGateway.shared.loggedInUser {
+            CULFirebaseGateway.shared.loggedInUser?.isDashboardHintsShown = true
             CULFirebaseGateway.shared.setDashboardHintsShown(for: user, completion: { (error) in
             })
         }
