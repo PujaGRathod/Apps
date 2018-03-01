@@ -19,8 +19,8 @@ target 'cultivate' do
     pod 'SDWebImage'
     pod 'SWRevealViewController'
     pod 'Instructions', '~> 1.0.0'
-    pod 'Fabric', '~> 1.7.2'
-    pod 'Crashlytics', '~> 3.9.3'
+    pod 'Fabric', '~> 1.7.5'
+    pod 'Crashlytics', '~> 3.10.1'
     pod 'MBProgressHUD', '~> 1.1.0'
     pod 'PhoneNumberKit', '~> 2.1'
     
@@ -42,8 +42,8 @@ target 'cultivate' do
         pod 'SDWebImage'
         pod 'SWRevealViewController'
         pod 'Instructions', '~> 1.0.0'
-        pod 'Fabric', '~> 1.7.2'
-        pod 'Crashlytics', '~> 3.9.3'
+        pod 'Fabric', '~> 1.7.5'
+        pod 'Crashlytics', '~> 3.10.1'
         pod 'MBProgressHUD', '~> 1.1.0'
         pod 'PhoneNumberKit', '~> 2.1'
         

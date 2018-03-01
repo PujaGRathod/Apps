@@ -393,12 +393,12 @@ class ContactsWorker {
         return false
     }
     
-    let phoneNumberKit = PhoneNumberKit()
+    static let phoneNumberKit = PhoneNumberKit()
     func atleastOnePhoneNumberMatchedBetween(cultivatePhoneNumbers: [String], iOSContactPhoneNumbers: [CNLabeledValue<CNPhoneNumber>]) -> Bool {
         
-//        let parsedNumbers1 = self.phoneNumberKit.parse(cultivatePhoneNumbers)
-//        let parsedNumbers2 = self.phoneNumberKit.parse(iOSContactPhoneNumbers.map({ $0.value.stringValue }))
-//        
+        let parsedNumbers1 = ContactsWorker.phoneNumberKit.parse(cultivatePhoneNumbers)
+        let parsedNumbers2 = ContactsWorker.phoneNumberKit.parse(iOSContactPhoneNumbers.map({ $0.value.stringValue }))
+//
 //        for phoneNumber1 in parsedNumbers1 {
 //            for phoneNumber2 in parsedNumbers2 {
 //                if phoneNumber1 == phoneNumber2 {

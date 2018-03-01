@@ -372,7 +372,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="T28-Kj-S26"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Dashboard" id="pHo-25-jsw">
+                    <navigationItem key="navigationItem" title="Dashboard" largeTitleDisplayMode="always" id="pHo-25-jsw">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="d2A-Ra-X7S" customClass="CULHamburgerMenuBarButton" customModule="cultivate" customModuleProvider="target"/>
                         <barButtonItem key="rightBarButtonItem" image="ic_log_action_30pt" width="44" id="eHt-Pf-rNU">
                             <inset key="imageInsets" minX="7" minY="7" maxX="7" maxY="7"/>
@@ -480,7 +480,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U4R-P6-yuo"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Submit feedback" id="nZT-s5-cST">
+                    <navigationItem key="navigationItem" title="Submit feedback" largeTitleDisplayMode="always" id="nZT-s5-cST">
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="kWb-ZU-r7a"/>
                     </navigationItem>
                     <connections>
@@ -808,7 +808,7 @@
         <image name="ic_viewedit_contacts" width="26" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gVj-pR-Z2r"/>
+        <segue reference="jc4-Zc-lbV"/>
         <segue reference="rkd-PU-rpf"/>
     </inferredMetricsTieBreakers>
 </document>

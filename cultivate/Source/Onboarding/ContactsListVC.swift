@@ -62,7 +62,14 @@ class ContactsListVC: UIViewController {
         DispatchQueue.main.async {
             self.contactsListTableViewAdapter.delegate = self
             self.contactsListTableViewAdapter.set(tableView: self.tblContactsList, with: self.selectedContacts)
-            self.contactsListTableViewAdapter.loadContactsFromAddressbook(with: self.selectedSortOrder)
+            
+            DispatchQueue.main.async {
+                self.showHUD()
+            }
+            self.contactsListTableViewAdapter.loadContactsFromAddressbook(with: self.selectedSortOrder, {
+                self.hideHUD()
+            })
+            
             self.searchController.searchResultsUpdater = self.contactsListTableViewAdapter
             self.searchController.obscuresBackgroundDuringPresentation = false
             self.searchController.searchBar.placeholder = "Search contacts"
@@ -135,13 +142,19 @@ class ContactsListVC: UIViewController {
         
         let action1 = UIAlertAction(title: actionTitle1, style: UIAlertActionStyle.default, handler: { (action) in
             self.selectedSortOrder = CULContact.SortOrder.firstName
-            self.contactsListTableViewAdapter.loadContactsFromAddressbook(with: self.selectedSortOrder)
+            self.showHUD()
+            self.contactsListTableViewAdapter.loadContactsFromAddressbook(with: self.selectedSortOrder, {
+                self.hideHUD()
+            })
         })
         actionSheet.addAction(action1)
 
         let action2 = UIAlertAction(title: actionTitle2, style: UIAlertActionStyle.default, handler: { (action) in
             self.selectedSortOrder = CULContact.SortOrder.lastName
-            self.contactsListTableViewAdapter.loadContactsFromAddressbook(with: self.selectedSortOrder)
+            self.showHUD()
+            self.contactsListTableViewAdapter.loadContactsFromAddressbook(with: self.selectedSortOrder, {
+                self.hideHUD()
+            })
         })
         actionSheet.addAction(action2)
         

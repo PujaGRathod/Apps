@@ -651,7 +651,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ksY-Rp-qGd"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Rename tags" id="X92-NI-glb">
+                    <navigationItem key="navigationItem" title="Rename tags" largeTitleDisplayMode="always" id="X92-NI-glb">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="ffF-Vm-FmV" customClass="CULHamburgerMenuBarButton" customModule="cultivate" customModuleProvider="target"/>
                     </navigationItem>
                     <connections>
@@ -690,7 +690,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tlT-vo-OA1"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Rename tag" id="GHd-ch-zt3">
+                    <navigationItem key="navigationItem" title="Rename tag" largeTitleDisplayMode="always" id="GHd-ch-zt3">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="zgm-jQ-aNp">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="tw3-VA-xHz" id="2jD-Lk-amf"/>
@@ -1093,7 +1093,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UeT-Or-4Gr"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Contacts" id="fcF-FY-TXT">
+                    <navigationItem key="navigationItem" title="Contacts" largeTitleDisplayMode="always" id="fcF-FY-TXT">
                         <barButtonItem key="backBarButtonItem" title="Back" id="CVI-wA-9fQ"/>
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="amf-od-e4j" customClass="CULHamburgerMenuBarButton" customModule="cultivate" customModuleProvider="target"/>
                         <rightBarButtonItems>

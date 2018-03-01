@@ -10,6 +10,7 @@ import UIKit
 import KLCPopup
 import Instructions
 import StoreKit
+import Crashlytics
 
 class DashboardVC: UIViewController {
 

@@ -553,6 +553,7 @@
 				BFC985461FE79AAE0041E32D /* Resources */,
 				6A1AB9484FE9819D3DDB1775 /* [CP] Embed Pods Frameworks */,
 				5A8D128F9E45E81F89949ADA /* [CP] Copy Pods Resources */,
+				BF35167A2047DF4E000B8C6C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -839,6 +840,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cultivateTests/Pods-cultivateTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BF35167A2047DF4E000B8C6C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
 		};
 		C3AFBD30BA3CA68A586F61C8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1197,6 +1211,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = W6K2394RR4;
 				INFOPLIST_FILE = "$(SRCROOT)/cultivate/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
@@ -1216,6 +1231,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = W6K2394RR4;
 				INFOPLIST_FILE = "$(SRCROOT)/cultivate/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;

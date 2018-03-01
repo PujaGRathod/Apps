@@ -322,7 +322,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6c9-JO-l6E"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create an account" id="Mii-JW-f0w">
+                    <navigationItem key="navigationItem" title="Create an account" largeTitleDisplayMode="always" id="Mii-JW-f0w">
                         <barButtonItem key="backBarButtonItem" title="Back" id="D9N-eQ-nEA"/>
                     </navigationItem>
                     <connections>
@@ -410,7 +410,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nIy-Hd-9SA"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Sign In" id="IUk-J7-4Te">
+                    <navigationItem key="navigationItem" title="Sign In" largeTitleDisplayMode="always" id="IUk-J7-4Te">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Coi-60-Er7"/>
                     </navigationItem>
                     <connections>
@@ -508,7 +508,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G35-TC-a9k"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Forgot your passowrd?" id="3tF-y5-YHY">
+                    <navigationItem key="navigationItem" title="Forgot your passowrd?" largeTitleDisplayMode="always" id="3tF-y5-YHY">
                         <barButtonItem key="backBarButtonItem" title="Back" id="WUo-Cx-RiN"/>
                     </navigationItem>
                     <connections>

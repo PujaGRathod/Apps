@@ -104,7 +104,7 @@ You’ll have the opportunity to change your selected contacts later on.</string
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Cws-Oc-uxa"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Select contacts" id="O7O-Oq-orb">
+                    <navigationItem key="navigationItem" title="Select contacts" largeTitleDisplayMode="always" id="O7O-Oq-orb">
                         <barButtonItem key="backBarButtonItem" title="Back" id="MyM-Af-U0h"/>
                     </navigationItem>
                     <connections>
@@ -156,7 +156,7 @@ You’ll have the opportunity to change your selected contacts later on.</string
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kKg-6f-NUn"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Select contacts" id="HVn-dv-rUj">
+                    <navigationItem key="navigationItem" title="Select contacts" largeTitleDisplayMode="always" id="HVn-dv-rUj">
                         <barButtonItem key="backBarButtonItem" title="Back" id="cqT-hf-kVE"/>
                         <rightBarButtonItems>
                             <barButtonItem style="plain" id="94P-6O-Wpb">
@@ -273,7 +273,7 @@ Cultivate will automatically schedule recommended follow-up date based on the fo
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EaR-HA-s3a"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Set follow-up frequencies" id="VwP-kq-Seq">
+                    <navigationItem key="navigationItem" title="Set follow-up frequencies" largeTitleDisplayMode="always" id="VwP-kq-Seq">
                         <barButtonItem key="backBarButtonItem" title="Back" id="wBx-J3-x7Q"/>
                     </navigationItem>
                     <connections>
@@ -324,7 +324,7 @@ Cultivate will automatically schedule recommended follow-up date based on the fo
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Gaf-Zd-M4E"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Set follow-up frequencies" id="U7g-bI-jXb">
+                    <navigationItem key="navigationItem" title="Set follow-up frequencies" largeTitleDisplayMode="always" id="U7g-bI-jXb">
                         <barButtonItem key="backBarButtonItem" title="Back" id="AHj-QB-HaS"/>
                     </navigationItem>
                     <connections>
@@ -426,7 +426,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zt2-bl-cph"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add tags" id="4Jj-hl-Q71">
+                    <navigationItem key="navigationItem" title="Add tags" largeTitleDisplayMode="always" id="4Jj-hl-Q71">
                         <barButtonItem key="backBarButtonItem" title="Back" id="5kZ-kI-Lk3"/>
                     </navigationItem>
                     <connections>
@@ -521,7 +521,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iQs-aX-beC"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add tags" id="opU-Df-w7c">
+                    <navigationItem key="navigationItem" title="Add tags" largeTitleDisplayMode="always" id="opU-Df-w7c">
                         <barButtonItem key="backBarButtonItem" title="Back" id="2za-bd-WF0"/>
                     </navigationItem>
                     <connections>
@@ -597,8 +597,8 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NZP-Fc-AcK"/>
                     </view>
-                    <navigationItem key="navigationItem" id="d0s-L9-dvh">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="Dqe-I5-NPw"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="d0s-L9-dvh">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Ye1-kG-Qtu"/>
                     </navigationItem>
                     <connections>
                         <outlet property="finishButton" destination="Abg-ZI-hXR" id="ScC-jj-j4e"/>
@@ -625,7 +625,7 @@ You can also skip adding tags for now and start using Cuiltivate.</string>
         <image name="ic_sort_100pt" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mku-Xg-epZ"/>
+        <segue reference="jnJ-PK-klY"/>
         <segue reference="iD8-Wf-naK"/>
         <segue reference="WC9-u8-GqI"/>
     </inferredMetricsTieBreakers>

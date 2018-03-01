@@ -25,8 +25,8 @@ class LoginVC: UIViewController {
             textfield.layer.borderWidth = 1
         }
         
-        self.txtEmail.text = "tysullberg@gmail.com"
-        self.txtPassword.text = "11sZ%tZoSfK^ne"
+//        self.txtEmail.text = "tysullberg@gmail.com"
+//        self.txtPassword.text = "11sZ%tZoSfK^ne"
     }
 
     override func didReceiveMemoryWarning() {

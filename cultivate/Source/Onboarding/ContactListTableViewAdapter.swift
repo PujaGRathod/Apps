@@ -44,7 +44,7 @@ class ContactListTableViewAdapter: NSObject {
         self.tableView.register(nib, forCellReuseIdentifier: "ContactTblCell")
     }
     
-    func loadContactsFromAddressbook(with sortOrder: CULContact.SortOrder) {
+    func loadContactsFromAddressbook(with sortOrder: CULContact.SortOrder, _ completion: @escaping (()->Void)) {
         // Get list of all contacts from the user's phonebook
         self.worker.getContacts(sortOrder: sortOrder) { (contacts, sortedKeys, error) in
             self.contacts = contacts
@@ -59,6 +59,7 @@ class ContactListTableViewAdapter: NSObject {
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                completion()
             }
         }
     }
