@@ -373,7 +373,7 @@
                         <viewLayoutGuide key="safeArea" id="T28-Kj-S26"/>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" largeTitleDisplayMode="always" id="pHo-25-jsw">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="d2A-Ra-X7S" customClass="CULHamburgerMenuBarButton" customModule="cultivate" customModuleProvider="target"/>
+                        <barButtonItem key="leftBarButtonItem" id="d2A-Ra-X7S" customClass="CULHamburgerMenuBarButton" customModule="cultivate" customModuleProvider="target"/>
                         <barButtonItem key="rightBarButtonItem" image="ic_log_action_30pt" width="44" id="eHt-Pf-rNU">
                             <inset key="imageInsets" minX="7" minY="7" maxX="7" maxY="7"/>
                             <connections>

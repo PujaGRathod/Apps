@@ -32,6 +32,11 @@ class ViewContactsListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
         hamburgerMenuVC.configure(self.menuButton, view: self.view)
         
         self.addBorderAndBackground(to: self.tagFilterView)

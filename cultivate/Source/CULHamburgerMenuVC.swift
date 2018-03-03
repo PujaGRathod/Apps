@@ -15,6 +15,11 @@ class CULHamburgerMenuVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

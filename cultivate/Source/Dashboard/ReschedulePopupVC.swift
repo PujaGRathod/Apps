@@ -34,6 +34,11 @@ class ReschedulePopupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
         self.containerView.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
         self.containerView.layer.borderWidth = 0.5
         self.containerView.layer.cornerRadius = 5

@@ -28,6 +28,11 @@ class DashboardVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name("applicationDidBecomeActive_Dashboard"), object: nil, queue: nil) { (notification) in
             self.viewWillAppear(false)
