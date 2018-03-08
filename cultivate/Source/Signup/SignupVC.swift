@@ -19,11 +19,6 @@ class SignupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.errorLabel.text = ""
     }
@@ -61,7 +56,7 @@ class SignupVC: UIViewController {
                 self.txtPassword.setTextfieldMode(to: CULTextFieldMode.success)
                 self.txtRetypePassword.setTextfieldMode(to: CULTextFieldMode.success)
             } else {
-                errorMessages.append("Your password must be at least 8 characters and consist of at least one lowercase, one uppercase, one number and one symbol.")
+                errorMessages.append("Your password must be at least 8 characters and consist of at least one number and one letter.")
                 self.txtPassword.setTextfieldMode(to: CULTextFieldMode.error)
                 self.txtRetypePassword.setTextfieldMode(to: CULTextFieldMode.error)
                 validationSuccess = false

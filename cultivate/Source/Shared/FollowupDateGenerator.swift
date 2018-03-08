@@ -48,10 +48,12 @@ class FollowupDateGenerator {
                     assignedContacts.append(contact)
                     continue
                 }
-                let followupDate = self.calendar.date(from: datecomponents)
                 
                 var assignedContact = contact
-                assignedContact.followupDate = followupDate
+                
+                if let followupDate = self.calendar.date(from: datecomponents) {
+                    assignedContact.followupDate = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: followupDate)
+                }
                 assignedContacts.append(assignedContact)
                 
                 print("Followup date set \(String(describing: assignedContact.followupDate)) for \(assignedContact.name)")

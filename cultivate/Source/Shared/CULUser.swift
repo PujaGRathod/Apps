@@ -9,6 +9,21 @@
 import UIKit
 import Firebase
 
+struct NotificationSettings {
+    enum Frequency: String {
+        case daily
+        case monday
+        case tuesday
+        case wednesday
+        case thursday
+        case friday
+        case saturday
+        case sunday
+    }
+    var time: String = "09:00"
+    var frequency: Frequency = .monday
+}
+
 class CULUser {
     
     var name: String
@@ -17,9 +32,10 @@ class CULUser {
     var isOnBoardingComplete = false
     var isDashboardHintsShown = false
     var isFollowupHintsShown = false
+    var notificationSettings: NotificationSettings?
     
     func getRawData() -> [String:Any] {
-        let rawData: [String:Any] = [
+        var rawData: [String:Any] = [
             "id": self.id,
             "email": self.email,
             "name": self.name,
@@ -27,6 +43,9 @@ class CULUser {
             "isDashboardHintsShown": self.isDashboardHintsShown,
             "isFollowupHintsShown": self.isFollowupHintsShown,
             ]
+        if let ns = self.notificationSettings {
+            rawData["notificationSettings"] = "\(ns.frequency),\(ns.time)"
+        }
         return rawData
     }
     
@@ -35,6 +54,13 @@ class CULUser {
         self.id = id
         self.email = email
         self.name = withName
+        
+        if self.notificationSettings == nil {
+            var ns = NotificationSettings()
+            ns.frequency = .daily
+            ns.time = "09:00"
+            self.notificationSettings = ns
+        }
     }
     
     init?(with data: [String: Any]) {
@@ -45,6 +71,19 @@ class CULUser {
             self.isOnBoardingComplete = (data["isOnBoardingComplete"] as? Bool) ?? false
             self.isDashboardHintsShown = (data["isDashboardHintsShown"] as? Bool) ?? false
             self.isFollowupHintsShown = (data["isFollowupHintsShown"] as? Bool) ?? false
+            
+            if let settings = data["notificationSettings"] as? String {
+                let list = settings.components(separatedBy: ",")
+                if list.count == 2,
+                    let frequency = list.first,
+                    let time = list.last {
+                    var ns = NotificationSettings()
+                    ns.frequency = NotificationSettings.Frequency.init(rawValue: frequency) ?? .monday
+                    ns.time = time
+                    self.notificationSettings = ns
+                }
+            }
+            
         } else {
             return nil
         }

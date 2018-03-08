@@ -31,11 +31,6 @@ class TagPickerPopupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
 //        self.headerView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
         self.containerView.layer.borderWidth = 0.5
@@ -69,7 +64,10 @@ class TagPickerPopupVC: UIViewController {
     }
     
     private func adjustTableViewHeight() {
+        let minHeight: CGFloat = 44
         var height = self.tableView.rowHeight * CGFloat(self.tagListTableViewAdapter.tags.count)
+        height = max(minHeight, height)
+        
         let maxHeight = 5 * self.tableView.rowHeight
         if self.shouldShowAddNewTagTextField {
             height += 44
@@ -77,7 +75,14 @@ class TagPickerPopupVC: UIViewController {
         self.tableViewHeightConstraint.constant = min(height, maxHeight)
         self.view.layoutIfNeeded()
         
-        self.popup.show(with: KLCPopupLayoutCenter)
+        let layout = KLCPopupLayoutMake(KLCPopupHorizontalLayout.center, KLCPopupVerticalLayout.aboveCenter)
+        self.popup.show(with: layout)
+        
+        
+        if self.tagListTableViewAdapter.tags.count == 0,
+            self.shouldShowAddNewTagTextField {
+            self.txtAddNewTag.becomeFirstResponder()
+        }
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {

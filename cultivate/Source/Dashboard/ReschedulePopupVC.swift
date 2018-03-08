@@ -34,11 +34,6 @@ class ReschedulePopupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
         self.containerView.layer.borderColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
         self.containerView.layer.borderWidth = 0.5
         self.containerView.layer.cornerRadius = 5
@@ -65,7 +60,7 @@ class ReschedulePopupVC: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
-        self.contact.followupDate = self.datePicker.date
+        self.contact.followupDate = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self.datePicker.date)
         if let user = CULFirebaseGateway.shared.loggedInUser {
             CULFirebaseGateway.shared.update(contacts: [self.contact], for: user, completion: { (error) in
 //                if let error = error {
@@ -86,7 +81,7 @@ class ReschedulePopupVC: UIViewController {
     }
     
     @IBAction func datePickerDateChanged(_ sender: UIDatePicker) {
-        self.contact.followupDate = self.datePicker.date
+        self.contact.followupDate = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self.datePicker.date)
         self.dateTextField.text = self.contact.userReadableFollowupDateString
     }
     

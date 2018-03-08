@@ -18,11 +18,6 @@ class LoginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
         self.errorLabel.text = ""
         let textfields: [UITextField] = [ self.txtEmail, self.txtPassword]
         for textfield in textfields {

@@ -35,6 +35,8 @@
 		BF4A5AAA1FEA742900012B40 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF4A5AA81FEA742800012B40 /* Authentication.storyboard */; };
 		BF4A5AAC1FEA746900012B40 /* WebLinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */; };
 		BF56EE1D201B2BE100415DD5 /* CULFirebaseAnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF56EE1C201B2BE100415DD5 /* CULFirebaseAnalyticsManager.swift */; };
+		BF5E4AD8204D38990041F3D7 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5E4AD6204D38990041F3D7 /* Notifications.storyboard */; };
+		BF5E4ADB204D38BE0041F3D7 /* NotificationSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5E4ADA204D38BE0041F3D7 /* NotificationSettingsVC.swift */; };
 		BF6379B61FFCA54F009C30E8 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */; };
 		BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6379B81FFCA587009C30E8 /* DashboardVC.swift */; };
 		BF6E5589200A146B00906E75 /* ContactDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */; };
@@ -53,8 +55,11 @@
 		BFA6228620174664008C0435 /* RenameTagsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA6228520174664008C0435 /* RenameTagsVC.swift */; };
 		BFA6228820174DF4008C0435 /* EditTagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA6228720174DF4008C0435 /* EditTagVC.swift */; };
 		BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */; };
+		BFC7C2DB204E8D6600A83A6A /* CULNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7C2DA204E8D6600A83A6A /* CULNotificationsManager.swift */; };
+		BFC7C2DD204E9B0000A83A6A /* CULNotificationsManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC7C2DC204E9B0000A83A6A /* CULNotificationsManagerTest.swift */; };
 		BFC8C2572009C8A60014062E /* CULFirebaseGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C2562009C8A60014062E /* CULFirebaseGateway.swift */; };
 		BFC8C2592009E9860014062E /* ReschedulePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8C2582009E9860014062E /* ReschedulePopupVC.swift */; };
+		BFC940A0204FF4DC00765831 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9409F204FF4DC00765831 /* Date.swift */; };
 		BFC985611FE79AAF0041E32D /* cultivateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC985601FE79AAF0041E32D /* cultivateTests.swift */; };
 		BFC9856C1FE79AAF0041E32D /* cultivateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9856B1FE79AAF0041E32D /* cultivateUITests.swift */; };
 		BFCA7D3E2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA7D3D2010BC3A00E717CB /* CULHamburgerMenuBarButton.swift */; };
@@ -133,6 +138,8 @@
 		BF4A5AA91FEA742900012B40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		BF4A5AAB1FEA746900012B40 /* WebLinkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkVC.swift; sourceTree = "<group>"; };
 		BF56EE1C201B2BE100415DD5 /* CULFirebaseAnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULFirebaseAnalyticsManager.swift; sourceTree = "<group>"; };
+		BF5E4AD7204D38990041F3D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Notifications.storyboard; sourceTree = "<group>"; };
+		BF5E4ADA204D38BE0041F3D7 /* NotificationSettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsVC.swift; sourceTree = "<group>"; };
 		BF6379B51FFCA54F009C30E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Dashboard.storyboard; sourceTree = "<group>"; };
 		BF6379B81FFCA587009C30E8 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		BF6E5588200A146B00906E75 /* ContactDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsVC.swift; sourceTree = "<group>"; };
@@ -151,8 +158,11 @@
 		BFA6228520174664008C0435 /* RenameTagsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameTagsVC.swift; sourceTree = "<group>"; };
 		BFA6228720174DF4008C0435 /* EditTagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagVC.swift; sourceTree = "<group>"; };
 		BFA8D8091FEBC13E007E2B21 /* CULTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULTextField.swift; sourceTree = "<group>"; };
+		BFC7C2DA204E8D6600A83A6A /* CULNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULNotificationsManager.swift; sourceTree = "<group>"; };
+		BFC7C2DC204E9B0000A83A6A /* CULNotificationsManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CULNotificationsManagerTest.swift; sourceTree = "<group>"; };
 		BFC8C2562009C8A60014062E /* CULFirebaseGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CULFirebaseGateway.swift; sourceTree = "<group>"; };
 		BFC8C2582009E9860014062E /* ReschedulePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReschedulePopupVC.swift; sourceTree = "<group>"; };
+		BFC9409F204FF4DC00765831 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		BFC985481FE79AAE0041E32D /* cultivate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cultivate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC9855C1FE79AAF0041E32D /* cultivateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cultivateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC985601FE79AAF0041E32D /* cultivateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cultivateTests.swift; sourceTree = "<group>"; };
@@ -227,6 +237,7 @@
 			children = (
 				591EA6351FEA77730001B494 /* UIViewControllerExtension.swift */,
 				591EA6361FEA77730001B494 /* StringExtension.swift */,
+				BFC9409F204FF4DC00765831 /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -305,8 +316,17 @@
 				BF6F61D3201616D200A49B08 /* CULBarButtonItem.swift */,
 				BFCC33542016345000D75309 /* RequestReviewManager.swift */,
 				BF56EE1C201B2BE100415DD5 /* CULFirebaseAnalyticsManager.swift */,
+				BFC7C2DA204E8D6600A83A6A /* CULNotificationsManager.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		BF5E4AD9204D38AE0041F3D7 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				BF5E4ADA204D38BE0041F3D7 /* NotificationSettingsVC.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		BF6379B71FFCA57C009C30E8 /* Dashboard */ = {
@@ -395,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				BFC985601FE79AAF0041E32D /* cultivateTests.swift */,
+				BFC7C2DC204E9B0000A83A6A /* CULNotificationsManagerTest.swift */,
 				BFED5AF42032E170000348E3 /* ContactsWorkerTests.swift */,
 				BFC985621FE79AAF0041E32D /* Info.plist */,
 			);
@@ -454,6 +475,7 @@
 				BF4A5AA81FEA742800012B40 /* Authentication.storyboard */,
 				BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */,
 				BFCA7D412010D0CF00E717CB /* Contact.storyboard */,
+				BF5E4AD6204D38990041F3D7 /* Notifications.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -469,6 +491,7 @@
 		BFE9D7911FE79F300091F4A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BF5E4AD9204D38AE0041F3D7 /* Notifications */,
 				BFE9D7931FE79F300091F4A8 /* AppDelegate.swift */,
 				BF6E5587200A146400906E75 /* Contact Details */,
 				BFCA7D3F2010C17800E717CB /* CULHamburgerMenuVC.swift */,
@@ -666,6 +689,7 @@
 				BFE9D7AA1FE7AB9A0091F4A8 /* FooterView.xib in Resources */,
 				BFE9D7A21FE7A0440091F4A8 /* Onboarding.storyboard in Resources */,
 				BFE9D7941FE79F300091F4A8 /* GoogleService-Info.plist in Resources */,
+				BF5E4AD8204D38990041F3D7 /* Notifications.storyboard in Resources */,
 				BF141916200F4EEB00BFEA07 /* ContactHistoryTblCell.xib in Resources */,
 				BFE9D7971FE79F300091F4A8 /* Extra.storyboard in Resources */,
 				BFD0168E20073AEC0054365F /* DashboardContactTblCell.xib in Resources */,
@@ -972,6 +996,7 @@
 				BF6379B91FFCA587009C30E8 /* DashboardVC.swift in Sources */,
 				BFEF92321FE7D586000ED577 /* ForgotPasswordVC.swift in Sources */,
 				BF14192320107D9F00BFEA07 /* TagPickerTblCell.swift in Sources */,
+				BFC940A0204FF4DC00765831 /* Date.swift in Sources */,
 				BFD0168D20073AEC0054365F /* DashboardContactTblCell.swift in Sources */,
 				BF14191B200FC7E500BFEA07 /* FrequencyPickerPopupVC.swift in Sources */,
 				BFA8D80A1FEBC13E007E2B21 /* CULTextField.swift in Sources */,
@@ -981,6 +1006,7 @@
 				BF80EFF120125FD7002A19CC /* SubmitFeedbackVC.swift in Sources */,
 				BF7F48CD1FE8FCBF00737FE5 /* SetFollowupFrequenciesVC.swift in Sources */,
 				BF1298A71FEA8E710058C8EC /* CULNavigationController.swift in Sources */,
+				BFC7C2DB204E8D6600A83A6A /* CULNotificationsManager.swift in Sources */,
 				BF7F48D71FE9089A00737FE5 /* ContactTblCell.swift in Sources */,
 				BF7F48C91FE8EE1C00737FE5 /* String.swift in Sources */,
 				BFF28FEB1FFB634B00036150 /* ExtendedSplashVC.swift in Sources */,
@@ -991,6 +1017,7 @@
 				BFD016902007401B0054365F /* FollowupDateGenerator.swift in Sources */,
 				BFD01693200747630054365F /* DashboardTableViewHeader.swift in Sources */,
 				BFA4370F1FEA2BE200E2E886 /* OnboardingCompletedVC.swift in Sources */,
+				BF5E4ADB204D38BE0041F3D7 /* NotificationSettingsVC.swift in Sources */,
 				591EA63A1FEA777A0001B494 /* CULUser.swift in Sources */,
 				BFCC33552016345000D75309 /* RequestReviewManager.swift in Sources */,
 				BFE9D79F1FE7A0210091F4A8 /* SignupVC.swift in Sources */,
@@ -1018,6 +1045,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFED5AF52032E170000348E3 /* ContactsWorkerTests.swift in Sources */,
+				BFC7C2DD204E9B0000A83A6A /* CULNotificationsManagerTest.swift in Sources */,
 				BFC985611FE79AAF0041E32D /* cultivateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1052,6 +1080,14 @@
 				BF4A5AA91FEA742900012B40 /* Base */,
 			);
 			name = Authentication.storyboard;
+			sourceTree = "<group>";
+		};
+		BF5E4AD6204D38990041F3D7 /* Notifications.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF5E4AD7204D38990041F3D7 /* Base */,
+			);
+			name = Notifications.storyboard;
 			sourceTree = "<group>";
 		};
 		BF6379B41FFCA54F009C30E8 /* Dashboard.storyboard */ = {
@@ -1251,7 +1287,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = W6K2394RR4;
 				INFOPLIST_FILE = cultivateTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.intelivexlabs.cultivateTests;
@@ -1269,7 +1305,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = W6K2394RR4;
 				INFOPLIST_FILE = cultivateTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.intelivexlabs.cultivateTests;

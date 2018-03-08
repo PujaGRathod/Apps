@@ -15,11 +15,6 @@ class CULHamburgerMenuVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +45,7 @@ class CULHamburgerMenuVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1, indexPath.item == 3 {
+        if indexPath.section == 1, indexPath.item == 4 {
             // Logout
             self.logoutTapped()
         }
