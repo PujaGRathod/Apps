@@ -180,6 +180,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let id = "OPEN"
+        let name = "NOTIFICATION"
+        CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
+        
         completionHandler()
     }
     

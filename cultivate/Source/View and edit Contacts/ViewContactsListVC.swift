@@ -41,10 +41,9 @@ class ViewContactsListVC: UIViewController {
             self.selectedSortOrder = sortOrder
         }
         
-        let id = "FOLLOWUP"
-        let name = "CONTACT_DASHBOARD"
-        let contentType = "DEFER_DATE"
-        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
+        let id = "Action"
+        let name = "ViewEditContacts"
+        CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
     }
     
     private func addBorderAndBackground(to view: UIView) {
@@ -153,6 +152,10 @@ class ViewContactsListVC: UIViewController {
         } else if segue.identifier == "segueEditContacts",
             let vc = segue.destination as? ContactsListVC {
             vc.mode = ContactSelectionProcessDataStore.Mode.updatingContacts
+            
+            let id = "SUBMIT"
+            let name = "EDIT_BUTTON"
+            CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
         }
     }
     

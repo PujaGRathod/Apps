@@ -146,10 +146,18 @@ class OnboardingCompletedVC: UIViewController {
             id = "UpdatingContacts"
             name = "Completion"
             
+            let id = "SUBMIT"
+            let name = "FINISH_BUTTON_EDIT_CONTACTS"
+            CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
+            
             self.navigationController?.popToRootViewController(animated: true)
         } else if ContactSelectionProcessDataStore.shared.mode == .addMissingTags {
             id = "AddMissingTags"
             name = "Completion"
+            
+            let id = "SUBMIT"
+            let name = "FINISH_BUTTON_ADD_MISSING_TAGS"
+            CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
             
             self.performSegue(withIdentifier: "segueDashboard", sender: nil)
         }
