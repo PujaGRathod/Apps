@@ -13,6 +13,7 @@ import FBSDKCoreKit
 import GoogleSignIn
 import IQKeyboardManagerSwift
 import SWRevealViewController
+import UserNotifications
 
 import Contacts
 
@@ -25,9 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-//        NotificationCenter.default.addObserver(forName: NSNotification.Name.CNContactStoreDidChange, object: nil, queue: nil) { (notification) in
-//            ContactsWorker().updateCultivateContacts()
-//        }
+        //        NotificationCenter.default.addObserver(forName: NSNotification.Name.CNContactStoreDidChange, object: nil, queue: nil) { (notification) in
+        //            ContactsWorker().updateCultivateContacts()
+        //        }
+
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+//        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        UNUserNotificationCenter.current().delegate = self
+        
         
         window?.tintColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
         
@@ -123,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        UIApplication.shared.applicationIconBadgeNumber = 0
         ContactsWorker().updateCultivateContacts()
     }
     
@@ -160,5 +168,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //            }
     //        }
     //    }
+    
+    
 }
 
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound, .badge])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let id = "OPEN"
+        let name = "NOTIFICATION"
+        CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
+        
+        completionHandler()
+    }
+    
+    
+}

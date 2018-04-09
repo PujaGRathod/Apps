@@ -154,18 +154,15 @@ class TagsListTableViewAdapter: NSObject {
         
         if let identifier = identifier {
             store.collection("users").document(currentUser.uid).collection("tags").document(identifier).setData(data) { (error) in
-                
-                //                if let error = error {
-                //                    print(error)
-                //                } else {
-                //                    print("Success")
-                //                    completion(tag)
-                //                    self.loadAllAvailableTags()
-                //                }
+                if let error = error {
+                    print(error)
+                    completion(nil)
+                } else {
+                    print("Success")
+                    completion(tag)
+                }
+                self.loadAllAvailableTags()
             }
-            
-            completion(tag)
-            self.loadAllAvailableTags()
         }
     }
     
@@ -201,9 +198,11 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
         
         if self.shouldUseCustomCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TagPickerTblCell
+            cell.backgroundColor = UIColor.clear
             if self.filteredTags.count == 0,
                 self.searchText.isEmpty == false {
-                cell.titleLabel.textColor = #colorLiteral(red: 0.7137254902, green: 0.8039215686, blue: 0.7254901961, alpha: 1)
+                cell.titleLabel.textColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+                cell.backgroundColor = #colorLiteral(red: 0.7137254902, green: 0.8039215686, blue: 0.7254901961, alpha: 1)
                 cell.titleLabel.text = "Tap to create a new tag"
                 cell.titleLabel.font = UIFont.italicSystemFont(ofSize: 17)
                 cell.checkmarkImageView.isHidden = true
@@ -220,7 +219,8 @@ extension TagsListTableViewAdapter: UITableViewDelegate, UITableViewDataSource {
         
         if self.filteredTags.count == 0,
             self.searchText.isEmpty == false {
-            cell.textLabel?.textColor = #colorLiteral(red: 0.7137254902, green: 0.8039215686, blue: 0.7254901961, alpha: 1)
+            cell.backgroundColor = #colorLiteral(red: 0.7137254902, green: 0.8039215686, blue: 0.7254901961, alpha: 1)
+            cell.textLabel?.textColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
             cell.textLabel?.text = "Tap to create a new tag"
             cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 17)
         } else {

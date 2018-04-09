@@ -390,7 +390,11 @@ class ContactDetailsVC: UIViewController {
         self.reschedulePopupVC = self.storyboard?.instantiateViewController(withIdentifier: "ReschedulePopupVC") as? ReschedulePopupVC
         if let reschedulePopupVC = self.reschedulePopupVC {
             reschedulePopupVC.followupDateUpdated = { updatedContact in
-                self.contact.followupDate = updatedContact.followupDate
+                
+                if let date = updatedContact.followupDate {
+                    self.contact.followupDate = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: date)
+                }
+                
                 self.display(contact: self.contact)
                 
                 let id = "DATE"
@@ -430,6 +434,9 @@ class ContactDetailsVC: UIViewController {
     private func update(contact: CULContact) {
         if let user = CULFirebaseGateway.shared.loggedInUser {
             CULFirebaseGateway.shared.update(contacts: [contact], for: user, completion: { (error) in
+                CULFirebaseGateway.shared.getContacts(for: user, { (contacts) in
+                    CULNotificationsManager.shared.setupLocalNotifications(for: contacts)
+                })
                 if let error = error {
                     self.showAlert("Error", message: error.localizedDescription)
                 } else {

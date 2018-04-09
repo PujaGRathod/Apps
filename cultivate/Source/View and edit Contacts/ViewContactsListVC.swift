@@ -32,11 +32,6 @@ class ViewContactsListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
         hamburgerMenuVC.configure(self.menuButton, view: self.view)
         
         self.addBorderAndBackground(to: self.tagFilterView)
@@ -46,10 +41,9 @@ class ViewContactsListVC: UIViewController {
             self.selectedSortOrder = sortOrder
         }
         
-        let id = "FOLLOWUP"
-        let name = "CONTACT_DASHBOARD"
-        let contentType = "DEFER_DATE"
-        CULFirebaseAnalyticsManager.shared.log(id: id, itemName: name, contentType: contentType)
+        let id = "Action"
+        let name = "ViewEditContacts"
+        CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
     }
     
     private func addBorderAndBackground(to view: UIView) {
@@ -158,6 +152,10 @@ class ViewContactsListVC: UIViewController {
         } else if segue.identifier == "segueEditContacts",
             let vc = segue.destination as? ContactsListVC {
             vc.mode = ContactSelectionProcessDataStore.Mode.updatingContacts
+            
+            let id = "SUBMIT"
+            let name = "EDIT_BUTTON"
+            CULFirebaseAnalyticsManager.shared.logUserSelection(with: id, on: name)
         }
     }
     

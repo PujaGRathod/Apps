@@ -474,7 +474,9 @@ class ContactsWorker {
         contact.db_Identifier = cultivateContact.db_Identifier
         contact.followupFrequency = cultivateContact.followupFrequency
         contact.tag = cultivateContact.tag
-        contact.followupDate = cultivateContact.followupDate
+        if let date = cultivateContact.followupDate {
+            contact.followupDate = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: date)
+        }
         contact.notes = cultivateContact.notes
         contact.followups = cultivateContact.followups
         return contact

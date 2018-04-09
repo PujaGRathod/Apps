@@ -17,11 +17,6 @@ class RenameTagsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
         
         self.tagListTableViewAdapter.shouldShowSelection = false
         self.tagListTableViewAdapter.set(tableView: self.tagsTableView)

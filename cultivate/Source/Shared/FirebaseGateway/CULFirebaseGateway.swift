@@ -166,7 +166,7 @@ class CULFirebaseGateway {
         raw["followupFrequency"] = contact.followupFrequency.rawValue
         
         if contact.followupFrequency == .none {
-            assertionFailure("Frequency can't be empty")
+//            assertionFailure("Frequency can't be empty")
         }
         
         if let tagId = contact.tag?.identifier {
@@ -189,12 +189,12 @@ class CULFirebaseGateway {
     
     func getTags(for user: CULUser, _ completion:@escaping (([CULTag])->Void)) {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("tags")
-//        var listener: ListenerRegistration?
-//        listener = ref.addSnapshotListener({ (snapshot, error) in
-                    ref.getDocuments { (snapshot, error) in
+        //        var listener: ListenerRegistration?
+        //        listener = ref.addSnapshotListener({ (snapshot, error) in
+        ref.getDocuments { (snapshot, error) in
             
             //            if snapshot?.metadata.isFromCache == false {
-//            listener?.remove()
+            //            listener?.remove()
             print("Listener removed for getTags ********** ")
             //            }
             
@@ -207,16 +207,16 @@ class CULFirebaseGateway {
             tags.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
             completion(tags)
             
-//        })
-                }
+            //        })
+        }
     }
     
     func getTag(with id: String, for user: CULUser, _ completion:@escaping ((CULTag?)->Void)) {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("tags").document(id)
-//        var listener: ListenerRegistration?
-//        listener = ref.addSnapshotListener({ (snapshot, error) in
+        //        var listener: ListenerRegistration?
+        //        listener = ref.addSnapshotListener({ (snapshot, error) in
         ref.getDocument { (snapshot, error) in
-//            listener?.remove()
+            //            listener?.remove()
             print("Listener removed for getTag ********** ")
             if let data = snapshot?.data(),
                 let dbId = snapshot?.documentID {
@@ -227,8 +227,8 @@ class CULFirebaseGateway {
             } else {
                 completion(nil)
             }
-//        })
-                }
+            //        })
+        }
     }
     
     private func tag(from raw: [String:Any]) -> CULTag {
@@ -285,10 +285,10 @@ class CULFirebaseGateway {
     
     func getContact(with id: String, for user: CULUser, _ completion:@escaping ((CULContact?)->Void)) {
         let ref = Firestore.firestore().collection("users").document(user.id).collection("contacts").document(id)
-//        var listener: ListenerRegistration?
-//        listener = ref.addSnapshotListener({ (snapshot, error) in
+        //        var listener: ListenerRegistration?
+        //        listener = ref.addSnapshotListener({ (snapshot, error) in
         ref.getDocument { (snapshot, error) in
-//            listener?.remove()
+            //            listener?.remove()
             print("Listener removed for getContact ********** ")
             if let data = snapshot?.data(),
                 let dbId = snapshot?.documentID {
@@ -308,8 +308,8 @@ class CULFirebaseGateway {
             } else {
                 completion(nil)
             }
-//        })
-                }
+            //        })
+        }
     }
     
     private func contact(from raw: [String:Any]) -> CULContact? {
@@ -326,7 +326,7 @@ class CULFirebaseGateway {
             contact.followupFrequency = CULFollowupFrequency(rawValue: freq) ?? .none
         }
         if contact.followupFrequency == .none {
-            assertionFailure("Frequency can't be empty")
+//            assertionFailure("Frequency can't be empty")
         }
         
         var tag = CULTag()
@@ -335,7 +335,8 @@ class CULFirebaseGateway {
         
         if let string = raw["followupDate"] as? String {
             if let timeInterval = Double(string) {
-                contact.followupDate = Date(timeIntervalSinceReferenceDate: timeInterval)
+                let dateTemp = Date(timeIntervalSinceReferenceDate: timeInterval)
+                contact.followupDate = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: dateTemp)
             }
         }
         
@@ -403,13 +404,13 @@ class CULFirebaseGateway {
         if let id = contact.db_Identifier {
             let ref = store.collection("users").document(loggedInUser.id).collection("contacts").document(id).collection("followups")
             
-//            var listener: ListenerRegistration?
-//            listener = ref.addSnapshotListener({ (snapshot, error) in
+            //            var listener: ListenerRegistration?
+            //            listener = ref.addSnapshotListener({ (snapshot, error) in
             
             ref.getDocuments(completion: { (snapshot, error) in
-            
+                
                 //                if snapshot?.metadata.isFromCache == false {
-//                listener?.remove()
+                //                listener?.remove()
                 print("Listener removed for getFollowups ********** ")
                 //                }
                 
@@ -446,6 +447,15 @@ class CULFirebaseGateway {
         let store = Firestore.firestore()
         let ref = store.collection("feedbacks").document()
         ref.setData([ "notes": feedback, "user": user.id ]) { (error) in
+            completion(error)
+        }
+    }
+    
+    func update(notificationSettings: NotificationSettings, for user: CULUser, completion: @escaping ((Error?)->Void)) {
+        let store = Firestore.firestore()
+        let ref = store.collection("users").document(user.id)
+        let data = [ "notificationSettings": "\(notificationSettings.frequency),\(notificationSettings.time)" ]
+        ref.updateData(data) { (error) in
             completion(error)
         }
     }

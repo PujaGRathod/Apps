@@ -11,6 +11,7 @@ import KLCPopup
 import Instructions
 import StoreKit
 import Crashlytics
+import UserNotifications
 
 class DashboardVC: UIViewController {
 
@@ -28,11 +29,6 @@ class DashboardVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name("applicationDidBecomeActive_Dashboard"), object: nil, queue: nil) { (notification) in
             self.viewWillAppear(false)
@@ -93,6 +89,12 @@ class DashboardVC: UIViewController {
         super.viewDidAppear(animated)
         self.askForReview()
         self.showHelpPopovers()
+        
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge, .carPlay]) {(accepted, error) in
+//            if !accepted {
+//                print("Notification access denied.")
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -111,8 +113,6 @@ class DashboardVC: UIViewController {
     
     // Tried to link all the unlinked cultivate contacts to iOS contacts
     func link(contacts: [CULContact], _ completion: @escaping (()->Void)) {
-//        return;
-        
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
             print("\(Date()) link(contacts START **********************************")
             let worker = ContactsWorker()
@@ -126,11 +126,10 @@ class DashboardVC: UIViewController {
     }
 
     func update(contacts: [CULContact], _ completion: @escaping (()->Void)) {
-//        return;
-        
         print("\(Date()) update(contacts:) START **********************************")
         // Generate initial followup dates for all contacts
         let contacts = FollowupDateGenerator.assignInitialFollowupDates(for: contacts)
+        CULNotificationsManager.shared.setupLocalNotifications(for: contacts)
         self.save(contacts: contacts, completion)
     }
     
