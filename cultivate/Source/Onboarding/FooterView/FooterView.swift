@@ -65,21 +65,41 @@ class FooterView: UIView {
     }
     
     func setCurrentStep(to step: OnboardingStep) {
-        self.innerViewCreateAccount.isHidden = true
-        self.innerViewChooseContacts.isHidden = true
-        self.innerViewPriorityLevels.isHidden = true
-        self.innerViewAddTags.isHidden = true
+        self.hideAllInnerViews()
+        var allPreviousStepCircleContainerViews = [UIView]()
         var innerCircleViewToShow: UIView!
         switch step {
         case .createAccount:
             innerCircleViewToShow = self.innerViewCreateAccount
         case .chooseContacts:
+            allPreviousStepCircleContainerViews = [self.innerViewCreateAccount.superview!]
             innerCircleViewToShow = self.innerViewChooseContacts
         case .setPriorityLevels:
+            allPreviousStepCircleContainerViews = [self.innerViewCreateAccount.superview!, self.innerViewChooseContacts.superview!]
             innerCircleViewToShow = self.innerViewPriorityLevels
         case .addTags:
+            allPreviousStepCircleContainerViews = [self.innerViewCreateAccount.superview!, self.innerViewChooseContacts.superview!, self.innerViewPriorityLevels.superview!]
             innerCircleViewToShow = self.innerViewAddTags
         }
         innerCircleViewToShow.isHidden = false
+        for view in allPreviousStepCircleContainerViews {
+            view.isHidden = false
+            view.layer.borderWidth = 0
+            view.backgroundColor = #colorLiteral(red: 0.3764705882, green: 0.5764705882, blue: 0.4039215686, alpha: 1)
+        }
+    }
+    
+    private func hideAllInnerViews() {
+        self.innerViewCreateAccount.isHidden = true
+        self.innerViewChooseContacts.isHidden = true
+        self.innerViewPriorityLevels.isHidden = true
+        self.innerViewAddTags.isHidden = true
+    }
+    
+    func setProgressCompletion() {
+        self.hideAllInnerViews()
+        for stepView in self.stepViewsCollection {
+            stepView.backgroundColor = self.innerViewChooseContacts.backgroundColor
+        }
     }
 }

@@ -29,7 +29,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="522" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -165,13 +165,11 @@ contacts</string>
                                         <constraint firstAttribute="width" constant="30" id="zr2-sC-Aex"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-DC-7AX">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set frequencies" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-DC-7AX">
                                     <rect key="frame" x="0.0" y="42" width="80" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="4nG-r0-D2C"/>
                                     </constraints>
-                                    <string key="text">Set priority
-levels</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.37647058820000001" green="0.57647058819999997" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -237,7 +235,7 @@ tags</string>
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="TPo-HX-ICb" secondAttribute="top" id="2n7-iC-lB7"/>
                 <constraint firstItem="PCS-XV-dH7" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="JRS-sJ-IdE"/>
